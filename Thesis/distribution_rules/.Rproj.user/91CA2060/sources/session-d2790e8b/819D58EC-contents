@@ -1,0 +1,55 @@
+##  Mean Temperature Flowering year 1 ----
+
+  C = 15;  B1 = 10; A1 = 10
+  
+  pheno_day = data_prd_rdd$DOY_Fl[i]
+  
+  # Fl_Y1_Tm_C
+  var = C
+  period = (pheno_day - floor(var / 2) + 1):(pheno_day + floor(var / 2) - 1)
+  Fl_Y1_Tm_C = mean((data_meteo_rdd %>% 
+                       filter(Year == year, Doy %in% period))$Tmed)
+  
+  
+  # Fl_Y1_Tm_B1
+  var = B1
+  period = (pheno_day - var + 1): pheno_day
+  Fl_Y1_Tm_B1 = mean((data_meteo_rdd %>% 
+                        filter(Year == year, Doy %in% period))$Tmed)
+  
+  
+  # Fl_Y1_Tm_A1
+  var = A1
+  period = pheno_day:(pheno_day + var - 1)
+  Fl_Y1_Tm_A1 = mean((data_meteo_rdd %>% 
+                        filter(Year == year, Doy %in% period))$Tmed)
+  
+  C = NA;  B1 = NA; A1 = NA
+
+
+# count -------------------------------------------------------------------------------
+
+##  Mean Temperature < 15ºC Flowering year 1 ----
+
+  # count number of days
+  
+  C = 15;  B1 = 15
+  
+  pheno_day = data_prd_rdd$DOY_Fl[i]
+  
+  # Fl_Y1_Tmed_less_15_C
+  var = C
+  period = (pheno_day - floor(var / 2) + 1):(pheno_day + floor(var / 2) - 1)
+  Fl_Y1_Tmed_less_15_C = sum(data_meteo_rdd %>% 
+                               filter(Year == year, Doy %in% period) %>% 
+                               select(`Tmed<15`))
+  
+  
+  # Fl_Y1_Tmed_less_15_B1
+  var = B1
+  period = (pheno_day - var + 1): pheno_day
+  Fl_Y1_Tmed_less_15_B1 = sum(data_meteo_rdd %>% 
+                                filter(Year == year, Doy %in% period) %>% 
+                                select(`Tmed<15`))
+  
+  C = NA;  B1 = NA

@@ -1,0 +1,17 @@
+> caren caren_temp.bas  0.1  0.1  -imp0.001  -null?  -classclass  -Hclass  -pRulesTemp  -ocsRulesTemp  -Att  -s,  
+
+ Classification Model 
+
+NumFreqItems = 55 in the dataset RulesTemp.prm with minsup = 0.1 
+NumOfRules = 969 in a dataset with 8124 transactions 
+NumOfClasses = 2  
+
+Total Time spent = 0 hrs 0 mts 2 secs
+
+
+Null values Replacement in Attributes:
+  In SROOT, replacement for the 2480 null values was: 
+    in class p  by  value b
+    in class e  by  value b
+
+
