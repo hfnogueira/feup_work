@@ -7,6 +7,7 @@
 
 # libs --------------------------------------------------------------------------------
 library(tidyverse)
+library(arules)
 
 # read data for RDD region ---------------------------------------------------------------------------
 
@@ -59,55 +60,65 @@ head(data_prd_rdd)
 my_df <-
   data.frame(Year = numeric(),
              Wine_mhl = numeric(),
-             Fl_Y1_Tm_C = numeric(),
-             Fl_Y1_Tm_B1 = numeric(),
-             Fl_Y1_Tm_A1 = numeric(),
-             Fl_Y0_Tm_B1 = numeric(),
-             Fl_Y0_Tm_A1 = numeric(),
-             H_Y1_Tm_C = numeric(),
-             H_Y1_Tm_B1 = numeric(),
-             H_Y0_Tm_A1 = numeric(),
-             BB_Y0_Tm_A1 = numeric(),
-             BB_Y0_Tm_A2 = numeric(),
-             Fl_Y1_Tmed_less_15_C = numeric(),
-             Fl_Y1_Tmed_less_15_B1 = numeric(),
-             BB_Y1_Tmmin_less_0_C = numeric(),
-             FL_Y1_Tmmin_less_0_A1 = numeric(),
-             FL_Y1_Tmmax_above_35_A1 = numeric(),
-             FL_Y1_Tmmax_above_35_A2 = numeric(),
-             sM_Y1_Tmmax_above_35_B1 = numeric(),
-             sM_Y1_Tmmax_above_35_A1= numeric(),
-             FL_Y1_rs_A1 = numeric(),
-             H_Y1_rs_B1 = numeric(),
-             H_Y1_rs_A1 = numeric(),
-             FL_Y1_rain_above_1mm_C = numeric(),
-             FL_Y1_rain_above_1mm_A1 = numeric(),
-             sM_Y1_rain_above_1mm_B1 = numeric(),
-             sM_Y1_rain_above_1mm_A1 = numeric(),
-             H_Y1_rain_above_1mm_C = numeric(),
-             H_Y1_rain_above_1mm_A1 = numeric(),
-             BB_Y1_Iaf_C = numeric(),
-             FL_Y1_Iaf_B1 = numeric(),
-             FL_Y1_Iaf_B2 = numeric(),
-             FL_Y1_Iaf_B3 = numeric(),
-             FL_Y1_Iaf_A1 = numeric(),
-             H_Y1_Iaf_C = numeric(),
-             FL_Y1_swa_A1 = numeric(),
-             FL_Y1_swa_A2 = numeric(),
-             H_Y0_swa_A1 = numeric(),
-             H_Y0_swa_A2 = numeric(),
-             FL_Y1_swc_Sm1.5Wp_A1 = numeric(),
-             FL_Y1_swc_Sm1.5Wp_A2 = numeric(),
-             H_Y1_swc_Sm1.5Wp_B1 = numeric(),
-             H_Y1_swc_Sm1.5Wp_A1 = numeric(),
-             FL_Y0_swc_Sm1.5Wp_A1 = numeric(),
-             FL_Y0_swc_Sm1.5Wp_A2 = numeric(),
-             FL_Y1_swc_Sm_0.9Fc_A1 = numeric(),
-             FL_Y1_swc_Sm_0.9Fc_A2 = numeric(),
-             FL_Y0_swc_Sm_0.9Fc_A1 = numeric(),
-             FL_Y0_swc_Sm_0.9Fc_A2 = numeric()
-
-             
+             tm_fl_y1_c = numeric(),
+             tm_fl_y1_b1 = numeric(),
+             tm_fl_y1_a1 = numeric(),
+             tm_fl_y0_b1 = numeric(),
+             tm_fl_y0_a1 = numeric(),
+             tm_bb_y0_a1 = numeric(),
+             tm_bb_y0_a2 = numeric(),
+             tm_sm_y1_c = numeric(),
+             tm_sm_y0_a1 = numeric(),
+             tm_sm_y0_b1 = numeric(),
+             tm_hv_y1_c = numeric(),
+             tm_hv_y1_b1 = numeric(),
+             tn_hv_y0_a1 = numeric(),
+             tm.days.less.15_fl_y1_c = numeric(),
+             tm.days.less.15_fl_y1_b1 = numeric(),
+             tm.days.less.0_bb_y1_b1 = numeric(),
+             tm.days.less.0_bb_y1_a1 = numeric(),
+             tm.days.less.0_fl_y1_a1 = numeric(),
+             tm.days.above.35_fl_y1_a1 = numeric(),
+             tm.days.above.35_fl_y1_a2 = numeric(),
+             tm.days.above.35_sm_y1_b1 = numeric(),
+             tm.days.above.35_sm_y1_a1 = numeric(),
+             rf_fl_y1_a1 = numeric(),
+             rf_hv_y1_b1 = numeric(),
+             rf_hv_y1_a1 = numeric(),
+             rf.above.1mm_fl_y1_c = numeric(),
+             rf.above.1mm_fl_y1_a1 = numeric(),
+             rf.above.1mm_sm_y1_b1 = numeric(),
+             rf.above.1mm_sm_y1_a1 = numeric(),
+             rf.above.1mm_hv_y1_c = numeric(),
+             rf.above.1mm_hv_y1_a1 = numeric(),
+             iaf_bb_y1_c = numeric(),
+             iaf_fl_y1_b1 = numeric(),
+             iaf_fl_y1_b2 = numeric(),
+             iaf_fl_y1_b3 = numeric(),
+             iaf_fl_y1_a1 = numeric(),
+             iaf_hv_y1_c = numeric(),
+             iaf_fl_y0_b1 = numeric(),
+             iaf_fl_y0_b2 = numeric(),
+             iaf_fl_y0_b3 = numeric(),
+             iaf_fl_y0_a1 = numeric(),
+             swa_fl_y1_a1 = numeric(),
+             swa_fl_y1_a2 = numeric(),
+             swa_hv_y1_b1 = numeric(),
+             swa_hv_y1_a1 = numeric(),
+             swa_hv_y0_a1 = numeric(),
+             swa_hv_y0_a2 = numeric(),
+             sw.less.15wp_fl_y1_a1 = numeric(),
+             sw.less.15wp_fl_y1_a2 = numeric(),
+             sw.less.15wp_sm_y1_a1 = numeric(),
+             sw.less.15wp_sm_y1_a2 = numeric(),
+             sw.less.15wp_hv_y1_b1 = numeric(),
+             sw.less.15wp_hv_y1_a1 = numeric(),
+             sw.less.15wp_fl_y0_a1 = numeric(),
+             sw.less.15wp_fl_y0_a2 = numeric(),
+             sw.above.09fc_fl_y1_a1 = numeric(),
+             sw.above.09fc_fl_y1_a2 = numeric(),
+             sw.above.09fc_fl_y0_a1 = numeric(),
+             sw.above.09fc_fl_y0_a2 = numeric()
              )
 
 
@@ -118,7 +129,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   ##  Year ----
   year = data_prd_rdd$Year[i]
   
-  print(paste('Year: ', year))
+  cat('Processing Year: ', year,'\n')
   
   ##  Wine production ----
   
@@ -136,24 +147,24 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_Fl[i]
   
-  # Fl_Y1_Tm_C
+  # tm_fl_y1_c
     var = C
     period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-    Fl_Y1_Tm_C = mean((data_meteo %>% 
+    tm_fl_y1_c = mean((data_meteo %>% 
                          filter(Year == year, Doy %in% period))$Tmed)
   
   
-  # Fl_Y1_Tm_B1
+  # tm_fl_y1_b1
     var = B1
     period = (pheno_day - var + 1): pheno_day
-    Fl_Y1_Tm_B1 = mean((data_meteo %>% 
+    tm_fl_y1_b1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Tmed)
   
   
- # Fl_Y1_Tm_A1
+ # tm_fl_y1_a1
     var = A1
     period = pheno_day:(pheno_day + var - 1)
-    Fl_Y1_Tm_A1 = mean((data_meteo %>% 
+    tm_fl_y1_a1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Tmed)
   
     C = NA;  B1 = NA; A1 = NA
@@ -167,16 +178,16 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_Fl[i-1]
   
-  # Fl_Y0_Tm_B1
+  # tm_fl_y0_b1
     var = B1
     period = (pheno_day - var + 1):pheno_day
-    Fl_Y0_Tm_B1 = mean((data_meteo %>% 
+    tm_fl_y0_b1 = mean((data_meteo %>% 
                           filter(Year == year -1, Doy %in% period))$Tmed)
     
-  # Fl_Y0_Tm_A1
+  # tm_fl_y0_a1
     var = A1
     period = pheno_day:(pheno_day + var - 1)
-    Fl_Y0_Tm_A1 = mean((data_meteo %>% 
+    tm_fl_y0_a1 = mean((data_meteo %>% 
                           filter(Year == year -1, Doy %in% period))$Tmed)
   
     B1 = NA; A1 = NA
@@ -191,16 +202,16 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_BB[i-1]
     
-    # BB_Y0_Tm_A1
+    # tm_bb_y0_a1
     var = A1
     period = (pheno_day - var + 1):pheno_day
-    BB_Y0_Tm_A1 = mean((data_meteo %>% 
+    tm_bb_y0_a1 = mean((data_meteo %>% 
                           filter(Year == year -1, Doy %in% period))$Tmed)
     
-    # BB_Y0_Tm_A2
+    # tm_bb_y0_a2
     var = A2
     period = pheno_day:(pheno_day + var - 1)
-    BB_Y0_Tm_A2 = mean((data_meteo %>% 
+    tm_bb_y0_a2 = mean((data_meteo %>% 
                           filter(Year == year -1, Doy %in% period))$Tmed)  
     
     A1 = NA; A2 = NA
@@ -218,16 +229,16 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_sM[i]
   
-  # sM_Y1_Tm_C
+  # tm_sm_y1_c
     var = C
     period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-    sM_Y1_Tm_C = mean((data_meteo %>% 
+    tm_sm_y1_c = mean((data_meteo %>% 
                          filter(Year == year, Doy %in% period))$Tmed)
   
-  # sM_Y1_Tm_A1
+  # tm_sm_y0_a1
     var = A1
     period = pheno_day:(pheno_day + var - 1)
-    sM_Y1_Tm_A1 = mean((data_meteo %>% 
+    tm_sm_y0_a1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Tmed)
 
     C = NA;  A1 = NA
@@ -241,18 +252,16 @@ for (i in 2:nrow(data_prd_rdd)) {
       
       pheno_day = data_prd_rdd$DOY_sM[i-1]
     
-    # sM_Y0_Tm_B1
+    # tm_sm_y0_b1
       var = B1
       period = (pheno_day - var + 1):pheno_day
-      sM_Y0_Tm_B1 = mean((data_meteo %>% 
+      tm_sm_y0_b1 = mean((data_meteo %>% 
                             filter(Year == year -1, Doy %in% period))$Tmed)
     
     
      B1 = NA
     
-    
-    
-    
+   
     
   ##  Mean Temperature Harvesting year 1 ----
   
@@ -260,17 +269,17 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_Hv[i]
     
-  # H_Y1_Tm_C
+  # tm_hv_y1_c
     var = C
     period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-    H_Y1_Tm_C = mean((data_meteo %>% 
+    tm_hv_y1_c = mean((data_meteo %>% 
                         filter(Year == year, Doy %in% period))$Tmed)
   
   
-  # H_Y1_Tm_B1
+  # tm_hv_y1_b1
     var = B1
     period = (pheno_day - var + 1): pheno_day
-    H_Y1_Tm_B1 = mean((data_meteo %>% 
+    tm_hv_y1_b1 = mean((data_meteo %>% 
                          filter(Year == year, Doy %in% period))$Tmed)
 
   
@@ -284,10 +293,10 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_Hv[i-1]
     
-    # H_Y0_Tm_A1
+    # tn_hv_y0_a1
       var = A1
       period = pheno_day:(pheno_day + var - 1)
-      H_Y0_Tm_A1 = mean((data_meteo %>% 
+      tn_hv_y0_a1 = mean((data_meteo %>% 
                            filter(Year == year -1, Doy %in% period))$Tmed)
       
     A1 = NA
@@ -306,18 +315,18 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_Fl[i]
     
-    # Fl_Y1_Tmed_less_15_C
+    # tm.days.less.15_fl_y1_c
     var = C
     period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-    Fl_Y1_Tmed_less_15_C = sum(data_meteo %>% 
+    tm.days.less.15_fl_y1_c = sum(data_meteo %>% 
                                  filter(Year == year, Doy %in% period) %>% 
                                  select(`Tmed<15`))
     
     
-    # Fl_Y1_Tmed_less_15_B1
+    # tm.days.less.15_fl_y1_b1
     var = B1
     period = (pheno_day - var + 1): pheno_day
-    Fl_Y1_Tmed_less_15_B1 = sum(data_meteo %>% 
+    tm.days.less.15_fl_y1_b1 = sum(data_meteo %>% 
                                   filter(Year == year, Doy %in% period) %>% 
                                   select(`Tmed<15`))
     
@@ -338,18 +347,18 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     pheno_day = data_prd_rdd$DOY_BB[i]
     
-    # BB_Y1_Tmmin_less_0_C
+    # tm.days.less.0_bb_y1_b1
     var = C
     period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-    BB_Y1_Tmmin_less_0_C = sum(data_meteo %>%
+    tm.days.less.0_bb_y1_b1 = sum(data_meteo %>%
                                  filter(Year == year, Doy %in% period) %>%
                                  select(`Tmin<0`))
     
     
-    # BB_Y1_Tmmin_less_0_A1
+    # tm.days.less.0_bb_y1_a1
     var = A1
     period = (pheno_day + var - 1): pheno_day
-    BB_Y1_Tmmin_less_0_A1 = sum(data_meteo %>% 
+    tm.days.less.0_bb_y1_a1 = sum(data_meteo %>% 
                                   filter(Year == year, Doy %in% period) %>% 
                                   select(`Tmin<0`))
     
@@ -366,10 +375,11 @@ for (i in 2:nrow(data_prd_rdd)) {
     pheno_day = data_prd_rdd$DOY_Fl[i]
     
     
-    # FL_Y1_Tmmin_less_0_A1
+
+    # tm.days.less.0_fl_y1_a1
     var = A1
     period = (pheno_day + var - 1): pheno_day
-    FL_Y1_Tmmin_less_0_A1 = sum(data_meteo %>% 
+    tm.days.less.0_fl_y1_a1 = sum(data_meteo %>% 
                                   filter(Year == year, Doy %in% period) %>% 
                                   select(`Tmin<0`))
     
@@ -388,17 +398,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_Tmmax_above_35_A1
+   # tm.days.above.35_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_Tmmax_above_35_A1 = sum(data_meteo %>% 
+   tm.days.above.35_fl_y1_a1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`Tmax>35`))
    
-  # FL_Y1_Tmmax_above_35_A2
+  # tm.days.above.35_fl_y1_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_Tmmax_above_35_A2 = sum(data_meteo %>% 
+   tm.days.above.35_fl_y1_a2 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`Tmax>35`))
    
@@ -414,18 +424,18 @@ for (i in 2:nrow(data_prd_rdd)) {
    B1 = 20; A1 = 20
    
    pheno_day = data_prd_rdd$DOY_sM[i]
-   
-   # sM_Y1_Tmmax_above_35_B1
+
+   # tm.days.above.35_sm_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   sM_Y1_Tmmax_above_35_B1 = sum(data_meteo %>% 
+   tm.days.above.35_sm_y1_b1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`Tmax>35`))
    
-   # sM_Y1_Tmmax_above_35_A1
+   # tm.days.above.35_sm_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   sM_Y1_Tmmax_above_35_A1 = sum(data_meteo %>% 
+   tm.days.above.35_sm_y1_a1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`Tmax>35`))
    
@@ -444,10 +454,11 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_rs_A1
+
+   # rf_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_rs_A1 = sum(data_meteo %>% 
+   rf_fl_y1_a1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(Rain))
    
@@ -464,17 +475,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Hv[i]
    
-   # H_Y1_rs_B1
+   # rf_hv_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   H_Y1_rs_B1 = sum(data_meteo %>% 
+   rf_hv_y1_b1 = sum(data_meteo %>% 
                       filter(Year == year, Doy %in% period) %>% 
                       select(Rain))
    
-   # H_Y1_rs_A1
+   # rf_hv_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   H_Y1_rs_A1 = sum(data_meteo %>% 
+   rf_hv_y1_a1 = sum(data_meteo %>% 
                        filter(Year == year, Doy %in% period) %>% 
                        select(Rain))
    
@@ -491,18 +502,19 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_rain_above_1mm_C
+  
+   # rf.above.1mm_fl_y1_c
    var = C
    period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-   FL_Y1_rain_above_1mm_C = sum(data_meteo %>%
+   rf.above.1mm_fl_y1_c = sum(data_meteo %>%
                                 filter(Year == year, Doy %in% period) %>%
                                 select(`R>0.1`))
    
    
-   # FL_Y1_rain_above_1mm_A1
+   # rf.above.1mm_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_rain_above_1mm_A1 = sum(data_meteo %>% 
+   rf.above.1mm_fl_y1_a1 = sum(data_meteo %>% 
                                  filter(Year == year, Doy %in% period) %>% 
                                  select(`R>0.1`))
    
@@ -510,25 +522,25 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    
    
-  ##  Rain  >1mm Start of maturity year 1 ----
+  ##  Rain>1mm Start of maturity year 1 ----
   # count number of days
    
    B1 = 20;  A1 = 20
    
    pheno_day = data_prd_rdd$DOY_sM[i]
    
-   # sM_Y1_rain_above_1mm_B1
+   # rf.above.1mm_sm_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   sM_Y1_rain_above_1mm_B1 = sum(data_meteo %>% 
+   rf.above.1mm_sm_y1_b1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`R>0.1`))
    
    
-   # sM_Y1_rain_above_1mm_A1
+   # rf.above.1mm_sm_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   sM_Y1_rain_above_1mm_A1 = sum(data_meteo %>% 
+   rf.above.1mm_sm_y1_a1 = sum(data_meteo %>% 
                                    filter(Year == year, Doy %in% period) %>% 
                                    select(`R>0.1`))
    
@@ -542,18 +554,18 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Hv[i]
    
-   # H_Y1_rain_above_1mm_C
+   # rf.above.1mm_hv_y1_c
    var = C
    period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-   H_Y1_rain_above_1mm_C = sum(data_meteo %>%
+   rf.above.1mm_hv_y1_c = sum(data_meteo %>%
                                 filter(Year == year, Doy %in% period) %>%
                                 select(`R>0.1`))
    
    
-   # H_Y1_rain_above_1mm_A1
+   # rf.above.1mm_hv_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   H_Y1_rain_above_1mm_A1 = sum(data_meteo %>% 
+   rf.above.1mm_hv_y1_a1 = sum(data_meteo %>% 
                                  filter(Year == year, Doy %in% period) %>% 
                                  select(`R>0.1`))
    
@@ -570,10 +582,10 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_BB[i]
    
-   # BB_Y1_Iaf_C
+   # iaf_bb_y1_c
    var = C
    period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-   BB_Y1_Iaf_C = mean((data_meteo %>% 
+   iaf_bb_y1_c = mean((data_meteo %>% 
                         filter(Year == year, Doy %in% period))$Iaf)
    
    
@@ -585,29 +597,29 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_Iaf_B1
+   # iaf_fl_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B1 = mean((data_meteo %>% 
+   iaf_fl_y1_b1 = mean((data_meteo %>% 
                          filter(Year == year, Doy %in% period))$Iaf)
    
-   # FL_Y1_Iaf_B2
+   # iaf_fl_y1_b2
    var = B2
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B2 = mean((data_meteo %>% 
+   iaf_fl_y1_b2 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Iaf)
    
-   # FL_Y1_Iaf_B3
+   # iaf_fl_y1_b3
    var = B3
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B3 = mean((data_meteo %>% 
+   iaf_fl_y1_b3 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Iaf)
    
    
-   # FL_Y1_Iaf_A1
+   # iaf_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_Iaf_A1 = mean((data_meteo %>% 
+   iaf_fl_y1_a1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Iaf)
    
    B1 = NA; B2 = NA; B3 = NA; A1 = NA
@@ -622,10 +634,10 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Hv[i]
    
-   # H_Y1_Iaf_C
+   # iaf_hv_y1_c
    var = C
    period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
-   H_Y1_Iaf_C = mean((data_meteo %>% 
+   iaf_hv_y1_c = mean((data_meteo %>% 
                          filter(Year == year, Doy %in% period))$Iaf)
    
    C = NA
@@ -638,55 +650,57 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i-1]
    
-   # FL_Y0_Iaf_B1
+   # iaf_fl_y0_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B1 = mean((data_meteo %>% 
+   iaf_fl_y0_b1 = mean((data_meteo %>% 
                          filter(Year == year - 1, Doy %in% period))$Iaf)
    
-   # FL_Y0_Iaf_B2
+   # iaf_fl_y0_b2
    var = B2
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B2 = mean((data_meteo %>% 
+   iaf_fl_y0_b2 = mean((data_meteo %>% 
                           filter(Year == year - 1, Doy %in% period))$Iaf)
    
-   # FL_Y0_Iaf_B3
+   # iaf_fl_y0_b3
    var = B3
    period = (pheno_day - var + 1): pheno_day
-   FL_Y1_Iaf_B3 = mean((data_meteo %>% 
+   iaf_fl_y0_b3 = mean((data_meteo %>% 
                           filter(Year == year - 1, Doy %in% period))$Iaf)
    
    
-   # FL_Y0_Iaf_A1
+   # iaf_fl_y0_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_Iaf_A1 = mean((data_meteo %>% 
+   iaf_fl_y0_a1 = mean((data_meteo %>% 
                           filter(Year == year - 1, Doy %in% period))$Iaf)
    
    
    B1 = NA; B2 = NA; B3 = NA; A1 = NA
+   
+   
 
 # Available soil water ----------------------------------------------------------------
 
    
-   ##  sw_a  Flowering year 1 ----
+   ##  swa  Flowering year 1 ----
    # average values
    
    A1 =15 ; A2 = 20
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_swa_A1
+   # swa_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swa_A1 = mean((data_meteo %>% 
+   swa_fl_y1_a1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Sm)
    
    
-   # FL_Y1_swa_A2
+   # swa_fl_y1_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swa_A2 = mean((data_meteo %>% 
+   swa_fl_y1_a2 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Sm)
   
    A1 =NA ; A2 = NA
@@ -694,54 +708,53 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    
    
-   ##  sw_a  Harvesting year 1 ----
+   ##  swa  Harvesting year 1 ----
    # average values
    
    B1 =20 ; A1 = 20
    
    pheno_day = data_prd_rdd$DOY_Hv[i]
    
-   # H_Y1_swa_B1
+   # swa_hv_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   H_Y1_swa_B1 = mean((data_meteo %>% 
+   swa_hv_y1_b1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Sm)
    
    
-   # H_Y1_swa_A1
+   # swa_hv_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   H_Y1_swa_A1 = mean((data_meteo %>% 
+   swa_hv_y1_a1 = mean((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$Sm)
    B1 =NA ; A1 = NA
    
    
    
-   ##  sw_a  Harvesting year 0 ----
+   ##  swa  Harvesting year 0 ----
    # average values
    
    A1 =15 ; A2 = 20
    
    pheno_day = data_prd_rdd$DOY_Hv[i-1]
    
-   # H_Y0_swa_A1
+   # swa_hv_y0_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   H_Y0_swa_A1 = mean((data_meteo %>% 
+   swa_hv_y0_a1 = mean((data_meteo %>% 
                          filter(Year == year - 1, Doy %in% period))$Sm)
    
-   
-   # H_Y0_swa_A2
+   # swa_hv_y0_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   H_Y0_swa_A2 = mean((data_meteo %>% 
+   swa_hv_y0_a2 = mean((data_meteo %>% 
                          filter(Year == year - 1, Doy %in% period))$Sm)
    
    
    
    
    
-   ##  sw_c <1.5 x Wp Flowering year 1 ----
+   ##  swa <1.5xWp Flowering year 1 ----
    
    # S_c  e <1.5 x Wp, A1, 10; 
    # refere ao nº de ocorrência nos 10 dias após em que em a 
@@ -756,17 +769,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_swc_Sm1.5Wp_A1
+   # sw.less.15wp_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+   sw.less.15wp_fl_y1_a1 = sum((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
-   # FL_Y1_swc_Sm1.5Wp_A2
+   # sw.less.15wp_fl_y1_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+   sw.less.15wp_fl_y1_a2 = sum((data_meteo %>% 
                           filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
   
    A1 =NA ; A2 = NA
@@ -778,17 +791,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_sM[i]
    
-   # sM_Y1_swc_Sm1.5Wp_A1
+   # sw.less.15wp_sm_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   sM_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+   sw.less.15wp_sm_y1_a1 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
-   # sM_Y1_swc_Sm1.5Wp_A2
+   # sw.less.15wp_sm_y1_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   sM_Y1_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+   sw.less.15wp_sm_y1_a2 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
@@ -801,17 +814,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Hv[i]
    
-   # H_Y1_swc_Sm1.5Wp_B1
+   # sw.less.15wp_hv_y1_b1
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   H_Y1_swc_Sm1.5Wp_B1 = sum((data_meteo %>% 
+   sw.less.15wp_hv_y1_b1 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
-   # H_Y1_swc_Sm1.5Wp_A1
+   # sw.less.15wp_hv_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   H_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+   sw.less.15wp_hv_y1_a1 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
@@ -825,17 +838,17 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i-1]
    
-   # FL_Y0_swc_Sm1.5Wp_A1
+   # sw.less.15wp_fl_y0_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y0_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+   sw.less.15wp_fl_y0_a1 = sum((data_meteo %>% 
                                  filter(Year == year -1, Doy %in% period))$`Sm<1.5Wp`)
    
    
-   # FL_Y0_swc_Sm1.5Wp_A2
+   # sw.less.15wp_fl_y0_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y0_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+   sw.less.15wp_fl_y0_a2 = sum((data_meteo %>% 
                                  filter(Year == year -1, Doy %in% period))$`Sm<1.5Wp`)
    
    A1 =NA ; A2 = NA
@@ -851,17 +864,18 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_swc_Sm_0.9Fc_A1
+
+   # sw.above.09fc_fl_y1_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swc_Sm_0.9Fc_A1 = sum((data_meteo %>% 
+   sw.above.09fc_fl_y1_a1 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm>0.9Fc`)
    
    
-   # FL_Y1_swc_Sm_0.9Fc_A2
+   # sw.above.09fc_fl_y1_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swc_Sm_0.9Fc_A2 = sum((data_meteo %>% 
+   sw.above.09fc_fl_y1_a2 = sum((data_meteo %>% 
                                  filter(Year == year, Doy %in% period))$`Sm>0.9Fc`)
    
    A1 =NA ; A2 = NA
@@ -874,17 +888,18 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    pheno_day = data_prd_rdd$DOY_Fl[i-1]
    
-   # FL_Y0_swc_Sm_0.9Fc_A1
+
+   # sw.above.09fc_fl_y0_a1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y0_swc_Sm_0.9Fc_A1 = sum((data_meteo %>% 
+   sw.above.09fc_fl_y0_a1 = sum((data_meteo %>% 
                                   filter(Year == year -1, Doy %in% period))$`Sm>0.9Fc`)
    
    
-   # FL_Y0_swc_Sm_0.9Fc_A2
+   # sw.above.09fc_fl_y0_a2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y0_swc_Sm_0.9Fc_A2 = sum((data_meteo %>% 
+   sw.above.09fc_fl_y0_a2 = sum((data_meteo %>% 
                                   filter(Year == year -1, Doy %in% period))$`Sm>0.9Fc`)
    
    A1 =NA ; A2 = NA
@@ -902,54 +917,66 @@ for (i in 2:nrow(data_prd_rdd)) {
                  data.frame(
                    Year = year,
                    Wine_mhl = Wine_mhl,
-                   Fl_Y1_Tm_C = Fl_Y1_Tm_C,
-                   Fl_Y1_Tm_B1 = Fl_Y1_Tm_B1,
-                   Fl_Y1_Tm_A1 = Fl_Y1_Tm_A1,
-                   Fl_Y0_Tm_B1 = Fl_Y0_Tm_B1, 
-                   Fl_Y0_Tm_A1 = Fl_Y0_Tm_A1,
-                   sM_Y1_Tm_C = sM_Y1_Tm_C,
-                   sM_Y1_Tm_A1 = sM_Y1_Tm_A1,
-                   sM_Y0_Tm_B1 = sM_Y0_Tm_B1,
-                   H_Y1_Tm_C = H_Y1_Tm_C,
-                   H_Y1_Tm_B1 = H_Y1_Tm_B1,
-                   H_Y0_Tm_A1 = H_Y0_Tm_A1,
-                   Fl_Y1_Tmed_less_15_C = Fl_Y1_Tmed_less_15_C,
-                   Fl_Y1_Tmed_less_15_B1 = Fl_Y1_Tmed_less_15_B1,
-                   BB_Y1_Tmmin_less_0_C = BB_Y1_Tmmin_less_0_C,
-                   FL_Y1_Tmmin_less_0_A1 = FL_Y1_Tmmin_less_0_A1,
-                   FL_Y1_Tmmax_above_35_A1 = FL_Y1_Tmmax_above_35_A1,
-                   FL_Y1_Tmmax_above_35_A2 = FL_Y1_Tmmax_above_35_A2,
-                   sM_Y1_Tmmax_above_35_B1 = sM_Y1_Tmmax_above_35_B1,
-                   sM_Y1_Tmmax_above_35_A1 = sM_Y1_Tmmax_above_35_A1,
-                   FL_Y1_rs_A1 = FL_Y1_rs_A1,
-                   H_Y1_rs_B1 = H_Y1_rs_B1,
-                   H_Y1_rs_A1 = H_Y1_rs_A1,
-                   FL_Y1_rain_above_1mm_C = FL_Y1_rain_above_1mm_C,
-                   FL_Y1_rain_above_1mm_A1 = FL_Y1_rain_above_1mm_A1,
-                   sM_Y1_rain_above_1mm_B1 = sM_Y1_rain_above_1mm_B1,
-                   sM_Y1_rain_above_1mm_A1 = sM_Y1_rain_above_1mm_B1,
-                   H_Y1_rain_above_1mm_C = H_Y1_rain_above_1mm_C,
-                   H_Y1_rain_above_1mm_A1 = H_Y1_rain_above_1mm_A1,
-                   BB_Y1_Iaf_C = BB_Y1_Iaf_C,
-                   FL_Y1_Iaf_B1 = FL_Y1_Iaf_B1,
-                   FL_Y1_Iaf_B2 = FL_Y1_Iaf_B2,
-                   FL_Y1_Iaf_B3 = FL_Y1_Iaf_B3,
-                   FL_Y1_Iaf_A1 = FL_Y1_Iaf_A1,
-                   H_Y1_Iaf_C = H_Y1_Iaf_C,
-                   FL_Y1_swa_A1 = FL_Y1_swa_A1,
-                   FL_Y1_swa_A2 = FL_Y1_swa_A2,
-                   H_Y0_swa_A1 = H_Y0_swa_A1,
-                   H_Y0_swa_A2 = H_Y0_swa_A2,
-                   FL_Y1_swc_Sm1.5Wp_A1 = FL_Y1_swc_Sm1.5Wp_A1,
-                   FL_Y1_swc_Sm1.5Wp_A2 = FL_Y1_swc_Sm1.5Wp_A2,
-                   H_Y1_swc_Sm1.5Wp_B1 = H_Y1_swc_Sm1.5Wp_B1,
-                   H_Y1_swc_Sm1.5Wp_A1 = H_Y1_swc_Sm1.5Wp_A1,
-                   FL_Y0_swc_Sm1.5Wp_A1 = FL_Y0_swc_Sm1.5Wp_A1,
-                   FL_Y0_swc_Sm1.5Wp_A2 = FL_Y0_swc_Sm1.5Wp_A2,
-                   FL_Y1_swc_Sm_0.9Fc_A1 = FL_Y1_swc_Sm_0.9Fc_A1,
-                   FL_Y1_swc_Sm_0.9Fc_A2 = FL_Y1_swc_Sm_0.9Fc_A2,
-                   FL_Y0_swc_Sm_0.9Fc_A1 = FL_Y0_swc_Sm_0.9Fc_A1,
-                   FL_Y0_swc_Sm_0.9Fc_A2 = FL_Y0_swc_Sm_0.9Fc_A2
+                   tm_fl_y1_c = tm_fl_y1_c,
+                   tm_fl_y1_b1 = tm_fl_y1_b1,
+                   tm_fl_y1_a1 = tm_fl_y1_a1,
+                   tm_fl_y0_b1 = tm_fl_y0_b1,
+                   tm_fl_y0_a1 = tm_fl_y0_a1,
+                   tm_bb_y0_a1 = tm_bb_y0_a1,
+                   tm_bb_y0_a2 = tm_bb_y0_a2,
+                   tm_sm_y1_c = tm_sm_y1_c,
+                   tm_sm_y0_a1 = tm_sm_y0_a1,
+                   tm_sm_y0_b1 = tm_sm_y0_b1,
+                   tm_hv_y1_c = tm_hv_y1_c,
+                   tm_hv_y1_b1 = tm_hv_y1_b1,
+                   tn_hv_y0_a1 = tn_hv_y0_a1,
+                   tm.days.less.15_fl_y1_c = tm.days.less.15_fl_y1_c,
+                   tm.days.less.15_fl_y1_b1 = tm.days.less.15_fl_y1_b1,
+                   tm.days.less.0_bb_y1_b1 = tm.days.less.0_bb_y1_b1,
+                   tm.days.less.0_bb_y1_a1 = tm.days.less.0_bb_y1_a1,
+                   tm.days.less.0_fl_y1_a1 = tm.days.less.0_fl_y1_a1,
+                   tm.days.above.35_fl_y1_a1 = tm.days.above.35_fl_y1_a1,
+                   tm.days.above.35_fl_y1_a2 = tm.days.above.35_fl_y1_a2,
+                   tm.days.above.35_sm_y1_b1 = tm.days.above.35_sm_y1_b1,
+                   tm.days.above.35_sm_y1_a1 = tm.days.above.35_sm_y1_a1,
+                   rf_fl_y1_a1 = rf_fl_y1_a1,
+                   rf_hv_y1_b1 = rf_hv_y1_b1,
+                   rf_hv_y1_a1 = rf_hv_y1_a1,
+                   rf.above.1mm_fl_y1_c = rf.above.1mm_fl_y1_c,
+                   rf.above.1mm_fl_y1_a1 = rf.above.1mm_fl_y1_a1,
+                   rf.above.1mm_sm_y1_b1 = rf.above.1mm_sm_y1_b1,
+                   rf.above.1mm_sm_y1_a1 = rf.above.1mm_sm_y1_a1,
+                   rf.above.1mm_hv_y1_c = rf.above.1mm_hv_y1_c,
+                   rf.above.1mm_hv_y1_a1 = rf.above.1mm_hv_y1_a1,
+                   iaf_bb_y1_c = iaf_bb_y1_c,
+                   iaf_fl_y1_b1 = iaf_fl_y1_b1,
+                   iaf_fl_y1_b2 = iaf_fl_y1_b2,
+                   iaf_fl_y1_b3 = iaf_fl_y1_b3,
+                   iaf_fl_y1_a1 = iaf_fl_y1_a1,
+                   iaf_hv_y1_c = iaf_hv_y1_c,
+                   iaf_fl_y0_b1 = iaf_fl_y0_b1,
+                   iaf_fl_y0_b2 = iaf_fl_y0_b2,
+                   iaf_fl_y0_b3 = iaf_fl_y0_b3,
+                   iaf_fl_y0_a1 = iaf_fl_y0_a1,
+                   swa_fl_y1_a1 = swa_fl_y1_a1,
+                   swa_fl_y1_a2 = swa_fl_y1_a2,
+                   swa_hv_y1_b1 = swa_hv_y1_b1,
+                   swa_hv_y1_a1 = swa_hv_y1_a1,
+                   swa_hv_y0_a1 = swa_hv_y0_a1,
+                   swa_hv_y0_a2 = swa_hv_y0_a2,
+                   sw.less.15wp_fl_y1_a1 = sw.less.15wp_fl_y1_a1,
+                   sw.less.15wp_fl_y1_a2 = sw.less.15wp_fl_y1_a2,
+                   sw.less.15wp_sm_y1_a1 = sw.less.15wp_sm_y1_a1,
+                   sw.less.15wp_sm_y1_a2 = sw.less.15wp_sm_y1_a2,
+                   sw.less.15wp_hv_y1_b1 = sw.less.15wp_hv_y1_b1,
+                   sw.less.15wp_hv_y1_a1 = sw.less.15wp_hv_y1_a1,
+                   sw.less.15wp_fl_y0_a1 = sw.less.15wp_fl_y0_a1,
+                   sw.less.15wp_fl_y0_a2 = sw.less.15wp_fl_y0_a2,
+                   sw.above.09fc_fl_y1_a1 = sw.above.09fc_fl_y1_a1,
+                   sw.above.09fc_fl_y1_a2 = sw.above.09fc_fl_y1_a2,
+                   sw.above.09fc_fl_y0_a1 = sw.above.09fc_fl_y0_a1,
+                   sw.above.09fc_fl_y0_a2 = sw.above.09fc_fl_y0_a2
+                   
               
                  ))
   
@@ -957,7 +984,74 @@ for (i in 2:nrow(data_prd_rdd)) {
 }
 
 
-my_df %>% View()
+
+# Discretize --------------------------------------------------------------------------
+
+# Convert a Continuous Variable into a Categorical Variable
+# This function implements several basic unsupervised methods to convert a continuous variable 
+# into a categorical variable (factor) using different binning strategies. 
+# For convenience, a whole data.frame can be discretized (i.e., all numeric columns 
+# are discretized).
+
+# Discretization method: 
+# Available are: 
+#     "interval" (equal interval width), 
+#     "frequency" (equal frequency), 
+#     "cluster" (k-means clustering)
+#     "fixed" (categories specifies interval boundaries). 
+
+
+#     Note that equal frequency does not achieve perfect equally sized groups if the 
+#     data contains duplicated values.
+
+
+
+my_df <- 
+   my_df %>% select(-Year)
+
+
+
+# transform into categorical variables the columns with less than 10 unique values
+
+
+for (col in names(my_df)) {
+   
+   if (col == 'Wine_mhl') {
+      next
+   }
+   
+   lenCol = length(unique(my_df[[col]]))
+   
+   if (lenCol < 10) {
+      cat(col, '--',lenCol ,'\n')
+      my_df[[col]] = as.factor(my_df[[col]])
+   }
+}
+
+# run discretization for the continuous variables
+
+for (col in names(my_df)) {
+   
+   if (col == 'Wine_mhl') {
+      next
+   }
+   
+   if (!is.factor(my_df[[col]])) {
+      cat('discretizing column ', col,'\n')
+      my_df[[col]] <- discretize(my_df[[col]], method   = "frequency")
+      
+   }
+}
+
+str(my_df)
+
+
+
+# Final output ------------------------------------------------------------------------
+
+
+#### CHANGE NAMES VARIOABALES RO BE MORE ESY TRRO READ
+
 
 write.csv(x = my_df,file = 'data/dis_rule_dataset_rdd.csv',
           row.names = FALSE)

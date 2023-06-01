@@ -14,7 +14,7 @@ library(tidyverse)
 
 # read dataset ------------------------------------------------------------------------
 
-df.rdd <- read.csv(file = 'data/dis_rule_dataset_rdd.csv') %>%  select (-Year)
+df.rdd <- read.csv(file = 'data/dis_rule_dataset_rdd.csv')
 
 glimpse(df.rdd)
 
