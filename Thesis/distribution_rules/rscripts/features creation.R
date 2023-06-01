@@ -95,7 +95,17 @@ my_df <-
              FL_Y1_swa_A1 = numeric(),
              FL_Y1_swa_A2 = numeric(),
              H_Y0_swa_A1 = numeric(),
-             H_Y0_swa_A2 = numeric()
+             H_Y0_swa_A2 = numeric(),
+             FL_Y1_swc_Sm1.5Wp_A1 = numeric(),
+             FL_Y1_swc_Sm1.5Wp_A2 = numeric(),
+             H_Y1_swc_Sm1.5Wp_B1 = numeric(),
+             H_Y1_swc_Sm1.5Wp_A1 = numeric(),
+             FL_Y0_swc_Sm1.5Wp_A1 = numeric(),
+             FL_Y0_swc_Sm1.5Wp_A2 = numeric(),
+             FL_Y1_swc_Sm_0.9Fc_A1 = numeric(),
+             FL_Y1_swc_Sm_0.9Fc_A2 = numeric(),
+             FL_Y0_swc_Sm_0.9Fc_A1 = numeric(),
+             FL_Y0_swc_Sm_0.9Fc_A2 = numeric()
 
              
              )
@@ -423,7 +433,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
 
 
-# Rainfall ----------------------------------------------------------------------------
+ # Rainfall ----------------------------------------------------------------------------
 
 
      
@@ -653,8 +663,8 @@ for (i in 2:nrow(data_prd_rdd)) {
    FL_Y1_Iaf_A1 = mean((data_meteo %>% 
                           filter(Year == year - 1, Doy %in% period))$Iaf)
    
-   B1 = NA; B2 = NA; B3 = NA; A1 = NA
    
+   B1 = NA; B2 = NA; B3 = NA; A1 = NA
 
 # Available soil water ----------------------------------------------------------------
 
@@ -731,25 +741,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   ##  sw_c  Flowering year 1 ----
+   ##  sw_c <1.5 x Wp Flowering year 1 ----
    
    # S_c  e <1.5 x Wp, A1, 10; 
    # refere ao nº de ocorrência nos 10 dias após em que em a 
@@ -757,30 +749,145 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    # Os valores de wilting point (Wp) e field capacity (Fc) dependem da região 
    # No Douro: Wp é de 402 e o Fc é de 142,8
-   # Nos verdes: Wp é de 338 mm e o Fc é de77 mm
+   # Nos verdes: Wp é de 338 mm e o Fc é de 77 mm
    
    
-   A1 =15 ; A2 = 20
+   A1 =10 ; A2 = 20
    
    pheno_day = data_prd_rdd$DOY_Fl[i]
    
-   # FL_Y1_swa_A1
+   # FL_Y1_swc_Sm1.5Wp_A1
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swa_A1 = mean((data_meteo %>% 
-                          filter(Year == year, Doy %in% period))$Sm)
+   FL_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+                          filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
    
    
-   # FL_Y1_swa_A2
+   # FL_Y1_swc_Sm1.5Wp_A2
    var = A2
    period = (pheno_day + var - 1): pheno_day
-   FL_Y1_swa_A2 = mean((data_meteo %>% 
-                          filter(Year == year, Doy %in% period))$Sm)
+   FL_Y1_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+                          filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
   
    A1 =NA ; A2 = NA
    
    
+   ##  sw_c <1.5 x Wp   Start of maturity year 1 ----
+  
+   A1 =10 ; A2 = 20
    
+   pheno_day = data_prd_rdd$DOY_sM[i]
+   
+   # sM_Y1_swc_Sm1.5Wp_A1
+   var = A1
+   period = (pheno_day + var - 1): pheno_day
+   sM_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
+   
+   
+   # sM_Y1_swc_Sm1.5Wp_A2
+   var = A2
+   period = (pheno_day + var - 1): pheno_day
+   sM_Y1_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
+   
+   
+   A1 =NA ; A2 = NA
+   
+  
+   ##  sw_c <1.5 x Wp   Harvesting year 1 ----
+   
+   B1 =20 ; A1 = 20
+   
+   pheno_day = data_prd_rdd$DOY_Hv[i]
+   
+   # H_Y1_swc_Sm1.5Wp_B1
+   var = B1
+   period = (pheno_day - var + 1): pheno_day
+   H_Y1_swc_Sm1.5Wp_B1 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
+   
+   
+   # H_Y1_swc_Sm1.5Wp_A1
+   var = A1
+   period = (pheno_day + var - 1): pheno_day
+   H_Y1_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm<1.5Wp`)
+   
+   
+   B1 =NA ; A1 = NA
+   
+   
+   
+   ##  sw_c <1.5 x Wp   Flowering year 0 ----
+   
+   A1 =10 ; A2 = 20
+   
+   pheno_day = data_prd_rdd$DOY_Fl[i-1]
+   
+   # FL_Y0_swc_Sm1.5Wp_A1
+   var = A1
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y0_swc_Sm1.5Wp_A1 = sum((data_meteo %>% 
+                                 filter(Year == year -1, Doy %in% period))$`Sm<1.5Wp`)
+   
+   
+   # FL_Y0_swc_Sm1.5Wp_A2
+   var = A2
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y0_swc_Sm1.5Wp_A2 = sum((data_meteo %>% 
+                                 filter(Year == year -1, Doy %in% period))$`Sm<1.5Wp`)
+   
+   A1 =NA ; A2 = NA
+   
+   
+   
+   ##  sw_c >0.9 x Fc  Flowering year 1 ----
+
+   # Douro:  Fc é de 142,8
+   # Verdes: Fc é de 77 mm
+   
+   A1 =10 ; A2 = 20
+   
+   pheno_day = data_prd_rdd$DOY_Fl[i]
+   
+   # FL_Y1_swc_Sm_0.9Fc_A1
+   var = A1
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y1_swc_Sm_0.9Fc_A1 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm>0.9Fc`)
+   
+   
+   # FL_Y1_swc_Sm_0.9Fc_A2
+   var = A2
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y1_swc_Sm_0.9Fc_A2 = sum((data_meteo %>% 
+                                 filter(Year == year, Doy %in% period))$`Sm>0.9Fc`)
+   
+   A1 =NA ; A2 = NA
+   
+   
+   
+   ##  sw_c >0.9 x Fc  Flowering year 0 ----
+   
+   A1 =10 ; A2 = 20
+   
+   pheno_day = data_prd_rdd$DOY_Fl[i-1]
+   
+   # FL_Y0_swc_Sm_0.9Fc_A1
+   var = A1
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y0_swc_Sm_0.9Fc_A1 = sum((data_meteo %>% 
+                                  filter(Year == year -1, Doy %in% period))$`Sm>0.9Fc`)
+   
+   
+   # FL_Y0_swc_Sm_0.9Fc_A2
+   var = A2
+   period = (pheno_day + var - 1): pheno_day
+   FL_Y0_swc_Sm_0.9Fc_A2 = sum((data_meteo %>% 
+                                  filter(Year == year -1, Doy %in% period))$`Sm>0.9Fc`)
+   
+   A1 =NA ; A2 = NA
    
    
    
@@ -832,10 +939,18 @@ for (i in 2:nrow(data_prd_rdd)) {
                    FL_Y1_swa_A1 = FL_Y1_swa_A1,
                    FL_Y1_swa_A2 = FL_Y1_swa_A2,
                    H_Y0_swa_A1 = H_Y0_swa_A1,
-                   H_Y0_swa_A2 = H_Y0_swa_A2
-                   
-                   
-                   
+                   H_Y0_swa_A2 = H_Y0_swa_A2,
+                   FL_Y1_swc_Sm1.5Wp_A1 = FL_Y1_swc_Sm1.5Wp_A1,
+                   FL_Y1_swc_Sm1.5Wp_A2 = FL_Y1_swc_Sm1.5Wp_A2,
+                   H_Y1_swc_Sm1.5Wp_B1 = H_Y1_swc_Sm1.5Wp_B1,
+                   H_Y1_swc_Sm1.5Wp_A1 = H_Y1_swc_Sm1.5Wp_A1,
+                   FL_Y0_swc_Sm1.5Wp_A1 = FL_Y0_swc_Sm1.5Wp_A1,
+                   FL_Y0_swc_Sm1.5Wp_A2 = FL_Y0_swc_Sm1.5Wp_A2,
+                   FL_Y1_swc_Sm_0.9Fc_A1 = FL_Y1_swc_Sm_0.9Fc_A1,
+                   FL_Y1_swc_Sm_0.9Fc_A2 = FL_Y1_swc_Sm_0.9Fc_A2,
+                   FL_Y0_swc_Sm_0.9Fc_A1 = FL_Y0_swc_Sm_0.9Fc_A1,
+                   FL_Y0_swc_Sm_0.9Fc_A2 = FL_Y0_swc_Sm_0.9Fc_A2
+              
                  ))
   
   
