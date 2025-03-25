@@ -9,14 +9,46 @@
 library(tidyverse)
 library(arules)
 
+file = 2 # 1 to RDD other to RVV
+
 # read data for RDD region ---------------------------------------------------------------------------
 
 ## meterological data ----
 
 
-data_meteo <-
-  read_csv(file = '../data/dataPrep_meteo_rdd.csv') %>%
-  mutate(Year = lubridate::year(Date))
+## production data ----
+
+##  RDD data ----
+
+
+if (file == 1) {
+   
+   data_prd <-
+      read.csv(file = '../data/dataPrep_production_rdd.csv') %>%
+      mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl))
+   
+   data_meteo <-
+      read_csv(file = '../data/dataPrep_meteo_rdd.csv') %>%
+      mutate(Year = lubridate::year(Date))
+   
+   
+} else {
+   
+   ##  RVV data ----
+   
+   data_prd <-
+      read.csv(file = '../data/dataPrep_production_rvv.csv') %>%
+      mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl)) %>% 
+      filter(Year != 2022)
+   
+   data_meteo <-
+      read_csv(file = '../data/dataPrep_meteo_rvv.csv') %>%
+      mutate(Year = lubridate::year(Date))
+   
+}
+
+
+
 
 head(data_meteo)
 
@@ -28,16 +60,10 @@ head(data_meteo)
 # "Tmed<15" "Tmax>35" "Tmin<-2"
 
 
-## production data ----
 
-data_prd_rdd <-
-  read.csv(file = '../data/dataPrep_production_rdd.csv') %>%
-  mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl))
+head(data_prd)
 
-
-head(data_prd_rdd)
-
-#names(data_prd_rdd)
+#names(data_prd)
 # "Year"     "Wine_mhl" "DOY_BB"
 # "DOY_Fl"   "DOY_sM"   "DOY_Fs"
 # "DOY_Hv"   "var"
@@ -124,16 +150,16 @@ my_df <-
 
 
 
-for (i in 2:nrow(data_prd_rdd)) {
+for (i in 2:nrow(data_prd)) {
 
   ##  Year ----
-  year = data_prd_rdd$Year[i]
+  year = data_prd$Year[i]
   
   cat('Processing Year: ', year,'\n')
   
   ##  Wine production ----
   
-  Wine_mhl = data_prd_rdd$Wine_mhl[i]
+  Wine_mhl = data_prd$Wine_mhl[i]
   
   
   
@@ -145,7 +171,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     C = 15;  B1 = 10; A1 = 10
     
-    pheno_day = data_prd_rdd$DOY_Fl[i]
+    pheno_day = data_prd$DOY_Fl[i]
   
   # tm_fl_y1_c
     var = C
@@ -176,7 +202,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     B1 = 10; A1 = 10
     
-    pheno_day = data_prd_rdd$DOY_Fl[i-1]
+    pheno_day = data_prd$DOY_Fl[i-1]
   
   # tm_fl_y0_b1
     var = B1
@@ -200,7 +226,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     A1 = 15; A2 = 30
     
-    pheno_day = data_prd_rdd$DOY_BB[i-1]
+    pheno_day = data_prd$DOY_BB[i-1]
     
     # tm_bb_y0_a1
     var = A1
@@ -227,7 +253,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     C = 20;  A1 = 20
     
-    pheno_day = data_prd_rdd$DOY_sM[i]
+    pheno_day = data_prd$DOY_sM[i]
   
   # tm_sm_y1_c
     var = C
@@ -250,7 +276,7 @@ for (i in 2:nrow(data_prd_rdd)) {
     
       B1 = 20
       
-      pheno_day = data_prd_rdd$DOY_sM[i-1]
+      pheno_day = data_prd$DOY_sM[i-1]
     
     # tm_sm_y0_b1
       var = B1
@@ -267,7 +293,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     C = 10;  B1 = 20
     
-    pheno_day = data_prd_rdd$DOY_Hv[i]
+    pheno_day = data_prd$DOY_Hv[i]
     
   # tm_hv_y1_c
     var = C
@@ -291,7 +317,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
     A1 = 30
     
-    pheno_day = data_prd_rdd$DOY_Hv[i-1]
+    pheno_day = data_prd$DOY_Hv[i-1]
     
     # tn_hv_y0_a1
       var = A1
@@ -313,7 +339,7 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     C = 15;  B1 = 15
     
-    pheno_day = data_prd_rdd$DOY_Fl[i]
+    pheno_day = data_prd$DOY_Fl[i]
     
     # tm.days.less.15_fl_y1_c
     var = C
@@ -345,7 +371,7 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     C = 20;  A1 = 30
     
-    pheno_day = data_prd_rdd$DOY_BB[i]
+    pheno_day = data_prd$DOY_BB[i]
     
     # tm.days.less.0_bb_y1_b1
     var = C
@@ -372,7 +398,7 @@ for (i in 2:nrow(data_prd_rdd)) {
     
     A1 = 10
     
-    pheno_day = data_prd_rdd$DOY_Fl[i]
+    pheno_day = data_prd$DOY_Fl[i]
     
     
 
@@ -394,9 +420,9 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    # count number of days
    
-   A1 = 10; A2 = 10
+   A1 = 10; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
    # tm.days.above.35_fl_y1_a1
    var = A1
@@ -423,7 +449,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 = 20; A1 = 20
    
-   pheno_day = data_prd_rdd$DOY_sM[i]
+   pheno_day = data_prd$DOY_sM[i]
 
    # tm.days.above.35_sm_y1_b1
    var = B1
@@ -452,7 +478,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 = 10
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
 
    # rf_fl_y1_a1
@@ -473,7 +499,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 = 10; A1 = 10
    
-   pheno_day = data_prd_rdd$DOY_Hv[i]
+   pheno_day = data_prd$DOY_Hv[i]
    
    # rf_hv_y1_b1
    var = B1
@@ -500,7 +526,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    C = 15;  A1 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
   
    # rf.above.1mm_fl_y1_c
@@ -527,7 +553,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 = 20;  A1 = 20
    
-   pheno_day = data_prd_rdd$DOY_sM[i]
+   pheno_day = data_prd$DOY_sM[i]
    
    # rf.above.1mm_sm_y1_b1
    var = B1
@@ -552,7 +578,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    C = 10;  A1 = 10
    
-   pheno_day = data_prd_rdd$DOY_Hv[i]
+   pheno_day = data_prd$DOY_Hv[i]
    
    # rf.above.1mm_hv_y1_c
    var = C
@@ -580,7 +606,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
    C = 10
    
-   pheno_day = data_prd_rdd$DOY_BB[i]
+   pheno_day = data_prd$DOY_BB[i]
    
    # iaf_bb_y1_c
    var = C
@@ -595,7 +621,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 = 10; B2 = 20; B3 = 30; A1 = 10
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
    # iaf_fl_y1_b1
    var = B1
@@ -632,7 +658,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    C = 10
    
-   pheno_day = data_prd_rdd$DOY_Hv[i]
+   pheno_day = data_prd$DOY_Hv[i]
    
    # iaf_hv_y1_c
    var = C
@@ -648,7 +674,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 = 10; B2 = 20; B3 = 30; A1 = 10
    
-   pheno_day = data_prd_rdd$DOY_Fl[i-1]
+   pheno_day = data_prd$DOY_Fl[i-1]
    
    # iaf_fl_y0_b1
    var = B1
@@ -688,7 +714,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =15 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
    # swa_fl_y1_a1
    var = A1
@@ -713,7 +739,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 =20 ; A1 = 20
    
-   pheno_day = data_prd_rdd$DOY_Hv[i]
+   pheno_day = data_prd$DOY_Hv[i]
    
    # swa_hv_y1_b1
    var = B1
@@ -736,7 +762,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =15 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Hv[i-1]
+   pheno_day = data_prd$DOY_Hv[i-1]
    
    # swa_hv_y0_a1
    var = A1
@@ -767,7 +793,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =10 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
    # sw.less.15wp_fl_y1_a1
    var = A1
@@ -789,7 +815,7 @@ for (i in 2:nrow(data_prd_rdd)) {
   
    A1 =10 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_sM[i]
+   pheno_day = data_prd$DOY_sM[i]
    
    # sw.less.15wp_sm_y1_a1
    var = A1
@@ -812,7 +838,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    B1 =20 ; A1 = 20
    
-   pheno_day = data_prd_rdd$DOY_Hv[i]
+   pheno_day = data_prd$DOY_Hv[i]
    
    # sw.less.15wp_hv_y1_b1
    var = B1
@@ -836,7 +862,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =10 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i-1]
+   pheno_day = data_prd$DOY_Fl[i-1]
    
    # sw.less.15wp_fl_y0_a1
    var = A1
@@ -862,7 +888,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =10 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i]
+   pheno_day = data_prd$DOY_Fl[i]
    
 
    # sw.above.09fc_fl_y1_a1
@@ -886,7 +912,7 @@ for (i in 2:nrow(data_prd_rdd)) {
    
    A1 =10 ; A2 = 20
    
-   pheno_day = data_prd_rdd$DOY_Fl[i-1]
+   pheno_day = data_prd$DOY_Fl[i-1]
    
 
    # sw.above.09fc_fl_y0_a1
@@ -1045,15 +1071,28 @@ for (col in names(my_df)) {
 
 str(my_df)
 
+# Substituting comma with another character (e.g., semicolon)
+my_df <- apply(my_df, c(1, 2), function(x) gsub(",", "|", x))
+
+
+
 
 
 # Final output ------------------------------------------------------------------------
 
+if (file == 1) {
+   
+   write.csv(x = my_df,file = 'data/dis_rule_dataset_rdd.csv',
+             row.names = FALSE)
+   
+   
+} else {
+   
+   write.csv(x = my_df,file = 'data/dis_rule_dataset_rvv.csv',
+             row.names = FALSE)
+   
+}
 
-#### CHANGE NAMES VARIOABALES RO BE MORE ESY TRRO READ
 
 
-write.csv(x = my_df,file = 'data/dis_rule_dataset_rdd.csv',
-          row.names = FALSE)
 
-getwd()

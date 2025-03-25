@@ -14,18 +14,39 @@ library(tidyverse)
 
 # read dataset ------------------------------------------------------------------------
 
-df.rdd <- read.csv(file = 'data/dis_rule_dataset_rdd.csv')
+df <- read.csv(file = '../data/dataPrep_dis_rule_dataset_rdd.csv')
+df <- read.csv(file = '../data/dataPrep_dis_rule_dataset_rvv.csv')
 
-glimpse(df.rdd)
 
-head(df.rdd)
+glimpse(df)
+
+head(df)
+
+
+
+
+for (col in names(df)) {
+  if (col == 'Wine_mhl') {
+    df[[col]] = as.numeric(df[[col]])
+  } else{
+    df[[col]] = as.factor(df[[col]])
+  }
+  cat(col,'---',class(df[[col]]),'\n')
+}
+
 
 # test --------------------------------------------------------------------------------
 
 # Build distribution rule set
-drs<-caren(df.rdd, Dist=TRUE, POI='Wine_mhl')
+
+df_test = df 
+
+ts.plot(df_test$Wine_mhl)
+
+drs <- caren(df_test, Dist=TRUE, POI='Wine_mhl',min.sup = 0.2, min.conf = 0.1)
 
 drs
+
 
 # View rules
 plot.drs(drs)
@@ -37,7 +58,29 @@ plot.drs(drs,iterate=TRUE)
 
 
 
+# read dataset ------------------------------------------------------------------------
 
+df.rvv <- read.csv(file = 'data/dis_rule_dataset_rvv.csv')
+
+glimpse(df.rvv)
+
+head(df.rvv)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################################################################
+###########################################################################################
 
 
 
@@ -83,6 +126,8 @@ head(auto.mpg.discr)
 
 # Build distribution rule set
 drs<-caren(auto.mpg.discr, Dist=TRUE, POI='MPG')
+
+auto.mpg.discr$HP %>% unique()
 
 # View rules
 plot.drs(drs)
