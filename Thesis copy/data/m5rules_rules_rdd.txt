@@ -1,0 +1,43 @@
+M5Rules — RDD 
+Generated: 2026-03-18 01:32 
+Observations: 89 
+Target: Wine_mhl (continuous)
+
+=== Naive Baseline ===
+MAE: 244.61 | RMSE: 304.94 
+
+=== Discovered Rules ===
+M5 pruned model rules 
+(using smoothed linear models) :
+Number of Rules : 1
+
+Rule: 1
+
+Wine_mhl = 
+	35.1019 * tm_fl_y1_c15 
+	+ 28.2361 * tm_fl_y0_b10 
+	- 85.2271 * tm_bb_y0_a30 
+	+ 26.0482 * tm_hv_y1_c10 
+	+ 39.1611 * tn_hv_y0_a30 
+	- 16.1993 * tm.days.less.15_fl_y1_b15 
+	+ 2811.4439 * iaf_fl_y0_b10 
+	- 2723.8386 * iaf_fl_y0_b20 
+	- 326.7221 [88/78.02%]
+
+
+
+=== Training Performance ===
+MAE: 190.21 | RMSE: 235.61 | R2: 0.403 
+
+=== Cross-Validation ( 10 folds) ===
+=== 10 Fold Cross Validation ===
+
+=== Summary ===
+
+Correlation coefficient                  0.2473
+Mean absolute error                    242.81  
+Root mean squared error                315.721 
+Relative absolute error                 99.452  %
+Root relative squared error            103.7377 %
+Total Number of Instances               88     
+R2 (CV): -0.076 

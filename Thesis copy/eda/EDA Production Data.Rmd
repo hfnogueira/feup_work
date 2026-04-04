@@ -1,0 +1,361 @@
+---
+title: "EDA on Production Data"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+
+```{r load_libs, warning=FALSE, include=FALSE}
+
+library(forecast)
+library(fpp2)
+library(tidyverse)
+library(tseries)
+library(plotly)
+library(hrbrthemes)
+library(readr)
+library(viridis)
+library(forcats)
+library(kableExtra)
+library(knitr)
+
+```
+
+
+
+# Read the data
+
+```{r read_data, warning=FALSE}
+
+dataPrep_rdd <- 
+  read.csv(file = '../data/dataPrep_production_rdd.csv') %>% 
+  mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl) )
+
+dataPrep_rvv <- 
+  read.csv(file = '../data/dataPrep_production_rvv.csv') %>% 
+  mutate(var = 'rvv',  DOY_Fs = 0, Wine_mhl = as.double(Wine_mhl))
+
+df_prd <- rbind(dataPrep_rdd, dataPrep_rvv)
+
+
+df_prd
+
+```
+
+```{r}
+
+ts.rdd <- ts( dataPrep_rdd$Wine_mhl, start = c(min(dataPrep_rdd$Year) ), frequency = 1)
+ts.rvv <- ts( dataPrep_rvv$Wine_mhl, start = c(min(dataPrep_rvv$Year) ), frequency = 1)
+
+str(ts.rdd)
+str(ts.rvv)
+
+```
+
+# EDA Production Data
+
+
+```{r, warning=FALSE}
+
+# convert the time series to data frames with a date column
+df1 <- data.frame(Date = time(ts.rdd), Value1 = ts.rdd)
+df2 <- data.frame(Date = time(ts.rvv), Value2 = ts.rvv)
+
+# left join the two data frames based on the Date column
+df_joined <- left_join(df1, df2, by = "Date")
+
+
+# plot wine production fro the two regions
+ggplot(df_joined, aes(x = Date)) +
+  geom_line(aes(y = Value1, color = "Rdd")) +
+  geom_line(aes(y = Value2, color = "Rvv")) +
+  labs(title = "Wine production from RDD and RVV regions", x = "Date", y = "Value", subtitle = 'values in Mhl') +
+  scale_color_manual(values = c("Rdd" = "#00AFBB", "Rvv" = "#E7B800")) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0,NA)) +
+  theme_bw()
+
+
+  
+# plot wine production RVV with regulation year
+ggplot(df_joined, aes(x = Date)) +
+  geom_line(aes(y = Value2, color = "Rvv")) +
+  labs(title = "Wine production from  RVV regions", x = "Date", y = "Value", subtitle = 'values in Mhl') +
+  scale_color_manual(values = c( "Rvv" = "#E7B800")) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0,NA)) +
+  geom_vline(xintercept = 1986) +
+  theme_bw()
+
+```
+```{r, fig.width=10, fig.height=4}
+
+# create plotly line chart
+
+
+df_joined %>% 
+  plot_ly( x = ~Date, y = ~Value1, type = "scatter", mode = "lines", name = "Rdd") %>%
+  add_trace(y = ~Value2, name = "Rvv") %>%
+  layout(title = "Wine production from RDD and RVV regions", 
+         xaxis = list(title = "Date"), 
+         yaxis = list(title = "Production Mhl", range = c(0, max(df_joined[,2:3], na.rm = TRUE))))
+
+
+```
+
+
+### Rdd region
+
+
+
+```{r}
+## rdd plots  ----------------------
+
+#autoplot(ts.rdd, main = 'Wine production for RDD region in Mhl')
+
+autoplot(ts.rdd)+
+  geom_smooth() +
+   expand_limits(y = 0) +
+  labs('Wine production for RDD region in Mh',
+       y = "Wine Production in Mhl (in thousands)",
+       x = NULL)
+```
+
+
+```{r}
+
+x <- ts.rdd
+
+# # lag plot of the series
+# gglagplot(x)
+
+# ACF plot of the series
+ggAcf(x, lag.max = 34)
+
+
+
+```
+
+### RVV
+
+
+```{r}
+
+
+autoplot(ts.rvv)+
+  geom_smooth() +
+  expand_limits(y = 0) +
+  labs('Wine production for RVV region in Mh',
+       y = "Wine Production in Mhl (in thousands)",
+       x = NULL)
+```
+
+```{r}
+
+x <- ts.rvv
+
+# # lag plot of the series
+# gglagplot(x)
+
+# ACF plot of the series
+ggAcf(x, lag.max = 34)
+
+
+
+```
+
+## stationary
+
+To check if a time series is stationary, we can perform a statistical test, such as the **Augmented Dickey-Fuller (ADF)** test or the **Kwiatkowski-Phillips-Schmidt-Shin (KPSS)** test. 
+
+The ADF test checks for the presence of a unit root in the time series.
+The ADF test is based on the null hypothesis that the time series has a unit root (i.e., it is non-stationary), and the alternative hypothesis that the time series is stationary.  **If the p-value is less than the significance level (usually 0.05), then we can reject the null hypothesis** of a unit root and conclude that the **time series is stationary**
+
+The KPSS test checks for **trend stationarity** (i.e., the absence of a trend) and **level stationarity** (i.e., the absence of a systematic difference between the mean and variance of the time series).
+
+
+### Tests for RDD
+
+```{r}
+# Perform the ADF test
+adf.test(ts.rdd)
+
+# Perform the KPSS test
+kpss.test(ts.rdd, null = 'Trend')
+```
+
+
+### Tests for RVV
+
+```{r}
+# Perform the ADF test
+adf.test(na.exclude(ts.rvv))
+
+# Perform the KPSS test
+kpss.test(na.exclude(ts.rvv), null = 'Trend')
+```
+
+# EDA 
+
+Check the days of Year for the several events
+
+```{r}
+
+# https://r-graph-gallery.com/density_mirror_ggplot2.html
+
+df_prd %>% select(var,DOY_BB,DOY_Fl, DOY_sM,DOY_Hv) %>% 
+  gather(key = key, value = value,- var) %>% 
+  group_by(var, key) %>% 
+  summarise(#min = min(value),
+            #max = max(value),
+            median = median(value),.groups = 'drop') %>% 
+  spread(key = var,value = median) %>% 
+  rename(median_rdd = rdd, 
+         median_rvv = rvv) %>% 
+  kable() %>% kableExtra::kable_minimal() 
+  #add_header_above(c(" ", "Hello" = 2, "World" = 2))
+
+
+df_prd %>%
+    select(- Wine_mhl, - DOY_Fs) %>% 
+    rename(Region = var) %>% 
+   # mutate(index = row_number()) %>% 
+    gather(key = variable, value = value, -Region, -Year) %>% 
+    spread(key = Region,value = value) %>% 
+    ggplot() +
+    
+    # Top
+    geom_density( aes(x = rdd, y = ..density..), fill="#69b3a2" ) +
+    geom_label( aes(x=40, y=0.01, label="rdd"), color="#69b3a2") +
+    
+    # Bottom
+    geom_density( aes(x = rvv, y = -..density..), fill= "#404080") +
+    geom_label( aes(x=320, y=-0.01, label="rvv"), color="#404080") +
+  
+    theme_ipsum() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      strip.text.x = element_text(size = 8)
+    ) +
+    xlab("") +
+    labs(title = 'Distribution of days of year for several events') +
+    facet_wrap(~variable)
+```
+
+
+
+```{r}
+
+## RDD variables  ----------------------
+
+# df_prd %>%
+#  # filter(var == 'rdd' ) %>% 
+#   select(-Year, -Wine_mhl) %>% 
+#   gather(key="region", value="value") %>%
+#   mutate(value = round(as.numeric(value),0)) %>% 
+#   mutate_all(~ifelse(is.na(.), 0, .)) %>% 
+#   
+#   mutate(region = fct_reorder(region, value)) %>%
+#   ggplot( aes(color=region, fill=region)) +
+#   
+#   ## histogram  ----------------------
+#   
+#   # geom_histogram(alpha=0.6, binwidth = 5) +
+# 
+#   ## densitys  ----------------------
+#     
+#   geom_density( aes(x = value, y = ..density..) ) +
+# 
+#     scale_fill_viridis(discrete=TRUE) +
+#     scale_color_viridis(discrete=TRUE) +
+# 
+# 
+#     theme_ipsum() +
+#     theme(
+#       legend.position="none",
+#       panel.spacing = unit(0.1, "lines"),
+#       strip.text.x = element_text(size = 8)
+#     ) +
+#     xlab("") +
+#     ylab("Assigned Probability (%)") +
+#     labs(title = 'RDD days of the year distributions for events') +
+#     facet_wrap(~region)
+
+
+```
+
+
+```{r include=FALSE}
+## a function to plot the densitys
+plot_densitys <- function(df_prd, x, x_label) {
+  df_prd %>%
+    select(Year, var,eval(x)) %>% 
+    rename(value = eval(x), region = var) %>% 
+   # mutate(index = row_number()) %>% 
+    spread(key = region, value = value) %>% 
+    ggplot() +
+    
+    # Top
+    geom_density( aes(x = rdd, y = ..density..), fill="#69b3a2" ) +
+    geom_label( aes(x=80, y=0.05, label="rdd"), color="#69b3a2") +
+    
+    # Bottom
+    geom_density( aes(x = rvv, y = -..density..), fill= "#404080") +
+    geom_label( aes(x=300, y=-0.05, label="rvv"), color="#404080") +
+    theme_ipsum() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      strip.text.x = element_text(size = 8)
+    ) +
+    xlab("") +
+    labs(title = paste('Days of year for', x_label)) 
+}
+```
+
+
+## Day of the Year for the Bud Break  -- DOY_BB
+
+```{r}
+
+plot_densitys(df_prd = df_prd, x = 'DOY_BB', x_label =  'Bud Break')
+
+```
+
+## Day of the Year for Flowering -- DOY_Fl
+
+```{r}
+
+plot_densitys(df_prd = df_prd, x = 'DOY_Fl', x_label =  'Flowering')
+
+```
+
+## Day of the Year for Start of the maturity -- DOY_sM
+
+```{r}
+
+plot_densitys(df_prd = df_prd, x = 'DOY_sM', x_label =  'Start of the maturity')
+
+```
+
+## Day of the Year for Start of the maturity -- DOY_Fs
+
+Data for the RVV is not available for Fruit Set
+
+```{r}
+
+plot_densitys(df_prd , x = 'DOY_Fs', x_label =  'Fruit Set')
+
+```
+
+
+## Day of the Year for the Harvest -- DOY_Hv
+
+Data for the RVV is not available for Fruit Set
+
+```{r}
+
+plot_densitys(df_prd , x = 'DOY_Hv', x_label =  'Harvest')
+
+```
+
