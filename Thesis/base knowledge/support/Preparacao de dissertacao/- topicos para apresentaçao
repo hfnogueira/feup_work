@@ -1,0 +1,43 @@
+- contexto
+- motivação
+- thesis goals 
+- concepts 
+- revisão literatura
+- proposal approach
+- framework 
+- dataset
+- roadmap
+
+
+
+
+
+3) a)
+	a) Context Word Embbedings no encoder poder usar paralelismo dado que este contexto é pré treinado , 
+agrupando determinadas palavras próximas umas das outras. 
+E por isso, calcular o contexto para cada palavra pode ser feito ao mesmo tempo para todos os inputs.
+
+	b) Não pode ser paralelizado porque existe dependência do input e do contexto, bem como a posição das palavras no input, 
+E por isso, so depois é possível efetuar o decode para a tradução
+
+	c) Cross Entropy no caso de tradução requer calcular a distância entre o input e o output como forma de medir a eficácia do 
+modelo quando está a aprender e por isso necessita da sequência input - output logo não é possível paralelizar.
+
+
+3 b)
+
+Sequências longas são um problema porque o mecanismo de atenção acaba por ser limitado na distância entre os tokens dados no 
+Input.
+Como o Transformer usa uma matriz de probabilidade de palavras entre si e calcula a posição relativa de cada palavrada sequencia, 
+para sequencias mais longas esta informação fica esparsa e deixa de fazer sentido o modelo.
+A dimensão do vetor de Positional Encoding, fica muito grande e os valores do mesmo próximos de zero
+
+
+
+
+
+
+
+ 
+
+

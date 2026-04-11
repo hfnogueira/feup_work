@@ -34,11 +34,11 @@ print(file)
 if (file == 1) {
    
    data_prd <-
-      read.csv(file = '../data/dataPrep_production_rdd.csv') %>%
+      read.csv(file = 'data/dataPrep_production_rdd.csv') %>%
       mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl))
    
    data_meteo <-
-      read_csv(file = '../data/dataPrep_meteo_rdd.csv') %>%
+      read_csv(file = 'data/dataPrep_meteo_rdd.csv') %>%
       mutate(Year = lubridate::year(Date))
    
    
@@ -47,12 +47,12 @@ if (file == 1) {
    ##  RVV data ----
    
    data_prd <-
-      read.csv(file = '../data/dataPrep_production_rvv.csv') %>%
+      read.csv(file = 'data/dataPrep_production_rvv.csv') %>%
       mutate(var = 'rdd', Wine_mhl = as.double(Wine_mhl)) %>% 
       filter(Year != 2022)
    
    data_meteo <-
-      read_csv(file = '../data/dataPrep_meteo_rvv.csv') %>%
+      read_csv(file = 'data/dataPrep_meteo_rvv.csv') %>%
       mutate(Year = lubridate::year(Date))
    
 }
@@ -1022,10 +1022,10 @@ for (i in 2:nrow(data_prd)) {
 # Used for RIPPER and other supervised ML methods that handle continuous features natively
 
 if (file == 1) {
-   write.csv(x = my_df, file = '../data/dataPrep_cont_dataset_rdd.csv', row.names = FALSE)
+   write.csv(x = my_df, file = 'data/dataPrep_cont_dataset_rdd.csv', row.names = FALSE)
    cat('Continuous dataset saved: dataPrep_cont_dataset_rdd.csv\n')
 } else {
-   write.csv(x = my_df, file = '../data/dataPrep_cont_dataset_rvv.csv', row.names = FALSE)
+   write.csv(x = my_df, file = 'data/dataPrep_cont_dataset_rvv.csv', row.names = FALSE)
    cat('Continuous dataset saved: dataPrep_cont_dataset_rvv.csv\n')
 }
 
@@ -1119,14 +1119,14 @@ my_df <- cbind(year = my_year_col, my_df)
 if (file == 1) {
    print('Saving discretized dataset for RDD...')
    
-   write.csv(x = my_df,file = '../data/dataPrep_dis_rule_dataset_rdd.csv',
+   write.csv(x = my_df,file = 'data/dataPrep_dis_rule_dataset_rdd.csv',
              row.names = FALSE)
    
    
 } else {
    print('Saving discretized dataset for RVV...')
    
-   write.csv(x = my_df,file = '../data/dataPrep_dis_rule_dataset_rvv.csv',
+   write.csv(x = my_df,file = 'data/dataPrep_dis_rule_dataset_rvv.csv',
              row.names = FALSE)
    
 }

@@ -23,7 +23,7 @@ library(gt)
 # When TRUE, CarenR rules describe climate conditions associated with
 # above/below-TREND years (deviation from expected era production).
 # When FALSE, rules describe above/below the all-time mean (original behaviour).
-detrend <- FALSE
+detrend <- TRUE
 
 
 # read dataset ------------------------------------------------------------------------
@@ -39,8 +39,8 @@ repeat {
 }
 
 path <- c(
-  "../data/dataPrep_dis_rule_dataset_rdd.csv",
-  "../data/dataPrep_dis_rule_dataset_rvv.csv"
+  "data/dataPrep_dis_rule_dataset_rdd.csv",
+  "data/dataPrep_dis_rule_dataset_rvv.csv"
 )[file]
 
 df <- read.csv(path)
@@ -95,10 +95,17 @@ if (detrend) {
 
 
 # Build distribution rule set --------------------------------------------------------------------------------
-
+par(mfrow = c(1, 1))
 ts.plot(df$Wine_mhl,
         main = if (detrend) paste(region, '— Wine_mhl residuals (detrended)')
                else         paste(region, '— Wine_mhl raw'))
+
+
+# Remove the year column --------------------------------------------------------------------------------
+
+df <- df %>% select(-year)
+
+# build the distribution rule set --------------------------------------------------------------------------------
 
 drs <- caren(
   df,
@@ -181,6 +188,7 @@ repeat {
 
 # examples ----------------------------------------------------------------------------
 
+# dont execute this block, it is just for demonstration of how to use CarenR with different datasets and settings.
 if (FALSE) {
   # Attribute-Value (UCI like) dataset
   data(mushrooms)

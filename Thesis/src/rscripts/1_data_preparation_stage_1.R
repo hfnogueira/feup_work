@@ -14,7 +14,6 @@ library(readxl)
 
 
 
-
 # Meterological data ------------------------------------------------------------------
 
 
@@ -35,7 +34,7 @@ library(readxl)
 
 
 df_rdd <-
-  read_excel("../data/RDD/Dados_Finais_regua_1933_2022.xls", 
+  read_excel("data/RDD/Dados_Finais_regua_1933_2022.xls", 
              sheet = "Matrix_modelacao") %>%
   select(Date, Month, Dom, Doy, Tmax, Tmin, Tmed, Rain, Sm, Iaf , Eto)
 
@@ -44,7 +43,7 @@ str(df_rdd)
 
 
 df_rvv <-
-  read_excel("../data/RVV/dados_finais_Braga_1941_2022_IM.xlsx", 
+  read_excel("data/RVV/dados_finais_Braga_1941_2022_IM.xlsx", 
              sheet = "Daily_meteo") %>%
   select(Date, Month, Dom, Doy, Tmax, Tmin, Tmed, Rain, Sm, Iaf , Eto)
 
@@ -102,22 +101,22 @@ head(df_rvv)
 # saveRDS(object = df_rvv, file = '../data/dataPrep_meteo_rvv')
 
 write.csv(x = df_rdd,
-          file = '../data/dataPrep_meteo_rdd.csv',
+          file = 'data/dataPrep_meteo_rdd.csv',
           row.names = FALSE)
 write.csv(x = df_rvv,
-          file = '../data/dataPrep_meteo_rvv.csv',
+          file = 'data/dataPrep_meteo_rvv.csv',
           row.names = FALSE)
 
 
 # Production Data ---------------------------------------------------------------------
 
 df_prd_rdd <-
-  read_excel("../data/RDD/Pheno_Prd_1933_2022_recente.xlsx", sheet = "data") %>%
+  read_excel("data/RDD/Pheno_Prd_1933_2022_recente.xlsx", sheet = "data") %>%
   rename(Wine_mhl = `Wine (MhL)`)
 
 
 df_prd_rvv <-
-  read_excel("../data/RVV/Pheno_Prd_1941_2022_recente.xlsx", sheet = "data") %>%
+  read_excel("data/RVV/Pheno_Prd_1941_2022_recente.xlsx", sheet = "data") %>%
   rename(Wine_mhl = `Wine (MhL)`)
 
 
@@ -128,8 +127,10 @@ df_prd_rvv <-
 # saveRDS(object = df_prd_rvv, file = '../data/dataPrep_production_rvv')
 
 write.csv(x = df_prd_rdd,
-          file = '../data/dataPrep_production_rdd.csv',
+          file = 'data/dataPrep_production_rdd.csv',
           row.names = FALSE)
 write.csv(x = df_prd_rvv,
-          file = '../data/dataPrep_production_rvv.csv',
+          file = 'data/dataPrep_production_rvv.csv',
           row.names = FALSE)
+
+
