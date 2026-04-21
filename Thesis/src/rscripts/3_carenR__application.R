@@ -25,6 +25,20 @@ library(gt)
 # When FALSE, rules describe above/below the all-time mean (original behaviour).
 detrend <- TRUE
 
+# Detrending method — only used when detrend = TRUE.
+#   "linear"  : remove a fitted straight line  (original behaviour)
+#   "lowess"  : remove a locally-weighted smooth trend (loess)
+# Must match the detrend_method set in scripts 4, 6, and 7 so all analyses
+# share the same target definition.
+detrend_method <- "linear"   # ← switch to "lowess" for LOWESS comparison
+
+# LOWESS smoothing span (fraction of points used in each local fit).
+# Only used when detrend_method = "lowess". Default 0.75 gives a smooth trend.
+# Keep fixed across all scripts.
+loess_span <- 0.75
+
+source("src/rscripts/utils/detrend_utils.R")
+
 
 # read dataset ------------------------------------------------------------------------
 
@@ -42,7 +56,7 @@ path <- c(
   "data/dataPrep_dis_rule_dataset_rdd.csv",
   "data/dataPrep_dis_rule_dataset_rvv.csv"
 )[file]
-
+1
 df <- read.csv(path)
 
 glimpse(df)
@@ -67,22 +81,21 @@ for (col in names(df)) {
 
 if (detrend) {
 
-  cat('\n--- Detrending enabled ---\n')
+  cat('\n--- Detrending enabled (method:', detrend_method, ') ---\n')
 
-  # year must be numeric for lm(); convert from factor if needed
-  year_num <- as.numeric(as.character(df$year))
+  # df_for_trend: numeric year + Wine_mhl, needed by detrend_utils
+  df_for_trend <- data.frame(
+    year     = as.numeric(as.character(df$year)),
+    Wine_mhl = df$Wine_mhl
+  )
 
-  trend_fit        <- lm(Wine_mhl ~ year_num, data = df)
-  trend_slope      <- round(coef(trend_fit)[2], 3)
-  trend_intercept  <- round(coef(trend_fit)[1], 1)
+  tr <- get_trend_residuals(df_for_trend, method = detrend_method,
+                            span = loess_span, verbose = TRUE)
 
-  cat('Trend model: Wine_mhl =', trend_intercept, '+', trend_slope, '* year\n')
-  cat('Trend slope:', trend_slope, 'mhl / year\n\n')
+  df$Wine_mhl_original <- df$Wine_mhl   # keep raw values for reference
+  df$Wine_mhl          <- tr$residuals  # replace with deviations from trend
 
-  df$Wine_mhl_original <- df$Wine_mhl          # keep raw values for reference
-  df$Wine_mhl          <- residuals(trend_fit) # replace with deviations from trend
-
-  cat('Wine_mhl now contains RESIDUALS (deviation from linear trend).\n')
+  cat('Wine_mhl now contains RESIDUALS (deviation from', detrend_method, 'trend).\n')
   cat('Positive = above-trend year  |  Negative = below-trend year\n')
   cat('Residual mean:', round(mean(df$Wine_mhl), 2),
       '| SD:', round(sd(df$Wine_mhl), 2), '\n\n')
@@ -118,7 +131,7 @@ drs <- caren(
 drs
 
 
-
+"src/rscripts/"
 
 
 # Show the rules ----------------------------------------------------------------------
@@ -156,8 +169,25 @@ plot.drs(drs, st = rule, n = 1, m = 1)   # st = rule index you want
 #plot.dr(drs[1,], dist.rep="boxplot")
 
 
+# save distribution rules to CSV (used by script 6 — walk-forward validation) --------
+# File name encodes region AND detrend method so both runs can coexist.
+
+if (detrend) {
+  rules_out_dir  <- 'distribution_rules'
+  if (!dir.exists(rules_out_dir)) dir.create(rules_out_dir, recursive = TRUE)
+
+  rules_out_file <- file.path(rules_out_dir,
+                              paste0('RulesTemp_', tolower(region),
+                                     '_', detrend_method, '.csv'))
+
+  write.csv2(drs, rules_out_file, row.names = FALSE)
+  cat('\nDistribution rules saved to:', rules_out_file, '\n')
+  cat('Script 6 will load this file when detrend_method = "', detrend_method, '".\n\n', sep = '')
+}
+
+
 rule <- 1
-max_rule <- nrow(drs) -1 
+max_rule <- nrow(drs) -1
 
 repeat {
   

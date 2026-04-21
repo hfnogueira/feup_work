@@ -29,10 +29,10 @@
 #    RulesTemp_rdd.csv  — CarenR output for RDD
 #
 #  Output:
-#    ../data/walkforward_results_{region}.csv
-#    ../data/walkforward_metrics_{region}.csv
-#    ../data/walkforward_predictions_{region}.png
-#    ../data/walkforward_errors_{region}.png
+#    data/walkforward_results_{region}.csv
+#    data/walkforward_metrics_{region}.csv
+#    data/walkforward_predictions_{region}.png
+#    data/walkforward_errors_{region}.png
 #
 #  Requires: tidyverse, RWeka, rpart
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -55,6 +55,30 @@ file             <- 2      # 1 = RDD  |  2 = RVV
 min_train        <- 25     # minimum training observations before first prediction
 seed             <- 42
 
+# Set TRUE to work in detrended space — must match script 3 (carenR distribution
+# rules) and scripts 4/7 (classification) so all analyses share the same target.
+#
+# When TRUE:
+#   - Each fold fits the trend on training data only (no leakage)
+#   - All models predict residuals (deviation from trend)
+#   - Predictions are converted back to mhl before computing MAE/RMSE/R²
+#     by adding trend(year) back → metrics stay in interpretable mhl units
+detrend <- TRUE
+
+# Detrending method — only used when detrend = TRUE.
+#   "linear"  : remove a fitted straight line  (original behaviour)
+#   "lowess"  : remove a locally-weighted smooth trend (loess)
+# Must match detrend_method in scripts 3, 4, and 7.
+# IMPORTANT: run script 3 with the same method first to generate matching
+# distribution rules (distribution_rules/RulesTemp_{region}_{method}.csv).
+detrend_method <- "linear"   # ← switch to "lowess" for LOWESS comparison
+
+# LOWESS smoothing span (fraction of points used in each local fit).
+# Only used when detrend_method = "lowess". Keep fixed across all scripts.
+loess_span <- 0.75
+
+source("src/rscripts/utils/detrend_utils.R")
+
 # CarenR prediction strategy:
 #   'A' = first matching rule
 #   'B' = average of all matching rules
@@ -76,13 +100,21 @@ dt_minsplit <- 10
 # load data ---------------------------------------------------------------------------
 
 if (file == 1) {
-   df          <- read.csv('../data/dataPrep_cont_dataset_rdd.csv')
-   region      <- 'RDD'
-   rules_file  <- '../RulesTemp_rdd.csv'
+   df     <- read.csv('data/dataPrep_cont_dataset_rdd.csv')
+   region <- 'RDD'
 } else {
-   df          <- read.csv('../data/dataPrep_cont_dataset_rvv.csv')
-   region      <- 'RVV'
-   rules_file  <- '../RulesTemp_rvv.csv'
+   df     <- read.csv('data/dataPrep_cont_dataset_rvv.csv')
+   region <- 'RVV'
+}
+
+# Rules file encodes both region and detrend method — run script 3 first with
+# the same detrend_method to generate this file.
+rules_file <- if (detrend) {
+  file.path('distribution_rules',
+            paste0('RulesTemp_', tolower(region), '_', detrend_method, '.csv'))
+} else {
+  file.path('distribution_rules',
+            paste0('RulesTemp_', tolower(region), '_no_detrend.csv'))
 }
 
 df <- df %>% arrange(year)
@@ -93,6 +125,7 @@ cat('Year range:', min(df$year), '-', max(df$year), '\n')
 cat('Global mean Wine_mhl:', round(mean(df$Wine_mhl), 2), 'mhl\n')
 cat('Walk-forward folds:', nrow(df) - min_train, '\n')
 cat('CarenR strategy:', carenr_strategy, '\n')
+cat('Detrend:', detrend, '\n')
 cat('------------------------------------------------------------\n')
 
 
@@ -298,28 +331,49 @@ for (i in seq_along(test_indices)) {
                   i, n_test, df$year[t_idx], nrow(train_data)))
    }
 
+   # --- fold-level detrending ------------------------------------------------
+   # When detrend=TRUE, fit the trend on training data only, replace Wine_mhl
+   # with residuals in both train and test for modelling.
+   # trend_offset stores the trend value at the test year so predictions can
+   # be converted back to mhl units before being stored in results.
+
+   if (detrend) {
+      trend_model    <- fit_trend(train_data, method = detrend_method,
+                                  span = loess_span)
+      trend_offset   <- apply_trend(trend_model, newdata = test_obs)
+
+      train_data$Wine_mhl <- train_data$Wine_mhl -
+                               apply_trend(trend_model, newdata = train_data)
+      test_obs$Wine_mhl   <- test_obs$Wine_mhl - trend_offset   # residual for test
+   } else {
+      trend_offset <- 0
+   }
+   # From here all models work in residual space when detrend=TRUE.
+   # At storage time we add trend_offset back → results are always in mhl units.
+
    # 1. Naive ---------------------------------------------------------------
-   results$naive[i] <- mean(train_data$Wine_mhl)
+   results$naive[i] <- mean(train_data$Wine_mhl) + trend_offset
 
    # 2. CarenR — strategy A / B / C -----------------------------------------
    results$carenr[i] <- predict_carenr(
       test_obs, train_data,
       carenr$rule_fns, carenr_strategy, carenr_min_subgroup
-   )
+   ) + trend_offset
 
    # 3. RIPPER — retrain → class → class mean --------------------------------
    results$ripper[i] <- predict_ripper(
       test_obs, train_data, n_classes, jrip_N, jrip_O, jrip_F
-   )
+   ) + trend_offset
 
    # 4. M5Rules — retrain → predict continuously -----------------------------
    tryCatch({
       train_m5        <- train_data %>% select(-year)
       model_m5        <- M5Rules(Wine_mhl ~ ., data = train_m5)
       results$m5rules[i] <- as.numeric(predict(model_m5,
-                                               test_obs %>% select(-year, -Wine_mhl)))
+                                               test_obs %>% select(-year, -Wine_mhl))
+                                       ) + trend_offset
    }, error = function(e) {
-      results$m5rules[i] <<- mean(train_data$Wine_mhl)
+      results$m5rules[i] <<- mean(train_data$Wine_mhl) + trend_offset
    })
 
    # 5. Decision Tree — retrain → predict leaf mean --------------------------
@@ -328,9 +382,10 @@ for (i in seq_along(test_indices)) {
       model_dt  <- rpart(Wine_mhl ~ ., data = train_dt,
                          control = rpart.control(cp = dt_cp, minsplit = dt_minsplit))
       results$dtree[i] <- as.numeric(predict(model_dt,
-                                             test_obs %>% select(-year, -Wine_mhl)))
+                                             test_obs %>% select(-year, -Wine_mhl))
+                                     ) + trend_offset
    }, error = function(e) {
-      results$dtree[i] <<- mean(train_data$Wine_mhl)
+      results$dtree[i] <<- mean(train_data$Wine_mhl) + trend_offset
    })
 }
 
@@ -409,10 +464,13 @@ p_preds <- ggplot(results_long, aes(x = year)) +
          strip.text    = element_text(face = 'bold'),
          plot.subtitle = element_text(colour = 'grey50'))
 
-ggsave(paste0('../data/walkforward_predictions_', tolower(region), '.png'),
+out_dir <- file.path('data', if (detrend) detrend_method else 'no_detrend')
+if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+
+ggsave(file.path(out_dir, paste0('walkforward_predictions_', tolower(region), '.png')),
        p_preds, width = 12, height = 9, dpi = 150)
 
-cat('\nSaved: walkforward_predictions_', tolower(region), '.png\n', sep = '')
+cat('\nSaved: ', file.path(out_dir, paste0('walkforward_predictions_', tolower(region), '.png')), '\n', sep = '')
 
 
 # ==============================================================================
@@ -440,25 +498,28 @@ p_errors <- ggplot(errors_long, aes(x = model, y = abs_error, fill = model)) +
    theme(legend.position = 'none',
          plot.subtitle = element_text(colour = 'grey50'))
 
-ggsave(paste0('../data/walkforward_errors_', tolower(region), '.png'),
+ggsave(file.path(out_dir, paste0('walkforward_errors_', tolower(region), '.png')),
        p_errors, width = 9, height = 6, dpi = 150)
 
-cat('Saved: walkforward_errors_', tolower(region), '.png\n', sep = '')
+cat('Saved: ', file.path(out_dir, paste0('walkforward_errors_', tolower(region), '.png')), '\n', sep = '')
 
 
 # ==============================================================================
 # SAVE RESULTS
 # ==============================================================================
 
+metrics_table$region         <- region
+metrics_table$detrend_method <- if (detrend) detrend_method else 'none'
+
 write.csv(results,
-          paste0('../data/walkforward_results_', tolower(region), '.csv'),
+          file.path(out_dir, paste0('walkforward_results_', tolower(region), '.csv')),
           row.names = FALSE)
 
 write.csv(metrics_table,
-          paste0('../data/walkforward_metrics_', tolower(region), '.csv'),
+          file.path(out_dir, paste0('walkforward_metrics_', tolower(region), '.csv')),
           row.names = FALSE)
 
-cat('\nResults saved:\n')
-cat('  ../data/walkforward_results_',  tolower(region), '.csv\n', sep = '')
-cat('  ../data/walkforward_metrics_',  tolower(region), '.csv\n', sep = '')
+cat('\nResults saved to:', out_dir, '\n')
+cat('  walkforward_results_',  tolower(region), '.csv\n', sep = '')
+cat('  walkforward_metrics_',  tolower(region), '.csv\n', sep = '')
 cat('\nDone.\n')

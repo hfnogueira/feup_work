@@ -36,6 +36,23 @@ n_classes <- 3   # number of target classes: 3 = Low / Medium / High
 n_folds   <- 10  # cross-validation folds
 seed      <- 42
 
+# Set TRUE to classify residuals from the linear production trend instead of
+# raw Wine_mhl.  Must match the detrend flag in 7_caren_classification_pipeline.R
+# so that both models operate on the same target definition.
+detrend <- TRUE
+
+# Detrending method — only used when detrend = TRUE.
+#   "linear"  : remove a fitted straight line  (original behaviour)
+#   "lowess"  : remove a locally-weighted smooth trend (loess)
+# Must match detrend_method in scripts 3, 6, and 7.
+detrend_method <- "linear"   # ← switch to "lowess" for LOWESS comparison
+
+# LOWESS smoothing span (fraction of points used in each local fit).
+# Only used when detrend_method = "lowess". Keep fixed across all scripts.
+loess_span <- 0.75
+
+source("src/rscripts/utils/detrend_utils.R")
+
 # JRip tuning parameters
 # NOTE: datasets are small (~80-90 obs). Default N=2.0 is too permissive and
 # can produce rules that cover only 2 instances (overfitting). With ~30 obs per
@@ -49,10 +66,10 @@ jrip_F <- 3     # internal pruning folds                   (default: 3)
 # load data ---------------------------------------------------------------------------
 
 if (file == 1) {
-   df     <- read.csv(file = '../data/dataPrep_cont_dataset_rdd.csv')
+   df     <- read.csv(file = 'data/dataPrep_cont_dataset_rdd.csv')
    region <- 'RDD'
 } else {
-   df     <- read.csv(file = '../data/dataPrep_cont_dataset_rvv.csv')
+   df     <- read.csv(file = 'data/dataPrep_cont_dataset_rvv.csv')
    region <- 'RVV'
 }
 
@@ -64,24 +81,48 @@ cat('------------------------------------------------------------\n')
 # discretize target variable ----------------------------------------------------------
 # Using quantile (equal-frequency) cuts so classes are balanced.
 # n_classes = 3 → Low / Medium / High based on tertiles.
+#
+# When detrend = TRUE, the linear production trend is removed first.
+# Low/Medium/High then mean "below / around / above what was expected for that era",
+# removing the structural upward trend that would otherwise make early decades
+# always appear "Low" regardless of climate conditions.
+# Must match the detrend flag in 7_caren_classification_pipeline.R.
 
-breaks <- quantile(df$Wine_mhl,
+class_labels <- c('Low', 'Medium', 'High')[1:n_classes]
+
+if (detrend) {
+
+  cat('\n--- Detrending enabled (method:', detrend_method, ') ---\n')
+  tr          <- get_trend_residuals(df, method = detrend_method,
+                                     span = loess_span, verbose = TRUE)
+  wine_values <- tr$residuals
+  cat('Residual mean:', round(mean(wine_values), 2),
+      '| SD:', round(sd(wine_values), 2), '\n\n')
+
+} else {
+
+  cat('\n--- Detrending disabled — using raw Wine_mhl ---\n\n')
+  wine_values <- df$Wine_mhl
+
+}
+
+breaks <- quantile(wine_values,
                    probs = seq(0, 1, length.out = n_classes + 1),
                    na.rm = TRUE)
 
 # Open boundaries to capture min/max safely
-breaks[1]               <- -Inf
-breaks[length(breaks)]  <- Inf
+breaks[1]              <- -Inf
+breaks[length(breaks)] <- Inf
 
-class_labels <- c('Low', 'Medium', 'High')[1:n_classes]
-
-df$Wine_class <- cut(df$Wine_mhl,
+df$Wine_class <- cut(wine_values,
                      breaks         = breaks,
                      labels         = class_labels,
                      include.lowest = TRUE,
                      ordered_result = TRUE)
 
-real_breaks <- quantile(df$Wine_mhl, probs = seq(0, 1, length.out = n_classes + 1), na.rm = TRUE)
+real_breaks <- quantile(wine_values,
+                        probs = seq(0, 1, length.out = n_classes + 1),
+                        na.rm = TRUE)
 
 cat('\nTarget class distribution (Wine_mhl discretized):\n')
 tbl <- table(df$Wine_class)
@@ -170,14 +211,19 @@ if (!is.null(conf_mat)) {
 }
 
 
-# save rules to text file -------------------------------------------------------------
+# save rules + metrics ----------------------------------------------------------------
+# Output goes to data/{detrend_method}/ so both runs coexist without overwriting.
 
-rules_file <- paste0('../data/ripper_rules_', tolower(region), '.txt')
+out_dir <- file.path('data', if (detrend) detrend_method else 'no_detrend')
+if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+
+rules_file <- file.path(out_dir, paste0('ripper_rules_', tolower(region), '.txt'))
 
 sink(rules_file)
 cat('RIPPER Rules -', region, '\n')
-cat('Generated:', format(Sys.time(), '%Y-%m-%d %H:%M'), '\n')
-cat('Observations:', nrow(df_ripper), '\n')
+cat('Generated     :', format(Sys.time(), '%Y-%m-%d %H:%M'), '\n')
+cat('Observations  :', nrow(df_ripper), '\n')
+cat('Detrend method:', if (detrend) detrend_method else 'none', '\n')
 cat('Target classes:', paste(class_labels, collapse = ' / '), '\n')
 cat('Thresholds (mhl):', paste(round(real_breaks, 2), collapse = ' | '), '\n\n')
 cat('=== Rules ===\n')
@@ -186,7 +232,29 @@ cat('\n=== Cross-Validation (', n_folds, 'folds) ===\n')
 print(eval_cv)
 sink()
 
-cat('\nRules saved to:', rules_file, '\n')
+# Also save numeric metrics as CSV for easy comparison in script 8
+if (!is.null(eval_cv$confusionMatrix)) {
+  conf_mat  <- eval_cv$confusionMatrix
+  precision <- diag(conf_mat) / colSums(conf_mat)
+  recall    <- diag(conf_mat) / rowSums(conf_mat)
+  f1        <- 2 * precision * recall / (precision + recall)
+  overall   <- sum(diag(conf_mat)) / sum(conf_mat)
+
+  metrics_csv <- data.frame(
+    region         = region,
+    detrend_method = if (detrend) detrend_method else 'none',
+    model          = 'RIPPER',
+    accuracy       = round(overall, 4),
+    macro_precision= round(mean(precision, na.rm = TRUE), 4),
+    macro_recall   = round(mean(recall,    na.rm = TRUE), 4),
+    macro_f1       = round(mean(f1,        na.rm = TRUE), 4)
+  )
+  write.csv(metrics_csv,
+            file.path(out_dir, paste0('ripper_metrics_', tolower(region), '.csv')),
+            row.names = FALSE)
+}
+
+cat('\nOutput saved to:', out_dir, '\n')
 cat('Done.\n')
 
 
