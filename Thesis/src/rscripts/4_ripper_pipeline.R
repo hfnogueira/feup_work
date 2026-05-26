@@ -7,7 +7,7 @@
 #
 #  Pipeline:
 #    1. Load continuous feature dataset (output of features creation_v2.R)
-#    2. Discretize target variable Wine_mhl into ordered classes (Low/Med/High)
+#    2. Discretize target variable Wine_mhl into quartile bins (Q1/Q2/Q3/Q4)
 #    3. Train JRip (RIPPER) — features stay continuous, RIPPER finds own thresholds
 #    4. Evaluate with k-fold cross-validation
 #    5. Print discovered rules
@@ -30,33 +30,23 @@ library(RWeka)
 
 
 # config ------------------------------------------------------------------------------
+# Shared params (detrend, detrend_method, loess_span, n_folds, seed) come from
+# utils/config.R. Per-run state and per-script tuning stay below.
 
-file      <- 1   # 1 = RDD   |   other = RVV
-n_classes <- 3   # number of target classes: 3 = Low / Medium / High
-n_folds   <- 10  # cross-validation folds
-seed      <- 42
-
-# Set TRUE to classify residuals from the linear production trend instead of
-# raw Wine_mhl.  Must match the detrend flag in 7_caren_classification_pipeline.R
-# so that both models operate on the same target definition.
-detrend <- TRUE
-
-# Detrending method — only used when detrend = TRUE.
-#   "linear"  : remove a fitted straight line  (original behaviour)
-#   "lowess"  : remove a locally-weighted smooth trend (loess)
-# Must match detrend_method in scripts 3, 6, and 7.
-detrend_method <- "linear"   # ← switch to "lowess" for LOWESS comparison
-
-# LOWESS smoothing span (fraction of points used in each local fit).
-# Only used when detrend_method = "lowess". Keep fixed across all scripts.
-loess_span <- 0.75
-
+source("src/rscripts/utils/config.R")
 source("src/rscripts/utils/detrend_utils.R")
+
+# Per-run state — change to switch region
+file      <- 1   # 1 = RDD   |   other = RVV
+
+# Per-script tuning
+n_classes <- 4   # number of target classes: 4 = Q1 / Q2 / Q3 / Q4 (quartiles)
+                 # Must match n_bins in 6_scenario_validation.R for consistency.
 
 # JRip tuning parameters
 # NOTE: datasets are small (~80-90 obs). Default N=2.0 is too permissive and
-# can produce rules that cover only 2 instances (overfitting). With ~30 obs per
-# class, N=4.0 means a rule must cover at least ~13% of its class — more robust.
+# can produce rules that cover only 2 instances (overfitting). With ~25 obs per
+# class, N=4.0 means a rule must cover at least ~16% of its class — more robust.
 # O=3 (optimisation passes) gives slightly better rule sets at negligible cost.
 jrip_N <- 4.0   # min total weight of instances in a rule  (default: 2.0)
 jrip_O <- 3     # number of optimisation runs              (default: 2)
@@ -80,15 +70,16 @@ cat('------------------------------------------------------------\n')
 
 # discretize target variable ----------------------------------------------------------
 # Using quantile (equal-frequency) cuts so classes are balanced.
-# n_classes = 3 → Low / Medium / High based on tertiles.
+# n_classes = 4 → Q1 / Q2 / Q3 / Q4 based on quartiles.
+# Matches n_bins = 4 in 6_scenario_validation.R so rule discovery and predictive
+# evaluation use the same class schema (note: script 6 re-fits breaks per fold).
 #
-# When detrend = TRUE, the linear production trend is removed first.
-# Low/Medium/High then mean "below / around / above what was expected for that era",
+# When detrend = TRUE, the production trend is removed first.
+# Q1 then means "lowest production relative to era trend", Q4 means "highest",
 # removing the structural upward trend that would otherwise make early decades
-# always appear "Low" regardless of climate conditions.
-# Must match the detrend flag in 7_caren_classification_pipeline.R.
+# always appear as Q1 regardless of climate conditions.
 
-class_labels <- c('Low', 'Medium', 'High')[1:n_classes]
+class_labels <- paste0('Q', seq_len(n_classes))   # Q1, Q2, Q3, Q4
 
 if (detrend) {
 
@@ -262,6 +253,62 @@ cat('Done.\n')
 
 
 
-# This is the rules from the full dataset
-print(model)   # ← THIS is what you compare to CarenR
+# --- Structured rules CSV (read by script 9 rule interpreter) ----------------
+# Parses the JRip print output into one row per rule.
+# JRip condition format: (feature >= val) and (feature2 <= val2) => class=X (n/err)
+# Default rule has no conditions: " => class=X (n/err)"
+
+rules_raw  <- capture.output(print(model))
+rule_lines <- grep("=>", rules_raw, value = TRUE)
+
+if (length(rule_lines) > 0) {
+
+  structured_ripper <- bind_rows(lapply(seq_along(rule_lines), function(i) {
+
+    line  <- trimws(rule_lines[i])
+    parts <- strsplit(line, "=>", fixed = TRUE)[[1]]
+
+    cond_raw   <- trimws(parts[1])
+    conseq_raw <- if (length(parts) >= 2) trimws(parts[2]) else ""
+
+    # Parse consequent: "Wine_class=High (14.0/2.0)"
+    m <- regmatches(conseq_raw,
+           regexec("=(\\w+)\\s*\\(([0-9.]+)/([0-9.]+)\\)", conseq_raw))[[1]]
+
+    n_cov <- if (length(m) >= 3) as.numeric(m[3]) else NA_real_
+    n_err <- if (length(m) >= 4) as.numeric(m[4]) else NA_real_
+
+    # Build one threshold column per internal break (n_classes - 1 of them)
+    thresh_df <- as.data.frame(t(setNames(
+      round(real_breaks[2:(length(real_breaks) - 1)], 3),
+      paste0('threshold_Q', seq_len(n_classes - 1), '_', seq_len(n_classes - 1) + 1)
+    )))
+
+    cbind(data.frame(
+      rule_index      = i,
+      is_default      = nchar(cond_raw) == 0,
+      conditions_raw  = if (nchar(cond_raw) == 0) "(default)" else cond_raw,
+      predicted_class = if (length(m) >= 2) m[2] else NA_character_,
+      n_covered       = n_cov,
+      n_errors        = n_err,
+      support_pct     = if (!is.na(n_cov)) round(n_cov / nrow(df_ripper) * 100, 1) else NA_real_,
+      precision_pct   = if (!is.na(n_cov) && n_cov > 0) round((n_cov - n_err) / n_cov * 100, 1) else NA_real_,
+      target_detrended= detrend,
+      region          = region,
+      detrend_method  = if (detrend) detrend_method else 'none',
+      stringsAsFactors= FALSE
+    ), thresh_df)
+  }))
+
+  struct_file <- file.path(out_dir, paste0('ripper_rules_structured_', tolower(region), '.csv'))
+  write.csv(structured_ripper, struct_file, row.names = FALSE)
+  cat('Saved structured RIPPER rules (for script 9):', struct_file, '\n')
+
+} else {
+  cat('[!] No rule lines found in JRip output — structured CSV not saved.\n')
+}
+
+cat('Done.\n')
+
+# Full rules (compare to CarenR) #← THIS is what you compare to CarenR
 

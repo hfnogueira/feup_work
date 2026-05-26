@@ -30,26 +30,36 @@ library(RWeka)
 
 
 # config ------------------------------------------------------------------------------
+# Shared params (detrend, detrend_method, loess_span, n_folds, seed) come from
+# utils/config.R. Per-run state and per-script tuning stay below.
+#
+# CAVEAT on detrend: M5Rules CV is handled internally by Weka
+# (evaluate_Weka_classifier), so fold-correct detrending is not possible here —
+# the trend is fitted once on the full dataset. Walk-forward validation
+# (script 6) does fold-correct detrending and should be used as the primary
+# evaluation.
 
-file     <- 1    # 1 = RDD   |   other = RVV
-n_folds  <- 10   # cross-validation folds
-seed     <- 42
+source("src/rscripts/utils/config.R")
+source("src/rscripts/utils/detrend_utils.R")
 
+# Per-run state — change to switch region
+file <- 1    # 1 = RDD   |   other = RVV
+
+# Per-script tuning
 # M5Rules control options:
 #   -N  use unsmoothed predictions (default: smoothed)
 #   -U  use unsmoothed linear models in leaves
-# Default settings (smoothed) are generally better for small datasets
-# We keep defaults but expose them here for experimentation
+# Default settings (smoothed) are generally better for small datasets.
 m5_unsmoothed <- FALSE   # set TRUE to disable smoothing
 
 
 # load data ---------------------------------------------------------------------------
 
 if (file == 1) {
-   df     <- read.csv(file = '../data/dataPrep_cont_dataset_rdd.csv')
+   df     <- read.csv(file = 'data/dataPrep_cont_dataset_rdd.csv')
    region <- 'RDD'
 } else {
-   df     <- read.csv(file = '../data/dataPrep_cont_dataset_rvv.csv')
+   df     <- read.csv(file = 'data/dataPrep_cont_dataset_rvv.csv')
    region <- 'RVV'
 }
 
@@ -59,7 +69,30 @@ cat('Global Wine_mhl — Mean:', round(mean(df$Wine_mhl), 2),
     '| SD:', round(sd(df$Wine_mhl), 2),
     '| Min:', round(min(df$Wine_mhl), 2),
     '| Max:', round(max(df$Wine_mhl), 2), '\n')
+cat('Detrend:', detrend, if (detrend) paste0('(', detrend_method, ')') else '', '\n')
 cat('------------------------------------------------------------\n')
+
+
+# detrend (optional) ------------------------------------------------------------------
+# Full-dataset detrend — see CAVEAT in config above regarding Weka CV leakage.
+
+if (detrend) {
+
+  cat('\n--- Detrending enabled (method:', detrend_method, ') ---\n')
+  tr             <- get_trend_residuals(df, method = detrend_method,
+                                        span = loess_span, verbose = TRUE)
+  df$Wine_mhl_original <- df$Wine_mhl    # keep raw for reference
+  df$Wine_mhl          <- tr$residuals   # replace with residuals
+
+  cat('Wine_mhl now contains RESIDUALS (deviation from', detrend_method, 'trend).\n')
+  cat('Residual mean:', round(mean(df$Wine_mhl), 2),
+      '| SD:', round(sd(df$Wine_mhl), 2), '\n\n')
+
+} else {
+
+  cat('\n--- Detrending disabled — using raw Wine_mhl ---\n\n')
+
+}
 
 
 # prepare feature matrix --------------------------------------------------------------
@@ -168,15 +201,22 @@ cat('Mean actual:   ', round(mean(df_m5$Wine_mhl), 2), 'mhl\n')
 cat('Correlation (predicted vs actual):', round(cor(df_m5$Wine_mhl, train_pred), 3), '\n')
 
 
-# save rules to text file -------------------------------------------------------------
+# save rules + metrics ----------------------------------------------------------------
+# Output goes to data/{detrend_method}/ so both runs coexist without overwriting.
+# Note: CV metrics are in RESIDUAL units when detrend=TRUE (not absolute mhl).
+# Use walk-forward results (script 6) for mhl-unit comparisons.
 
-rules_file <- paste0('../data/m5rules_rules_', tolower(region), '.txt')
+out_dir <- file.path('data', if (detrend) detrend_method else 'no_detrend')
+if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+
+rules_file <- file.path(out_dir, paste0('m5rules_rules_', tolower(region), '.txt'))
 
 sink(rules_file)
 cat('M5Rules —', region, '\n')
-cat('Generated:', format(Sys.time(), '%Y-%m-%d %H:%M'), '\n')
-cat('Observations:', nrow(df_m5), '\n')
-cat('Target: Wine_mhl (continuous)\n\n')
+cat('Generated     :', format(Sys.time(), '%Y-%m-%d %H:%M'), '\n')
+cat('Observations  :', nrow(df_m5), '\n')
+cat('Detrend method:', if (detrend) detrend_method else 'none', '\n')
+cat('Target        : Wine_mhl', if (detrend) '(residuals)' else '(raw, mhl)', '\n\n')
 
 cat('=== Naive Baseline ===\n')
 cat('MAE:', round(naive_mae, 2), '| RMSE:', round(naive_rmse, 2), '\n\n')
@@ -192,5 +232,85 @@ print(eval_cv)
 cat('R2 (CV):', round(cv_r2, 3), '\n')
 sink()
 
-cat('\nRules saved to:', rules_file, '\n')
+# Save numeric metrics as CSV for comparison in script 8
+metrics_csv <- data.frame(
+  region         = region,
+  detrend_method = if (detrend) detrend_method else 'none',
+  model          = 'M5Rules',
+  cv_mae         = round(cv_mae,  4),
+  cv_rmse        = round(cv_rmse, 4),
+  cv_r2          = round(cv_r2,   4),
+  note           = if (detrend) 'metrics in residual units (not mhl)' else 'metrics in mhl'
+)
+write.csv(metrics_csv,
+          file.path(out_dir, paste0('m5rules_metrics_', tolower(region), '.csv')),
+          row.names = FALSE)
+
+cat('\nOutput saved to:', out_dir, '\n')
+
+# --- Structured rules CSV (read by script 9 rule interpreter) ----------------
+# Parses the M5Rules print output into one row per rule.
+# Block structure: "LM num: N" header, then condition lines, then "Wine_mhl = ..."
+# Coverage summary: "LM1 (n_instances/error%)" appears in the preamble.
+
+m5_raw      <- capture.output(print(model))
+block_idx   <- grep("^LM num:\\s*[0-9]+", m5_raw)
+
+if (length(block_idx) > 0) {
+
+  structured_m5 <- bind_rows(lapply(seq_along(block_idx), function(i) {
+
+    blk_start <- block_idx[i] + 1
+    blk_end   <- if (i < length(block_idx)) block_idx[i + 1] - 1 else length(m5_raw)
+    block     <- m5_raw[blk_start:blk_end]
+    block     <- block[nchar(trimws(block)) > 0]    # drop blank lines
+
+    rule_idx  <- as.integer(gsub("[^0-9]", "", m5_raw[block_idx[i]]))
+
+    # Locate "Wine_mhl =" — separates conditions (above) from linear model (below)
+    target_line <- grep("^\\s*Wine_mhl\\s*=", block)[1]
+
+    if (!is.na(target_line)) {
+      cond_lines <- if (target_line > 1) trimws(block[1:(target_line - 1)]) else character(0)
+      cond_lines <- cond_lines[nchar(cond_lines) > 0]
+      conditions_raw   <- if (length(cond_lines) > 0) paste(cond_lines, collapse = " AND ") else "(default)"
+      linear_model_raw <- paste(trimws(block[target_line:length(block)]), collapse = " ")
+    } else {
+      conditions_raw   <- "(default)"
+      linear_model_raw <- paste(trimws(block), collapse = " ")
+    }
+
+    # Coverage: "LM{N} (n_instances/err%)" in the preamble block at the top
+    lm_header <- grep(paste0("^LM", rule_idx, "\\s*\\("), m5_raw, value = TRUE)
+    n_inst <- NA_real_; err_pct <- NA_real_
+    if (length(lm_header) > 0) {
+      hm <- regmatches(lm_header[1],
+              regexec("\\(([0-9]+)/([0-9.]+)%?\\)", lm_header[1]))[[1]]
+      if (length(hm) >= 3) {
+        n_inst  <- as.numeric(hm[2])
+        err_pct <- as.numeric(hm[3])
+      }
+    }
+
+    data.frame(
+      rule_index       = rule_idx,
+      conditions_raw   = conditions_raw,
+      linear_model_raw = linear_model_raw,
+      n_instances      = n_inst,
+      error_pct        = err_pct,
+      target_detrended = detrend,
+      region           = region,
+      detrend_method   = if (detrend) detrend_method else 'none',
+      stringsAsFactors = FALSE
+    )
+  }))
+
+  struct_file <- file.path(out_dir, paste0('m5rules_rules_structured_', tolower(region), '.csv'))
+  write.csv(structured_m5, struct_file, row.names = FALSE)
+  cat('Saved structured M5Rules (for script 9):', struct_file, '\n')
+
+} else {
+  cat('[!] No LM num blocks found in M5Rules output — structured CSV not saved.\n')
+}
+
 cat('Done.\n')

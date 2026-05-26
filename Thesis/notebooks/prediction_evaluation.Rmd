@@ -1,0 +1,445 @@
+---
+title: "Scenario-Based Prediction Evaluation"
+subtitle: "Walk-forward validation — RDD & RVV"
+author: "Hugo Nogueira"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    highlight: tango
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width  = 10,
+  fig.height = 6
+)
+
+library(tidyverse)
+
+# ── Paths ──────────────────────────────────────────────────────────────────────
+# Change detrend_method to match the folder you want to evaluate
+detrend_method <- "linear"
+
+data_dir <- file.path("../data", detrend_method)
+
+metrics_rdd     <- read.csv(file.path(data_dir, "scenario_metrics_rdd.csv"))
+metrics_rvv     <- read.csv(file.path(data_dir, "scenario_metrics_rvv.csv"))
+predictions_rdd <- read.csv(file.path(data_dir, "scenario_predictions_rdd.csv"))
+predictions_rvv <- read.csv(file.path(data_dir, "scenario_predictions_rvv.csv"))
+
+# ── Shared helpers ──────────────────────────────────────────────────────────────
+model_colours <- c(
+  Naive        = "grey50",
+  DT           = "#E15759",
+  CarenR_Assoc = "#9467BD",
+  CarenR_Dist  = "#76B7B2",
+  M5Rules      = "#F28E2B"
+)
+
+model_order <- c("Naive", "DT", "CarenR_Assoc", "CarenR_Dist", "M5Rules")
+
+# Remove degenerate scenarios (n_test == 1 → R² = -Inf)
+clean_metrics <- function(df) {
+  df %>%
+    filter(n_test > 1, !is.na(mae), is.finite(r2)) %>%
+    mutate(model = factor(model, levels = model_order))
+}
+
+metrics_rdd_c <- clean_metrics(metrics_rdd)
+metrics_rvv_c <- clean_metrics(metrics_rvv)
+```
+
+---
+
+# Overview
+
+This notebook evaluates the **walk-forward (expanding-window) prediction capacity** of five models trained and tested across a series of scenarios on two Portuguese wine regions:
+
+- **RDD** — Douro (~89 observations, 1933–2022)
+- **RVV** — Vinho Verde (~80 observations, 1941–2022)
+
+Each scenario uses **≥ 80 % of the data for training** and the remaining years as the test set. All models are trained exclusively on the training split; detrending is fold-correct. Predictions are in original **mhl** units.
+
+**Models compared:**
+
+| Model | Description |
+|-------|-------------|
+| Naive | Always predicts the training mean — the baseline floor |
+| DT | Decision Tree (rpart) |
+| CarenR_Assoc | Association rules via `predict.caren()` |
+| CarenR_Dist | Distribution rules (KS-test), support-weighted subgroup means |
+| M5Rules | Piecewise linear rule model (Weka) |
+
+---
+
+# RDD — Douro
+
+## Summary table {.tabset}
+
+### Mean metrics across all scenarios
+
+```{r rdd-summary}
+metrics_rdd_c %>%
+  group_by(Model = model) %>%
+  summarise(
+    Scenarios   = n(),
+    `Mean MAE`  = round(mean(mae,  na.rm = TRUE), 1),
+    `Mean RMSE` = round(mean(rmse, na.rm = TRUE), 1),
+    `Mean R²`   = round(mean(r2,   na.rm = TRUE), 3),
+    `# Wins (MAE)` = NA_integer_,
+    .groups = "drop"
+  ) -> tbl_rdd
+
+# Count wins per scenario
+wins_rdd <- metrics_rdd_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  group_by(scenario) %>%
+  slice_min(mae, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  count(model, name = "wins")
+
+tbl_rdd <- tbl_rdd %>%
+  left_join(wins_rdd %>% rename(Model = model), by = "Model") %>%
+  mutate(`# Wins (MAE)` = replace_na(wins, 0)) %>%
+  select(-wins) %>%
+  arrange(`Mean MAE`)
+
+knitr::kable(tbl_rdd, align = "lrrrrrr")
+```
+
+### Per-scenario metrics
+
+```{r rdd-per-scenario}
+metrics_rdd_c %>%
+  select(Scenario = scenario, `Train obs` = n_train,
+         `Train end` = train_end_year, `Test start` = test_start_year,
+         `Test obs` = n_test, Model = model,
+         MAE = mae, RMSE = rmse, R2 = r2) %>%
+  arrange(Scenario, MAE)
+```
+
+## Learning curves
+
+```{r rdd-learning-mae, fig.height=5}
+metrics_rdd_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  ggplot(aes(x = n_train, y = mae, colour = model, group = model)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.2) +
+  geom_hline(
+    data = metrics_rdd_c %>% filter(model == "Naive") %>%
+      group_by(n_train) %>% summarise(mae = mean(mae)),
+    aes(yintercept = mae), colour = "grey50",
+    linetype = "dashed", linewidth = 0.6, inherit.aes = FALSE
+  ) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  labs(
+    title    = "RDD — MAE vs Training Size",
+    subtitle = paste0("Dashed = Naive baseline | Detrend: ", detrend_method),
+    x = "Training observations (n)", y = "MAE (mhl)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+
+```{r rdd-learning-r2, fig.height=5}
+metrics_rdd_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  ggplot(aes(x = n_train, y = r2, colour = model, group = model)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.2) +
+  geom_hline(yintercept = 0, linetype = "dashed",
+             colour = "grey50", linewidth = 0.6) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  labs(
+    title    = "RDD — R² vs Training Size",
+    subtitle = paste0("Dashed = 0 | Detrend: ", detrend_method),
+    x = "Training observations (n)", y = "R²"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+
+## Actual vs Predicted — all scenarios
+
+```{r rdd-actual-vs-pred, fig.height=8}
+predictions_rdd %>%
+  filter(model != "CarenR_Assoc", !is.na(predicted)) %>%
+  ggplot(aes(x = actual, y = predicted, colour = model)) +
+  geom_point(alpha = 0.55, size = 1.8) +
+  geom_abline(slope = 1, intercept = 0,
+              linetype = "dashed", colour = "grey40") +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  facet_wrap(~ model, ncol = 2) +
+  labs(
+    title    = "RDD — Actual vs Predicted (all scenarios, all test years)",
+    subtitle = "Points on the dashed line = perfect prediction",
+    x = "Actual Wine_mhl", y = "Predicted Wine_mhl"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+## Forecast horizon — last scenario
+
+```{r rdd-horizon, fig.height=7}
+last_s_rdd <- max(predictions_rdd$scenario[predictions_rdd$n_test > 1])
+
+predictions_rdd %>%
+  filter(scenario == last_s_rdd, model != "CarenR_Assoc", !is.na(predicted)) %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = actual), colour = "black", linewidth = 1.0, alpha = 0.7) +
+  geom_point(aes(y = actual), colour = "black", size = 2, alpha = 0.7) +
+  geom_line(aes(y = predicted, colour = model), linewidth = 0.85) +
+  geom_point(aes(y = predicted, colour = model), size = 2, alpha = 0.9) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  facet_wrap(~ model, ncol = 2) +
+  labs(
+    title    = paste0("RDD — Forecast Horizon (scenario ", last_s_rdd, ", largest training set)"),
+    subtitle = "Black = actual  |  Coloured = predicted",
+    x = "Year", y = "Wine production (mhl)"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+## Error distribution
+
+```{r rdd-error-dist, fig.height=5}
+predictions_rdd %>%
+  filter(model != "CarenR_Assoc", !is.na(predicted)) %>%
+  mutate(error = predicted - actual) %>%
+  ggplot(aes(x = error, fill = model)) +
+  geom_histogram(bins = 25, alpha = 0.8, colour = "white") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey30") +
+  scale_fill_manual(values = model_colours) +
+  facet_wrap(~ model, ncol = 2, scales = "free_y") +
+  labs(
+    title = "RDD — Prediction Error Distribution (predicted − actual)",
+    x = "Error (mhl)", y = "Count"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+---
+
+# RVV — Vinho Verde
+
+## Summary table {.tabset}
+
+### Mean metrics across all scenarios
+
+```{r rvv-summary}
+metrics_rvv_c %>%
+  group_by(Model = model) %>%
+  summarise(
+    Scenarios   = n(),
+    `Mean MAE`  = round(mean(mae,  na.rm = TRUE), 1),
+    `Mean RMSE` = round(mean(rmse, na.rm = TRUE), 1),
+    `Mean R²`   = round(mean(r2,   na.rm = TRUE), 3),
+    .groups = "drop"
+  ) -> tbl_rvv
+
+wins_rvv <- metrics_rvv_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  group_by(scenario) %>%
+  slice_min(mae, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  count(model, name = "wins")
+
+tbl_rvv <- tbl_rvv %>%
+  left_join(wins_rvv %>% rename(Model = model), by = "Model") %>%
+  mutate(`# Wins (MAE)` = replace_na(wins, 0)) %>%
+  select(-wins) %>%
+  arrange(`Mean MAE`)
+
+knitr::kable(tbl_rvv, align = "lrrrrrr")
+```
+
+### Per-scenario metrics
+
+```{r rvv-per-scenario}
+metrics_rvv_c %>%
+  select(Scenario = scenario, `Train obs` = n_train,
+         `Train end` = train_end_year, `Test start` = test_start_year,
+         `Test obs` = n_test, Model = model,
+         MAE = mae, RMSE = rmse, R2 = r2) %>%
+  arrange(Scenario, MAE)
+```
+
+## Learning curves
+
+```{r rvv-learning-mae, fig.height=5}
+metrics_rvv_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  ggplot(aes(x = n_train, y = mae, colour = model, group = model)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.2) +
+  geom_hline(
+    data = metrics_rvv_c %>% filter(model == "Naive") %>%
+      group_by(n_train) %>% summarise(mae = mean(mae)),
+    aes(yintercept = mae), colour = "grey50",
+    linetype = "dashed", linewidth = 0.6, inherit.aes = FALSE
+  ) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  labs(
+    title    = "RVV — MAE vs Training Size",
+    subtitle = paste0("Dashed = Naive baseline | Detrend: ", detrend_method),
+    x = "Training observations (n)", y = "MAE (mhl)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+
+```{r rvv-learning-r2, fig.height=5}
+metrics_rvv_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  ggplot(aes(x = n_train, y = r2, colour = model, group = model)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.2) +
+  geom_hline(yintercept = 0, linetype = "dashed",
+             colour = "grey50", linewidth = 0.6) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  labs(
+    title    = "RVV — R² vs Training Size",
+    subtitle = paste0("Dashed = 0 | Detrend: ", detrend_method),
+    x = "Training observations (n)", y = "R²"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+
+## Actual vs Predicted — all scenarios
+
+```{r rvv-actual-vs-pred, fig.height=8}
+predictions_rvv %>%
+  filter(model != "CarenR_Assoc", !is.na(predicted)) %>%
+  ggplot(aes(x = actual, y = predicted, colour = model)) +
+  geom_point(alpha = 0.55, size = 1.8) +
+  geom_abline(slope = 1, intercept = 0,
+              linetype = "dashed", colour = "grey40") +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  facet_wrap(~ model, ncol = 2) +
+  labs(
+    title    = "RVV — Actual vs Predicted (all scenarios, all test years)",
+    subtitle = "Points on the dashed line = perfect prediction",
+    x = "Actual Wine_mhl", y = "Predicted Wine_mhl"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+## Forecast horizon — last scenario
+
+```{r rvv-horizon, fig.height=7}
+last_s_rvv <- max(predictions_rvv$scenario[predictions_rvv$n_test > 1])
+
+predictions_rvv %>%
+  filter(scenario == last_s_rvv, model != "CarenR_Assoc", !is.na(predicted)) %>%
+  ggplot(aes(x = year)) +
+  geom_line(aes(y = actual), colour = "black", linewidth = 1.0, alpha = 0.7) +
+  geom_point(aes(y = actual), colour = "black", size = 2, alpha = 0.7) +
+  geom_line(aes(y = predicted, colour = model), linewidth = 0.85) +
+  geom_point(aes(y = predicted, colour = model), size = 2, alpha = 0.9) +
+  scale_colour_manual(values = model_colours, name = "Model") +
+  facet_wrap(~ model, ncol = 2) +
+  labs(
+    title    = paste0("RVV — Forecast Horizon (scenario ", last_s_rvv, ", largest training set)"),
+    subtitle = "Black = actual  |  Coloured = predicted",
+    x = "Year", y = "Wine production (mhl)"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+## Error distribution
+
+```{r rvv-error-dist, fig.height=5}
+predictions_rvv %>%
+  filter(model != "CarenR_Assoc", !is.na(predicted)) %>%
+  mutate(error = predicted - actual) %>%
+  ggplot(aes(x = error, fill = model)) +
+  geom_histogram(bins = 25, alpha = 0.8, colour = "white") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "grey30") +
+  scale_fill_manual(values = model_colours) +
+  facet_wrap(~ model, ncol = 2, scales = "free_y") +
+  labs(
+    title = "RVV — Prediction Error Distribution (predicted − actual)",
+    x = "Error (mhl)", y = "Count"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none", strip.text = element_text(face = "bold"))
+```
+
+---
+
+# Head-to-head: RDD vs RVV
+
+```{r both-mae, fig.height=5}
+bind_rows(
+  metrics_rdd_c %>% mutate(region = "RDD"),
+  metrics_rvv_c %>% mutate(region = "RVV")
+) %>%
+  filter(model != "CarenR_Assoc") %>%
+  group_by(region, model) %>%
+  summarise(mean_mae = mean(mae, na.rm = TRUE), .groups = "drop") %>%
+  ggplot(aes(x = model, y = mean_mae, fill = model)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = round(mean_mae, 1)), vjust = -0.4, size = 3.5) +
+  scale_fill_manual(values = model_colours) +
+  facet_wrap(~ region, scales = "free_y") +
+  labs(
+    title = "Mean MAE by model and region (all scenarios)",
+    x = NULL, y = "Mean MAE (mhl)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 25, hjust = 1))
+```
+
+---
+
+# Key findings
+
+```{r findings}
+# Best model per region
+best_rdd <- metrics_rdd_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  group_by(model) %>%
+  summarise(mean_mae = mean(mae, na.rm = TRUE)) %>%
+  slice_min(mean_mae, n = 1)
+
+best_rvv <- metrics_rvv_c %>%
+  filter(model != "CarenR_Assoc") %>%
+  group_by(model) %>%
+  summarise(mean_mae = mean(mae, na.rm = TRUE)) %>%
+  slice_min(mean_mae, n = 1)
+
+naive_rdd <- metrics_rdd_c %>% filter(model == "Naive") %>% summarise(m = mean(mae)) %>% pull(m)
+naive_rvv <- metrics_rvv_c %>% filter(model == "Naive") %>% summarise(m = mean(mae)) %>% pull(m)
+```
+
+- **CarenR_Assoc** failed to produce valid predictions in all scenarios (returned NA). This is a known bug in `predict.caren()` related to factor level handling and needs to be addressed separately.
+
+- **CarenR_Dist** was identical to Naive in every scenario for both regions — the distribution rules never fired on test observations, so every prediction fell back to the training mean.
+
+- **RDD best model**: `r best_rdd$model` (mean MAE = `r round(best_rdd$mean_mae, 1)` mhl vs Naive = `r round(naive_rdd, 1)` mhl).
+
+- **RVV best model**: `r best_rvv$model` (mean MAE = `r round(best_rvv$mean_mae, 1)` mhl vs Naive = `r round(naive_rvv, 1)` mhl).
+
+- **All R² values are negative**, meaning no model consistently outperforms predicting the training mean when evaluated out-of-sample. This reflects the high year-to-year variability in wine production driven by annual weather — an inherently difficult forecasting problem.
+
+- The key takeaway is that the discovered rules carry **descriptive/explanatory value** (identifying which meteorological conditions historically associate with high or low production) but do not translate into robust multi-year predictive accuracy. This distinction between descriptive and predictive validity is a meaningful thesis contribution.
+
+---
+
+*Generated automatically from `data/`r detrend_method`/scenario_metrics_*.csv` and `scenario_predictions_*.csv`.*
