@@ -1,7 +1,6 @@
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 #                       Data set creation - v2
 #                       by:  hugonogueira
-#                       at:  Sat Jun  3 00:41:02 2023  
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
 
@@ -120,13 +119,19 @@ my_df <-
               days.maxTemp.above.35_sm_y1_a20 = numeric(),
               rf_fl_y1_a10 = numeric(),
               rf_hv_y1_b10 = numeric(),
-              rf_hv_y1_a10 = numeric(),
+              # rf_hv_y1_a10 dropped: post-harvest rain of the current year
+              # has no causal pathway to current-year wine production
+              # (grapes are already picked).
+              # Replaced by rf_hv_y0_a10 below.
+              rf_hv_y0_a10 = numeric(),
               days.rf.above.1mm_fl_y1_c15 = numeric(),
               days.rf.above.1mm_fl_y1_a20 = numeric(),
               days.rf.above.1mm_sm_y1_b20 = numeric(),
               days.rf.above.1mm_sm_y1_a20 = numeric(),
               days.rf.above.1mm_hv_y1_c10 = numeric(),
-              days.rf.above.1mm_hv_y1_a10 = numeric(),
+              # days.rf.above.1mm_hv_y1_a10 dropped — same reason.
+              # Replaced by days.rf.above.1mm_hv_y0_a10 below.
+              days.rf.above.1mm_hv_y0_a10 = numeric(),
               iaf_bb_y1_c10 = numeric(),
               iaf_fl_y1_b10 = numeric(),
               iaf_fl_y1_b20 = numeric(),
@@ -140,7 +145,10 @@ my_df <-
               swa_fl_y1_a15 = numeric(),
               swa_fl_y1_a30 = numeric(),
               swa_hv_y1_b20 = numeric(),
-              swa_hv_y1_a20 = numeric(),
+              # swa_hv_y1_a20 dropped: post-harvest soil-water of the current
+              # year cannot affect current-year production. The y0 version
+              # below (swa_hv_y0_a20) already existed and carries the
+              # biologically meaningful carry-over signal.
               swa_hv_y0_a15 = numeric(),
               swa_hv_y0_a20 = numeric(),
               sw.less.15wp_fl_y1_a10 = numeric(),
@@ -503,29 +511,48 @@ for (i in 2:nrow(data_prd)) {
    
    
    ##  Rain quantity Harvesting year 1 ----
-   # sum rain quantity
-   
-   B1 = 10; A1 = 10
-   
+   # sum rain quantity (current year, BEFORE harvest only — see year-0 block
+   # below for the carry-over story after the previous year's harvest)
+
+   B1 = 10
+
    pheno_day = data_prd$DOY_Hv[i]
-   
-   # rf_hv_y1_b10
+
+   # rf_hv_y1_b10  — rain in the 10 days BEFORE current-year harvest.
+   # Biological pathway: heavy late-ripening rain causes berry splitting,
+   # sugar dilution, disease pressure (botrytis, mildew) — all directly
+   # suppressing current-year yield and quality.
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   rf_hv_y1_b10 = sum(data_meteo %>% 
-                      filter(Year == year, Doy %in% period) %>% 
+   rf_hv_y1_b10 = sum(data_meteo %>%
+                      filter(Year == year, Doy %in% period) %>%
                       select(Rain))
-   
-   # rf_hv_y1_a10
+
+   B1 = NA
+
+
+   ##  Rain quantity Harvesting year 0 ----
+   # sum rain quantity in the 10 days AFTER the PREVIOUS year's harvest.
+   # Biological pathway: post-harvest moisture during the carbohydrate-
+   # accumulation window replenishes vine reserves before dormancy, driving
+   # next year's bud break, shoot vigour, and yield potential. This is the
+   # causally meaningful counterpart to the (now-removed) rf_hv_y1_a10
+   # feature, which sat after the current-year harvest and therefore could
+   # not affect the current-year vintage.
+
+   A1 = 10
+
+   pheno_day = data_prd$DOY_Hv[i-1]   # PREVIOUS year's actual harvest DoY
+                                       # (same convention as swa_hv_y0_*)
+
+   # rf_hv_y0_a10
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   rf_hv_y1_a10 = sum(data_meteo %>% 
-                       filter(Year == year, Doy %in% period) %>% 
-                       select(Rain))
-   
-   
-   
-   B1 = NA; A1 = NA
+   rf_hv_y0_a10 = sum(data_meteo %>%
+                      filter(Year == year - 1, Doy %in% period) %>%
+                      select(Rain))
+
+   A1 = NA
    
    
    
@@ -582,26 +609,45 @@ for (i in 2:nrow(data_prd)) {
    
    
   ##  Rain >1mm Harvesting year 1 ----
-  # count number of days
-   
-   C = 10;  A1 = 10
-   
+  # count number of wet days CENTRED on current-year harvest (5 before + 5
+  # after, includes harvest day). The pre-harvest half captures berry-
+  # splitting / disease-pressure risk; the few days after are biologically
+  # inert for current-year yield but kept because they are part of the
+  # centred window definition.
+
+   C = 10
+
    pheno_day = data_prd$DOY_Hv[i]
-   
+
    # days.rf.above.1mm_hv_y1_c10
    var = C
    period = (pheno_day - floor(var / 2) ):(pheno_day + floor(var / 2) )
    days.rf.above.1mm_hv_y1_c10 = sum(data_meteo %>%
                                 filter(Year == year, Doy %in% period) %>%
                                 select(`R>0.1`))
-   
-   
-   # days.rf.above.1mm_hv_y1_a10
+
+   C = NA
+
+
+  ##  Rain >1mm Harvesting year 0 ----
+  # count number of wet days in the 10 days AFTER the PREVIOUS year's
+  # harvest. Replaces the (now-removed) days.rf.above.1mm_hv_y1_a10, which
+  # had no causal pathway to current-year yield. This y0 version captures
+  # post-harvest wet-day frequency during the vine's reserve-accumulation
+  # window, contributing to next year's vigour and yield potential.
+
+   A1 = 10
+
+   pheno_day = data_prd$DOY_Hv[i-1]   # PREVIOUS year's actual harvest DoY
+
+   # days.rf.above.1mm_hv_y0_a10
    var = A1
    period = (pheno_day + var - 1): pheno_day
-   days.rf.above.1mm_hv_y1_a10 = sum(data_meteo %>% 
-                                 filter(Year == year, Doy %in% period) %>% 
+   days.rf.above.1mm_hv_y0_a10 = sum(data_meteo %>%
+                                 filter(Year == year - 1, Doy %in% period) %>%
                                  select(`R>0.1`))
+
+   A1 = NA
    
    C = NA;   A1 = NA
 
@@ -743,25 +789,23 @@ for (i in 2:nrow(data_prd)) {
    
    
    ##  swa  Harvesting year 1 ----
-   # average values
-   
-   B1 =20 ; A1 = 20
-   
+   # average values — current-year, BEFORE harvest only.
+   # The previous swa_hv_y1_a20 (post-harvest soil-water of the current
+   # year) was removed because it has no causal pathway to current-year
+   # production; its biologically meaningful counterpart is swa_hv_y0_a20,
+   # which already exists in the Harvesting year-0 block below.
+
+   B1 = 20
+
    pheno_day = data_prd$DOY_Hv[i]
-   
-   # swa_hv_y1_b20
+
+   # swa_hv_y1_b20  — soil water in the 20 days BEFORE current-year harvest
    var = B1
    period = (pheno_day - var + 1): pheno_day
-   swa_hv_y1_b20 = mean((data_meteo %>% 
+   swa_hv_y1_b20 = mean((data_meteo %>%
                           filter(Year == year, Doy %in% period))$Sm)
-   
-   
-   # swa_hv_y1_a20
-   var = A1
-   period = (pheno_day + var - 1): pheno_day
-   swa_hv_y1_a20 = mean((data_meteo %>% 
-                          filter(Year == year, Doy %in% period))$Sm)
-   B1 =NA ; A1 = NA
+
+   B1 = NA
    
    
    
@@ -975,13 +1019,13 @@ for (i in 2:nrow(data_prd)) {
                     days.maxTemp.above.35_sm_y1_a20 = days.maxTemp.above.35_sm_y1_a20,
                     rf_fl_y1_a10 = rf_fl_y1_a10,
                     rf_hv_y1_b10 = rf_hv_y1_b10,
-                    rf_hv_y1_a10 = rf_hv_y1_a10,
+                    rf_hv_y0_a10 = rf_hv_y0_a10,
                     days.rf.above.1mm_fl_y1_c15 = days.rf.above.1mm_fl_y1_c15,
                     days.rf.above.1mm_fl_y1_a20 = days.rf.above.1mm_fl_y1_a20,
                     days.rf.above.1mm_sm_y1_b20 = days.rf.above.1mm_sm_y1_b20,
                     days.rf.above.1mm_sm_y1_a20 = days.rf.above.1mm_sm_y1_a20,
                     days.rf.above.1mm_hv_y1_c10 = days.rf.above.1mm_hv_y1_c10,
-                    days.rf.above.1mm_hv_y1_a10 = days.rf.above.1mm_hv_y1_a10,
+                    days.rf.above.1mm_hv_y0_a10 = days.rf.above.1mm_hv_y0_a10,
                     iaf_bb_y1_c10 = iaf_bb_y1_c10,
                     iaf_fl_y1_b10 = iaf_fl_y1_b10,
                     iaf_fl_y1_b20 = iaf_fl_y1_b20,
@@ -995,7 +1039,6 @@ for (i in 2:nrow(data_prd)) {
                     swa_fl_y1_a15 = swa_fl_y1_a15,
                     swa_fl_y1_a30 = swa_fl_y1_a30,
                     swa_hv_y1_b20 = swa_hv_y1_b20,
-                    swa_hv_y1_a20 = swa_hv_y1_a20,
                     swa_hv_y0_a15 = swa_hv_y0_a15,
                     swa_hv_y0_a20 = swa_hv_y0_a20,
                     sw.less.15wp_fl_y1_a10 = sw.less.15wp_fl_y1_a10,
@@ -1077,22 +1120,90 @@ for (col in names(my_df)) {
 }
 
 
-# run discretization for the continuous variables
+# run discretization for the continuous variables ------------------------------------
+#
+# Strategy (per-feature, unsupervised):
+#
+#   - DEFAULT  -> equal-frequency binning into 3 bins (Low / Medium / High tertiles).
+#                 Works well on roughly continuous features.
+#
+#   - FALLBACK -> k-means cluster binning into 2 bins, triggered when a feature
+#                 is "mass-clustered": any single exact value carries >= 25% of
+#                 the observations AND fewer than 50% of rows are unique values.
+#                 This catches saturating / near-bimodal columns (e.g. IAF at the
+#                 harvest window, where the underlying canopy model pins values at
+#                 0 in the leaf-off season and at the species max during full
+#                 canopy). Equal-frequency on these produces meaningless or
+#                 degenerate bins because cut points fall through identical values.
+#
+# Output remains a factor in either case, so downstream rule-mining (CarenR) is
+# agnostic to which strategy was chosen.
+
+DISC_THRESHOLD_MASS <- 0.25   # any single value carrying >= 25% of mass triggers cluster mode
+DISC_THRESHOLD_UNIQ <- 0.50   # AND fewer than 50% of rows are unique values
+DISC_DEFAULT_BREAKS <- 3      # equal-frequency default
+DISC_CLUSTER_BREAKS <- 2      # k-means cluster fallback (binary)
+
+# Bookkeeping so the choice per feature is auditable in the run log
+disc_log <- data.frame(
+  feature    = character(),
+  mode       = character(),
+  max_mass   = numeric(),
+  uniq_ratio = numeric(),
+  n_bins     = integer(),
+  stringsAsFactors = FALSE
+)
 
 for (col in names(my_df)) {
-   
-   if (col == 'Wine_mhl') {
-      next
-   }
-   
-   print(col)
-   
-   if (!is.factor(my_df[[col]])) {
-      cat('discretizing column ', col,'\n')
-      my_df[[col]] <- discretize(my_df[[col]], method   = "frequency")
-      
-   }
+
+  if (col == 'Wine_mhl') next
+  if (is.factor(my_df[[col]])) next   # already collapsed (single-value column)
+
+  x          <- my_df[[col]]
+  n          <- length(x)
+  max_mass   <- max(table(x)) / n
+  uniq_ratio <- length(unique(x)) / n
+
+  is_clustered <- max_mass >= DISC_THRESHOLD_MASS &&
+                  uniq_ratio <  DISC_THRESHOLD_UNIQ
+
+  if (is_clustered) {
+    cat(sprintf('discretizing %-30s [CLUSTER]   max_mass=%.2f  uniq=%.2f\n',
+                col, max_mass, uniq_ratio))
+    binned <- tryCatch(
+      discretize(x, method = "cluster", breaks = DISC_CLUSTER_BREAKS),
+      error = function(e) {
+        cat('  cluster failed (', conditionMessage(e),
+            '), falling back to frequency\n')
+        discretize(x, method = "frequency", breaks = DISC_DEFAULT_BREAKS)
+      }
+    )
+    mode_used <- "cluster"
+  } else {
+    cat(sprintf('discretizing %-30s [FREQUENCY] max_mass=%.2f  uniq=%.2f\n',
+                col, max_mass, uniq_ratio))
+    binned <- discretize(x, method = "frequency", breaks = DISC_DEFAULT_BREAKS)
+    mode_used <- "frequency"
+  }
+
+  my_df[[col]] <- binned
+  disc_log <- rbind(
+    disc_log,
+    data.frame(
+      feature    = col,
+      mode       = mode_used,
+      max_mass   = round(max_mass, 3),
+      uniq_ratio = round(uniq_ratio, 3),
+      n_bins     = length(levels(binned)),
+      stringsAsFactors = FALSE
+    )
+  )
 }
+
+cat('\n--- Discretization summary ---\n')
+print(disc_log)
+cat('Cluster-mode features:', sum(disc_log$mode == "cluster"),
+    '| Frequency-mode features:', sum(disc_log$mode == "frequency"), '\n\n')
 
 
 # Substituting comma with another character (e.g., semicolon)

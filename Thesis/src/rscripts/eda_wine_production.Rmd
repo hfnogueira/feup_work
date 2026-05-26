@@ -1,0 +1,1117 @@
+---
+title: "Wine Production — Exploratory Data Analysis"
+author: "Hugo Nogueira"
+date: "`r format(Sys.Date(), '%B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    theme: flatly
+    highlight: tango
+    number_sections: true
+    fig_width: 11
+    fig_height: 5.5
+    df_print: paged
+    self_contained: true
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+subtitle: Douro (RDD) & Vinho Verde (RVV) | Climate × Yield Relationships
+---
+
+```{r setup, include=FALSE}
+# ── Working directory: project root (two levels above src/rscripts/) ─────────
+
+print(getwd())  # should be src/rscripts/
+
+
+knitr::opts_knit$set(root.dir = normalizePath("../.."))
+
+knitr::opts_chunk$set(
+  echo    = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center"
+)
+
+# ── Libraries ────────────────────────────────────────────────────────────────
+library(tidyverse)
+library(ggrepel)     # install.packages("ggrepel") if needed
+library(patchwork)   # install.packages("patchwork") if needed
+library(scales)
+library(plotly)      # install.packages("plotly") if needed — interactive charts
+library(crosstalk)   # install.packages("crosstalk") if needed — client-side slicers
+
+# try catch here. give another location if there is an error
+
+primary_path  <- "src/rscripts/utils/detrend_utils.R"
+fallback_path <- "utils/detrend_utils.R"
+
+if (file.exists(primary_path)) {
+  source(primary_path)
+} else if (file.exists(fallback_path)) {
+  source(fallback_path)
+} else {
+  stop(
+    paste0(
+      "Could not find detrend_utils.R in either path:\n",
+      "- ", normalizePath(primary_path, mustWork = FALSE), "\n",
+      "- ", normalizePath(fallback_path, mustWork = FALSE), "\n\n",
+      "Current working directory is:\n",
+      getwd()
+    )
+  )
+}
+
+# ── Palette ──────────────────────────────────────────────────────────────────
+COL_RDD    <- "#4E79A7"
+COL_RVV    <- "#E15759"
+COL_LIN    <- "#4E79A7"
+COL_LOW    <- "#F28E2B"
+COL_GREY   <- "grey55"
+
+stage_colours <- c(
+  bb = "#4E79A7",   # Bud Break    — blue
+  fl = "#F28E2B",   # Flowering    — orange
+  sm = "#59A14F",   # Start Maturity — green
+  hv = "#E15759"    # Harvest      — red
+)
+
+stage_labels_nice <- c(
+  bb = "Bud Break",
+  fl = "Flowering",
+  sm = "Start of Maturity",
+  hv = "Harvest"
+)
+
+LOESS_SPAN  <- 0.75
+DETREND_M   <- "linear"   # method used for detrended target in correlations
+```
+
+```{r load-data}
+# ── Load both regions ────────────────────────────────────────────────────────
+rdd <- read.csv("data/dataPrep_cont_dataset_rdd.csv")
+rvv <- read.csv("data/dataPrep_cont_dataset_rvv.csv")
+
+# Unified long frame for production comparisons
+prod_both <- bind_rows(
+  rdd %>% select(year, Wine_mhl) %>% mutate(region = "RDD"),
+  rvv %>% select(year, Wine_mhl) %>% mutate(region = "RVV")
+)
+
+# Feature columns (exclude year and Wine_mhl)
+feat_cols_rdd <- setdiff(names(rdd), c("year", "Wine_mhl"))
+feat_cols_rvv <- setdiff(names(rvv), c("year", "Wine_mhl"))
+feat_cols     <- intersect(feat_cols_rdd, feat_cols_rvv)   # shared features
+
+# Decades
+rdd <- rdd %>% mutate(decade = paste0(floor(year / 10) * 10, "s"))
+rvv <- rvv %>% mutate(decade = paste0(floor(year / 10) * 10, "s"))
+```
+
+```{r feature-decoder}
+# ── Compact feature label decoder ────────────────────────────────────────────
+# Returns a short readable label + stage + metric components
+metric_short <- c(
+  "tm"                    = "Tmean",
+  "tn"                    = "Tmean",
+  "tm.days.less.15"       = "Days Tmean<15°C",
+  "days_minTemp.less.0"   = "Frost days",
+  "days.minTemp.less.0"   = "Frost days",
+  "days.maxTemp.above.35" = "Heat days >35°C",
+  "days.tempMax.above.35" = "Heat days >35°C",
+  "rf"                    = "Rainfall",
+  "days.rf.above.1mm"     = "Wet days",
+  "iaf"                   = "Leaf Area Index",
+  "swa"                   = "Soil Water",
+  "sw.less.15wp"          = "Drought days",
+  "sw.above.09fc"         = "Waterlogging days"
+)
+
+decode_feat_short <- function(feat) {
+  m <- regmatches(feat,
+         regexec("^(.+)_(bb|fl|sm|hv)_(y0|y1)_([cba]\\d+)$", feat, perl = TRUE))[[1]]
+  if (length(m) == 0) return(list(label = feat, stage = NA, year_off = NA, metric = feat))
+
+  metric    <- m[2]
+  stage     <- m[3]
+  year_off  <- m[4]
+  win_code  <- m[5]
+
+  met_lbl   <- metric_short[metric]
+  if (is.na(met_lbl)) met_lbl <- metric
+
+  # In this dataset the production-record year IS the harvest year. Features
+  # named *_y1_* are sourced from that same calendar year (the current year of
+  # the vintage cycle); *_y0_* features are from the previous calendar year.
+  year_str  <- if (year_off == "y1") "curr yr" else "prev yr"
+  stage_str <- stage_labels_nice[stage]
+  if (is.na(stage_str)) stage_str <- stage
+
+  list(
+    label    = paste0(met_lbl, " | ", stage_str, " (", year_str, ")"),
+    short    = paste0(met_lbl, "\n", stage_str),
+    stage    = stage,
+    year_off = year_off,
+    metric   = met_lbl
+  )
+}
+
+# Build a lookup table for all features
+feat_meta <- tibble(feature = feat_cols) %>%
+  mutate(
+    decoded  = map(feature, decode_feat_short),
+    label    = map_chr(decoded, "label"),
+    short    = map_chr(decoded, "short"),
+    stage    = map_chr(decoded, "stage"),
+    year_off = map_chr(decoded, "year_off"),
+    metric   = map_chr(decoded, "metric")
+  ) %>%
+  select(-decoded)
+```
+
+---
+
+# Overview {.unnumbered}
+
+This notebook explores the **two wine production datasets** for the Douro (RDD) and Vinho Verde (RVV) demarcated regions. The dataset spans several decades of annual vine phenology and climate observations, linked to total wine production in million hectolitres (mhl).
+
+The four sections below build towards a data-grounded intuition for the modelling pipeline:
+
+1. **Wine production over time** — is there a structural trend and how much does year-to-year variability remain after removing it?
+2. **Phenological event timing** — are bud break, flowering, and harvest shifting earlier across decades? What does that tell us about climate?
+3. **Climate variables over time** — have the input features themselves shifted across decades (a climate change signal)?
+4. **Feature distributions by decade** — are the distribution shapes (not just the means) changing?
+5. **Feature–target correlations** — which climate windows are most predictive of production?
+
+---
+
+# Wine Production Over Time
+
+## Raw series and trend
+
+```{r prod-raw, fig.height=5}
+# Compute linear and LOWESS trends for each region
+make_trend_df <- function(df, reg) {
+  years <- df$year
+  wine  <- df$Wine_mhl
+
+  lin_fit   <- lm(Wine_mhl ~ year, data = df)
+  low_fit   <- loess(Wine_mhl ~ year, data = df, span = LOESS_SPAN)
+  lin_trend <- predict(lin_fit)
+  low_trend <- predict(low_fit)
+
+  tibble(
+    year       = years,
+    observed   = wine,
+    lin_trend  = lin_trend,
+    low_trend  = low_trend,
+    region     = reg
+  )
+}
+
+td_rdd <- make_trend_df(rdd, "RDD")
+td_rvv <- make_trend_df(rvv, "RVV")
+td_all <- bind_rows(td_rdd, td_rvv)
+
+ggplot(td_all, aes(year)) +
+  geom_line(aes(y = observed), colour = COL_GREY, linewidth = 0.8) +
+  geom_point(aes(y = observed, colour = region), size = 1.8, alpha = 0.85) +
+  geom_line(aes(y = lin_trend), colour = COL_LIN, linewidth = 1.3, linetype = "solid") +
+  geom_line(aes(y = low_trend), colour = COL_LOW, linewidth = 1.3, linetype = "dashed") +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV), guide = "none") +
+  facet_wrap(~region, scales = "free_y", ncol = 2) +
+  labs(
+    title   = "Annual wine production with trend lines",
+    subtitle= "Solid = linear trend  |  Dashed = LOWESS trend (span = 0.75)",
+    x       = "Year",
+    y       = "Wine production (mhl)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(strip.text = element_text(face = "bold", size = 13))
+```
+
+The two regions tell **opposite structural stories**. RDD shows a clear positive trend — production roughly doubling from the 1930s to the 2000s, consistent with vineyard expansion and modernisation of viticultural practices. RVV shows a strong negative trend, with production declining from the early decades to the present, likely reflecting regulatory changes in planted area and regional restructuring.
+
+The linear and LOWESS fits agree well for RDD, suggesting a broadly linear trajectory. For RVV the picture is more nuanced: the LOWESS reveals a relatively stable plateau through the 1940s–1970s followed by a sharp decline from the 1980s onwards — a non-linearity that a single straight line cannot capture. This distinction matters for the detrending step: linear detrending is likely adequate for RDD, but may over-correct early RVV years and under-correct recent ones. The diagnostic tests in `detrend_diagnostics.R` will formalise this.
+
+## Decade-level averages
+
+```{r decade-bars, fig.height=4.5}
+prod_decade <- prod_both %>%
+  mutate(decade = paste0(floor(year / 10) * 10, "s")) %>%
+  group_by(region, decade) %>%
+  summarise(
+    mean_wine = mean(Wine_mhl),
+    sd_wine   = sd(Wine_mhl),
+    n         = n(),
+    .groups   = "drop"
+  )
+
+ggplot(prod_decade, aes(decade, mean_wine, fill = region)) +
+  geom_col(position = position_dodge(0.85), width = 0.75, alpha = 0.9) +
+  geom_errorbar(
+    aes(ymin = mean_wine - sd_wine, ymax = mean_wine + sd_wine),
+    position = position_dodge(0.85), width = 0.25, linewidth = 0.7
+  ) +
+  scale_fill_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  labs(
+    title    = "Mean wine production by decade",
+    subtitle = "Error bars show ± 1 standard deviation within each decade",
+    x        = "Decade",
+    y        = "Mean production (mhl)",
+    fill     = "Region"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "top")
+```
+
+The decade breakdown confirms and sharpens the story from the raw trend. RDD grew steadily from roughly 800 mhl in the 1930s to around 1 200–1 400 mhl in the 2000s–2020s, with moderate and fairly stable within-decade variability throughout. RVV follows the opposite arc: peak production exceeding 2 000 mhl per decade in the 1940s–1970s, then a steep decline toward 800 mhl by the 2020s. Notably, the error bars for RVV are widest in the mid-century decades, suggesting that inter-annual climate variability had a greater influence on production during the high-output era — which makes the detrended residuals for that period especially informative.
+
+## Detrended residuals
+
+After removing the long-term production trend (here: linear), the **residuals represent year-to-year climate-driven deviations**. This is the target variable used in the rule-learning pipeline. A residual near zero means production was as expected for that era; large positive/negative values indicate climate anomalies.
+
+```{r detrended, fig.height=5}
+td_all <- td_all %>%
+  mutate(
+    lin_resid = observed - lin_trend,
+    low_resid = observed - low_trend
+  )
+
+# Long format for overlaid residuals
+resid_long <- td_all %>%
+  select(year, region, lin_resid, low_resid) %>%
+  pivot_longer(c(lin_resid, low_resid),
+               names_to  = "method",
+               values_to = "residual") %>%
+  mutate(method = dplyr::recode(method, lin_resid = "Linear", low_resid = "LOWESS"))
+
+ggplot(resid_long, aes(year, residual, colour = method)) +
+  geom_hline(yintercept = 0, colour = "grey70", linetype = "dotted") +
+  geom_line(linewidth = 0.9, alpha = 0.85) +
+  geom_point(size = 1.4, alpha = 0.75) +
+  scale_colour_manual(values = c(Linear = COL_LIN, LOWESS = COL_LOW)) +
+  facet_wrap(~region, ncol = 2, scales = "free_y") +
+  labs(
+    title    = "Detrended residuals — production deviation from trend",
+    subtitle = "Positive = above-trend year  |  Negative = below-trend year",
+    x        = "Year",
+    y        = "Residual (mhl)",
+    colour   = "Detrend method"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    strip.text     = element_text(face = "bold", size = 13),
+    legend.position= "top"
+  )
+```
+
+For RDD, the linear and LOWESS residuals track almost identically throughout the record — confirming that the linear trend is an adequate summary of RDD's growth trajectory and that the resulting residuals are well-centred. For RVV the picture is more revealing: the two series diverge considerably in the 1940s–1960s, where the linear residuals are systematically positive (the linear fit "expects" production to already be declining from the start, labelling the plateau era as above-trend) while the LOWESS residuals are closer to zero. This is precisely the over-correction artefact identified from the raw trend — and it reinforces the case for using LOWESS detrending for RVV.
+
+---
+
+# Phenological Event Timing
+
+Vine phenology records the **day of the year (DOY)** on which key growth events occur: bud break, flowering, start of maturity, and harvest. These dates are direct outputs of the vine's response to temperature accumulation — earlier dates signal warmer conditions, later dates signal cooler ones.
+
+Crucially, the engineered climate features in the modelling dataset are computed as windows *centred on* or *around* these DOY events. Understanding how the phenological calendar itself has shifted is therefore both an agronomic story and a methodological one: if bud break is happening three weeks earlier than in 1950, then the climate conditions captured inside each phenological window are also shifting in calendar time.
+
+```{r pheno-load}
+# Load the raw production + DOY files
+prod_rdd <- read.csv("data/dataPrep_production_rdd.csv", na.strings = c("nd", "NA", ""))
+prod_rvv <- read.csv("data/dataPrep_production_rvv.csv", na.strings = c("nd", "NA", ""))
+
+# Standardise column names to lower-case year
+names(prod_rdd) <- tolower(names(prod_rdd))
+names(prod_rvv) <- tolower(names(prod_rvv))
+
+# Identify DOY columns (everything starting with "doy")
+doy_cols_rdd <- grep("^doy", names(prod_rdd), value = TRUE)
+doy_cols_rvv <- grep("^doy", names(prod_rvv), value = TRUE)
+
+# Human-readable event labels
+doy_labels <- c(
+  doy_bb  = "Bud Break",
+  doy_fl  = "Flowering",
+  doy_sm  = "Start of Maturity",
+  doy_fs  = "Fruit Set",
+  doy_hv  = "Harvest"
+)
+
+# Long-format DOY frames
+doy_long_rdd <- prod_rdd %>%
+  select(year, all_of(doy_cols_rdd)) %>%
+  pivot_longer(all_of(doy_cols_rdd), names_to = "event", values_to = "doy") %>%
+  mutate(
+    region = "RDD",
+    event_label = doy_labels[event],
+    event_label = if_else(is.na(event_label), event, event_label),
+    decade = paste0(floor(year / 10) * 10, "s")
+  )
+
+doy_long_rvv <- prod_rvv %>%
+  select(year, all_of(doy_cols_rvv)) %>%
+  pivot_longer(all_of(doy_cols_rvv), names_to = "event", values_to = "doy") %>%
+  mutate(
+    region = "RVV",
+    event_label = doy_labels[event],
+    event_label = if_else(is.na(event_label), event, event_label),
+    decade = paste0(floor(year / 10) * 10, "s")
+  )
+
+doy_long <- bind_rows(doy_long_rdd, doy_long_rvv) %>%
+  filter(!is.na(doy)) %>%
+  mutate(
+    event_label = factor(event_label,
+                         levels = c("Bud Break", "Fruit Set", "Flowering",
+                                    "Start of Maturity", "Harvest"))
+  )
+```
+
+## Phenological dates over time
+
+Each line traces the evolution of a phenological event's day-of-year. A **downward trend** means the event is happening earlier — the most common fingerprint of warming temperatures.
+
+```{r pheno-ts, fig.height=6.5}
+# Trend summary: slope of linear fit per event × region
+pheno_trends <- doy_long %>%
+  group_by(region, event_label) %>%
+  summarise(
+    slope     = coef(lm(doy ~ year, na.action = na.omit))[2],
+    cor_year  = cor(year, doy, use = "complete.obs"),
+    .groups   = "drop"
+  ) %>%
+  mutate(
+    slope_label = sprintf("%+.2f days/yr", slope)
+  )
+
+ggplot(doy_long, aes(year, doy, colour = region)) +
+  geom_point(size = 1.4, alpha = 0.55) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.12, linewidth = 1.2) +
+  geom_text(
+    data  = pheno_trends,
+    aes(label = slope_label, colour = region),
+    x     = -Inf, y = Inf, hjust = -0.1, vjust = 1.6,
+    size  = 3.2, fontface = "italic"
+    #,position = position_dodge(width = 0)
+  ) +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~event_label, scales = "free_y", ncol = 2) +
+  labs(
+    title    = "Phenological event timing over time",
+    subtitle = "Day of year (DOY) for each growth stage  |  Labels show linear trend slope",
+    x        = "Year",
+    y        = "Day of year",
+    colour   = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    strip.text      = element_text(face = "bold", size = 11),
+    legend.position = "top"
+  )
+```
+
+All five events are shifting earlier, consistently across both regions — a clear warming fingerprint, but the rate of advance is *not* uniform across the season. The strongest drift is at **Harvest** (RDD: −0.19 d/yr, p<0.001; RVV: −0.26 d/yr, p<0.001), followed by **Start of Maturity** (RDD: −0.09 d/yr, p=0.012; RVV: −0.17 d/yr, p=0.007). Earlier-season events drift more slowly: Fruit Set −0.08 d/yr (RDD only), Flowering −0.07 (RDD) / −0.11 (RVV), and Bud Break −0.05 (RDD) / −0.10 (RVV) — none of these reach the 0.05 significance level except RVV Bud Break (p=0.022). In other words, **the late-season warming signal is the dominant one**: harvest is moving forward faster than veraison, and veraison faster than flowering and bud break. This is precisely the pattern that drives the asymmetric phase-compression observed in §2.3, where the Start-of-Maturity → Harvest interval shortens significantly while Bud-Break → Flowering remains essentially flat. A consistent observation across all panels is that RVV events occur later in the calendar year than their RDD counterparts — reflecting RVV's more northerly latitude, higher rainfall, and cooler Atlantic-influenced climate.
+
+## Decade-level distributions
+
+Beyond the mean shift, are individual events also becoming *more variable* over time — indicating less predictable growing seasons?
+
+```{r pheno-decade, fig.height=6}
+ggplot(doy_long, aes(decade, doy, fill = region)) +
+  geom_violin(alpha = 0.30, trim = TRUE, position = position_dodge(0.8)) +
+  geom_boxplot(width = 0.18, outlier.size = 1, alpha = 0.85,
+               position = position_dodge(0.8)) +
+  scale_fill_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~event_label, scales = "free_y", ncol = 2) +
+  labs(
+    title    = "Phenological event distributions by decade",
+    subtitle = "Violin = full within-decade distribution  |  Box = median and IQR",
+    x        = "Decade",
+    y        = "Day of year",
+    fill     = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    strip.text      = element_text(face = "bold", size = 11),
+    legend.position = "top",
+    axis.text.x     = element_text(angle = 35, hjust = 1, size = 9)
+  )
+```
+
+The decade-level violin plots confirm the directional shifts already seen in the trend lines, and add a distributional dimension. The leftward migration of median lines is visible across all events and both regions. For harvest in particular, the within-decade spread appears to narrow in recent decades — suggesting that harvest dates are becoming more consistent (less inter-annual variability), even as they shift earlier. Bud break shows the opposite in RVV: wider and more asymmetric distributions in mid-century decades, which may reflect that early bud break events were more erratic before the current warming regime stabilised.
+
+## Inter-stage durations (growing season structure)
+
+The **duration between consecutive stages** captures how compressed or extended each phenological phase is in a given year. A shortening bud-break-to-harvest window suggests accelerated ripening — which affects berry composition and, ultimately, wine volume and quality.
+
+```{r pheno-durations, fig.height=5}
+# Compute durations where all required columns exist
+compute_durations <- function(df, reg) {
+  required <- c("year", "doy_bb", "doy_fl", "doy_hv")
+  if (!all(required %in% names(df))) return(NULL)
+
+  d <- df %>%
+    select(year, any_of(c("doy_bb", "doy_fl", "doy_sm", "doy_hv"))) %>%
+    mutate(
+      bb_to_fl  = doy_fl  - doy_bb,
+      fl_to_sm  = if ("doy_sm" %in% names(.)) doy_sm - doy_fl  else NA_real_,
+      sm_to_hv  = if ("doy_sm" %in% names(.)) doy_hv - doy_sm  else NA_real_,
+      bb_to_hv  = doy_hv  - doy_bb,
+      region    = reg
+    ) %>%
+    select(year, region, bb_to_fl, fl_to_sm, sm_to_hv, bb_to_hv)
+
+  d
+}
+
+dur_rdd <- compute_durations(prod_rdd, "RDD")
+dur_rvv <- compute_durations(prod_rvv, "RVV")
+dur_all <- bind_rows(dur_rdd, dur_rvv)
+
+dur_long <- dur_all %>%
+  pivot_longer(-c(year, region),
+               names_to  = "phase",
+               values_to = "days") %>%
+  filter(!is.na(days)) %>%
+  mutate(
+    phase = dplyr::recode(phase,
+      bb_to_fl  = "Bud Break → Flowering",
+      fl_to_sm  = "Flowering → Start of Maturity",
+      sm_to_hv  = "Start of Maturity → Harvest",
+      bb_to_hv  = "Total season (BB → Harvest)"
+    ),
+    phase = factor(phase, levels = c(
+      "Bud Break → Flowering",
+      "Flowering → Start of Maturity",
+      "Start of Maturity → Harvest",
+      "Total season (BB → Harvest)"
+    ))
+  )
+
+ggplot(dur_long, aes(year, days, colour = region)) +
+  geom_point(size = 1.3, alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.12, linewidth = 1.2) +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~phase, scales = "free_y", ncol = 2) +
+  labs(
+    title    = "Inter-stage durations over time",
+    subtitle = "Are phenological phases getting shorter or longer?",
+    x        = "Year",
+    y        = "Duration (days)",
+    colour   = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    strip.text      = element_text(face = "bold", size = 10),
+    legend.position = "top"
+  )
+```
+
+To quantify what the trend lines above suggest, we fit an ordinary least-squares regression `duration ~ year` for each region × phase, and report the slope as **days per decade** (slope × 10) together with its p-value (two-sided t-test of H₀: slope = 0) and R².
+
+```{r pheno-durations-slopes}
+# Per-(region, phase) OLS fit of duration ~ year
+slopes_tbl <- dur_long %>%
+  group_by(region, phase) %>%
+  summarise(
+    n      = sum(!is.na(days)),
+    mean_d = mean(days, na.rm = TRUE),
+    fit    = list(lm(days ~ year)),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    slope_per_decade = vapply(fit, function(m) unname(coef(m)["year"]) * 10, numeric(1)),
+    p_value          = vapply(fit, function(m) summary(m)$coefficients["year", "Pr(>|t|)"], numeric(1)),
+    r_squared        = vapply(fit, function(m) summary(m)$r.squared, numeric(1)),
+    sig              = cut(p_value,
+                           breaks = c(-Inf, 0.001, 0.01, 0.05, Inf),
+                           labels = c("***", "**", "*", "ns"))
+  ) %>%
+  arrange(region, phase) %>%
+  transmute(
+    Region             = region,
+    Phase              = phase,
+    n                  = n,
+    `Mean (days)`      = round(mean_d, 1),
+    `Slope (d/decade)` = round(slope_per_decade, 2),
+    `p-value`          = signif(p_value, 3),
+    `R²`               = round(r_squared, 3),
+    Sig                = sig
+  )
+
+knitr::kable(
+  slopes_tbl,
+  caption = "Linear trend in inter-stage duration over time, by region. Slopes are days per decade from an OLS fit of duration ~ year. Significance codes: *** p<0.001, ** p<0.01, * p<0.05, ns = not significant at α=0.05."
+)
+```
+
+**Trend interpretation.** The total growing season (bud break to harvest) has shortened in both regions (RDD: −1.4 d/decade, p=0.007; RVV: −1.6 d/decade, p=0.014), but the compression is **not uniform across phases**. Contrary to what a casual reading of the trend lines might suggest, **Bud Break → Flowering is essentially stable** in both regions: slopes are within ±0.15 d/decade and not statistically distinguishable from zero (RDD p=0.66, RVV p=0.86). The contraction is concentrated in the **Start of Maturity → Harvest** phase, which shortens significantly in both RDD (−1.0 d/decade, p<0.001) and RVV (−0.9 d/decade, p=0.016). RVV additionally shows a mild contraction in **Flowering → Start of Maturity** (−0.6 d/decade, p=0.045) that RDD does not. In other words, vines in both regions reach bud-break-to-flowering in roughly the same time they always have, but **ripening (veraison-to-harvest) has accelerated** — consistent with warmer late-summer temperatures pushing harvests forward. This is the part of the season where the rule-learning pipeline is most likely to surface climate-driven signal.
+
+## Phenological timing vs wine production
+
+Does an earlier harvest year correlate with higher or lower production? This scatter links the phenological signal directly to the modelling target.
+
+```{r pheno-vs-prod, fig.height=5.5}
+# Join DOY to detrended production
+detrend_prod <- function(df) {
+  tr <- get_trend_residuals(df %>% rename(year = names(df)[1]), method = DETREND_M, verbose = FALSE)
+  df$resid <- tr$residuals
+  df
+}
+
+# Merge production residuals back onto DOY-long frame
+prod_rdd2 <- prod_rdd %>%
+  rename(Wine_mhl = wine_mhl) %>%
+  filter(!is.na(Wine_mhl))
+prod_rdd2$resid <- get_trend_residuals(
+  data.frame(year = prod_rdd2$year, Wine_mhl = prod_rdd2$Wine_mhl),
+  method = DETREND_M, verbose = FALSE
+)$residuals
+
+prod_rvv2 <- prod_rvv %>%
+  rename(Wine_mhl = wine_mhl) %>%
+  filter(!is.na(Wine_mhl))
+prod_rvv2$resid <- get_trend_residuals(
+  data.frame(year = prod_rvv2$year, Wine_mhl = prod_rvv2$Wine_mhl),
+  method = DETREND_M, verbose = FALSE
+)$residuals
+
+doy_vs_prod <- bind_rows(
+  doy_long_rdd %>%
+    left_join(prod_rdd2 %>% select(year, resid), by = "year"),
+  doy_long_rvv %>%
+    left_join(prod_rvv2 %>% select(year, resid), by = "year")
+) %>%
+  filter(!is.na(resid), !is.na(doy))
+
+# Correlation labels
+cor_labels <- doy_vs_prod %>%
+  group_by(region, event_label) %>%
+  summarise(
+    r = round(cor(doy, resid, use = "complete.obs"), 2),
+    .groups = "drop"
+  ) %>%
+  mutate(label = paste0("r = ", r))
+
+ggplot(doy_vs_prod, aes(doy, resid, colour = region)) +
+  geom_hline(yintercept = 0, colour = "grey70", linetype = "dotted") +
+  geom_point(size = 1.5, alpha = 0.55) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.1) +
+  geom_text(
+    data = cor_labels,
+    aes(label = label, colour = region),
+    x = -Inf, y = Inf, hjust = -0.15, vjust = 1.8,
+    size = 3.3, fontface = "italic"
+  ) +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~event_label, scales = "free_x", ncol = 2) +
+  labs(
+    title    = "Phenological timing vs detrended wine production",
+    subtitle = "Negative r = earlier event → above-trend production year",
+    x        = "Day of year",
+    y        = "Detrended production (residual, mhl)",
+    colour   = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    strip.text      = element_text(face = "bold", size = 11),
+    legend.position = "top"
+  )
+```
+
+Correlations between phenological event timing and detrended production are generally weak (all |r| ≤ 0.31), which is an important negative result. The single strongest signal is for **Bud Break in RVV** (r = +0.31, p = 0.005): later bud break is associated with above-trend production. The biological intuition is that very early bud break exposes new shoots to late-frost risk, so years with somewhat later bud break may avoid frost damage and preserve yield potential. RDD shows a weaker, non-significant version of the same direction (r = +0.14, p = 0.19). All other events in both regions show correlations close to zero (|r| < 0.21). This tells us that the *timing* of phenological events per se is not strongly predictive of yield; what matters more are the *climate conditions within the windows around those events* — precisely what the engineered features in sections 3–5 are designed to capture.
+
+---
+
+# Climate Feature Trends Over Time
+
+## Which features are drifting with time?
+
+A feature that correlates strongly with *year* is itself trending — potentially confounded with the production trend. A high |correlation with year| also suggests a **climate change signal** in that variable, which is worth highlighting in the thesis.
+
+```{r feat-trends-corr}
+# Pearson correlation of each feature with year
+cor_year_rdd <- feat_cols %>%
+  set_names() %>%
+  map_dbl(~cor(rdd[[.x]], rdd$year, use = "complete.obs"))
+
+cor_year_rvv <- feat_cols %>%
+  set_names() %>%
+  map_dbl(~cor(rvv[[.x]], rvv$year, use = "complete.obs"))
+
+cor_year_df <- tibble(
+  feature  = feat_cols,
+  cor_rdd  = cor_year_rdd,
+  cor_rvv  = cor_year_rvv
+) %>%
+  left_join(feat_meta %>% select(feature, label, stage, year_off, metric),
+            by = "feature") %>%
+  mutate(
+    abs_mean = (abs(cor_rdd) + abs(cor_rvv)) / 2
+  ) %>%
+  arrange(desc(abs_mean))
+
+# Top 20 trending features table
+cor_year_df %>%
+  slice_head(n = 20) %>%
+  select(Feature = label, Stage = stage, `Cor (RDD)` = cor_rdd, `Cor (RVV)` = cor_rvv) %>%
+  mutate(
+    `Cor (RDD)` = round(`Cor (RDD)`, 3),
+    `Cor (RVV)` = round(`Cor (RVV)`, 3)
+  )
+```
+
+```{r feat-trends-bar-prep}
+# Top 16 features by average |r| with year — used in the two plots below.
+top_trending <- cor_year_df %>% slice_head(n = 16)
+
+# Long form (one row per region) shared by both plot chunks.
+top_long <- top_trending %>%
+  select(label, stage, year_off, cor_rdd, cor_rvv) %>%
+  pivot_longer(c(cor_rdd, cor_rvv), names_to = "region", values_to = "r") %>%
+  mutate(region = dplyr::recode(region, cor_rdd = "RDD", cor_rvv = "RVV"))
+
+# Phenological cycle order: bb -> fl -> sm -> hv, and within each stage
+# previous year (y0) before current year (y1) — i.e. chronological order
+# across the two-year vintage window. In this dataset y1 = year of harvest /
+# production record, y0 = the calendar year before that.
+stage_order_chr    <- c("bb", "fl", "sm", "hv")
+year_off_order_chr <- c("y0", "y1")
+
+# Helper that builds the dot-plot. `order_by` controls the y-axis ordering:
+#   "cycle"    -> sort by phenological cycle (top-down: bb,y0 -> hv,y1)
+#   "strength" -> sort by max |r| across regions (strongest at the top)
+plot_top_trending <- function(df, order_by = c("cycle", "strength"),
+                              subtitle = NULL) {
+  order_by <- match.arg(order_by)
+
+  d <- df %>%
+    mutate(
+      sort_key = ifelse(
+        is.na(stage) | is.na(year_off),
+        Inf,
+        match(stage, stage_order_chr) * 10 + match(year_off, year_off_order_chr)
+      )
+    )
+
+  d <- if (order_by == "cycle") {
+    # ggplot puts factor level 1 at the BOTTOM of a discrete y-axis. Using
+    # .desc = TRUE makes the smallest sort_key (e.g. bb,y0) the top level,
+    # so the cycle reads top -> bottom.
+    d %>% mutate(label = forcats::fct_reorder(label, sort_key,
+                                              .fun = min, .desc = TRUE))
+  } else {
+    d %>% mutate(label = forcats::fct_reorder(label, abs(r), .fun = max))
+  }
+
+  ggplot(d, aes(r, label, colour = region, shape = region)) +
+    geom_vline(xintercept = 0,            colour = "grey70", linetype = "dotted") +
+    geom_vline(xintercept = c(-0.3, 0.3), colour = "grey85", linetype = "dashed") +
+    geom_point(size = 3.5, alpha = 0.9) +
+    scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+    scale_shape_manual(values  = c(RDD = 16,      RVV = 17)) +
+    labs(
+      title    = "Top 16 features trending over time (|r| with year)",
+      subtitle = subtitle,
+      x        = "Pearson r with year",
+      y        = NULL,
+      colour   = "Region",
+      shape    = "Region"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(legend.position = "top", panel.grid.major.y = element_blank())
+}
+```
+
+```{r feat-trends-bar-cycle, fig.height=6}
+plot_top_trending(
+  top_long,
+  order_by = "cycle",
+  subtitle = "Y-axis ordered by phenological cycle (bud break → harvest, prev yr before curr yr) — dashed lines at r = ±0.30"
+)
+```
+
+```{r feat-trends-bar-strength, fig.height=6}
+plot_top_trending(
+  top_long,
+  order_by = "strength",
+  subtitle = "Y-axis ordered by correlation strength (max |r| across regions) — dashed lines at r = ±0.30"
+)
+```
+
+The top-trending features are dominated by **temperature variables at the Harvest and Start of Maturity phenological windows**. Mean temperature at Harvest (current and previous year) shows correlations with year of r ≈ 0.37–0.41 for RDD and 0.23–0.34 for RVV — a clear warming signal that is consistent across both regions. Mean temperature at Start of Maturity also trends upward, but the magnitude is asymmetric across regions: RVV shows r ≈ 0.30–0.40 across both years, whereas RDD shows a moderate signal in the current-year window (r ≈ 0.27) and essentially no signal in the previous-year window (r ≈ +0.02). Leaf Area Index at Harvest (current year) shows notably higher correlations for RVV (r ≈ 0.36) than RDD (r ≈ 0.07); this is **not** a viticultural-practice signal but an artefact of the IAF model in the source data — see §3.2 — and should be interpreted with caution. Among rainfall-related features, RDD shows a clear decline in wet days at Harvest (r ≈ −0.20) but a *positive* trend in wet days at Start of Maturity (r ≈ +0.20); RVV shows essentially no Harvest-window trend (r ≈ −0.04) and a mild decline at Start of Maturity (r ≈ −0.13). The "drying end-of-season" pattern is therefore region- and window-specific, not a uniform signal. Several temperature features exceed the r = 0.30 threshold for both regions simultaneously, indicating a shared and robust warming signal at the late-season windows.
+
+## Time-series plots of top trending features
+
+The 12 features with the strongest temporal drift across both regions, plotted against year with a loess smooth to show the direction and pace of change.
+
+```{r feat-trends-ts, fig.height=9}
+top12 <- cor_year_df %>% slice_head(n = 12) %>% pull(feature)
+
+# Long format with both regions
+rdd_long <- rdd %>%
+  select(year, all_of(top12)) %>%
+  pivot_longer(-year, names_to = "feature", values_to = "value") %>%
+  mutate(region = "RDD")
+
+rvv_long <- rvv %>%
+  select(year, all_of(top12)) %>%
+  pivot_longer(-year, names_to = "feature", values_to = "value") %>%
+  mutate(region = "RVV")
+
+feat_long <- bind_rows(rdd_long, rvv_long) %>%
+  left_join(feat_meta %>% select(feature, label), by = "feature") %>%
+  mutate(label = str_wrap(label, 28))
+
+ggplot(feat_long, aes(year, value, colour = region)) +
+  geom_point(size = 0.9, alpha = 0.55) +
+  geom_smooth(method = "loess", span = LOESS_SPAN, se = FALSE, linewidth = 1.1) +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~label, scales = "free_y", ncol = 3) +
+  labs(
+    title    = "Top trending climate features over time",
+    subtitle = "Points = annual observations  |  Curves = LOWESS smooth",
+    x        = "Year",
+    y        = "Feature value",
+    colour   = "Region"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    legend.position  = "top",
+    strip.text       = element_text(face = "bold", size = 8.5),
+    axis.text        = element_text(size = 8),
+    panel.grid.minor = element_blank()
+  )
+```
+
+---
+
+The time-series plots reveal three distinct patterns. Temperature features (Tmean at Harvest, Start of Maturity, and Flowering) show clear, sustained upward trends for both regions, with RVV exhibiting a more pronounced rise from the 1980s onwards. Cold days during Flowering (Days Tmean < 15°C) are declining from roughly 5–6 days per window in the 1930s–1940s toward near-zero in recent decades — fewer cold interruptions during the vine's most yield-sensitive window. Wet days at Harvest are declining for RDD (r ≈ −0.20 with year) but show essentially no trend for RVV (r ≈ −0.04). The Leaf Area Index at Harvest for RVV shows an apparent U-shaped trajectory — low in the 1940s–1960s, dipping further in the 1970s–1980s, then rising from the 1990s onwards. **This U-shape is not a climatic or viticultural-practice signal** but an artefact of how IAF is generated upstream: the daily `Iaf` series in the source Excel is a deterministic, saturating bell-shape with two flat shelves (≈ 45 % of daily rows are exactly 0 outside the leaf-on season, ≈ 26 % are pinned at the species maximum during full canopy). Whether the harvest window catches the saturated plateau or the post-senescence drop is determined almost entirely by where harvest day sits relative to the model's fixed leaf-fall date — and harvest dates have shifted over time. The harvest-window IAF feature is therefore largely a proxy for `DOY_Hv` and should be interpreted with caution in the rule-mining results.
+
+## Interactive feature explorer
+
+Use the slicer below to pick one or more features and see the annual series for both regions overlaid in the same chart. Useful for quickly comparing any subset of the 60 engineered features without re-running code.
+
+> **Tip:** when comparing features with different units (e.g. Tmean in °C vs. Soil Water in mm vs. count of heat days), the y-axis scale will be dominated by the largest-magnitude one. Pick one feature at a time, or features that share units, for the cleanest read.
+
+```{r feat-explorer-data}
+# Build a long-format frame: one row per (region, year, feature). Uses the
+# full feature set (not just the top trending), so the slicer can reach any
+# of the 60 engineered features.
+feat_long_all <- bind_rows(
+  rdd %>% select(year, all_of(feat_cols)) %>%
+    pivot_longer(-year, names_to = "feature", values_to = "value") %>%
+    mutate(region = "RDD"),
+  rvv %>% select(year, all_of(feat_cols)) %>%
+    pivot_longer(-year, names_to = "feature", values_to = "value") %>%
+    mutate(region = "RVV")
+) %>%
+  left_join(feat_meta %>% select(feature, label, stage, year_off),
+            by = "feature") %>%
+  filter(!is.na(value)) %>%
+  arrange(label, region, year)
+```
+
+```{r feat-explorer-plot}
+# crosstalk shared data — the filter widget and the plotly chart bind to it,
+# so user selections in the dropdown filter the rows feeding the plot.
+shared_feat <- crosstalk::SharedData$new(
+  feat_long_all,
+  key   = ~paste(region, feature),
+  group = "feat_explore"
+)
+
+filter_feat <- crosstalk::filter_select(
+  id         = "feat_select",
+  label      = "Pick one or more features:",
+  sharedData = shared_feat,
+  group      = ~label,    # dropdown shows unique human-readable labels
+  multiple   = TRUE
+)
+
+p_explorer <- plot_ly(
+  shared_feat,
+  x         = ~year,
+  y         = ~value,
+  color     = ~region,
+  colors    = c(RDD = COL_RDD, RVV = COL_RVV),
+  split     = ~paste(region, " — ", label),  # one trace per region × feature
+  type      = "scatter",
+  mode      = "lines+markers",
+  hoverinfo = "text",
+  text      = ~paste0(
+                "Region: ",  region,
+                "<br>Feature: ", label,
+                "<br>Year: ",    year,
+                "<br>Value: ",   signif(value, 4)
+              )
+) %>%
+  layout(
+    title  = list(
+      text = "<b>Feature explorer</b><br><sub>Pick features in the slicer to plot annual series for both regions</sub>",
+      x    = 0.02
+    ),
+    xaxis  = list(title = "Year"),
+    yaxis  = list(title = "Feature value"),
+    legend = list(orientation = "h", x = 0, y = -0.2),
+    margin = list(t = 80, b = 80)
+  ) %>%
+  config(displaylogo = FALSE)
+
+crosstalk::bscols(
+  widths = c(3, 9),
+  filter_feat,
+  p_explorer
+)
+```
+
+# Feature Distributions by Decade
+
+Decade-level violin + boxplot overlays reveal whether the **spread and shape** of a feature has changed, beyond just the mean. Widening violins suggest increasing year-to-year variability (greater climate extremes); shifts in the median line indicate directional change.
+
+## By phenological stage
+
+```{r decade-violins, fig.height=14}
+# Select up to 3 representative features per stage by highest |r| with year
+top_per_stage <- cor_year_df %>%
+  filter(!is.na(stage)) %>%
+  group_by(stage) %>%
+  slice_max(abs_mean, n = 3) %>%
+  ungroup()
+
+selected_feats <- top_per_stage$feature
+
+# Build long frame — combine both regions
+build_decade_long <- function(df, reg, feats) {
+  df %>%
+    select(year, decade, all_of(feats)) %>%
+    pivot_longer(all_of(feats), names_to = "feature", values_to = "value") %>%
+    mutate(region = reg)
+}
+
+decade_long <- bind_rows(
+  build_decade_long(rdd, "RDD", selected_feats),
+  build_decade_long(rvv, "RVV", selected_feats)
+) %>%
+  left_join(feat_meta %>% select(feature, label, stage), by = "feature") %>%
+  mutate(
+    label = str_wrap(label, 32),
+    stage = factor(stage, levels = c("bb", "fl", "sm", "hv"),
+                   labels = stage_labels_nice)
+  )
+
+ggplot(decade_long, aes(decade, value, fill = region)) +
+  geom_violin(alpha = 0.35, trim = TRUE, position = position_dodge(0.85)) +
+  geom_boxplot(width = 0.15, outlier.size = 0.8, alpha = 0.8,
+               position = position_dodge(0.85)) +
+  scale_fill_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  facet_wrap(~label, scales = "free_y", ncol = 2) +
+  labs(
+    title    = "Feature distributions by decade",
+    subtitle = "Violin = full distribution  |  Box = median and IQR  |  3 features per phenological stage",
+    x        = "Decade",
+    y        = "Feature value",
+    fill     = "Region"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    legend.position  = "top",
+    strip.text       = element_text(face = "bold", size = 9),
+    axis.text.x      = element_text(angle = 35, hjust = 1, size = 8),
+    panel.grid.minor = element_blank()
+  )
+```
+
+The violin plots confirm and extend the time-series observations. Temperature features at all stages show a rightward shift across decades — systematic warming that is more pronounced in the Harvest and Bud Break windows. The most striking feature-level change is in Days Tmean < 15°C at Flowering: distributions that spanned 0–12 days in the 1930s–1940s have compressed to near-zero in recent decades, reflecting warmer springs with minimal cold interruptions during the flowering window. Frost days at Bud Break remain close to zero throughout, but occasional extremes persist as outliers even in the most recent decades, suggesting frost risk has not disappeared despite earlier mean bud break. The Leaf Area Index features show structurally different distributions between RDD (consistently lower) and RVV (consistently higher), reflecting the different canopy architecture and vineyard management in the two regions — a between-region difference that the modelling pipeline must account for when applying rules discovered in one region to another.
+
+---
+
+# Feature–Target Correlations
+
+## Correlation with raw vs detrended Wine_mhl
+
+High correlation with the **raw** target may partly reflect the shared time trend. Correlations with **detrended residuals** are more informative: they capture genuine year-to-year climate–yield relationships after accounting for the structural upward drift in production.
+
+```{r target-corr}
+# Compute detrended residuals
+tr_rdd <- get_trend_residuals(rdd, method = DETREND_M, verbose = FALSE)
+tr_rvv <- get_trend_residuals(rvv, method = DETREND_M, verbose = FALSE)
+
+rdd$resid <- tr_rdd$residuals
+rvv$resid <- tr_rvv$residuals
+
+# Correlations with raw and detrended target
+cor_target <- feat_cols %>%
+  set_names() %>%
+  map_dfr(function(f) {
+    tibble(
+      feature    = f,
+      rdd_raw    = cor(rdd[[f]], rdd$Wine_mhl, use = "complete.obs"),
+      rdd_detr   = cor(rdd[[f]], rdd$resid,    use = "complete.obs"),
+      rvv_raw    = cor(rvv[[f]], rvv$Wine_mhl, use = "complete.obs"),
+      rvv_detr   = cor(rvv[[f]], rvv$resid,    use = "complete.obs")
+    )
+  }) %>%
+  left_join(feat_meta %>% select(feature, label, stage, year_off, metric),
+            by = "feature") %>%
+  mutate(
+    abs_rdd_detr = abs(rdd_detr),
+    abs_rvv_detr = abs(rvv_detr),
+    abs_mean_detr = (abs_rdd_detr + abs_rvv_detr) / 2
+  ) %>%
+  arrange(desc(abs_mean_detr))
+```
+
+## Top 20 features by correlation with detrended production
+
+```{r corr-bar, fig.height=7}
+top20_detr <- cor_target %>% slice_head(n = 20)
+
+# Raw vs detrended comparison
+top20_long <- top20_detr %>%
+  select(label, stage, rdd_raw, rdd_detr, rvv_raw, rvv_detr) %>%
+  pivot_longer(-c(label, stage),
+               names_to  = c("region", "target"),
+               names_sep = "_",
+               values_to = "r") %>%
+  mutate(
+    target = dplyr::recode(target, raw = "Raw Wine_mhl", detr = "Detrended residuals"),
+    label  = fct_reorder(label, abs(r), .fun = max)
+  )
+
+ggplot(top20_long %>% filter(target == "Detrended residuals"),
+       aes(r, label, fill = region)) +
+  geom_col(position = position_dodge(0.75), width = 0.65, alpha = 0.88) +
+  geom_vline(xintercept = 0, colour = "grey50") +
+  geom_vline(xintercept = c(-0.3, 0.3), colour = "grey80", linetype = "dashed") +
+  scale_fill_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  labs(
+    title    = "Top 20 features — correlation with detrended Wine_mhl",
+    subtitle = "Dashed lines at r = ±0.30  |  Positive = above-trend production in high-value years",
+    x        = "Pearson r with detrended residuals",
+    y        = NULL,
+    fill     = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position        = "top",
+    panel.grid.major.y     = element_blank(),
+    axis.text.y            = element_text(size = 9)
+  )
+```
+
+The top predictors are not identical across regions; the two stories are similar in direction but differ in which window dominates.
+
+For **RVV** the single strongest signal in the dataset is **Soil Water at Flowering (current year)** with r ≈ −0.48, closely followed by Rainfall at Flowering (current year) at r ≈ −0.35 and Wet days at Flowering at r ≈ −0.34. The interpretation is straightforward: years with high moisture during the flowering window have below-trend production, consistent with excess moisture promoting vegetative growth, disease pressure (botrytis, downy mildew), and berry dilution that directly suppresses yield. Temperature at Flowering (current year) and Rainfall at Harvest (current year) appear with smaller positive correlations (r ≈ +0.25 and +0.27).
+
+For **RDD** the strongest signal is **Soil Water at Harvest (current year)** at r ≈ −0.33, with several Flowering-window moisture features (soil water, wet days, rainfall) following at |r| ≈ 0.27–0.30. RDD's flowering-window moisture signal is therefore present but less dominant than in RVV, and the harvest-window soil-water signal is the leading one. Temperature at Flowering (previous year) is the main positive contributor at r ≈ +0.26.
+
+Combined, the regions agree on the **direction** — flowering-window moisture is broadly yield-suppressing, late-season warmth and selective harvest-window moisture are broadly yield-supporting — but they differ in which window contributes the strongest single feature. This regional asymmetry is a hint that any rule-learner will likely learn somewhat different rules in each region rather than a single shared rule set.
+
+## Raw vs detrended correlation comparison
+
+Comparing the two correlation sets reveals which features were "inflated" by the shared time trend and which have genuine climate–yield signal.
+
+```{r corr-raw-vs-detr, fig.height=5.5}
+# Scatter: raw vs detrended correlation for each region
+p_rdd <- cor_target %>%
+  ggplot(aes(rdd_raw, rdd_detr,
+             colour = stage, label = metric)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_vline(xintercept = 0, colour = "grey70") +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", colour = "grey60") +
+  geom_point(size = 2.2, alpha = 0.75) +
+  scale_colour_manual(values = stage_colours,
+                      labels = stage_labels_nice,
+                      na.value = "grey60") +
+  coord_cartesian(xlim = c(-0.7, 0.7), ylim = c(-0.7, 0.7)) +
+  labs(
+    title  = "RDD",
+    x      = "r  with raw Wine_mhl",
+    y      = "r  with detrended residuals",
+    colour = "Stage"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none")
+
+p_rvv <- cor_target %>%
+  ggplot(aes(rvv_raw, rvv_detr,
+             colour = stage, label = metric)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_vline(xintercept = 0, colour = "grey70") +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", colour = "grey60") +
+  geom_point(size = 2.2, alpha = 0.75) +
+  scale_colour_manual(values = stage_colours,
+                      labels = stage_labels_nice,
+                      na.value = "grey60") +
+  coord_cartesian(xlim = c(-0.7, 0.7), ylim = c(-0.7, 0.7)) +
+  labs(
+    title  = "RVV",
+    x      = "r  with raw Wine_mhl",
+    y      = "r  with detrended residuals",
+    colour = "Stage"
+  ) +
+  theme_minimal(base_size = 12)
+
+p_rdd + p_rvv +
+  plot_annotation(
+    title    = "Raw vs detrended correlations — all features",
+    subtitle = "Points below the diagonal lost correlation after detrending (time-trend artefact)\nPoints above the diagonal gained — masked by opposing trend",
+    theme    = theme(plot.title = element_text(face = "bold", size = 14))
+  )
+```
+
+For RDD, most points cluster near or slightly below the diagonal — the raw and detrended correlations are broadly similar, which is expected since RDD's production and most temperature features are both trending upward (a mild positive confound). For RVV the picture is more complex: production is declining while temperatures are rising, creating an implicit negative confound. Several harvest-stage temperature features (which have positive raw correlations in RDD) appear with different magnitudes after detrending in RVV, reflecting this opposing-trend effect. The net result is that the detrended correlations for RVV are less dominated by a single direction, and the genuine climate signal is more evenly distributed across stages.
+
+## Correlation by phenological stage
+
+Which vine growth stage is most informative for predicting production? Stage-level aggregation gives a cleaner picture than individual features, since it averages over the quantile and window-size variants within each stage.
+
+```{r corr-by-stage, fig.height=4.5}
+cor_target %>%
+  filter(!is.na(stage)) %>%
+  select(stage, rdd_detr, rvv_detr) %>%
+  pivot_longer(-stage, names_to = "region", values_to = "r") %>%
+  mutate(region = dplyr::recode(region, rdd_detr = "RDD", rvv_detr = "RVV")) %>%
+  ggplot(aes(stage, abs(r), colour = region)) +
+  geom_jitter(width = 0.15, size = 2, alpha = 0.55) +
+  stat_summary(fun = median, geom = "crossbar",
+               aes(group = region),
+               position = position_dodge(0.4),
+               width = 0.35, linewidth = 0.8) +
+  scale_colour_manual(values = c(RDD = COL_RDD, RVV = COL_RVV)) +
+  scale_x_discrete(labels = stage_labels_nice) +
+  labs(
+    title    = "Absolute correlation with detrended Wine_mhl — by phenological stage",
+    subtitle = "Points = individual features  |  Bar = median |r| per stage",
+    x        = "Phenological stage",
+    y        = "|r| with detrended residuals",
+    colour   = "Region"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "top")
+```
+
+The Flowering stage shows the highest median |r| with detrended production in both regions (approximately 0.20–0.25), followed by Harvest. Bud Break has the lowest median correlation, and Start of Maturity sits between the two extremes. This stage-level ranking is broadly consistent with agronomic knowledge: the flowering window is the primary determinant of berry set and therefore potential yield, while harvest conditions affect final berry composition. The relatively lower predictive power of Bud Break despite its stronger temporal drift reinforces the finding from section 2.4 — earlier timing per se is less important than the quality of conditions within each window.
+
+---
+
+# Key Takeaways {.unnumbered}
+
+**Production trends are opposite across regions.** RDD shows a positive long-term growth trajectory (roughly doubling from 1930s to 2000s), while RVV shows a strong negative trend — declining from over 2 000 mhl in the mid-century peak to under 900 mhl today. Both trends must be removed before modelling to isolate climate-driven variability. For RDD, a linear detrend is adequate; for RVV, LOWESS is more appropriate given the non-linear plateau-then-decline structure.
+
+**The phenological calendar is shifting, with the late-season events shifting fastest.** All vine growth events are occurring earlier, but the rate is not uniform: Harvest moves at −0.19 d/yr (RDD) / −0.26 d/yr (RVV), Start of Maturity at −0.09 / −0.17, while Flowering and Bud Break advance roughly half as fast (−0.05 to −0.11 d/yr). The Start-of-Maturity → Harvest phase has shortened significantly in both regions, while Bud-Break → Flowering is statistically unchanged — the warming signal is concentrated in the ripening window, not the early-season one. Despite these shifts, the *timing* of events is only weakly predictive of production (|r| ≤ 0.31 across all events and regions); the informative signal lies in the climate conditions within the windows around those events.
+
+**Climate itself is trending at the late-season windows.** Temperature features at Harvest and Start of Maturity show moderate correlations with year (RDD r ≈ 0.27–0.41 at the windows where the signal is present; RVV r ≈ 0.23–0.40), confirming that the input feature space is not stationary at those windows. Cold days during Flowering are declining sharply in both regions. Wet-day trends at end-of-season are not uniform: RDD shows a clear decline at Harvest (r ≈ −0.20) and a *positive* trend at Start of Maturity (r ≈ +0.20); RVV shows essentially no Harvest trend and a mild decline at Start of Maturity. The shared cross-region signal is therefore late-season warming, not a uniform end-of-season drying.
+
+**Flowering-window moisture is the dominant predictive signal in RVV; in RDD the harvest-window soil-water signal is comparable.** After detrending, Soil Water at Flowering (current year) is the single strongest predictor in RVV (r ≈ −0.48), with the same direction confirmed by Rainfall at Flowering and Wet days at Flowering. Excess moisture in this critical window suppresses yield through disease pressure and berry dilution. In RDD the leading single feature is Soil Water at Harvest (r ≈ −0.33), with Flowering-window moisture features slightly behind at |r| ≈ 0.27–0.30. Both regions agree on the direction (flowering moisture is yield-suppressing); they differ on which window contributes the strongest single feature.
+
+**Flowering is the most informative phenological stage** for prediction in both regions, followed by Harvest. Bud Break, which has the *slowest* temporal drift (not the fastest, despite an earlier framing in the literature), also contributes the least predictive signal at the stage level.
+
+---
+
+*Generated with `eda_wine_production.Rmd`. Knit in RStudio from the project root.*

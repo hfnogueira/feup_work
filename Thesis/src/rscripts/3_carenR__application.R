@@ -1,7 +1,6 @@
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #                       carenR algorithm application
 #                       by:  hugonogueira
-#                       at:  Fri May 12 13:47:05 2023
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -18,25 +17,10 @@ library(gt)
 
 
 # config ---------------------------------------------------------------------------------
+# Shared params (detrend, detrend_method, loess_span) come from utils/config.R.
+# Change them THERE — they propagate to every pipeline script.
 
-# Set to TRUE to remove the long-term production trend before running CarenR.
-# When TRUE, CarenR rules describe climate conditions associated with
-# above/below-TREND years (deviation from expected era production).
-# When FALSE, rules describe above/below the all-time mean (original behaviour).
-detrend <- TRUE
-
-# Detrending method — only used when detrend = TRUE.
-#   "linear"  : remove a fitted straight line  (original behaviour)
-#   "lowess"  : remove a locally-weighted smooth trend (loess)
-# Must match the detrend_method set in scripts 4, 6, and 7 so all analyses
-# share the same target definition.
-detrend_method <- "linear"   # ← switch to "lowess" for LOWESS comparison
-
-# LOWESS smoothing span (fraction of points used in each local fit).
-# Only used when detrend_method = "lowess". Default 0.75 gives a smooth trend.
-# Keep fixed across all scripts.
-loess_span <- 0.75
-
+source("src/rscripts/utils/config.R")
 source("src/rscripts/utils/detrend_utils.R")
 
 
@@ -173,14 +157,29 @@ plot.drs(drs, st = rule, n = 1, m = 1)   # st = rule index you want
 # File name encodes region AND detrend method so both runs can coexist.
 
 if (detrend) {
-  rules_out_dir  <- 'distribution_rules'
+  # Save CarenR rules alongside the RIPPER / M5Rules outputs so all model
+  # artefacts for a given detrend method live in one folder.
+  rules_out_dir  <- file.path('data', detrend_method)
   if (!dir.exists(rules_out_dir)) dir.create(rules_out_dir, recursive = TRUE)
 
   rules_out_file <- file.path(rules_out_dir,
                               paste0('RulesTemp_', tolower(region),
                                      '_', detrend_method, '.csv'))
 
-  write.csv2(drs, rules_out_file, row.names = FALSE)
+  # write.table with sep=";" dec="." matches the format load_carenr_rules() in
+  # script 6 expects: read.csv(path, sep = ";", dec = ".", ...).
+  # Convert any list-type columns (e.g. Subgroup from Dist = TRUE) to
+  # character so write.table can serialize them.
+  drs_save <- drs
+  for (col in names(drs_save)) {
+    if (is.list(drs_save[[col]])) {
+      drs_save[[col]] <- sapply(drs_save[[col]],
+                                function(x) paste(as.character(x), collapse = "|"),
+                                USE.NAMES = FALSE)
+    }
+  }
+  write.table(drs_save, rules_out_file, sep = ";", dec = ".",
+              row.names = FALSE, quote = FALSE)
   cat('\nDistribution rules saved to:', rules_out_file, '\n')
   cat('Script 6 will load this file when detrend_method = "', detrend_method, '".\n\n', sep = '')
 }
