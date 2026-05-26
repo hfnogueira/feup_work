@@ -1,0 +1,2 @@
+"region","detrend_method","model","accuracy","macro_precision","macro_recall","macro_f1"
+"RVV","linear","RIPPER",0.275,0.2492,0.2726,0.2561

@@ -1,0 +1,43 @@
+RIPPER Rules — RVV 
+Generated     : 2026-05-22 00:41 
+Detrend method: linear 
+Target classes: Low / Medium / High 
+Thresholds (mhl): -1442.47 | -219.83 | 120.4 | 1611.48 
+
+=== Rules ===
+JRIP rules:
+===========
+
+(iaf_fl_y0_a10 >= 2.40493) and (tm_bb_y0_a30 >= 13.341667) and (rf_fl_y1_a10 <= 15.9) => Wine_class=Medium (13.0/1.0)
+(tm_fl_y1_b10 >= 19.26) and (iaf_fl_y1_b10 >= 2.203642) => Wine_class=Medium (9.0/1.0)
+(swa_fl_y1_a30 <= 123.564982) and (tm_fl_y1_c15 >= 16.606667) => Wine_class=High (21.0/3.0)
+ => Wine_class=Low (37.0/12.0)
+
+Number of Rules : 4
+
+
+=== Cross-Validation ( 10 folds) ===
+=== 10 Fold Cross Validation ===
+
+=== Summary ===
+
+Correctly Classified Instances          22               27.5    %
+Incorrectly Classified Instances        58               72.5    %
+Kappa statistic                         -0.0905
+K&B Relative Info Score                  2.0899 %
+K&B Information Score                    2.6579 bits      0.0332 bits/instance
+Class complexity | order 0             127.1781 bits      1.5897 bits/instance
+Class complexity | scheme             2313.543  bits     28.9193 bits/instance
+Complexity improvement     (Sf)      -2186.3649 bits    -27.3296 bits/instance
+Mean absolute error                      0.4684
+Root mean squared error                  0.5433
+Relative absolute error                105.2341 %
+Root relative squared error            115.0648 %
+Total Number of Instances               80     
+
+=== Confusion Matrix ===
+
+  a  b  c   <-- classified as
+ 11  7  9 |  a = Low
+ 12  2 12 |  b = Medium
+ 12  6  9 |  c = High

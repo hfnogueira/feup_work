@@ -1,0 +1,106 @@
+Decision Tree Rules — RVV
+Generated : 2026-05-25 21:26
+Detrend   : linear
+step_years: 1
+dt_cp     : 0.01  |  dt_minsplit: 10
+
+Note: predictions are in RESIDUAL units (mhl deviation from trend).
+Positive = above-trend  |  Negative = below-trend
+============================================================
+
+
+============================================================
+SCENARIO 1 — train: 64 obs (1942-2005)  test: 16 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 2 — train: 65 obs (1942-2006)  test: 15 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 3 — train: 66 obs (1942-2007)  test: 14 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 4 — train: 67 obs (1942-2008)  test: 13 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 5 — train: 68 obs (1942-2009)  test: 12 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 6 — train: 69 obs (1942-2010)  test: 11 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 7 — train: 70 obs (1942-2011)  test: 10 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 8 — train: 71 obs (1942-2012)  test: 9 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 9 — train: 72 obs (1942-2013)  test: 8 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 10 — train: 73 obs (1942-2014)  test: 7 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 11 — train: 74 obs (1942-2015)  test: 6 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 12 — train: 75 obs (1942-2016)  test: 5 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 13 — train: 76 obs (1942-2017)  test: 4 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 14 — train: 77 obs (1942-2018)  test: 3 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 15 — train: 78 obs (1942-2019)  test: 2 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 16 — train: 79 obs (1942-2020)  test: 1 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+

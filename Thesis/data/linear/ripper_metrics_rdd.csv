@@ -1,0 +1,2 @@
+"region","detrend_method","model","accuracy","macro_precision","macro_recall","macro_f1"
+"RDD","linear","RIPPER",0.4205,0.4145,0.4184,0.4039

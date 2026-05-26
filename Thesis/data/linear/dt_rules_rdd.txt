@@ -1,0 +1,118 @@
+Decision Tree Rules — RDD
+Generated : 2026-05-25 10:16
+Detrend   : linear
+step_years: 1
+dt_cp     : 0.01  |  dt_minsplit: 10
+
+Note: predictions are in RESIDUAL units (mhl deviation from trend).
+Positive = above-trend  |  Negative = below-trend
+============================================================
+
+
+============================================================
+SCENARIO 1 — train: 71 obs (1934-2004)  test: 18 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 2 — train: 72 obs (1934-2005)  test: 17 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 3 — train: 73 obs (1934-2006)  test: 16 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 4 — train: 74 obs (1934-2007)  test: 15 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 5 — train: 75 obs (1934-2008)  test: 14 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 6 — train: 76 obs (1934-2009)  test: 13 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 7 — train: 77 obs (1934-2010)  test: 12 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 8 — train: 78 obs (1934-2011)  test: 11 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 9 — train: 79 obs (1934-2012)  test: 10 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 10 — train: 80 obs (1934-2013)  test: 9 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 11 — train: 81 obs (1934-2014)  test: 8 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 12 — train: 82 obs (1934-2015)  test: 7 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 13 — train: 83 obs (1934-2016)  test: 6 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 14 — train: 84 obs (1934-2017)  test: 5 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 15 — train: 85 obs (1934-2018)  test: 4 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 16 — train: 86 obs (1934-2019)  test: 3 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 17 — train: 87 obs (1934-2020)  test: 2 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+
+
+============================================================
+SCENARIO 18 — train: 88 obs (1934-2021)  test: 1 obs
+============================================================
+  [could not extract rules: subscript out of bounds]
+

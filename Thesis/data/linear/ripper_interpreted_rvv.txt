@@ -1,0 +1,58 @@
+============================================================
+RIPPER (JRip) Rules — RVV
+Detrending : YES (linear)
+Target     : Wine_mhl residuals (Low/Med/High relative to trend)
+Rules      : 4 (ordered — first match wins)
+============================================================
+
+HOW TO READ THESE RULES:
+  Rules are evaluated in order. For a given year, the FIRST rule
+  whose conditions are satisfied determines the predicted class.
+  The default rule (last) catches all years not covered above.
+  Precision = % of covered training years correctly classified.
+============================================================
+
+------------------------------------------------------------
+RULE 1  |  Support: 16.2%  (13 years)  |  Precision: 92.3%
+
+  WHEN:
+    • iaf_fl_y0_a10 > = 2.40493
+    • tm_bb_y0_a30 > = 13.341667
+    • rf_fl_y1_a10 < = 15.9
+
+  THEN wine production is:  MEDIUM production (-219.825 to 120.4 mhl from trend)
+
+  SUMMARY: In years when iaf_fl_y0_a10 > = 2.40493; and tm_bb_y0_a30 > = 13.341667; and rf_fl_y1_a10 < = 15.9, wine production tends to be medium.
+
+------------------------------------------------------------
+RULE 2  |  Support: 11.2%  (9 years)  |  Precision: 88.9%
+
+  WHEN:
+    • tm_fl_y1_b10 > = 19.26
+    • iaf_fl_y1_b10 > = 2.203642
+
+  THEN wine production is:  MEDIUM production (-219.825 to 120.4 mhl from trend)
+
+  SUMMARY: In years when tm_fl_y1_b10 > = 19.26; and iaf_fl_y1_b10 > = 2.203642, wine production tends to be medium.
+
+------------------------------------------------------------
+RULE 3  |  Support: 26.2%  (21 years)  |  Precision: 85.7%
+
+  WHEN:
+    • swa_fl_y1_a30 < = 123.564982
+    • tm_fl_y1_c15 > = 16.606667
+
+  THEN wine production is:  HIGH production (above 120.4 mhl above trend)
+
+  SUMMARY: In years when swa_fl_y1_a30 < = 123.564982; and tm_fl_y1_c15 > = 16.606667, wine production tends to be high.
+
+------------------------------------------------------------
+RULE 4  (DEFAULT — covers all remaining years)
+
+  WHEN:
+    • (no conditions — applies to all remaining years)
+
+  THEN wine production is:  LOW production (below -219.825 mhl below trend)
+
+  SUMMARY: In years when (no conditions — applies to all remaining years), wine production tends to be low.
+

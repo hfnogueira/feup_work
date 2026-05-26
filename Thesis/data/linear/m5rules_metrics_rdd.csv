@@ -1,0 +1,2 @@
+"region","detrend_method","model","cv_mae","cv_rmse","cv_r2","note"
+"RDD","linear","M5Rules",183.3822,240.4298,0.0036,"metrics in residual units"

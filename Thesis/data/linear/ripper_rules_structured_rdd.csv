@@ -1,0 +1,5 @@
+"rule_index","is_default","conditions_raw","predicted_class","n_covered","n_errors","support_pct","precision_pct","threshold_low_med","threshold_med_high","target_detrended","region","detrend_method"
+1,FALSE,"(tm_hv_y1_c10 >= 21.168182) and (tm_hv_y1_c10 <= 22.804545)","Medium",19,5,21.3,73.7,-140.648,93.395,TRUE,"RDD","linear"
+2,FALSE,"(iaf_bb_y1_c10 >= 0.001565) and (tm_hv_y1_b20 >= 23.1025)","High",17,4,19.1,76.5,-140.648,93.395,TRUE,"RDD","linear"
+3,FALSE,"(tm.days.less.15_fl_y1_b15 <= 3) and (tm_hv_y1_b20 <= 21.2975)","High",6,0,6.7,100,-140.648,93.395,TRUE,"RDD","linear"
+4,TRUE,"(default)","Low",46,20,51.7,56.5,-140.648,93.395,TRUE,"RDD","linear"

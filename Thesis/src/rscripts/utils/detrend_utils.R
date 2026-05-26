@@ -64,20 +64,42 @@ fit_trend <- function(train_df, method = "linear", span = 0.75) {
 # Predicts the trend value at each row of newdata.
 # Works for both lm and loess objects returned by fit_trend().
 #
-# Note on loess extrapolation: when newdata$year falls outside the training
-# range, loess extrapolates linearly from the nearest edge points.
-# In walk-forward CV (test year = train_max + 1) this is always a one-step
-# extrapolation, which is acceptable.
+# For loess: R's predict.loess() returns NA for years outside the training
+# range. We handle this with linear extrapolation from the boundary: fit a
+# short OLS line through the last `extrap_tail` fitted training values and
+# project forward. This is conservative (smooth trend continues linearly)
+# and correct for one-step-ahead walk-forward CV.
 #
 # Arguments:
-#   trend_model  Object returned by fit_trend()
-#   newdata      data.frame with column 'year' (numeric or factor)
+#   trend_model   Object returned by fit_trend()
+#   newdata       data.frame with column 'year' (numeric or factor)
+#   extrap_tail   Number of tail training points used to estimate the
+#                 extrapolation slope (loess only). Default 5.
 #
 # Returns: numeric vector, length == nrow(newdata)
 
-apply_trend <- function(trend_model, newdata) {
-  nd <- data.frame(year = as.numeric(as.character(newdata$year)))
-  as.numeric(predict(trend_model, newdata = nd))
+apply_trend <- function(trend_model, newdata, extrap_tail = 5) {
+  nd   <- data.frame(year = as.numeric(as.character(newdata$year)))
+  pred <- as.numeric(predict(trend_model, newdata = nd))
+
+  # loess: fill NAs (out-of-range years) with linear extrapolation
+  if (inherits(trend_model, "loess") && any(is.na(pred))) {
+    # Recover training years + fitted values from the loess object
+    train_years  <- as.numeric(trend_model$x)
+    train_fitted <- as.numeric(fitted(trend_model))
+
+    # Use the last extrap_tail points to estimate slope at the boundary
+    n_tail  <- min(extrap_tail, length(train_years))
+    tail_yr <- tail(train_years,  n_tail)
+    tail_ft <- tail(train_fitted, n_tail)
+    slope   <- coef(lm(tail_ft ~ tail_yr))[["tail_yr"]]
+    intercept_val <- tail(tail_ft, 1) - slope * tail(tail_yr, 1)
+
+    na_idx       <- which(is.na(pred))
+    pred[na_idx] <- intercept_val + slope * nd$year[na_idx]
+  }
+
+  pred
 }
 
 

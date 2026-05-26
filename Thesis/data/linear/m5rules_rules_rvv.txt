@@ -1,0 +1,64 @@
+M5Rules — RVV 
+Generated     : 2026-05-22 00:41 
+Detrend method: linear 
+Target        : Wine_mhl (residuals) 
+
+=== Naive Baseline ===
+MAE: 412.89 | RMSE: 544.38 
+
+=== Discovered Rules ===
+M5 pruned model rules 
+(using smoothed linear models) :
+Number of Rules : 3
+
+Rule: 1
+IF
+	swa_fl_y1_a15 > 131.364
+THEN
+
+Wine_mhl = 
+	-13.2577 * tm_fl_y0_b10 
+	- 40.7199 * tm_fl_y0_a10 
+	+ 17.1571 * tm_sm_y0_a20 
+	- 24.8711 * tm_hv_y1_b20 
+	- 2063.7854 * iaf_bb_y1_c10 
+	- 8.1184 * swa_fl_y1_a30 
+	+ 2419.7711 [41/67.641%]
+
+Rule: 2
+IF
+	tm_hv_y1_b20 > 16.764
+THEN
+
+Wine_mhl = 
+	24.1079 * tm_fl_y1_c15 
+	- 24.0915 * tm_fl_y0_b10 
+	+ 46.6995 * tm_sm_y0_a20 
+	- 49.5548 * tm_hv_y1_b20 
+	+ 5.1021 * rf_hv_y0_a10 
+	- 1.7369 * swa_hv_y1_b20 
+	+ 227.8692 [31/73.261%]
+
+Rule: 3
+
+Wine_mhl = 
+	-151.6016 * tm_fl_y0_b10 
+	+ 3455.2925 [8/59.917%]
+
+
+
+=== Training Performance ===
+MAE: 269.23 | RMSE: 354.8 | R2: 0.575 
+
+=== Cross-Validation ( 10 folds) ===
+=== 10 Fold Cross Validation ===
+
+=== Summary ===
+
+Correlation coefficient                  0.278 
+Mean absolute error                    440.0765
+Root mean squared error                576.3489
+Relative absolute error                104.3729 %
+Root relative squared error            103.4446 %
+Total Number of Instances               80     
+R2 (CV): -0.07 

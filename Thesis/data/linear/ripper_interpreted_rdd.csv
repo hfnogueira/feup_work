@@ -1,0 +1,8 @@
+"rule_rank","predicted_class","support_pct","precision_pct","n_covered","is_default","n_conditions","sentences","features","condition_3","raw_conditions"
+1,"Medium",21.3,73.7,19,FALSE,2,"tm_hv_y1_c10 > = 21.168182","tm_hv_y1_c10 >",NA,"(tm_hv_y1_c10 >= 21.168182) and (tm_hv_y1_c10 <= 22.804545)"
+1,"Medium",21.3,73.7,19,FALSE,2,"tm_hv_y1_c10 < = 22.804545","tm_hv_y1_c10 <",NA,"(tm_hv_y1_c10 >= 21.168182) and (tm_hv_y1_c10 <= 22.804545)"
+2,"High",19.1,76.5,17,FALSE,2,"iaf_bb_y1_c10 > = 0.001565","iaf_bb_y1_c10 >",NA,"(iaf_bb_y1_c10 >= 0.001565) and (tm_hv_y1_b20 >= 23.1025)"
+2,"High",19.1,76.5,17,FALSE,2,"tm_hv_y1_b20 > = 23.1025","tm_hv_y1_b20 >",NA,"(iaf_bb_y1_c10 >= 0.001565) and (tm_hv_y1_b20 >= 23.1025)"
+3,"High",6.7,100,6,FALSE,2,"tm.days.less.15_fl_y1_b15 < = 3","tm.days.less.15_fl_y1_b15 <",NA,"(tm.days.less.15_fl_y1_b15 <= 3) and (tm_hv_y1_b20 <= 21.2975)"
+3,"High",6.7,100,6,FALSE,2,"tm_hv_y1_b20 < = 21.2975","tm_hv_y1_b20 <",NA,"(tm.days.less.15_fl_y1_b15 <= 3) and (tm_hv_y1_b20 <= 21.2975)"
+4,"Low",51.7,56.5,46,TRUE,2,"(no conditions — applies to all remaining years)",NA,NA,"(default)"
