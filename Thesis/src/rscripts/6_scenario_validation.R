@@ -354,6 +354,73 @@ make_caren_intervals <- function(values, breaks) {
 }
 
 
+# --- Supervised cut-point finder ---------------------------------------------
+# Finds n_bins-1 interior cut points for a continuous feature x that maximise
+# the between-group sum-of-squares of target y (training residuals).
+# Uses greedy binary recursive splitting — equivalent to fitting a 1-D
+# decision stump chain.  Cut points are derived entirely from training data,
+# so applying them inside the scenario loop avoids data leakage.
+#
+# Arguments:
+#   x        — numeric feature vector (training observations)
+#   y        — numeric target vector (training residuals, same length as x)
+#   n_bins   — number of bins to produce (default 3 → two cut points)
+#   min_obs  — minimum observations required on each side of a split
+# Returns a numeric vector of n_bins-1 cut points.
+
+find_supervised_cuts <- function(x, y, n_bins = 3, min_obs = 5) {
+  x <- as.numeric(x);  y <- as.numeric(y)
+  ok <- !is.na(x) & !is.na(y);  x <- x[ok];  y <- y[ok]
+
+  # Fallback: not enough data → equal-frequency quantile cuts
+  if (length(x) < 2 * min_obs)
+    return(as.numeric(quantile(x, seq_len(n_bins - 1) / n_bins)))
+
+  best_split <- function(xv, yv) {
+    cands      <- sort(unique(xv));  cands <- cands[-length(cands)]
+    if (length(cands) == 0) return(NA_real_)
+    grand_mean <- mean(yv)
+    scores <- vapply(cands, function(t) {
+      lo <- yv[xv <= t];  hi <- yv[xv > t]
+      if (length(lo) < min_obs || length(hi) < min_obs) return(-Inf)
+      # Between-group SS (proportional to variance reduction)
+      length(lo) * (mean(lo) - grand_mean)^2 +
+        length(hi) * (mean(hi) - grand_mean)^2
+    }, numeric(1))
+    if (all(is.infinite(scores))) return(NA_real_)
+    cands[which.max(scores)]
+  }
+
+  if (n_bins == 2) {
+    t1 <- best_split(x, y)
+    return(if (is.na(t1)) as.numeric(quantile(x, 0.5)) else t1)
+  }
+
+  # Two cuts for 3 bins: first globally best, then best inside one segment
+  t1 <- best_split(x, y)
+  if (is.na(t1)) return(as.numeric(quantile(x, c(1/3, 2/3))))
+
+  lo_m <- x <= t1;  hi_m <- !lo_m
+  t2_lo <- if (sum(lo_m) >= 2 * min_obs) best_split(x[lo_m], y[lo_m]) else NA_real_
+  t2_hi <- if (sum(hi_m) >= 2 * min_obs) best_split(x[hi_m], y[hi_m]) else NA_real_
+
+  score_gain <- function(t, xv, yv) {
+    if (is.na(t)) return(-Inf)
+    lo <- yv[xv <= t];  hi <- yv[xv > t]
+    if (length(lo) < min_obs || length(hi) < min_obs) return(-Inf)
+    gm <- mean(yv)
+    length(lo) * (mean(lo) - gm)^2 + length(hi) * (mean(hi) - gm)^2
+  }
+
+  t2 <- if (score_gain(t2_lo, x[lo_m], y[lo_m]) >=
+             score_gain(t2_hi, x[hi_m], y[hi_m])) t2_lo else t2_hi
+  if (is.na(t2))
+    t2 <- as.numeric(quantile(x, ifelse(mean(lo_m) >= 0.5, 1/3, 2/3)))
+
+  sort(c(t1, t2))
+}
+
+
 # --- Metrics ------------------------------------------------------------------
 
 compute_metrics <- function(actual, predicted) {
@@ -1235,6 +1302,77 @@ for (s in seq_along(train_ends)) {
   })
 
   # --------------------------------------------------------------------------
+  # 5l. CARENR_SUPERVISED — per-fold supervised discretization
+  #
+  #  Motivation: the pre-computed df_disc uses globally fixed equal-frequency
+  #  tertile cut points (fitted on all 80 years), causing two problems:
+  #    (a) Data leakage — test-year feature values influence the cut points.
+  #    (b) Unsupervised — bins ignore the production target entirely.
+  #
+  #  This variant fixes both:
+  #    1. Cut points are computed inside the scenario loop on training data ONLY.
+  #    2. Cuts are SUPERVISED: for each feature, greedy binary recursive
+  #       splitting maximises between-group SS of training residuals
+  #       (find_supervised_cuts above).  This places splits where features
+  #       best separate low-production from high-production years.
+  #    3. Feature selection: top-N by Pearson |r| (same as Sup_FS).
+  #
+  #  Prediction path is unchanged: parse_one_condition converts CAREN interval
+  #  strings back to numeric bounds, so rules are evaluated against continuous
+  #  test feature values — no test-set discretization needed.
+  # --------------------------------------------------------------------------
+
+  pred_caren_supervised <- tryCatch({
+
+    feat_cols <- setdiff(names(train_cont), c('year', 'Wine_mhl'))
+
+    # Feature selection: Pearson |r| on continuous training features
+    feat_cors <- sapply(feat_cols, function(col)
+      abs(cor(train_cont[[col]], train_residuals, use = 'complete.obs')))
+    feat_cors <- feat_cors[!is.na(feat_cors)]
+    top_feats <- names(sort(feat_cors, decreasing = TRUE))[seq_len(carenr_n_features)]
+
+    # Per-fold supervised discretization: cut points from training data + residuals
+    disc_train_sv <- data.frame(Wine_mhl = train_residuals)
+    for (feat in top_feats) {
+      cuts    <- find_supervised_cuts(train_cont[[feat]], train_residuals, n_bins = 3)
+      breaks  <- c(-Inf, cuts, Inf)
+      disc_train_sv[[feat]] <- as.factor(
+        make_caren_intervals(train_cont[[feat]], breaks))
+    }
+
+    drs_sv <- suppressMessages(suppressWarnings(
+      caren(disc_train_sv,
+            Dist     = TRUE,
+            POI      = 'Wine_mhl',
+            min.sup  = carenr_min_sup,
+            min.conf = carenr_min_conf)
+    ))
+
+    parsed_sv <- parse_drs(drs_sv)
+
+    n_rules_sv <- if (!is.null(parsed_sv$rules_df)) nrow(parsed_sv$rules_df) else 0
+    cat(sprintf('  [supervised] rules found: %d\n', n_rules_sv))
+
+    train_for_pred <- train_cont %>% mutate(Wine_mhl = train_residuals)
+
+    sapply(seq_len(n_test), function(j) {
+      test_obs_j          <- test_cont[j, , drop = FALSE]
+      test_obs_j$Wine_mhl <- 0
+      predict_carenr_dist(test_obs_j,
+                          train_for_pred,
+                          parsed_sv$rule_fns,
+                          carenr_strategy,
+                          carenr_min_subgroup,
+                          agg_fn = subgroup_agg)
+    }) + trend_offsets
+
+  }, error = function(e) {
+    cat('  [!] CarenR_Supervised failed on scenario', s, ':', conditionMessage(e), '\n')
+    rep(NA_real_, n_test)
+  })
+
+  # --------------------------------------------------------------------------
   # 6. M5RULES
   # --------------------------------------------------------------------------
 
@@ -1270,6 +1408,7 @@ for (s in seq_along(train_ends)) {
     CarenR_Dist_Conf       = pred_caren_dist_conf,
     CarenR_Dist_Stack      = pred_caren_dist_stack,
     CarenR_Dist_Sup_FS     = pred_caren_dist_sup_fs,
+    CarenR_Supervised      = pred_caren_supervised,
     M5Rules                = pred_m5
   )
 
