@@ -18,7 +18,21 @@ HOW TO READ THESE RULES:
 RULE 1  |  Support: 21.2%  (≈17 years)  |  p-value: 0.0198
 
   WHEN:
-    • swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -26,13 +40,21 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±568.77 mhl
     Distribution skewness    : 0.13 (symmetric)
 
-  SUMMARY: In years when swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 337.5 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 337.5 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 2  |  Support: 21.2%  (≈17 years)  |  p-value: 0.0216
 
   WHEN:
-    • tm_fl_y1_c15=[13.8|17.1)|tm_fl_y1_a10=[12.6|17.5)|sw.above.09fc in the 20 days after Flowering (previous year) is between 17.5 and 20
+    • Mean daily temperature in a 15-day window centred on Flowering (current year) is between 13.8 °C and 17.1 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days
+        → Near-saturation soil conditions promote vegetative growth and
+          disease, and can dilute berry sugars around harvest.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -40,13 +62,19 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±551.5 mhl
     Distribution skewness    : 0.97 (skewed)
 
-  SUMMARY: In years when tm_fl_y1_c15=[13.8|17.1)|tm_fl_y1_a10=[12.6|17.5)|sw.above.09fc in the 20 days after Flowering (previous year) is between 17.5 and 20, wine production tends to be 267.6 mhl below the long-term trend.
+  SUMMARY: In years when Mean daily temperature in a 15-day window centred on Flowering (current year) is between 13.8 °C and 17.1 °C; and Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C; and Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days, wine production tends to be 267.6 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 3  |  Support: 27.5%  (≈22 years)  |  p-value: 0.0294
 
   WHEN:
-    • swa_fl_y1_a15=[143|234]|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37
+    • Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -54,13 +82,22 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±467.02 mhl
     Distribution skewness    : -0.4 (symmetric)
 
-  SUMMARY: In years when swa_fl_y1_a15=[143|234]|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37, wine production tends to be 365.4 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days, wine production tends to be 365.4 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 4  |  Support: 25%  (≈20 years)  |  p-value: 0.0298
 
   WHEN:
-    • tm_bb_y0_a30=[11.2|13.5)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Mean daily temperature in the 30 days after Bud Break (previous year) is between 11.2 °C and 13.5 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days
+        → Impairs pollen viability and fertilisation during flowering —
+          directly reduces berry set and yield potential.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 ABOVE-TREND (positive)
@@ -68,13 +105,22 @@ ABOVE-TREND (positive)
     Std deviation in subgroup: ±711.72 mhl
     Distribution skewness    : -0.63 (skewed)
 
-  SUMMARY: In years when tm_bb_y0_a30=[11.2|13.5)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 310.8 mhl above the long-term trend.
+  SUMMARY: In years when Mean daily temperature in the 30 days after Bud Break (previous year) is between 11.2 °C and 13.5 °C; and Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 310.8 mhl above the long-term trend.
 
 ------------------------------------------------------------
 RULE 5  |  Support: 23.8%  (≈19 years)  |  p-value: 0.0299
 
   WHEN:
-    • tm_fl_y1_a10=[12.6|17.5)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|sw.above.09fc in the 20 days after Flowering (previous year) is between 17.5 and 20
+    • Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days
+        → Near-saturation soil conditions promote vegetative growth and
+          disease, and can dilute berry sugars around harvest.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -82,13 +128,22 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±400.75 mhl
     Distribution skewness    : -0.02 (symmetric)
 
-  SUMMARY: In years when tm_fl_y1_a10=[12.6|17.5)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|sw.above.09fc in the 20 days after Flowering (previous year) is between 17.5 and 20, wine production tends to be 292.4 mhl below the long-term trend.
+  SUMMARY: In years when Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days; and Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days, wine production tends to be 292.4 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 6  |  Support: 26.2%  (≈21 years)  |  p-value: 0.0356
 
   WHEN:
-    • rf_fl_y1_a10=[20.7|121]|iaf_hv_y1_c10=[1.29|2.52]|days.maxTemp.above.35 in the 10 days after Flowering (current year) is between 0 and 1.26
+    • Rainfall sum in the 10 days after Flowering (current year) is between 20.7 mm and 121 mm
+        → Total water input — dilution risk around flowering; disease
+          pressure and berry splitting risk around harvest.
+    • Leaf Area Index (IAF) in a 10-day window centred on Harvest (current year) is between 1.29 m²/m² and 2.52 m²/m²
+        → Proxy for canopy development and vine vigour — reflects
+          growth conditions and photosynthetic capacity.
+    • Heat-stress days (maximum temperature above 35°C) in the 10 days after Flowering (current year) is between 0 days and 1.26 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -96,13 +151,22 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±461.55 mhl
     Distribution skewness    : -0.35 (symmetric)
 
-  SUMMARY: In years when rf_fl_y1_a10=[20.7|121]|iaf_hv_y1_c10=[1.29|2.52]|days.maxTemp.above.35 in the 10 days after Flowering (current year) is between 0 and 1.26, wine production tends to be 386.7 mhl below the long-term trend.
+  SUMMARY: In years when Rainfall sum in the 10 days after Flowering (current year) is between 20.7 mm and 121 mm; and Leaf Area Index (IAF) in a 10-day window centred on Harvest (current year) is between 1.29 m²/m² and 2.52 m²/m²; and Heat-stress days (maximum temperature above 35°C) in the 10 days after Flowering (current year) is between 0 days and 1.26 days, wine production tends to be 386.7 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 7  |  Support: 26.2%  (≈21 years)  |  p-value: 0.0356
 
   WHEN:
-    • rf_fl_y1_a10=[20.7|121]|iaf_hv_y1_c10=[1.29|2.52]|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Rainfall sum in the 10 days after Flowering (current year) is between 20.7 mm and 121 mm
+        → Total water input — dilution risk around flowering; disease
+          pressure and berry splitting risk around harvest.
+    • Leaf Area Index (IAF) in a 10-day window centred on Harvest (current year) is between 1.29 m²/m² and 2.52 m²/m²
+        → Proxy for canopy development and vine vigour — reflects
+          growth conditions and photosynthetic capacity.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -110,13 +174,23 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±461.55 mhl
     Distribution skewness    : -0.35 (symmetric)
 
-  SUMMARY: In years when rf_fl_y1_a10=[20.7|121]|iaf_hv_y1_c10=[1.29|2.52]|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 386.7 mhl below the long-term trend.
+  SUMMARY: In years when Rainfall sum in the 10 days after Flowering (current year) is between 20.7 mm and 121 mm; and Leaf Area Index (IAF) in a 10-day window centred on Harvest (current year) is between 1.29 m²/m² and 2.52 m²/m²; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 386.7 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 8  |  Support: 22.5%  (≈18 years)  |  p-value: 0.0357
 
   WHEN:
-    • iaf_fl_y0_b10=[2.16|2.21)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37
+    • Leaf Area Index (IAF) in the 10 days before Flowering (previous year) is between 2.16 m²/m² and 2.21 m²/m²
+        → Proxy for canopy development and vine vigour — reflects
+          growth conditions and photosynthetic capacity.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -124,13 +198,23 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±459.99 mhl
     Distribution skewness    : 0.63 (skewed)
 
-  SUMMARY: In years when iaf_fl_y0_b10=[2.16|2.21)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37, wine production tends to be 332 mhl below the long-term trend.
+  SUMMARY: In years when Leaf Area Index (IAF) in the 10 days before Flowering (previous year) is between 2.16 m²/m² and 2.21 m²/m²; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days, wine production tends to be 332 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 9  |  Support: 23.8%  (≈19 years)  |  p-value: 0.0394
 
   WHEN:
-    • swa_fl_y1_a15=[143|234]|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37
+    • Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -138,13 +222,23 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±483.94 mhl
     Distribution skewness    : -0.39 (symmetric)
 
-  SUMMARY: In years when swa_fl_y1_a15=[143|234]|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37, wine production tends to be 370.9 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days, wine production tends to be 370.9 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 10  |  Support: 25%  (≈20 years)  |  p-value: 0.0397
 
   WHEN:
-    • swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -152,13 +246,28 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±591.22 mhl
     Distribution skewness    : -0.01 (symmetric)
 
-  SUMMARY: In years when swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 245.5 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 245.5 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 11  |  Support: 20%  (≈16 years)  |  p-value: 0.0403
 
   WHEN:
-    • tm_bb_y0_a15=[9.16|12)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|sw.above.09fc_fl_y0_a20=[17.5|20]|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53
+    • Mean daily temperature in the 15 days after Bud Break (previous year) is between 9.16 °C and 12 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days
+        → Impairs pollen viability and fertilisation during flowering —
+          directly reduces berry set and yield potential.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days
+        → Near-saturation soil conditions promote vegetative growth and
+          disease, and can dilute berry sugars around harvest.
+    • Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days
+        → Frost around bud break irreversibly damages newly emerged
+          shoots — can cause partial or total yield loss.
 
   THEN wine production is:  
 ABOVE-TREND (positive)
@@ -166,13 +275,18 @@ ABOVE-TREND (positive)
     Std deviation in subgroup: ±501.64 mhl
     Distribution skewness    : 1.07 (skewed)
 
-  SUMMARY: In years when tm_bb_y0_a15=[9.16|12)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|sw.above.09fc_fl_y0_a20=[17.5|20]|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53, wine production tends to be 283.8 mhl above the long-term trend.
+  SUMMARY: In years when Mean daily temperature in the 15 days after Bud Break (previous year) is between 9.16 °C and 12 °C; and Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days; and Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days; and Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days, wine production tends to be 283.8 mhl above the long-term trend.
 
 ------------------------------------------------------------
 RULE 12  |  Support: 20%  (≈16 years)  |  p-value: 0.0403
 
   WHEN:
-    • days.rf.above.1mm_fl_y1_c15=[5.67|12]|swa in the 30 days after Flowering (current year) is between 140 and 227
+    • Wet days (daily rainfall above 1 mm) in a 15-day window centred on Flowering (current year) is between 5.67 days and 12 days
+        → Increases humidity and disease pressure (downy mildew,
+          botrytis); physically hinders pollination during flowering.
+    • Available soil water in the 30 days after Flowering (current year) is between 140 mm and 227 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -180,13 +294,22 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±572.07 mhl
     Distribution skewness    : 1.11 (skewed)
 
-  SUMMARY: In years when days.rf.above.1mm_fl_y1_c15=[5.67|12]|swa in the 30 days after Flowering (current year) is between 140 and 227, wine production tends to be 319.4 mhl below the long-term trend.
+  SUMMARY: In years when Wet days (daily rainfall above 1 mm) in a 15-day window centred on Flowering (current year) is between 5.67 days and 12 days; and Available soil water in the 30 days after Flowering (current year) is between 140 mm and 227 mm, wine production tends to be 319.4 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 13  |  Support: 20%  (≈16 years)  |  p-value: 0.0403
 
   WHEN:
-    • swa_fl_y1_a15=[143|234]|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37
+    • Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days
+        → Impairs pollen viability and fertilisation during flowering —
+          directly reduces berry set and yield potential.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -194,13 +317,26 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±426.96 mhl
     Distribution skewness    : -0.98 (skewed)
 
-  SUMMARY: In years when swa_fl_y1_a15=[143|234]|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37, wine production tends to be 389.9 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 15 days after Flowering (current year) is between 143 mm and 234 mm; and Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days, wine production tends to be 389.9 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 14  |  Support: 20%  (≈16 years)  |  p-value: 0.0403
 
   WHEN:
-    • swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53
+    • Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days
+        → Frost around bud break irreversibly damages newly emerged
+          shoots — can cause partial or total yield loss.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -208,13 +344,24 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±615.25 mhl
     Distribution skewness    : 0.08 (symmetric)
 
-  SUMMARY: In years when swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53, wine production tends to be 307.5 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days; and Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days, wine production tends to be 307.5 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 15  |  Support: 20%  (≈16 years)  |  p-value: 0.0403
 
   WHEN:
-    • tm_fl_y1_c15=[13.8|17.1)|tm_fl_y1_a10=[12.6|17.5)|sw.above.09fc_fl_y0_a20=[17.5|20]|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53
+    • Mean daily temperature in a 15-day window centred on Flowering (current year) is between 13.8 °C and 17.1 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days
+        → Near-saturation soil conditions promote vegetative growth and
+          disease, and can dilute berry sugars around harvest.
+    • Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days
+        → Frost around bud break irreversibly damages newly emerged
+          shoots — can cause partial or total yield loss.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -222,13 +369,22 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±569.57 mhl
     Distribution skewness    : 0.96 (skewed)
 
-  SUMMARY: In years when tm_fl_y1_c15=[13.8|17.1)|tm_fl_y1_a10=[12.6|17.5)|sw.above.09fc_fl_y0_a20=[17.5|20]|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53, wine production tends to be 268.8 mhl below the long-term trend.
+  SUMMARY: In years when Mean daily temperature in a 15-day window centred on Flowering (current year) is between 13.8 °C and 17.1 °C; and Mean daily temperature in the 10 days after Flowering (current year) is between 12.6 °C and 17.5 °C; and Wet-soil days (soil water above 0.9× field capacity) in the 20 days after Flowering (previous year) is between 17.5 days and 20 days; and Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days, wine production tends to be 268.8 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 16  |  Support: 23.8%  (≈19 years)  |  p-value: 0.0411
 
   WHEN:
-    • swa_fl_y1_a15=[81.4|115)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Available soil water in the 15 days after Flowering (current year) is between 81.4 mm and 115 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days
+        → Impairs pollen viability and fertilisation during flowering —
+          directly reduces berry set and yield potential.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 ABOVE-TREND (positive)
@@ -236,13 +392,22 @@ ABOVE-TREND (positive)
     Std deviation in subgroup: ±429.35 mhl
     Distribution skewness    : 0.94 (skewed)
 
-  SUMMARY: In years when swa_fl_y1_a15=[81.4|115)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 281.1 mhl above the long-term trend.
+  SUMMARY: In years when Available soil water in the 15 days after Flowering (current year) is between 81.4 mm and 115 mm; and Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 281.1 mhl above the long-term trend.
 
 ------------------------------------------------------------
 RULE 17  |  Support: 23.8%  (≈19 years)  |  p-value: 0.0411
 
   WHEN:
-    • swa_fl_y1_a30=[77.5|113)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Available soil water in the 30 days after Flowering (current year) is between 77.5 mm and 113 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days
+        → Impairs pollen viability and fertilisation during flowering —
+          directly reduces berry set and yield potential.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 ABOVE-TREND (positive)
@@ -250,13 +415,26 @@ ABOVE-TREND (positive)
     Std deviation in subgroup: ±426.83 mhl
     Distribution skewness    : 0.95 (skewed)
 
-  SUMMARY: In years when swa_fl_y1_a30=[77.5|113)|tm.days.less.15_fl_y1_c15=[0|3.4)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 279.1 mhl above the long-term trend.
+  SUMMARY: In years when Available soil water in the 30 days after Flowering (current year) is between 77.5 mm and 113 mm; and Cold days (mean temperature below 15°C) in a 15-day window centred on Flowering (current year) is between 0 days and 3.4 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 279.1 mhl above the long-term trend.
 
 ------------------------------------------------------------
 RULE 18  |  Support: 21.2%  (≈17 years)  |  p-value: 0.0415
 
   WHEN:
-    • iaf_fl_y0_b10=[2.16|2.21)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53
+    • Leaf Area Index (IAF) in the 10 days before Flowering (previous year) is between 2.16 m²/m² and 2.21 m²/m²
+        → Proxy for canopy development and vine vigour — reflects
+          growth conditions and photosynthetic capacity.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days
+        → Frost around bud break irreversibly damages newly emerged
+          shoots — can cause partial or total yield loss.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -264,13 +442,23 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±473.66 mhl
     Distribution skewness    : 0.65 (skewed)
 
-  SUMMARY: In years when iaf_fl_y0_b10=[2.16|2.21)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35_sm_y1_a20=[0|2.37)|days_minTemp.less.0 in a 20-day window centred on Bud Break (current year) is between 0 and 1.53, wine production tends to be 336.9 mhl below the long-term trend.
+  SUMMARY: In years when Leaf Area Index (IAF) in the 10 days before Flowering (previous year) is between 2.16 m²/m² and 2.21 m²/m²; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days; and Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days, wine production tends to be 336.9 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 19  |  Support: 22.5%  (≈18 years)  |  p-value: 0.0464
 
   WHEN:
-    • swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37
+    • Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -278,13 +466,26 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±579.08 mhl
     Distribution skewness    : 0.01 (symmetric)
 
-  SUMMARY: In years when swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days.maxTemp.above.35 in the 20 days after Start of Maturity (current year) is between 0 and 2.37, wine production tends to be 296.1 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Start of Maturity (current year) is between 0 days and 2.37 days, wine production tends to be 296.1 mhl below the long-term trend.
 
 ------------------------------------------------------------
 RULE 20  |  Support: 22.5%  (≈18 years)  |  p-value: 0.0464
 
   WHEN:
-    • swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days_minTemp.less.0_bb_y1_c20=[0|1.53)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14
+    • Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
+    • Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days
+        → Frost around bud break irreversibly damages newly emerged
+          shoots — can cause partial or total yield loss.
+    • Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days
+        → Causes flower abortion and poor berry set during flowering;
+          accelerates sugar rise while impairing acid retention and
+          aroma during maturation.
 
   THEN wine production is:  
 BELOW-TREND (negative)
@@ -292,5 +493,5 @@ BELOW-TREND (negative)
     Std deviation in subgroup: ±624.67 mhl
     Distribution skewness    : 0.02 (symmetric)
 
-  SUMMARY: In years when swa_hv_y1_b20=[61.5|97)|days.tempMax.above.35_sm_y1_b20=[0|1.91)|days_minTemp.less.0_bb_y1_c20=[0|1.53)|days.maxTemp.above.35 in the 20 days after Flowering (current year) is between 0 and 1.14, wine production tends to be 250 mhl below the long-term trend.
+  SUMMARY: In years when Available soil water in the 20 days before Harvest (current year) is between 61.5 mm and 97 mm; and Heat-stress days (maximum temperature above 35°C) in the 20 days before Start of Maturity (current year) is between 0 days and 1.91 days; and Frost days (minimum temperature below 0°C) in a 20-day window centred on Bud Break (current year) is between 0 days and 1.53 days; and Heat-stress days (maximum temperature above 35°C) in the 20 days after Flowering (current year) is between 0 days and 1.14 days, wine production tends to be 250 mhl below the long-term trend.
 

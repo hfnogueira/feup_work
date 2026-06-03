@@ -1,6 +1,6 @@
 Decision Tree Rules — RDD
-Generated : 2026-06-03 00:06
-Detrend   : linear
+Generated : 2026-06-03 11:33
+Detrend   : lowess
 step_years: 1
 dt_cp     : 0.01  |  dt_minsplit: 10
 

@@ -98,7 +98,7 @@ if (detrend) {
 # prepare feature matrix --------------------------------------------------------------
 # Wine_mhl stays CONTINUOUS — no discretisation needed
 
-df_m5 <- df %>% select(-year)
+df_m5 <- df %>% select(-year, -any_of("Wine_mhl_original"))  # exclude raw target — data leakage
 
 cat('\nDimensions going into M5Rules:', nrow(df_m5), 'rows x', ncol(df_m5) - 1, 'features\n')
 
@@ -254,7 +254,7 @@ cat('\nOutput saved to:', out_dir, '\n')
 # Coverage summary: "LM1 (n_instances/error%)" appears in the preamble.
 
 m5_raw      <- capture.output(print(model))
-block_idx   <- grep("^LM num:\\s*[0-9]+", m5_raw)
+block_idx   <- grep("^(LM num:|Rule:)\\s*[0-9]+", m5_raw)
 
 if (length(block_idx) > 0) {
 

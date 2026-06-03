@@ -1,0 +1,4 @@
+"rule_index","conditions_raw","linear_model_raw","n_instances","error_pct","target_detrended","region","detrend_method"
+1,"IF AND swa_fl_y1_a15 > 131.364 AND THEN","Wine_mhl = -13.2577 * tm_fl_y0_b10 - 40.7199 * tm_fl_y0_a10 + 17.1571 * tm_sm_y0_a20 - 24.8711 * tm_hv_y1_b20 - 2063.7854 * iaf_bb_y1_c10 - 8.1184 * swa_fl_y1_a30 + 2419.7711 [41/67.641%]",NA,NA,TRUE,"RVV","linear"
+2,"IF AND tm_hv_y1_b20 > 16.764 AND THEN","Wine_mhl = 24.1079 * tm_fl_y1_c15 - 24.0915 * tm_fl_y0_b10 + 46.6995 * tm_sm_y0_a20 - 49.5548 * tm_hv_y1_b20 + 5.1021 * rf_hv_y0_a10 - 1.7369 * swa_hv_y1_b20 + 227.8692 [31/73.261%]",NA,NA,TRUE,"RVV","linear"
+3,"(default)","Wine_mhl = -151.6016 * tm_fl_y0_b10 + 3455.2925 [8/59.917%]",NA,NA,TRUE,"RVV","linear"
