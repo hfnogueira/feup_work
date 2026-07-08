@@ -1,0 +1,142 @@
+
+\chapter{Discussion}\label{ch:discussion}
+
+This chapter draws together the findings from Chapters~\ref{ch:goal_1_rule_extraction} and~\ref{ch:goal_2_predictive_performance} to explain why rule-based machine learning succeeds at pattern discovery but falls short of reliable prediction in this domain. Four questions are addressed: (1) why the same rules that explain historical production cannot reliably predict future production; (2) why the two technical decisions embedded in the pipeline are in fundamental tension; (3) why the two regions diverge so markedly in their CarenR performance; and (4) what structural properties of the data would need to change for rule-based prediction to succeed.
+
+
+\section{The Asymmetry Between Discovery and Prediction}\label{sec:the_asymmetry_between_discovery}
+
+The core finding of this thesis is an asymmetry between two related but distinct tasks: discovering patterns that explain historical production, and predicting future production from those patterns. Goal 1 succeeds: 48 rules for RDD and 20 for RVV, pointing to harvest-period soil water and flowering-phase moisture as primary drivers, validated by LOESS detrending to be genuine within-era effects. Goal 2 does not succeed in aggregate. Understanding why requires examining the different requirements of the two tasks.
+
+Pattern discovery requires only that a statistical association exists, that years satisfying a given condition have a systematically different distribution of production residuals from years that do not. With |r| $\approx$ 0.47 between the top climate features and production residuals, even under LOESS detrending that removes era confounds, such an association clearly exists. CarenR's KS-test framework is well suited to detecting distributional differences at this signal strength: subgroup induction on 80--89 years of data with a 20\% support threshold provides adequate power to identify the most prominent associations.
+
+Prediction requires something harder: the association must be strong enough that knowing a year's climate conditions reduces the expected error below what would be obtained by simply predicting the training median. With |r| $\approx$ 0.47, climate features explain approximately 22\% of the variance in production residuals. The remaining 78\% is unexplained variance, driven by factors not in the feature set (severe weather events within the growing season, vine disease outbreaks, localised frost, logistical constraints on harvest) or by measurement noise. In a series with coefficient of variation $\approx$ 47\%, the signal-to-noise ratio is too low for a rule-based classifier to overcome year-to-year noise in held-out prediction, even though the identified patterns are real.
+
+This asymmetry --- a genuine agroclimatic association that is too weak for reliable prediction --- is not a failure of the methodology. It is a property of the system being studied.
+
+
+\section{The Two-Decision Trade-off}\label{sec:the_twodecision_tradeoff}
+
+The prediction pipeline decomposes into two sequential decisions whose demands pull in opposite directions (Section~\ref{sec:detrending_and_the_twodecision}). Decision 1 (trend modelling) determines how large the test-period residuals are: a better-fitting trend leaves smaller residuals and a lower Naive\_Median baseline. Decision 2 (climate signal extraction) determines whether a model can predict those residuals better than zero: it requires structured, non-trivial residuals to exploit.
+
+The LOESS detrending experiment makes this trade-off concrete. In the RVV, LOESS reduces the Naive\_Median baseline from 140 to approximately 90 mhl, a 36\% improvement in Decision 1. But LOESS simultaneously reduces test residuals to magnitudes too small for CarenR to form stable rules, suppressing rule induction to zero. The improvement in Decision 1 quality is achieved by removing the very signal that Decision 2 depends on.
+
+For the RDD, the linear trend is already better calibrated to the Douro's plateau-shaped production trajectory than LOESS, which would overfit the training tail and inflate test residuals to 290 mhl. Here, linear detrending both provides the better Decision 1 floor and preserves sufficient structured residual for Decision 2. The result is the closest CarenR approach to the naive baseline observed in this study (189 vs 184 mhl).
+
+The trade-off cannot be resolved within the current methodology because both decisions are parameterised by a single covariate (time) and a single hyperparameter (linear vs. LOESS span). Decoupling them would require separate covariates for structural trend (industry restructuring, policy, demographics) and climate signal. As long as time is the only detrending covariate, any increase in trend flexibility competes directly with residual signal availability.
+
+
+\section{Why the Two Regions Diverge}\label{sec:why_the_two_regions}
+
+The 3\% gap between CarenR and the naive baseline in RDD versus the 22\% gap in RVV reflects a structural difference in the underlying data, not just a difference in degree.
+
+The Douro's production history is structurally less confounded. The Douro DOC for table wines was established in 1979, and Port production is regulated by an annual administrative quota (the benefício system), which partially decouples observed production from pure climate variation. The region's production increased gradually across the study period (+80\%), creating a smoother structural trend that linear detrending captures adequately. As a result, linear detrend residuals in RDD contain a mixture of genuine climate signal and modest structural residual, with the climate component sufficiently prominent for CarenR to exploit in era-balanced scenarios.
+
+Vinho Verde's production decline of 65\% over the study period was driven primarily by structural factors: EU accession (1986) and the Common Agricultural Policy brought grubbing-up subsidies and quality standards that penalised the region's traditional high-yield pergola systems; rural exodus reduced the number of active small producers; and conversion to lower-yield espalier training reduced per-hectare output independently of climate. These transitions were concentrated in the 1980s--2000s, producing a non-linear structural break that neither linear nor LOESS detrending can fully separate from the inter-annual climate signal. The RVV linear detrend residuals therefore contain a larger structural residual component that contaminates the climate signal available for CarenR.
+
+The era-composition analysis (Section~\ref{sec:era_composition_and_perscenario_rvv}) further illustrates this divergence. As more post-1990 data enters the RVV training set, CarenR's performance worsens rather than improves, the opposite of the RDD pattern. This indicates that the rules CarenR discovers for RVV are increasingly tuned to era-specific statistical patterns that do not generalise to test years from the same modern era. The structural disruption of Vinho Verde production has been so large and so rapid that no stable climate-production relationship emerges from within any single era.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Structural explanation of the RDD vs RVV performance divergence.}\label{tab:ch6a_1}
+  \small
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{2.9cm}|p{2.7cm}|p{3.3cm}|X}
+  \toprule
+  Dimension & RDD: Douro & RVV: Vinho Verde & Implication \\
+  \midrule
+  Production trend & +80\% (gradual) & -65\% (structural break) & RVV confound is stronger and harder to detrend \\
+  Era confound & Moderate & Strong & CarenR rules are more era-contaminated in RVV \\
+  Climate effect within era & Visible (|r|~0.47 survives LOESS) & Same magnitude but overwhelmed by structural noise & Same climate signal; different noise floor \\
+  CarenR performance & 3\% gap, wins in 5/18 scenarios & 22\% gap, 0/16 wins, rules harmful & Structural noise eliminates any climate advantage in RVV \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+
+\section{Why the Walk-Forward Metric Penalises CarenR}\label{sec:why_the_walkforward_metric}
+
+The weighted MAE metric assigns weight proportional to test-set size. In an expanding-window design, early scenarios have the largest test sets. Scenario 1 for RDD covers 18 test years; Scenario 14 covers 5. The early scenarios are precisely those where era confound is strongest (post-1990 share 20--28\%) and CarenR underperforms. The scenarios where CarenR wins (10--14) have the smallest test sets among the reliable scenarios and contribute the least to the aggregate metric.
+
+This interaction is not a deficiency of the metric, weighting by test-set size correctly gives more influence to estimates based on more observations. However, it means that the aggregate weighted MAE is sensitive to the era-composition structure of the time series. A dataset in which the modern era constituted a larger fraction of the study period would allocate more weight to scenarios where CarenR is competitive, potentially reversing the aggregate ranking. As the Portuguese wine industry accumulates additional years of observation in the modern (post-1990) era, the era-balanced window would arrive earlier in the walk-forward sequence and carry more aggregate weight.
+
+
+\section{Structural Covariates as a Path Forward}\label{sec:structural_covariates_as_a}
+
+The analysis throughout this thesis points to a single underlying limitation: the detrending step uses time as its sole covariate, which conflates climate-driven variation with structural industry changes. The most promising methodological extension is to incorporate structural covariates, vineyard planted area, number of certified producers, annual Port benefício quota, and proportion of espalier vs. pergola training, directly into the detrending model.
+
+A structural detrending model of the form:
+
+\begin{equation}
+  y_t = \alpha + \beta_1 t + \beta_2 \,\text{area}_t + \beta_3 \,\text{quota}_t + \varepsilon_t
+  \label{eq:structural_detrend}
+\end{equation}
+
+would separate the structural production trajectory (captured by area and quota covariates) from the inter-annual climate residual ($\varepsilon_t$), leaving a cleaner signal for CarenR to exploit. The era confound would be substantially reduced because the structural transitions that create era boundaries would be explicitly modelled rather than proxied by the time trend. This approach is analogous to the use of normalised production (production per hectare of planted vineyard) in some agronomic studies, which removes the area effect from the production series.
+
+Such data are available in principle from IVV (Instituto da Vinha e do Vinho) and IVDP (Instituto dos Vinhos do Douro e do Porto) for the modern period, though the historical coverage for pre-1986 years may be incomplete. Assembling a full structural covariate time series for 1934--2022 (RDD) and 1942--2021 (RVV) would require archival research and is left as the primary recommendation for future work.
+
+
+\section{Relation to Prior Work}\label{sec:relation_to_prior_work}
+
+The finding that rule-based methods can discover interpretable agroclimatic patterns but fail to outperform naive baselines in small samples is consistent with the broader forecasting literature on agricultural yield prediction. Fraga et al. (2012, 2014) demonstrated that climate indices derived from the growing season are correlated with wine quality and quantity in Portuguese regions, with predictive R$^2$ values typically in the 0.35--0.55 range for regional aggregates. This is broadly consistent with the |r| $\approx$ 0.47 observed here, suggesting that the signal level is an intrinsic property of the system rather than a limitation of the current feature set.
+
+The two-decision framing proposed in this thesis offers a more precise diagnostic than the summary “model beats baseline or not.” Decomposing prediction error into trend quality and climate signal extraction pinpoints where the bottleneck lies: in this case, Decision 1 (structural detrending) rather than Decision 2, given that the rule-learning step already approaches the limit set by the available climate signal.
+
+
+% ===== CONTINUATION =====
+
+
+\section{Experimental Design Decisions and Methodological Evolution}\label{sec:experimental_design_decisions_and}
+
+The final pipeline described in Chapter~\ref{ch:data_and_methodology} represents the outcome of an iterative development process. Several design decisions were made in response to problems discovered during exploratory analysis, and documenting these decisions is both methodologically honest and practically informative for future researchers working on similar problems.
+
+
+\subsection{The Uptrend Problem and the Decision to Detrend}\label{sub:the_uptrend_problem_and}
+
+The first major design decision concerned how to handle the structural production trends in both regions. An initial version of the CarenR analysis was run on raw (non-detrended) production values for the Douro. The result was immediately suspicious: all five discovered rules pointed to LOW production conditions, despite the Douro having a clear upward trend and the expectation that meaningful rules should exist for both above and below-average years.
+
+Investigation revealed the cause: without detrending, CarenR's global mean was the all-time average (approximately 1,112 mhl), which is heavily influenced by the low-production pre-1960 era. Years from the 1930s--1950s were systematically below this global mean not because of climate but because the structural production baseline was lower. CarenR was finding rules that described era membership, ``low production years tend to be early years'', rather than genuine climate-production relationships. The discovered rules were statistically valid but agronomically meaningless.
+
+The solution, linear detrending applied separately within each training fold, transformed the problem from one of explaining raw production levels to one of explaining deviations from the expected structural trajectory. Under this formulation, a rule like ``dry post-flowering conditions $\rightarrow$ above-trend production'' is interpretable regardless of which era the year belongs to, because ``above-trend'' is defined relative to the era-specific trend. The detrending decision was therefore not merely a preprocessing convenience but a fundamental reframing of the research question from ``what predicts high production?'' to ``what predicts better-than-expected production given the structural context of each period?''
+
+
+\subsection{LOESS Detrending: A Promising Idea That Killed the Signal}\label{sub:loess_detrending_a_promising}
+
+Once linear detrending was adopted, a natural follow-up question was whether more flexible detrending (LOESS) might produce better results by more accurately capturing the non-linear structural trajectories, particularly the RVV plateau-then-collapse shape. LOESS detrending was evaluated with a smoothing span of 0.40, which provides substantial flexibility while preserving some year-to-year structure.
+
+The result was counter-intuitive: LOESS improved the Naive\_Median baseline substantially for RVV (from 140 to ~90 mhl, a 36\% improvement in Decision 1) but eliminated all CarenR rules entirely, zero rules fired in any scenario. The explanation became clear upon reflection: LOESS with span 0.40 on an 80-year series absorbs so much of the inter-annual variation into the trend component that the residuals become too small and structureless for CarenR's KS test to detect significant subgroup differences. The flexible trend was doing exactly what it was designed to do, capturing year-to-year variation, but in doing so it was consuming the signal that CarenR needed.
+
+For RDD, LOESS proved actively harmful: the Naive\_Median baseline worsened from 184 to 290 mhl because LOESS extrapolated the slope of the final training years into the test period. The Douro's production had plateaued around 1,300--1,400 mhl since the mid-2000s, but LOESS projected a continued slope from the training data into test years, systematically overestimating production. The rigid linear trend, despite its simplicity, happened to extrapolate the Douro plateau more accurately than the flexible LOESS curve.
+
+These LOESS results reinforced the two-decision decomposition: improving Decision 1 (trend quality) came directly at the cost of Decision 2 (climate signal availability). The decision to retain linear detrending for the primary analysis was therefore not a limitation born of simplicity but a deliberate choice that maximised the climate signal available for rule discovery while accepting a higher baseline error.
+
+
+\subsection{The Classification-to-Regression Transition}\label{sub:the_classificationtoregression_transition}
+
+The original design of Goal 2 (Predictive Validation) used RIPPER as the primary comparison model, with production discretised into Low / Medium / High classes. The evaluation metric was classification accuracy. This design proved unsatisfactory for two reasons discovered during initial experiments.
+
+First, RIPPER's cross-validated accuracy of 28--42\%, only marginally above the 33\% random baseline, confirmed that the classification task was genuinely difficult but also revealed that the accuracy metric was a poor measure of prediction quality for this application. A model that correctly identifies ``above-trend'' vs ``below-trend'' years at 55\% accuracy might be practically valuable even if its overall three-class accuracy is modest, because correctly identifying the direction is more important than nailing the precise tertile. Accuracy treats all misclassifications equally, which is not the right criterion when the goal is to outperform a naive quantitative forecast.
+
+Second, comparing RIPPER (classification) against CarenR (which outputs a continuous median residual) required arbitrary conversion of CarenR's continuous predictions to class labels, or RIPPER's class labels to continuous values. Either conversion introduced distortion. The cleaner solution was to operate entirely in the continuous domain: use MAE on the original production scale as the evaluation metric, and compare all models, including RIPPER, by the same criterion. RIPPER was retained as a comparison model for Goal 1 (rule discovery, where its classification rules are directly interpretable) but M5Rules replaced it as the primary continuous-target comparison for Goal 2.
+
+This transition from a classification to a regression evaluation framework was not merely cosmetic. It changed which models were most meaningful to compare, which metric was used, and ultimately what the thesis's predictive conclusion would be. The MAE-based walk-forward evaluation with a Naive\_Median baseline is a more demanding and more informative benchmark than classification accuracy: it directly asks whether a model can beat the simplest possible quantitative forecast, which is the right question for a production forecasting application.
+
+
+\subsection{CarenR Variant Proliferation: Why 11 Variants?}\label{sub:carenr_variant_proliferation_why}
+
+The decision to evaluate 11 CarenR variants was motivated by a genuine uncertainty about which feature selection strategy would work best in this domain. Prior work with CarenR had established that feature selection matters but had not systematically evaluated the trade-off between aggressive selection (which finds the most discriminating features but risks overfitting) and conservative selection (which retains broader coverage but may include noise).
+
+The 11 variants represent a structured exploration of this trade-off rather than an ad hoc collection of experiments. They vary along three dimensions: the criterion used to rank features ($\eta$$^2$, Pearson |r|, hard threshold); whether a support filter is applied (ensuring each bin of a selected feature is well-populated); and how rule predictions are combined at test time (equal weighting, support weighting, confidence weighting, stacking). The CarenR\_Supervised variant was included specifically to test the hypothesis that per-fold supervised discretisation might improve rule quality by better aligning bin boundaries with the production distribution, and its consistent failure (worst CarenR variant in both regions) provides a clear, replicable finding about the risks of target leakage in feature engineering.
+
+The systematic comparison also revealed the region-specificity of optimal selection strategy ($\eta$$^2$ for RDD, Sup\_FS for RVV), which is itself a methodological contribution: it demonstrates that the appropriate CarenR configuration for a given time series depends on the strength and structure of the climate signal, which cannot be determined a priori without empirical evaluation. Researchers applying CarenR to similar agricultural forecasting problems should therefore conduct a comparable structured sensitivity analysis rather than assuming any single configuration will be optimal.
+
+
+\subsection{Limitations Acknowledged During Development}\label{sub:limitations_acknowledged_during_development}
+
+Several limitations were identified during the pipeline development that are worth documenting explicitly. The CarenR\_Assoc variant (association rule classification, rather than distributional rules) was initially planned but not fully implemented due to factor-level alignment issues in the walk-forward context: the class boundaries estimated on each training fold did not consistently produce the same factor levels across folds, causing prediction-time errors when test-year factor values fell outside training-set factor ranges. Resolving this would require a more robust factor recoding step in the walk-forward loop and is left as a natural extension of the current work.
+
+The LAG variant (CarenR\_Dist\_Lag) attempted to augment the feature set with autocorrelated lag features identified from the ACF of the production residual series. While this variant performs competitively in RDD (rank 5), it is outperformed by simpler selectors in both regions, suggesting that the ACF-based lag selection does not consistently identify more predictive carry-over features than the domain-knowledge-based y0 features already included in the base feature set. The carry-over mechanism is real, as confirmed by RIPPER and M5Rules coefficients on previous-year variables, but the ACF approach to identifying it appears less reliable than the agronomically-motivated y0 feature construction.

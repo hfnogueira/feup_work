@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: chapters/honourdeclaration.aux
+A level-1 auxiliary file: chapters/ch0_abstract.aux
+A level-1 auxiliary file: chapters/ch1_intro.aux
+A level-1 auxiliary file: chapters/ch2_literature.aux
+A level-1 auxiliary file: chapters/ch3_methods.aux
+A level-1 auxiliary file: chapters/ch4_rules.aux
+A level-1 auxiliary file: chapters/ch5_prediction.aux
+A level-1 auxiliary file: chapters/ch6_discussion.aux
+A level-1 auxiliary file: chapters/ch7_conclusions.aux
+The style file: plainnat.bst
+A level-1 auxiliary file: chapters/app_a_rules.aux
+A level-1 auxiliary file: chapters/app_b_eda.aux
+A level-1 auxiliary file: chapters/app_c_features.aux
+A level-1 auxiliary file: chapters/app_d_feature_map.aux
+A level-1 auxiliary file: chapters/app_e_ai_transparency.aux
+Database file #1: references.bib
+You've used 22 entries,
+            2773 wiz_defined-function locations,
+            742 strings with 9410 characters,
+and the built_in function-call counts, 9393 in all, are:
+= -- 785
+> -- 645
+< -- 10
++ -- 217
+- -- 195
+* -- 717
+:= -- 1513
+add.period$ -- 81
+call.type$ -- 22
+change.case$ -- 130
+chr.to.int$ -- 22
+cite$ -- 44
+duplicate$ -- 451
+empty$ -- 737
+format.name$ -- 231
+if$ -- 1939
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 22
+newline$ -- 133
+num.names$ -- 88
+pop$ -- 280
+preamble$ -- 1
+purify$ -- 109
+quote$ -- 0
+skip$ -- 342
+stack$ -- 0
+substring$ -- 44
+swap$ -- 28
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 237
+warning$ -- 0
+while$ -- 66
+width$ -- 0
+write$ -- 302

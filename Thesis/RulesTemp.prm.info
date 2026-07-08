@@ -1,0 +1,10 @@
+> caren caren_temp.bas  0.2  0.1  -null?  -pRulesTemp  -Att  -s,  
+
+ Classification Model 
+
+NumFreqItems = 45 in the dataset RulesTemp.prm with minsup = 0.2 
+NumOfRules = 681 in a dataset with 79 transactions 
+No class attribute defined!   
+
+Total Time spent = 0 hrs 0 mts 0 secs
+

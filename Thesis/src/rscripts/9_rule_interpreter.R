@@ -362,8 +362,21 @@ decode_feature <- function(feat) {
 
 translate_condition <- function(subgroup_str) {
 
-  # Split compound condition on " & "
+  # CAREN outputs conditions joined in two possible ways:
+  #   (a) " & "  — explicit ampersand separator
+  #   (b) "|"    — pipe immediately after ) or ] that closes the previous interval,
+  #                e.g. "feat1=[lo|hi)|feat2=[lo|hi]"
+  # Strategy: try " & " first; if it yields a single token, fall back to the
+  # lookbehind split on | preceded by ) or ].
+
   raw_conds <- trimws(strsplit(subgroup_str, "\\s*&\\s*")[[1]])
+
+  if (length(raw_conds) == 1L) {
+    # No " & " found — try splitting on | that immediately follows ) or ]
+    raw_conds <- trimws(
+      strsplit(subgroup_str, "(?<=[)\\]])[|]", perl = TRUE)[[1]]
+    )
+  }
 
   parsed <- lapply(raw_conds, function(cond) {
 

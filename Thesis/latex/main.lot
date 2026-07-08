@@ -1,0 +1,75 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Literature map positioning this thesis relative to existing research streams.\relax }}{11}{table.caption.7}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Dataset characteristics for the Douro (RDD) and Vinho Verde (RVV) study regions.\relax }}{15}{table.caption.8}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of the three rule-learning algorithms: CarenR, RIPPER, and M5Rules.\relax }}{18}{table.caption.11}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Complete set of 17 models evaluated in the walk-forward validation.\relax }}{27}{table.caption.14}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces CarenR variant families and their feature selection strategies.\relax }}{28}{table.caption.15}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Prediction aggregation formulas for the three CarenR variant families.\relax }}{30}{table.caption.16}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Worked example of the support-weighted prediction formula.\relax }}{30}{table.caption.17}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Stationarity test results. ADF H$_0$: unit root present.\relax }}{32}{table.caption.18}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Primary daily meteorological variables in the raw source files.\relax }}{33}{table.caption.19}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Binary threshold indicators derived from raw daily meteorological variables.\relax }}{34}{table.caption.20}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Annual phenology and production variables.\relax }}{34}{table.caption.21}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Feature naming convention components.\relax }}{35}{table.caption.22}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Feature groups, counts, and agronomic meanings. Total: 59 features per region.\relax }}{36}{table.caption.23}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Top 5 CarenR rules for the Douro (RDD), sorted by KS $p$-value. Full top-10 in Table~\ref {tab:appa_top10_rdd}.\relax }}{40}{table.caption.24}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Top 5 CarenR rules for the Vinho Verde (RVV). Rule 4 is the only above-trend rule. Full top-10 in Table~\ref {tab:appa_top10_rvv}.\relax }}{41}{table.caption.25}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Cross-regional feature direction comparison for swa\_hv\_y1\_b20.\relax }}{42}{table.caption.26}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces LOESS validation of top CarenR features (span = 0.40). Features retaining $>85\%$ of linear correlation carry genuine within-era signal.\relax }}{43}{table.caption.27}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces RIPPER rules for RDD. CV accuracy 42\%.\relax }}{43}{table.caption.28}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces RIPPER rules for RVV. CV accuracy 28\%.\relax }}{44}{table.caption.29}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces M5Rules RDD dominant model coefficients mapped to CarenR findings.\relax }}{45}{table.caption.30}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces M5Rules RVV Rule 1 coefficients mapped to CarenR findings.\relax }}{45}{table.caption.31}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Feature agreement across CarenR, RIPPER, and M5Rules for both regions.\relax }}{46}{table.caption.32}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Feature frequency across all 48 RDD CarenR rules.\relax }}{48}{table.caption.33}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Feature frequency across all 20 RVV CarenR rules.\relax }}{49}{table.caption.34}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Rule set overlap and coherence metrics for RDD and RVV.\relax }}{51}{table.caption.35}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces RDD walk-forward results, 17 models across 18 scenarios, sorted by weighted MAE (mhl).\relax }}{54}{table.caption.36}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces RVV walk-forward results sorted by weighted MAE (mhl).\relax }}{55}{table.caption.38}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Per-scenario \texttt {CarenR\_Dist\_Eta2} vs \texttt {Naive\_Median} for RDD.\relax }}{55}{table.caption.40}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces RVV scenario outcomes for \texttt {CarenR\_Dist\_Sup\_FS} vs \texttt {Naive\_Median}.\relax }}{57}{table.caption.42}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces RDD vs RVV summary comparison across key evaluation dimensions.\relax }}{58}{table.caption.44}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Statistical tests summary. The $p=0.031$ result is exploratory.\relax }}{58}{table.caption.45}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces LOESS detrending sensitivity analysis.\relax }}{59}{table.caption.48}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Per-scenario MAE for \texttt {Naive\_Median} and \texttt {CarenR\_Dist\_Eta2}: 18 RDD scenarios.\relax }}{61}{table.caption.49}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Per-scenario MAE for \texttt {Naive\_Median} and \texttt {CarenR\_Dist\_Sup\_FS}: 16 RVV scenarios.\relax }}{63}{table.caption.51}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces CarenR variant sensitivity analysis by feature selection strategy.\relax }}{65}{table.caption.53}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces The three possible outcomes of CarenR prediction and their interpretation.\relax }}{67}{table.caption.54}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Structural explanation of the RDD vs RVV performance divergence.\relax }}{71}{table.caption.55}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.2}{\ignorespaces Top 10 CarenR rules for the Vinho Verde (RVV). Rule 4 is the only above-trend rule.\relax }}{83}{table.A.2}%
+\contentsline {table}{\numberline {A.3}{\ignorespaces Complete CarenR rule listing for the Douro (RDD) region: all 48 rules.\relax }}{85}{table.A.3}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Top 10 CarenR rules for the Douro (RDD), sorted by KS $p$-value.\relax }}{89}{table.caption.58}%
+\contentsline {table}{\numberline {A.4}{\ignorespaces Complete CarenR rule listing for the Vinho Verde (RVV) region: all 20 rules.\relax }}{90}{table.A.4}%
+\contentsline {table}{\numberline {A.5}{\ignorespaces RIPPER classification rules for both regions.\relax }}{91}{table.A.5}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Descriptive statistics: RDD (1934--2022) and RVV (1942--2021).\relax }}{93}{table.caption.59}%
+\contentsline {table}{\numberline {B.2}{\ignorespaces Decade-level production averages for RDD and RVV.\relax }}{94}{table.caption.60}%
+\contentsline {table}{\numberline {B.3}{\ignorespaces Phenological timing: mean dates, variability, and decadal trends.\relax }}{95}{table.caption.61}%
+\contentsline {table}{\numberline {B.4}{\ignorespaces Production statistics by era for RDD and RVV.\relax }}{96}{table.caption.62}%
+\contentsline {table}{\numberline {B.5}{\ignorespaces Feature correlations with detrended production ($|r|$) for RDD and RVV.\relax }}{97}{table.caption.63}%
+\contentsline {table}{\numberline {B.6}{\ignorespaces Feature drift: correlation with year index as proxy for era confound.\relax }}{98}{table.caption.64}%
+\contentsline {table}{\numberline {B.7}{\ignorespaces Complete data pipeline from raw sources to final outputs.\relax }}{100}{table.caption.66}%
+\contentsline {table}{\numberline {B.8}{\ignorespaces Fixed configuration parameters for CarenR and the walk-forward protocol.\relax }}{100}{table.caption.67}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Temperature features (13 features).\relax }}{101}{table.C.1}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Cold day (Tmed $<$ 15$^\circ $C) and frost day (Tmin $<$ 0$^\circ $C) features (5 features).\relax }}{103}{table.caption.68}%
+\contentsline {table}{\numberline {C.4}{\ignorespaces Rainfall total and wet day count features (8 features).\relax }}{103}{table.C.4}%
+\contentsline {table}{\numberline {C.5}{\ignorespaces Leaf Area Index (LAI) features (10 features).\relax }}{104}{table.C.5}%
+\contentsline {table}{\numberline {C.6}{\ignorespaces Soil water availability, stress day (Sm $<$ 1.5$\times $Wp), and saturation day (Sm $>$ 0.9$\times $Fc) features (18 features).\relax }}{105}{table.C.6}%
+\contentsline {table}{\numberline {C.3}{\ignorespaces Heat stress day (Tmax $>$ 35$^\circ $C) features (4 features).\relax }}{107}{table.caption.69}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces AI use summary table 1.\relax }}{114}{table.caption.71}%
+\contentsline {table}{\numberline {E.2}{\ignorespaces AI use summary table 2.\relax }}{114}{table.caption.72}%
+\contentsline {table}{\numberline {E.3}{\ignorespaces AI use summary table 3.\relax }}{115}{table.caption.73}%
+\contentsline {table}{\numberline {E.4}{\ignorespaces AI use summary table 4.\relax }}{115}{table.caption.74}%
+\contentsline {table}{\numberline {E.5}{\ignorespaces AI use summary table 5.\relax }}{116}{table.caption.75}%
+\contentsline {table}{\numberline {E.6}{\ignorespaces AI use summary table 6.\relax }}{117}{table.caption.76}%

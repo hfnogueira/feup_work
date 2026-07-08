@@ -1,0 +1,218 @@
+\chapter{AI Use Transparency Statement}\label{app:ai_use_transparency_statement}
+
+\textbf{AI Use Transparency Appendix}
+
+\textbf{Thesis title: }Rule-based Machine Learning for Wine Production Forecasting: A Distributional Subgroup Discovery Approach
+
+\textbf{Student: }Hugo Filipe Queir\'oz Nogueira
+
+\textbf{Tool used: }Claude (Anthropic), model claude-sonnet-4-6, accessed via Claude Cowork desktop application
+
+\textbf{Period of use: }May--June 2026
+
+
+\section{Overview of AI Use}\label{app_sec:overview_of_ai_use}
+
+AI was used throughout the writing and revision process of this dissertation. All research activities --- dataset construction, R pipeline development, CarenR experiments, statistical analysis, and interpretation of results --- were carried out independently by the student. AI use was restricted to four categories: (1) writing support, (2) substantive content revision, (3) code generation for auxiliary scripts, and (4) numerical verification.
+
+The student directed all AI interactions, reviewed every output, and validated all content against primary data sources. The numerical verification process (Section~\ref{app_sec:numerical_verification_process}) was specifically designed to detect and correct AI-generated errors in the thesis text.
+
+
+\section{Writing Support --- All Chapters}\label{app_sec:writing_support_all_chapters}
+
+Writing support (grammatical corrections, comma splice fixes, reformulation of awkward phrasing, removal of formulaic AI-sounding constructions) was applied across all chapters. This is the most widespread category of use. The student identified problems and directed specific corrections; AI did not generate substantive new content in this category.
+
+\begin{table}[htbp]
+  \centering
+  \caption{AI use summary table 1.}\label{tab:appe_1}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{3.2cm}|p{4.0cm}|X}
+  \toprule
+  Section & Type of editing & Example prompt \\
+  \midrule
+  Abstract & Reformulation, AI-phrase removal & ``rewrite any AI-sounding phrases to be more direct and academic'' \\
+  Ch. 1 --- Introduction & Sentence restructuring, comma splices & ``fix grammar and AI-sounding phrases throughout'' \\
+  Ch. 2 --- Literature Review & Reformulation, hedging language & ``flag and rewrite passages that sound AI-generated'' \\
+  Ch. 3 --- Methods & Comma splices, paragraph flow & ``fix comma splices and reformulate where needed'' \\
+  Ch. 4 --- Rule Discovery & Comma splices, sentence structure & ``go to file 12 and fix any issues'' \\
+  Ch. 5 --- Prediction results & Comma splices, reformulation & ``fix this paragraph, it reads as AI-written'' \\
+  Ch. 6 --- Discussion & AI-phrase removal, vague citation removal & ``remove Santos et al. (various) --- this is not a real citation'' \\
+  Ch. 7 --- Conclusions & Factual correction & (numerical fix only, see Section~\ref{app_sec:numerical_verification_process}) \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+\section{Substantive Content Revision}\label{app_sec:substantive_content_revision}
+
+In several sections, AI was used to generate or substantially rewrite one or more paragraphs. These are declared below at section level with representative prompts and iteration examples as required.
+
+
+\subsection{Chapter 3 --- Methods: CarenR\_Supervised Description}\label{app_sub:chapter_3_methods_carenrsupervised}
+
+\textbf{Location: }Section~\ref{sub:carenr_distribution_rules_via}, CarenR variant table and Table~\ref{tab:ch3a_4}
+
+\textbf{Purpose: }The original description of the CarenR\_Supervised variant incorrectly described it as performing “discretisation of the response variable.” After the student identified the correct behaviour from the source code, AI was used to rewrite the description accurately.
+
+Iteration example:
+
+\begin{table}[htbp]
+  \centering
+  \caption{AI use summary table 2.}\label{tab:appe_2}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{0.4cm}|p{5.0cm}|X}
+  \toprule
+  \# & Prompt & Outcome \\
+  \midrule
+  1 & ``what is the CarenR\_Supervised, which performs discretisation of the response variable?'' & AI explained the difference between response discretisation and feature discretisation \\
+  2 & ``yes'' [to updating the description in ch3] & Description updated: “performs discretisation of the response variable” → “uses supervised feature discretisation --- deriving bin cut-points by maximising residual separation within each training fold” \\
+  3 & ``check in the table at chapter 3 if some update is needed'' & Table~\ref{tab:ch3a_4} description updated to match; missing CarenR\_Dist\_Sup\_Thresh row added to variant table \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+\subsection{Chapter 3 --- Methods: Table~\ref{tab:ch3a_4} New Row}\label{app_sub:chapter_3_methods_table}
+
+\textbf{Location: }Section~\ref{sub:carenr_distribution_rules_via}, Table~\ref{tab:ch3a_4} (CarenR variant breakdown)
+
+\textbf{Purpose: }The CarenR\_Dist\_Sup\_Thresh variant was missing from the 11-variant breakdown table. After the student identified the gap, AI generated the missing row content based on the existing table structure and the student’s understanding of the variant.
+
+
+\subsection{Chapter 5 --- Prediction: Test Period Table Corrections}\label{app_sub:chapter_5_prediction_test}
+
+\textbf{Location: }Section~\ref{sec:perscenario_mae_douro_rdd}, Tables~\ref{tab:ch5b_1} and~\ref{tab:ch5b_2} (walk-forward scenario tables)
+
+\textbf{Purpose: }The student identified that the “Test yr” column was showing single years rather than multi-year test periods. AI was used to compute the correct test period ranges from the data and rewrite all 34 rows across both tables.
+
+Iteration example:
+
+\begin{table}[htbp]
+  \centering
+  \caption{AI use summary table 3.}\label{tab:appe_3}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{0.4cm}|p{5.0cm}|X}
+  \toprule
+  \# & Prompt & Outcome \\
+  \midrule
+  1 & ``is this table the test year shouldn’t be a couple of years?'' & AI confirmed the test periods span multiple years and extracted correct ranges from scenario\_metrics\_rdd/rvv.csv \\
+  2 & [review of proposed corrections] & Student validated ranges against their own understanding of the walk-forward setup; RVV train periods also corrected (were 4 years off) \\
+  3 & ``Continue from where you left off'' & Column header renamed to “Test period”; all rows applied to both tables \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+\subsection{Chapter 5 --- Prediction: Bold Label Paragraphs}\label{app_sub:chapter_5_prediction_bold}
+
+\textbf{Location: }Section~\ref{sec:era_composition_and_perscenario_rvv} (per-scenario analysis paragraphs)
+
+\textbf{Purpose: }Several paragraphs with a bold label (e.g., “Scenarios 3 and 4:”) had their formatting collapsed when previous edits were applied. AI reconstructed the correct bold-label + normal-body structure.
+
+Iteration example:
+
+\begin{table}[htbp]
+  \centering
+  \caption{AI use summary table 4.}\label{tab:appe_4}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{0.4cm}|p{5.0cm}|X}
+  \toprule
+  \# & Prompt & Outcome \\
+  \midrule
+  1 & ``this is in bold... apply the same format as the others [Scenarios 3 and 4 paragraph]'' & AI identified the paragraph and reconstructed two-run structure: bold label up to colon, normal body text \\
+  2 & ``Continue from where you left off'' & Same fix applied to “Scenarios 17 and 18” and “The fallback pattern” paragraphs \\
+  3 & ``while executing it, this par is full in bold [Why $\eta$$^2$ wins in RDD]'' & Same fix applied in Chapter~\ref{ch:goal_2_predictive_performance} expand file \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+\section{Code Generation}\label{app_sec:code_generation}
+
+AI was used to generate two types of code: modifications to an existing R pipeline script, and a new R analysis script. All code was reviewed and tested by the student. The student is able to explain the logic of all generated code.
+
+\begin{table}[htbp]
+  \centering
+  \caption{AI use summary table 5.}\label{tab:appe_5}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{4.5cm}|p{2.0cm}|X}
+  \toprule
+  File & Type & Description \\
+  \midrule
+  src/rscripts/6\_scenario\_validation.R & Modification & Added CLI argument parsing (RDD/RVV region flag) and modified learning curve plot section to apply thicker lines to Naive\_Median and best CarenR variant \\
+  src/rscripts/10\_rule\_overlap\_analysis.R & New script & New R script computing pairwise feature overlap, distinct feature combinations, and condition-subset statistics for both regions \\
+  Verification scripts (Python) & New scripts & Python scripts to cross-verify all numerical claims in thesis chapters against data CSVs (scenario\_metrics, rules\_interpreted). Used to detect and correct errors; not part of submitted codebase. \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+Representative prompts for code generation:
+
+•  ``I have an idea / Give some extra thickness to the naive baseline and the best caren for each plot'' --- resulted in linewidth aesthetic mapping in ggplot2
+
+•  ``go through the full pages on every chapter and see if we have all the scripts available and once we have them execute it and check if the numbers match'' --- resulted in comprehensive Python verification script
+
+
+\section{Numerical Verification Process}\label{app_sec:numerical_verification_process}
+
+A complete numerical verification pass was conducted across all chapter files. AI generated Python scripts that loaded the data CSVs, recomputed all key statistics (weighted MAE, Wilcoxon tests, overlap statistics, rule counts, direction counts, support thresholds), and compared them against the thesis text. The following errors were identified and corrected:
+
+\clearpage
+\begin{table}[h!]
+  \centering
+  \caption{AI use summary table 6.}\label{tab:appe_6}
+  \footnotesize
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{l|l|l|X}
+  \toprule
+  Location & Original & Corrected & Source \\
+  \midrule
+  Ch. 3 --- CarenR\_Dist\_Thresh threshold & |r| $\geq$ 0.20 & |r| $\geq$ 0.30 & Code: carenr\_cor\_thresh = 0.30 \\
+  Ch. 4 --- support filter & $\geq$15\% of obs. & $\geq$20\% of obs. & Code: carenr\_min\_sup = 0.20 \\
+  Ch. 4 --- RDD direction count & 46/48 above-trend & 31/48 above-trend & rules\_interpreted\_rdd.csv \\
+  Ch. 4 --- RVV direction count & 19/20 below-trend & 16/20 below-trend & rules\_interpreted\_rvv.csv \\
+  Ch. 4 --- RIPPER RVV accuracy & 35\% & 27.5\% & ripper\_metrics\_rvv.csv \\
+  Ch. 4 --- RIPPER kappa range & $\kappa$ = 0.06--0.19 & $\kappa$ = 0.13 (RDD), -0.09 (RVV) & ripper\_rules\_rdd/rvv.txt \\
+  Ch. 5/6 --- support threshold refs & $\geq$15\% support & $\geq$20\% support & Code: carenr\_min\_sup = 0.20 \\
+  Appendix~\ref{app:complete_rule_listings} --- RVV direction count & 19/1 split & 16/4 split & rules\_interpreted\_rvv.csv \\
+  Appendix~\ref{app:complete_feature_reference} --- feature count & 59 features & 58 features & dataPrep\_cont\_dataset\_rdd.csv \\
+  Ch. 19/appendices --- LAI in RVV & LAI in all 20 rules & LAI in 4/20 rules & rules\_interpreted\_rvv.csv \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+Claims verified as correct: rule counts (48/20), weighted MAEs (189.2/171.6/184/140 mhl), Wilcoxon tests (W=68 p=0.468; W=0 p=0.004), binomial test (5/5, p=0.031), pairwise overlap (730/1128 = 64.7\%; 95/190 = 50.0\%), distinct feature combinations (44/48; 20/20), feature-subset rules (28/48; 5/20), M5Rules rule counts (2/3), RIPPER RDD accuracy (42\%), LOESS MAEs (~90 mhl RVV; ~290 mhl RDD), era-composition threshold (~29\%).
+
+
+\section{Student Responsibility Declaration}\label{app_sec:student_responsibility_declaration}
+
+The student affirms that:
+
+•  All research activities (data preparation, feature engineering, model execution, statistical analysis) were conducted independently without AI assistance.
+
+•  All AI-generated or AI-revised content was critically reviewed and validated against primary sources before inclusion.
+
+•  The numerical verification process demonstrates active critical engagement: errors introduced earlier in the writing process (including AI-generated errors) were identified and corrected.
+
+•  The student understands and is able to explain all content in this dissertation, including all sections revised with AI assistance.
+
+\nopagebreak[4]
+\vspace{0.5em}
+\noindent Hugo Filipe Queir\'oz Nogueira, June 2026

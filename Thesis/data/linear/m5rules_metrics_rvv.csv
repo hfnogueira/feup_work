@@ -1,2 +1,2 @@
 "region","detrend_method","model","cv_mae","cv_rmse","cv_r2","note"
-"RVV","linear","M5Rules",440.0765,576.3489,-0.0701,"metrics in residual units"
+"RVV","linear","M5Rules",440.0765,576.3489,-0.0701,"metrics in residual units (not mhl)"

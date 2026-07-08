@@ -1,0 +1,55 @@
+============================================================
+M5Rules — RDD
+Detrending : YES (linear)
+Target     : Wine_mhl residuals (deviation from trend)
+Rules      : 2 (ordered — first match wins)
+============================================================
+
+HOW TO READ THESE RULES:
+  Rules are evaluated in order. Each rule defines a climate subgroup
+  AND a local linear model active within it.
+  'x' coefficients indicate direction and magnitude of each feature's
+  contribution within that subgroup — positive = more production,
+  negative = less production.
+============================================================
+
+------------------------------------------------------------
+RULE 1
+
+  WHEN:
+    • IF
+    • Mean daily temperature in the 10 days before Flowering (previous year) > 16.03 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • Wet days (daily rainfall above 1 mm) in the 20 days after Flowering (current year) ≤ 3.5 days
+        → Increases humidity and disease pressure (downy mildew,
+          botrytis); physically hinders pollination during flowering.
+    • THEN
+
+  THEN  Wine_mhl residual (mhl above/below trend)  =
+             45.2299 × Mean daily temperature in the 10 days before Flowering (current year) [°C]
+             + 23.4341 × tm_fl_y0_b10 - 52.1672 * tm_bb_y0_a30 - 9.1835 * tm in the 20 days after Start of Maturity (previous year)
+             + 8.8029 × Mean daily temperature in a 10-day window centred on Harvest (current year) [°C]
+             + 7.3148 × tn_hv_y0_a30 - 3.4465 * tm.days.less.15 in the 15 days before Flowering (current year)
+             + 0.8769 × Rainfall sum in the 10 days after Harvest (previous year) [mm]
+             + 7.6834 × days.rf.above.1mm_sm_y1_b20 - 32.6483 * days.rf.above.1mm in the 10 days after Harvest (previous year)
+             + 675.752 × Leaf Area Index (IAF) in the 10 days before Flowering (current year) [m²/m²]
+             + 285.8541 × Leaf Area Index (IAF) in the 30 days before Flowering (current year) [m²/m²]
+             + 2319.9926 × iaf_fl_y0_b20 - 2474.5516 * iaf_fl_y0_b30 - 0.4354 * swa_hv_y1_b20 - 1023.6146 [19/44.82%]
+
+  SUMMARY: In years when IF; and Mean daily temperature in the 10 days before Flowering (previous year) > 16.03 °C; and Wet days (daily rainfall above 1 mm) in the 20 days after Flowering (current year) ≤ 3.5 days; and THEN, production is estimated by the linear model above.
+
+------------------------------------------------------------
+RULE 2
+
+  WHEN:
+    • (no conditions — applies to all remaining years)
+
+  THEN  Wine_mhl residual (mhl above/below trend)  =
+             66.4463 × tm_fl_y1_b10 - 97.628 * tm_bb_y0_a30 - 38.5402 * tm in the 20 days after Start of Maturity (previous year)
+             + 39.6208 × Mean daily temperature in the 30 days after Harvest (previous year) [°C]
+             + 1394.7275 × Leaf Area Index (IAF) in the 20 days before Flowering (current year) [m²/m²]
+             + 4138.6018 × iaf_fl_y0_b10 - 4199.4292 * iaf_fl_y0_b20 - 2.3042 * swa_hv_y1_b20 - 408.0874 [69/72.204%]
+
+  SUMMARY: In years when (no conditions — applies to all remaining years), production is estimated by the linear model above.
+

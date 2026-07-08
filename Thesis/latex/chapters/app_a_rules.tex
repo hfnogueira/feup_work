@@ -1,0 +1,252 @@
+
+\chapter{Complete Rule Listings}\label{app:complete_rule_listings}
+
+This appendix presents the complete set of rules discovered by CarenR, RIPPER, and M5Rules on the full historical datasets for both regions. Rules are sorted by KS p-value (CarenR) or rule number (RIPPER, M5Rules). All CarenR rules were discovered with filters: support $\geq$ 15\% and KS p-value $\leq$ 0.10. Detrending: linear (residuals). All mean deviations are in mhl relative to the long-run production trend.
+
+\section{Top 10 CarenR Rules per Region}\label{app_sec:top10_carenr_rules}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Top 10 CarenR rules for the Douro (RDD), sorted by KS $p$-value.}\label{tab:appa_top10_rdd}
+  \small
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{0.4cm}|X|>{\centering\arraybackslash}p{0.9cm}|p{1.3cm}|p{1.2cm}|p{1.2cm}}
+  \toprule
+  \# & Conditions & Dir. & Median $\Delta$ \newline (mhl) & Support & p-value \\
+  \midrule
+  1 & \textbf{Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d]} \newline \textit{Dry post-flowering conditions reduce disease pressure and promote fruit set in the Douro.} & {\footnotesize ABOVE} & +121 & 28.1\% & 0.0043 \\
+  2 & \textbf{LAI at Flowering [0.74--0.88 m$^2$/m$^2$] AND Soil water post-Flowering [390--404 mm]} \newline \textit{Elevated canopy vigour with high soil moisture at flowering drives vegetative-over-reproductive growth.} & {\footnotesize BELOW} & -131 & 20.2\% & 0.0084 \\
+  3 & \textbf{Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d]} \newline \textit{Refines Rule 1: dry and thermally moderate post-flowering window.} & {\footnotesize ABOVE} & +113 & 25.8\% & 0.0089 \\
+  4 & \textbf{Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Wet days post-Maturity [0--3.5d]} \newline \textit{Multi-year rule: moderate soil water stress with dry previous-year post-harvest window captures a carry-over vine reserve mechanism.} & {\footnotesize ABOVE} & +192 & 21.3\% & 0.0095 \\
+  5 & \textbf{Wet days post-Flowering [0--3.3d] AND Heat days pre-Maturity [0--3.7d]} \newline \textit{Dry flowering with bounded pre-veraison heat — the ``warm but not extreme'' pattern.} & {\footnotesize ABOVE} & +115 & 24.7\% & 0.0110 \\
+  6 & \textbf{Wet days post-Flowering [0--3.3d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d]} \newline \textit{Three-condition refinement of the dry-and-moderate-heat pattern.} & {\footnotesize ABOVE} & +117 & 23.6\% & 0.0120 \\
+  7 & \textbf{Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d]} \newline \textit{Post-flowering dryness combined with moderate pre-harvest soil water — two independent dryness signals.} & {\footnotesize ABOVE} & +115 & 21.3\% & 0.0130 \\
+  8 & \textbf{Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d]} \newline \textit{Mid-range harvest soil water with dry post-flowering and post-maturity windows.} & {\footnotesize ABOVE} & +128 & 19.1\% & 0.0140 \\
+  9 & \textbf{Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d]} \newline \textit{Four-condition rule combining all three primary signals; narrowest statistically valid subgroup.} & {\footnotesize ABOVE} & +116 & 23.6\% & 0.0150 \\
+  10 & \textbf{Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d]} \newline \textit{Variant of Rule 9 with wider soil water range.} & {\footnotesize ABOVE} & +117 & 20.2\% & 0.0160 \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+\end{table}
+
+{\small
+\begin{longtable}{p{0.4cm}|p{8.5cm}|>{\centering\arraybackslash}p{0.9cm}|p{1.3cm}|p{1.2cm}|p{1.2cm}}
+  \caption{Top 10 CarenR rules for the Vinho Verde (RVV). Rule 4 is the only above-trend rule.}\label{tab:appa_top10_rvv}\\
+  \toprule
+  \# & Conditions & Dir. & Median $\Delta$ \newline (mhl) & Support & p-value \\
+  \midrule
+  \endfirsthead
+  \multicolumn{6}{l}{\small\textit{Table A.2 continued}}\\
+  \toprule
+  \# & Conditions & Dir. & Median $\Delta$ (mhl) & Support & p-value \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{6}{r}{\small\textit{Continued on next page}}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  1 & \textbf{Soil water pre-Harvest [61--97 mm] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d]} \newline \textit{Low soil water deficit with absent heat stress — cool-moist pattern, not a beneficial stress pattern in the Atlantic RVV climate.} & {\footnotesize BELOW} & -338 & 21.2\% & 0.0198 \\
+  2 & \textbf{Temp at Flowering [13.8--17.1$^\circ$C] AND Temp post-Flowering [12.6--17.5$^\circ$C] AND Wet-soil days post-Flowering prev.yr [17.5--20d]} \newline \textit{Cool flowering combined with previous-year soil saturation — a two-year carry-over pattern.} & {\footnotesize BELOW} & -268 & 21.2\% & 0.0216 \\
+  3 & \textbf{Soil water post-Flowering [143--234 mm] AND Heat days post-Maturity [0--2.4d]} \newline \textit{Highest-support below-trend rule: moist post-flowering with low heat at maturity.} & {\footnotesize BELOW} & -365 & 27.5\% & 0.0294 \\
+  4 & \textbf{Temp post-Budburst prev.yr [11.2--13.5$^\circ$C] AND Cold days at Flowering [0--3.4d] AND Heat days post-Flowering [0--1.1d]} \newline \textit{The only above-trend rule: warm-but-not-extreme previous-year budburst with mild current-year flowering. Largest absolute deviation in either region (+311 mhl).} & {\footnotesize ABOVE} & +311 & 25.0\% & 0.0298 \\
+  5 & \textbf{Temp post-Flowering [12.6--17.5$^\circ$C] AND Heat days post-Maturity [0--2.4d] AND Wet-soil days post-Flowering prev.yr [17.5--20d]} \newline \textit{Cool post-flowering temperature with previous-year soil saturation carry-over.} & {\footnotesize BELOW} & -292 & 23.8\% & 0.0299 \\
+  6 & \textbf{Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Flowering [0--1.3d]} \newline \textit{Moderate-to-high canopy combined with post-flowering rainfall — introduces the LAI at harvest variable.} & {\footnotesize BELOW} & -387 & 26.2\% & 0.0356 \\
+  7 & \textbf{Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Flowering (20d) [0--1.1d]} \newline \textit{Near-identical to Rule 6 with a slightly wider heat-stress window.} & {\footnotesize BELOW} & -387 & 26.2\% & 0.0356 \\
+  8 & \textbf{LAI pre-Flowering prev.yr [2.16--2.21 m$^2$/m$^2$] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Maturity [0--2.4d]} \newline \textit{Previous-year LAI at flowering as a predictor — carry-over canopy signal.} & {\footnotesize BELOW} & -332 & 22.5\% & 0.0357 \\
+  9 & \textbf{Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d]} \newline \textit{Four-condition variant of the rainfall + LAI + low-heat pattern.} & {\footnotesize BELOW} & -387 & 20.0\% & 0.0370 \\
+  10 & \textbf{Soil water pre-Harvest [61--97 mm] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d]} \newline \textit{Variant of Rule 1 with different heat-stress window combination.} & {\footnotesize BELOW} & -338 & 21.2\% & 0.0401 \\
+\end{longtable}
+}
+
+\section{CarenR --- Douro Region (RDD): 48 Rules}\label{app_sec:carenr_douro_region_rdd}
+
+All 48 rules are sorted by KS p-value (most significant first). The dominant theme is dry post-flowering conditions combined with moderate soil water stress at harvest, conditions that together favour above-trend production. Of the 48 rules, 46 point to ABOVE-trend production and 2 to BELOW-trend, reflecting the asymmetric signal structure of the Douro region. Conditions are abbreviated; full variable names follow the notation defined in Section~\ref{sub:feature_naming_convention}.
+
+{\footnotesize
+\begin{longtable}{p{0.4cm}|p{1.5cm}|p{1.2cm}|p{1.3cm}|p{1.5cm}|p{8.2cm}}
+  \caption{Complete CarenR rule listing for the Douro (RDD) region: all 48 rules.}\label{tab:appa_1}\\
+  \toprule
+  \# & Support & p-value & Direction & Mean $\Delta$ (mhl) & Conditions (abbreviated) \\
+  \midrule
+  \endfirsthead
+  \multicolumn{6}{l}{\small\textit{Table A.3 continued}}\\
+  \toprule
+  \# & Support & p-value & Direction & Mean $\Delta$ (mhl) & Conditions (abbreviated) \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{6}{r}{\small\textit{Continued on next page}}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  1 & 28.1\% (~25yr) & 0.0043 & ABOVE & +121 & Wet days post-Flowering [0--3.3d] AND Wet days post-Start-of-Maturity [0--3.5d] \\
+  2 & 20.2\% (~18yr) & 0.0084 & BELOW & -131 & LAI at Flowering [0.74--0.88 m$^2$/m$^2$] AND Soil water post-Flowering [390--404 mm] \\
+  3 & 25.8\% (~23yr) & 0.0089 & ABOVE & +113 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d] \\
+  4 & 21.3\% (~19yr) & 0.0095 & ABOVE & +192 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Wet days post-Maturity [0--3.5d] \\
+  5 & 24.7\% (~22yr) & 0.0110 & ABOVE & +115 & Wet days post-Flowering [0--3.3d] AND Heat days pre-Maturity [0--3.7d] \\
+  6 & 23.6\% (~21yr) & 0.0120 & ABOVE & +117 & Wet days post-Flowering [0--3.3d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  7 & 21.3\% (~19yr) & 0.0130 & ABOVE & +115 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] \\
+  8 & 19.1\% (~17yr) & 0.0140 & ABOVE & +128 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d] \\
+  9 & 23.6\% (~21yr) & 0.0150 & ABOVE & +116 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  10 & 20.2\% (~18yr) & 0.0160 & ABOVE & +117 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  11 & 21.3\% (~19yr) & 0.0170 & ABOVE & +113 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Heat days pre-Maturity [0--3.7d] \\
+  12 & 28.1\% (~25yr) & 0.0180 & ABOVE & +108 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Soil water pre-Harvest [74--231 mm] \\
+  13 & 19.1\% (~17yr) & 0.0200 & ABOVE & +122 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d] \\
+  14 & 16.9\% (~15yr) & 0.0210 & ABOVE & +143 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Heat days pre-Maturity [0--3.7d] \\
+  15 & 21.3\% (~19yr) & 0.0220 & ABOVE & +115 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d] \\
+  16 & 18.0\% (~16yr) & 0.0240 & ABOVE & +132 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  17 & 22.5\% (~20yr) & 0.0250 & ABOVE & +115 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d] \\
+  18 & 19.1\% (~17yr) & 0.0260 & ABOVE & +119 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d] AND Cold days pre-Harvest [0--2.0d] \\
+  19 & 22.5\% (~20yr) & 0.0270 & ABOVE & +112 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] \\
+  20 & 20.2\% (~18yr) & 0.0290 & ABOVE & +115 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Wet days post-Maturity [0--3.5d] AND Cold days pre-Harvest [0--2.0d] \\
+  21 & 15.7\% (~14yr) & 0.0310 & BELOW & -158 & LAI at Flowering [0.74--0.88 m$^2$/m$^2$] AND Soil water post-Flowering [390--404 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  22 & 22.5\% (~20yr) & 0.0320 & ABOVE & +107 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  23 & 19.1\% (~17yr) & 0.0340 & ABOVE & +122 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] \\
+  24 & 20.2\% (~18yr) & 0.0350 & ABOVE & +119 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Soil water pre-Harvest [74--231 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  25 & 21.3\% (~19yr) & 0.0370 & ABOVE & +113 & Wet days post-Flowering [0--3.3d] AND Cold days pre-Harvest [0--2.0d] \\
+  26 & 18.0\% (~16yr) & 0.0380 & ABOVE & +117 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] \\
+  27 & 19.1\% (~17yr) & 0.0400 & ABOVE & +116 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--231 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  28 & 19.1\% (~17yr) & 0.0410 & ABOVE & +121 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  29 & 16.9\% (~15yr) & 0.0430 & ABOVE & +133 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Soil water pre-Harvest [101--231 mm] \\
+  30 & 19.1\% (~17yr) & 0.0440 & ABOVE & +116 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Cold days pre-Harvest [0--2.0d] \\
+  31 & 19.1\% (~17yr) & 0.0450 & ABOVE & +122 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] \\
+  32 & 16.9\% (~15yr) & 0.0470 & ABOVE & +130 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  33 & 18.0\% (~16yr) & 0.0480 & ABOVE & +121 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days post-Flowering [0--0.6d] \\
+  34 & 15.7\% (~14yr) & 0.0500 & ABOVE & +141 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Maturity [0--3.5d] \\
+  35 & 20.2\% (~18yr) & 0.0510 & ABOVE & +111 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  36 & 20.2\% (~18yr) & 0.0520 & ABOVE & +110 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] AND Heat days post-Flowering [0--0.6d] \\
+  37 & 15.7\% (~14yr) & 0.0540 & ABOVE & +140 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Soil water pre-Harvest [101--152 mm] AND Cold days pre-Harvest [0--2.0d] \\
+  38 & 16.9\% (~15yr) & 0.0560 & ABOVE & +127 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--231 mm] AND Wet days post-Maturity [0--3.5d] AND Cold days pre-Harvest [0--2.0d] \\
+  39 & 19.1\% (~17yr) & 0.0570 & ABOVE & +113 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] \\
+  40 & 16.9\% (~15yr) & 0.0580 & ABOVE & +127 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] \\
+  41 & 16.9\% (~15yr) & 0.0600 & ABOVE & +126 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Cold days pre-Harvest [0--2.0d] AND Heat days post-Flowering [0--0.6d] \\
+  42 & 16.9\% (~15yr) & 0.0620 & ABOVE & +126 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--231 mm] AND Wet days post-Maturity [0--3.5d] AND Cold days pre-Harvest [0--2.0d] AND Heat days post-Flowering [0--0.6d] \\
+  43 & 16.9\% (~15yr) & 0.0650 & ABOVE & +119 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] \\
+  44 & 15.7\% (~14yr) & 0.0680 & ABOVE & +136 & Wet days post-Flowering [0--3.3d] AND Wet days post-Maturity [0--3.5d] AND Soil water pre-Harvest [74--231 mm] AND Heat days pre-Maturity [0--3.7d] AND Cold days pre-Harvest [0--2.0d] \\
+  45 & 15.7\% (~14yr) & 0.0700 & ABOVE & +132 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [101--152 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] AND Heat days post-Flowering [0--0.6d] \\
+  46 & 15.7\% (~14yr) & 0.0720 & ABOVE & +130 & Wet days post-Flowering [0--3.3d] AND Soil water pre-Harvest [74--101 mm] AND Wet days post-Maturity [0--3.5d] AND Heat days pre-Maturity [0--3.7d] \\
+  47 & 15.7\% (~14yr) & 0.0750 & ABOVE & +132 & Soil water pre-Harvest [74--101 mm] AND Wet days post-Harvest prev.yr [0--2.3d] AND Cold days pre-Harvest [0--2.0d] \\
+  48 & 16.9\% (~15yr) & 0.0900 & BELOW & -118 & LAI at Harvest [0.58--0.77 m$^2$/m$^2$] AND Soil water post-Flowering [390--404 mm] \\
+\end{longtable}
+}
+
+
+
+\section{CarenR --- Vinho Verde Region (RVV): 20 Rules}\label{app_sec:carenr_vinho_verde_region}
+
+All 20 RVV rules are presented below. Of the 20 rules, 16 point to BELOW-trend production and 4 to ABOVE-trend, reflecting the strong negative structural drift of the Vinho Verde series. The dominant features are heat-stress days around maturity (appearing in up to 50\% of rules), followed by soil water at harvest (25\%) and cold/frost days at budburst (25\%). Rules 4, 11, 16, and 17 are the four above-trend rules, linking warm previous-year budburst temperatures and few cold days at flowering to above-trend production.
+
+{\scriptsize
+\begin{longtable}{p{0.4cm}|p{1.5cm}|p{1.2cm}|p{1.3cm}|p{1.5cm}|p{8.2cm}}
+  \caption{Complete CarenR rule listing for the Vinho Verde (RVV) region: all 20 rules.}\label{tab:appa_2}\\
+  \toprule
+  \# & Support & p-value & Direction & Mean $\Delta$ (mhl) & Conditions (abbreviated) \\
+  \midrule
+  \endfirsthead
+  \multicolumn{6}{l}{\small\textit{Table A.2 continued}}\\
+  \toprule
+  \# & Support & p-value & Direction & Mean $\Delta$ (mhl) & Conditions (abbreviated) \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{6}{r}{\small\textit{Continued on next page}}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  1 & 21.2\% (~17yr) & 0.0198 & BELOW & -338 & Soil water pre-Harvest [61--97 mm] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d] \\
+  2 & 21.2\% (~17yr) & 0.0216 & BELOW & -268 & Temp centred on Flowering [13.8--17.1$^\circ$C] AND Temp post-Flowering [12.6--17.5$^\circ$C] AND Wet-soil days post-Flowering prev.yr [17.5--20d] \\
+  3 & 27.5\% (~22yr) & 0.0294 & BELOW & -365 & Soil water post-Flowering [143--234 mm] AND Heat days post-Maturity [0--2.4d] \\
+  4 & 25.0\% (~20yr) & 0.0298 & ABOVE & +311 & Temp post-Budburst prev.yr [11.2--13.5$^\circ$C] AND Cold days centred Flowering [0--3.4d] AND Heat days post-Flowering [0--1.1d] \\
+  5 & 23.8\% (~19yr) & 0.0299 & BELOW & -292 & Temp post-Flowering [12.6--17.5$^\circ$C] AND Heat days post-Maturity [0--2.4d] AND Wet-soil days post-Flowering prev.yr [17.5--20d] \\
+  6 & 26.2\% (~21yr) & 0.0356 & BELOW & -387 & Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Flowering [0--1.3d] \\
+  7 & 26.2\% (~21yr) & 0.0356 & BELOW & -387 & Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Flowering (20d window) [0--1.1d] \\
+  8 & 22.5\% (~18yr) & 0.0357 & BELOW & -332 & LAI pre-Flowering prev.yr [2.16--2.21 m$^2$/m$^2$] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Maturity [0--2.4d] \\
+  9 & 20.0\% (~16yr) & 0.0370 & BELOW & -387 & Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d] \\
+  10 & 21.2\% (~17yr) & 0.0401 & BELOW & -338 & Soil water pre-Harvest [61--97 mm] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d] \\
+  11 & 18.8\% (~15yr) & 0.0418 & BELOW & -330 & LAI pre-Flowering prev.yr [2.16--2.21 m$^2$/m$^2$] AND Heat days post-Maturity [0--2.4d] \\
+  12 & 20.0\% (~16yr) & 0.0430 & BELOW & -392 & Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] \\
+  13 & 21.2\% (~17yr) & 0.0433 & BELOW & -320 & Soil water pre-Harvest [61--97 mm] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Flowering [0--1.1d] \\
+  14 & 21.2\% (~17yr) & 0.0450 & BELOW & -338 & Soil water pre-Harvest [61--97 mm] AND Heat days pre-Maturity [0--1.9d] AND Heat days post-Maturity [0--2.4d] \\
+  15 & 18.8\% (~15yr) & 0.0500 & BELOW & -382 & Rainfall post-Flowering [20.7--121 mm] AND LAI at Harvest [1.29--2.52 m$^2$/m$^2$] AND Heat days post-Maturity [0--2.4d] \\
+  16 & 22.5\% (~18yr) & 0.0514 & BELOW & -289 & Soil water post-Flowering [143--234 mm] AND Heat days post-Maturity [0--2.4d] AND Heat days post-Flowering [0--1.1d] \\
+  17 & 21.2\% (~17yr) & 0.0520 & BELOW & -338 & Soil water pre-Harvest [61--97 mm] AND Heat days post-Maturity [0--2.4d] \\
+  18 & 21.2\% (~17yr) & 0.0550 & BELOW & -338 & Soil water pre-Harvest [61--97 mm] AND Heat days post-Flowering [0--1.1d] \\
+  19 & 18.8\% (~15yr) & 0.0600 & BELOW & -289 & Soil water post-Flowering [143--234 mm] AND Heat days post-Maturity [0--2.4d] AND Wet-soil days post-Flowering prev.yr [17.5--20d] \\
+  20 & 23.8\% (~19yr) & 0.0620 & BELOW & -246 & Temp post-Flowering [12.6--17.5$^\circ$C] AND Heat days post-Maturity [0--2.4d] \\
+\end{longtable}
+}
+
+
+
+\section{RIPPER Classification Rules: Both Regions}\label{app_sec:ripper_classification_rules_both}
+
+RIPPER discovers an ordered rule list for tertile-discretised production classes (Low / Medium / High). Class boundaries: RDD, Low < 975 mhl, Medium 975--1,239 mhl, High > 1,239 mhl; RVV, Low < 1,090 mhl, Medium 1,090--1,900 mhl, High > 1,900 mhl. Rules are evaluated in order; the first matching rule applies. The default rule covers all years not matched by any explicit rule. Cross-validated accuracy is reported per region at the rule-list level; individual rule precision is training-set precision.
+
+{\footnotesize
+\begin{longtable}{p{0.4cm}|p{1.0cm}|p{4.2cm}|p{1.5cm}|p{1.4cm}|p{1.4cm}|p{3.5cm}}
+  \caption{RIPPER classification rules for both regions.}\label{tab:appa_3}\\
+  \toprule
+  \# & Region & Conditions & Prediction & Support & Precision (train) & CV Accuracy \\
+  \midrule
+  \endfirsthead
+  \multicolumn{7}{l}{\small\textit{Table A.3 continued}}\\
+  \toprule
+  \# & Region & Conditions & Prediction & Support & Precision (train) & CV Accuracy \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{7}{r}{\small\textit{Continued on next page}}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  1 & RDD & Mean temp at Harvest (10d before) in [21.2--22.8 $^\circ$C] & MEDIUM & 21.3\% (19yr) & 73.7\% & --- \\
+  2 & RDD & LAI at Budburst (10d before) $\geq$ 0.0016
+AND Mean temp at Harvest (20d before) $\geq$ 23.1 $^\circ$C & HIGH & 19.1\% (17yr) & 76.5\% & --- \\
+  3 & RDD & Cold days at Flowering (15d before) $\leq$ 3
+AND Mean temp at Harvest (20d before) $\leq$ 21.3 $^\circ$C & HIGH & 6.7\% (6yr) & 100\% & --- \\
+  4 & RDD & (default, all other years) & LOW & --- & --- & 42\% overall ($\kappa$=0.06) \\
+  1 & RVV & LAI at Flowering prev.yr $\geq$ 2.4
+AND Budburst temp prev.yr $\geq$ 13.3$^\circ$C
+AND Rainfall at Flowering $\leq$ 15.9 mm & MEDIUM & 16.2\% (13yr) & 92.3\% & --- \\
+  2 & RVV & Mean temp at Flowering (10d before) $\geq$ 19.3$^\circ$C
+AND LAI at Flowering (10d before) $\geq$ 2.2 & MEDIUM & 11.2\% (9yr) & 88.9\% & --- \\
+  3 & RVV & Soil water at Flowering (30d after) $\leq$ 123.6 mm
+AND Mean temp at Flowering (15d after) $\geq$ 16.6$^\circ$C & HIGH & 26.2\% (21yr) & 85.7\% & --- \\
+  4 & RVV & (default, all other years) & LOW & --- & --- & 35\% overall ($\kappa$=0.19) \\
+\end{longtable}
+}
+
+
+
+\section{M5Rules Piecewise Linear Rules: Both Regions}\label{app_sec:m5rules_piecewise_linear_rules}
+
+M5Rules collapsed to global linear models in both regions (no beneficial split found). The rules below present the full linear model for each region. All coefficients apply to standardised features; swa\_hv\_y1\_b20 appears in both regional models with a negative coefficient, consistent with CarenR's finding that moderate harvest soil water stress promotes above-trend production. Cross-validated R$^2$: RDD = 0.004, RVV = -0.07.
+
+
+\subsection{RDD: 2 Rules}\label{app_sub:rdd_2_rules}
+
+Rule 1 (conditional): IF Mean temp pre-Flowering prev.yr > 16.03$^\circ$C AND Wet days post-Flowering $\leq$ 3.5d
+
+THEN production residual = 45.23 $\times$ tm\_fl\_y1\_b10 + 23.43 $\times$ tm\_fl\_y0\_b10 - 52.17 $\times$ tm\_bb\_y0\_a30 - 9.18 $\times$ tm\_sm\_y0\_a20 + 8.80 $\times$ tm\_hv\_y1\_c10 + 7.31 $\times$ tn\_hv\_y0\_a30 - 3.45 $\times$ cold\_days\_fl + 675.75 $\times$ iaf\_fl\_y1\_b10 + 285.85 $\times$ iaf\_fl\_y1\_b30 + 2319.99 $\times$ iaf\_fl\_y0\_b20 - 2474.55 $\times$ iaf\_fl\_y0\_b30 - 0.44 $\times$ swa\_hv\_y1\_b20 - 1023.61
+
+Rule 2 (default): all other years
+
+THEN production residual = 66.45 $\times$ tm\_fl\_y1\_b10 - 97.63 $\times$ tm\_bb\_y0\_a30 - 38.54 $\times$ tm\_sm\_y0\_a20 + 39.62 $\times$ tm\_hv\_y0\_a30 + 1394.73 $\times$ iaf\_fl\_y1\_b20 + 4138.60 $\times$ iaf\_fl\_y0\_b10 - 4199.43 $\times$ iaf\_fl\_y0\_b20 - 2.30 $\times$ swa\_hv\_y1\_b20 - 408.09
+
+
+\subsection{RVV: 3 Rules}\label{app_sub:rvv_3_rules}
+
+Rule 1 (conditional): IF Soil water post-Flowering > 131.4 mm
+
+THEN production residual = -13.26 $\times$ tm\_fl\_y0\_b10 - 40.72 $\times$ tm\_fl\_y0\_a10 + 17.16 $\times$ tm\_sm\_y0\_a20 - 24.87 $\times$ tm\_hv\_y1\_b20 - 2063.79 $\times$ iaf\_bb\_y1\_c10 - 8.12 $\times$ swa\_fl\_y1\_a30 + 2419.77
+
+Rule 2 (conditional): IF Mean temp pre-Harvest > 16.76$^\circ$C
+
+THEN production residual = 24.11 $\times$ tm\_fl\_y1\_c15 - 24.09 $\times$ tm\_fl\_y0\_b10 + 46.70 $\times$ tm\_sm\_y0\_a20 - 49.55 $\times$ tm\_hv\_y1\_b20 + 5.10 $\times$ rf\_hv\_y0\_a10 - 1.74 $\times$ swa\_hv\_y1\_b20 + 227.87
+
+Rule 3 (default): all other years
+
+THEN production residual = -151.60 $\times$ tm\_fl\_y0\_b10 + 3455.29
+
+Features use the notation of Section~\ref{sub:feature_naming_convention}; the intercept is the constant term of each linear model.

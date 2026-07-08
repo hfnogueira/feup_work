@@ -70,8 +70,16 @@ library(rpart)
 source("src/rscripts/utils/config.R")
 source("src/rscripts/utils/detrend_utils.R")
 
-# Per-run state — change to switch region
-file       <- 2     # 1 = RDD  |  2 = RVV
+# Per-run state — accepts optional command-line arg: Rscript script.R RDD or RVV
+# Falls back to file <- 2 (RVV) if no argument supplied
+args_cli <- commandArgs(trailingOnly = TRUE)
+if (length(args_cli) > 0 && toupper(args_cli[1]) == 'RDD') {
+  file <- 1
+} else if (length(args_cli) > 0 && toupper(args_cli[1]) == 'RVV') {
+  file <- 2
+} else {
+  file <- 2     # default: RVV  (change to 1 for RDD)
+}
 
 # Per-script tuning — walk-forward scenarios
 min_train_pct <- 0.80   # minimum training fraction (e.g. 0.80 = 80% of data)
@@ -417,7 +425,15 @@ find_supervised_cuts <- function(x, y, n_bins = 3, min_obs = 5) {
   if (is.na(t2))
     t2 <- as.numeric(quantile(x, ifelse(mean(lo_m) >= 0.5, 1/3, 2/3)))
 
-  sort(c(t1, t2))
+  cuts <- sort(unique(c(t1, t2)))   # deduplicate — prevents "breaks not unique" in cut()
+
+  # If deduplication collapsed to a single cut, add a second from equal-frequency
+  if (length(cuts) < n_bins - 1) {
+    fallback <- as.numeric(quantile(x, seq_len(n_bins - 1) / n_bins))
+    cuts <- sort(unique(c(cuts, fallback)))[seq_len(n_bins - 1)]
+  }
+
+  cuts
 }
 
 
@@ -1336,7 +1352,8 @@ for (s in seq_along(train_ends)) {
     disc_train_sv <- data.frame(Wine_mhl = train_residuals)
     for (feat in top_feats) {
       cuts    <- find_supervised_cuts(train_cont[[feat]], train_residuals, n_bins = 3)
-      breaks  <- c(-Inf, cuts, Inf)
+      breaks  <- unique(sort(c(-Inf, cuts, Inf)))   # unique() guards against degenerate data
+      if (length(breaks) < 3) next                  # skip feature if still degenerate
       disc_train_sv[[feat]] <- as.factor(
         make_caren_intervals(train_cont[[feat]], breaks))
     }
@@ -1585,15 +1602,21 @@ model_colours <- c(
 )
 
 # Smooth with a loess line when there are many scenarios
+# Key lines (Naive_Median + best CarenR) get extra thickness
+best_carenr <- if (region == 'RDD') 'CarenR_Dist_Eta2' else 'CarenR_Dist_Sup_FS'
+highlight_models <- c('Naive_Median', best_carenr)
 p_lc <- metrics_all %>%
   filter(model != 'Naive') %>%
-  ggplot(aes(x = n_train, y = mae, colour = model)) +
+  mutate(lw_group = if_else(model %in% highlight_models, 'key', 'other')) %>%
+  ggplot(aes(x = n_train, y = mae, colour = model, linewidth = lw_group)) +
   { if (n_scenarios > 10)
-      geom_smooth(method = 'loess', span = 0.4, se = FALSE, linewidth = 1.0)
+      geom_smooth(method = 'loess', span = 0.4, se = FALSE)
     else
-      geom_line(linewidth = 0.9)
+      geom_line()
   } +
-  geom_point(size = 1.6, alpha = 0.55) +
+  scale_linewidth_manual(values = c(key = 2.0, other = 0.7), guide = 'none') +
+  geom_point(aes(size = lw_group), alpha = 0.6) +
+  scale_size_manual(values = c(key = 2.5, other = 1.3), guide = 'none') +
   geom_hline(data = metrics_all %>%
                filter(model == 'Naive') %>%
                group_by(n_train) %>%

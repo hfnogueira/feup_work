@@ -1,0 +1,62 @@
+============================================================
+M5Rules — RVV
+Detrending : YES (linear)
+Target     : Wine_mhl residuals (deviation from trend)
+Rules      : 3 (ordered — first match wins)
+============================================================
+
+HOW TO READ THESE RULES:
+  Rules are evaluated in order. Each rule defines a climate subgroup
+  AND a local linear model active within it.
+  'x' coefficients indicate direction and magnitude of each feature's
+  contribution within that subgroup — positive = more production,
+  negative = less production.
+============================================================
+
+------------------------------------------------------------
+RULE 1
+
+  WHEN:
+    • IF
+    • Available soil water in the 15 days after Flowering (current year) > 131.364 mm
+        → Soil moisture balance — governs water stress and berry growth
+          rate.
+    • THEN
+
+  THEN  Wine_mhl residual (mhl above/below trend)  =
+             -13.2577 × tm_fl_y0_b10 - 40.7199 * tm in the 10 days after Flowering (previous year)
+             + 17.1571 × tm_sm_y0_a20 - 24.8711 * tm_hv_y1_b20 - 2063.7854 * iaf_bb_y1_c10 - 8.1184 * swa in the 30 days after Flowering (current year)
+             + 2419.7711 [41/67.641%]  (intercept)
+
+  SUMMARY: In years when IF; and Available soil water in the 15 days after Flowering (current year) > 131.364 mm; and THEN, production is estimated by the linear model above.
+
+------------------------------------------------------------
+RULE 2
+
+  WHEN:
+    • IF
+    • Mean daily temperature in the 20 days before Harvest (current year) > 16.764 °C
+        → Core thermal proxy — drives bud burst, berry set, sugar
+          accumulation, and ripening speed.
+    • THEN
+
+  THEN  Wine_mhl residual (mhl above/below trend)  =
+             24.1079 × tm_fl_y1_c15 - 24.0915 * tm in the 10 days before Flowering (previous year)
+             + 46.6995 × tm_sm_y0_a20 - 49.5548 * tm in the 20 days before Harvest (current year)
+             + 5.1021 × rf_hv_y0_a10 - 1.7369 * swa in the 20 days before Harvest (current year)
+             + 227.8692 [31/73.261%]  (intercept)
+
+  SUMMARY: In years when IF; and Mean daily temperature in the 20 days before Harvest (current year) > 16.764 °C; and THEN, production is estimated by the linear model above.
+
+------------------------------------------------------------
+RULE 3
+
+  WHEN:
+    • (no conditions — applies to all remaining years)
+
+  THEN  Wine_mhl residual (mhl above/below trend)  =
+             -151.6016 × Mean daily temperature in the 10 days before Flowering (previous year) [°C]
+             + 3455.2925 [8/59.917%]  (intercept)
+
+  SUMMARY: In years when (no conditions — applies to all remaining years), production is estimated by the linear model above.
+
