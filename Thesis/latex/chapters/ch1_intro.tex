@@ -1,0 +1,44 @@
+
+\chapter{Introduction}\label{ch:introduction}
+
+
+\section{Motivation}\label{sec:motivation}
+
+Wine production is among the most climate-sensitive agricultural activities in Europe. Annual yield at a regional scale is governed by a complex interaction of meteorological conditions during the growing season, including temperature, rainfall, soil water balance, and frost events, superimposed on longer-term structural factors including vine age and density, viticultural practices, policy constraints, and market demand. For wine regions such as the Douro Valley and Vinho Verde in northern Portugal, which together produce some of Portugal's most commercially and culturally significant wines, understanding the relationship between climate and production has practical relevance for producers, cooperatives, and regulatory bodies managing annual harvest forecasts, storage planning, and risk assessment.
+
+At the same time, the agroclimatic signal present in annual production data is weak when compared to the year-to-year variability. Total production values at the regional level reflect the decisions of thousands of individual producers, the heterogeneity of vineyards in terms of soil type, altitude, and vine training systems, as well as the effects of localized weather events that are not captured by regional climate indices. This high level of variability has historically limited the predictive performance of statistical models applied to wine production forecasting, motivating the use of interpretable machine learning methods that seek to identify the most robust and relevant climate patterns from the available data.
+
+Modern machine learning has been applied extensively to grape yield and wine production prediction over the past decade. Random Forest, Support Vector Machines, Gradient Boosting, and Deep Learning architectures, including Long Short-Term Memory networks, have all been used to predict yield from meteorological, phenological, and remote sensing data (Santos et al.; Lopes et al., 2024). These methods achieve strong predictive accuracy and handle complex non-linear interactions across large feature sets. Their limitation is interpretability: the internal decision logic is not accessible to viticulturalists, cooperative managers, or climate adaptation planners, and post-hoc explanation tools such as SHAP values approximate feature influence rather than producing explicit, auditable rules. Where the goal is to explain which conditions drive production, not merely to forecast the next value, this opacity is a fundamental constraint. No published work applies interpretable rule-based discovery methods to extract compact, human-readable agroclimatic patterns from long regional wine production records.
+
+Rule-based methods produce human-readable conditional statements: for example, ``if soil water at harvest is below X mm and fewer than Y wet days occur after flowering, then production is above the long-run trend by Z thousand hectolitres.'' These outputs can be read, questioned, and validated by agronomists, vine growers, and policy analysts without requiring knowledge of the underlying algorithm. Each rule also carries an explicit support estimate, the proportion of historical years in which the condition held, giving a direct measure of how frequently the identified pattern occurred.
+
+
+\section{Research Goals and Questions}\label{sec:research_goals_and_questions}
+
+This thesis pursues two complementary goals applied to historical wine production data from two Portuguese wine regions: the Douro Demarcated Region (RDD, 89 years, 1934--2022) and the Vinho Verde Region (RVV, 80 years, 1942--2021).
+
+\textbf{Goal 1 (Rule Discovery): }discover interpretable agroclimatic rules that explain which meteorological conditions are associated with above and below-trend production years in each region. The primary algorithm for this goal is CarenR (CAREN framework), which identifies subgroups of observations where the distribution of production residuals differs significantly from the global distribution, as measured by a Kolmogorov--Smirnov test.
+
+\textbf{Goal 2 (Predictive Validation): }evaluate whether the discovered rules, and rule-based models more generally, can outperform a naive production forecast in rigorous walk-forward (expanding window) validation. This goal addresses whether the identified climate patterns have sufficient predictive power to improve on the simplest possible forecast: the historical median.
+
+These goals give rise to four specific research questions:
+
+\textbullet{}  RQ1: Which agroclimatic variables most consistently distinguish above and below-trend production years in the Douro and Vinho Verde regions?
+
+\textbullet{}  RQ2: Do the identified variables reflect genuine within-era climate effects, or are they confounded with the structural production era transitions observed in both regions?
+
+\textbullet{}  RQ3: Does any rule-based model outperform the Naive\_Median baseline in rigorous walk-forward validation?
+
+\textbullet{}  RQ4: If rule-based prediction fails in aggregate, under what conditions, if any, does it succeed, and what structural properties of the data explain those conditions?
+
+
+\section{Scope and Delimitations}\label{sec:scope_and_delimitations}
+
+The thesis focuses exclusively on annual regional production values, measured in thousands of hectolitres (mhl). Sub-regional, vineyard-level, or quality-related outcomes are outside the scope of the study. The feature set is derived from regional climate indices and a vine phenological model; field measurements of vine physiology are not available and are therefore not considered. The study does not address price forecasting, demand modelling, or the economics of wine production.
+
+The rule-learning algorithms evaluated are CarenR (distributional rules), RIPPER (classification rules), and M5Rules (rule induction with linear regression consequents), together with naive baselines and a Decision Tree regressor as a non-rule comparator. Deep learning, ensemble methods, and other non-interpretable regression approaches are not evaluated; the thesis is specifically motivated by the interpretability requirement that makes rule-based methods preferable in this domain context.
+
+
+\section{Thesis Structure}\label{sec:thesis_structure}
+
+Chapter~\ref{ch:literature_review} covers the relevant background: wine production forecasting, agroclimatic modelling, and rule-based machine learning. Chapter~\ref{ch:data_and_methodology} describes the data, feature engineering, detrending methodology, and walk-forward validation protocol, and introduces the two-decision decomposition framework used throughout the analysis. Chapter~\ref{ch:goal_1_rule_extraction} reports the rule discovery results: algorithms compared, dominant agroclimatic features, and LOESS validation. Chapter~\ref{ch:goal_2_predictive_performance} presents the walk-forward prediction results for both regions, including era-composition analysis and statistical tests. Chapter~\ref{ch:discussion} discusses why rule discovery succeeds whereas prediction at the regional level remains challenging, examines the structural divergence between the two regions, and outlines directions for improvement. Chapter~\ref{ch:conclusions} presents conclusions, contributions, limitations, and future work.

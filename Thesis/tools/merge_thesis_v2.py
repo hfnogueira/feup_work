@@ -9,24 +9,25 @@ from docx.oxml import OxmlElement
 from docxcompose.composer import Composer
 import copy, os
 
-THESIS_DIR = '/sessions/charming-modest-galileo/mnt/Thesis/'
-OUT_PATH   = '/sessions/charming-modest-galileo/mnt/Thesis/thesis_complete.docx'
+THESIS_DIR = '/sessions/elegant-trusting-volta/mnt/Thesis/'
+OUT_PATH   = '/sessions/elegant-trusting-volta/mnt/Thesis/thesis_complete.docx'
 
 CHAPTERS = [
-    ('Abstract',          ['abstract_v2.docx']),
-    ('Introduction',      ['chapter1_introduction_v2.docx']),
-    ('Literature Review', ['chapter2_literature_v2.docx', 'chapter2_expand.docx', 'chapter2_cycle_figure.docx']),
-    ('Methodology',       ['chapter3_methods_v2.docx', 'chapter3_prediction_formula.docx', 'chapter3_stationarity.docx', 'chapter3_data_pipeline.docx', 'chapter3_acf.docx', 'chapter3_context_figures.docx']),
-    ('Rule Extraction',   ['chapter4_v4.docx', 'chapter4_overlap_freq.docx']),
-    ('Prediction',        ['chapter5_prediction_v2.docx', 'chapter5_per_scenario.docx', 'chapter5_expand.docx']),
-    ('Discussion',        ['chapter6_discussion.docx', 'chapter6_expand.docx']),
-    ('Conclusions',       ['chapter7_v3.docx']),
-    ('Figures',           ['figures.docx']),
-    ('References',        ['references_v2.docx']),
-    ('Appendix A',        ['appendix_a_rules.docx']),
-    ('Appendix B',        ['appendix_b_eda.docx']),
-    ('Appendix C',        ['appendix_c_features.docx']),
-    ('Appendix D',        ['appendix_d_feature_map.docx']),
+    ('Abstract',          ['01_abstract_v2.docx']),
+    ('Introduction',      ['02_chapter1_introduction_v2.docx']),
+    ('Literature Review', ['03_chapter2_literature_v2.docx', '04_chapter2_expand.docx', '05_chapter2_cycle_figure.docx']),
+    ('Methodology',       ['06_chapter3_methods_v3.docx', '07_chapter3_prediction_formula.docx', '08_chapter3_stationarity.docx', '09_chapter3_data_pipeline_v2.docx', '10_chapter3_acf.docx', '11_chapter3_context_figures.docx']),
+    ('Rule Extraction',   ['12_chapter4_v4.docx', '13_chapter4_overlap_freq.docx']),
+    ('Prediction',        ['14_chapter5_prediction_v2.docx', '15_chapter5_per_scenario.docx', '16_chapter5_expand.docx']),
+    ('Discussion',        ['17_chapter6_discussion.docx', '18_chapter6_expand.docx']),
+    ('Conclusions',       ['19_chapter7_v3.docx']),
+    ('Figures',           ['20_figures.docx']),
+    ('References',        ['21_references_v2.docx']),
+    ('Appendix A',        ['22_appendix_a_rules.docx']),
+    ('Appendix B',        ['23_appendix_b_eda.docx']),
+    ('Appendix C',        ['24_appendix_c_features.docx']),
+    ('Appendix D',        ['25_appendix_d_feature_map.docx']),
+    ('Appendix E',        ['26_appendix_e_ai_transparency.docx']),
 ]
 
 CH3_INJECT_AFTER = 'This generates 18 evaluation scenarios for RDD'
@@ -139,7 +140,7 @@ for label, files in CHAPTERS:
         src = Document(fpath)
 
         # Inject Ch3 sentence
-        if fname == 'chapter3_methods_v2.docx':
+        if fname == '06_chapter3_methods_v3.docx':
             inject_ch3_sentence(src)
 
         # Add page break before first file of each chapter

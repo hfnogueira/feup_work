@@ -70,8 +70,16 @@ library(rpart)
 source("src/rscripts/utils/config.R")
 source("src/rscripts/utils/detrend_utils.R")
 
-# Per-run state — change to switch region
-file       <- 2     # 1 = RDD  |  2 = RVV
+# Per-run state — accepts optional command-line arg: Rscript script.R RDD or RVV
+# Falls back to file <- 2 (RVV) if no argument supplied
+args_cli <- commandArgs(trailingOnly = TRUE)
+if (length(args_cli) > 0 && toupper(args_cli[1]) == 'RDD') {
+  file <- 1
+} else if (length(args_cli) > 0 && toupper(args_cli[1]) == 'RVV') {
+  file <- 2
+} else {
+  file <- 2     # default: RVV  (change to 1 for RDD)
+}
 
 # Per-script tuning — walk-forward scenarios
 min_train_pct <- 0.80   # minimum training fraction (e.g. 0.80 = 80% of data)
@@ -1594,15 +1602,21 @@ model_colours <- c(
 )
 
 # Smooth with a loess line when there are many scenarios
+# Key lines (Naive_Median + best CarenR) get extra thickness
+best_carenr <- if (region == 'RDD') 'CarenR_Dist_Eta2' else 'CarenR_Dist_Sup_FS'
+highlight_models <- c('Naive_Median', best_carenr)
 p_lc <- metrics_all %>%
   filter(model != 'Naive') %>%
-  ggplot(aes(x = n_train, y = mae, colour = model)) +
+  mutate(lw_group = if_else(model %in% highlight_models, 'key', 'other')) %>%
+  ggplot(aes(x = n_train, y = mae, colour = model, linewidth = lw_group)) +
   { if (n_scenarios > 10)
-      geom_smooth(method = 'loess', span = 0.4, se = FALSE, linewidth = 1.0)
+      geom_smooth(method = 'loess', span = 0.4, se = FALSE)
     else
-      geom_line(linewidth = 0.9)
+      geom_line()
   } +
-  geom_point(size = 1.6, alpha = 0.55) +
+  scale_linewidth_manual(values = c(key = 2.0, other = 0.7), guide = 'none') +
+  geom_point(aes(size = lw_group), alpha = 0.6) +
+  scale_size_manual(values = c(key = 2.5, other = 1.3), guide = 'none') +
   geom_hline(data = metrics_all %>%
                filter(model == 'Naive') %>%
                group_by(n_train) %>%

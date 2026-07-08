@@ -1,0 +1,171 @@
+
+\chapter{Literature Review}\label{ch:literature_review}
+
+This chapter reviews the foundations of the thesis across three domains: the agroclimatic drivers of wine production in Portuguese wine regions; quantitative approaches to yield prediction, from classical regression to modern machine learning; and the data mining methods (subgroup discovery and distribution rules) that underpin the CarenR framework used in this study. The chapter closes by situating this thesis relative to existing work.
+
+
+\section{Regional Wine Production in Portugal}\label{sec:regional_wine_production_in}
+
+Portugal is home to several wine regions with distinct climatic identities. This thesis focuses on two: the Douro Demarcated Region (RDD) and the Vinho Verde Region (RVV). Together they represented approximately 32\% of Portugal's total vineyard area and 37\% of national wine production in 2018 \citep{Cunha2020}. Despite their geographical proximity in northern Portugal, the two regions have markedly different climates and production histories, making them a natural comparative setting for agroclimatic modelling.
+
+
+\subsection{Douro Region}\label{sub:douro_region}
+
+The Douro wine region is located in north-eastern Portugal, one of the oldest demarcated wine regions in the world. Its topography is dominated by steep schist terraces on the hillsides of the Douro valley. The climate is continental and semi-arid: mean growing-season temperatures reach approximately 19.5$^\circ$C (Köppen Csa), annual precipitation ranges from 400 to 800 mm concentrated outside the growing season, and most vineyards are non-irrigated. Soil water reserves accumulated during the dormant winter period are the primary buffer against summer water stress. \citet{Cunha2016} demonstrated that soil water in the previous two to three years exerts a positive carryover effect on current-year production, reflecting the slow recharge of deep schist soil profiles. Douro production has increased substantially over the study period, roughly doubling from ~770 mhl in the 1930s to ~1,400 mhl by the 2010s, partly reflecting the expansion of the Douro DOC appellation for table wines from 1979 onward and the administrative Port production quota system (IVDP benef\'icio, the annual Port production quota).
+
+
+\subsection{Vinho Verde Region}\label{sub:vinho_verde_region}
+
+The Vinho Verde Region is located in the Minho province of north-western Portugal, the most Atlantic European wine region (Köppen Csb). Mean annual precipitation ranges from 1,200 to 2,000 mm and growing-season temperatures average approximately 17.1$^\circ$C. In contrast to the Douro, Vinho Verde production declined dramatically over the study period, from approximately 2,300 mhl in the 1960s to around 800 mhl by the 2010s ($-$65\%). This structural decline is associated with Portugal's EU accession in 1986, which introduced vine grubbing-up incentives under the Common Agricultural Policy and quality standards that penalised the region's traditional high-yield pergola systems, alongside rural exodus and the gradual conversion to lower-yield espalier training. Because rainfall is generally sufficient to refill soil water reserves year-round in RVV, carryover effects of water deficits are less prominent than in the Douro \citep{Cunha2020}.
+
+
+\section{Grapevine Yield Formation}\label{sec:grapevine_yield_formation}
+
+Grapevine yield is the product of five sequential components: vines per hectare, shoots per vine, inflorescences per shoot, berry number per bunch, and berry mass \citep{Zhu2020}. Each component is sensitive to different environmental stimuli at different phenological stages, creating a cascade of climate dependencies that spans two growing seasons. Inflorescence primordia, the embryonic structures that will become grape clusters, are initiated during the spring and summer of the year prior to the harvest year. Whether primordia develop into productive inflorescences or revert to tendrils is governed primarily by temperature and light at the time of differentiation \citep{Zhu2020}: high temperatures encourage inflorescence development, while cool or shaded conditions lead to tendril formation, reducing the following season's potential bunch number. This mechanism means that current-year production is physiologically dependent on prior-year climate, motivating the inclusion of lagged features in the agroclimatic models used in this thesis.
+
+The flowering stage, occurring in late spring of the harvest year, determines the number of berries through fruit-set efficiency. Both low and high temperatures disrupt pollination; wet conditions promote fungi diseases such as Botrytis cinerea and downy mildew, reducing fruit set. The veraison-to-harvest period is governed by temperature and soil water: in the Douro, post-veraison soil water stress typically promotes berry concentration; in Vinho Verde, the wetter Atlantic climate means that canopy management and moisture balance are the dominant ripening-phase constraints.
+
+
+
+\subsection{The Two-Year Vine Development Cycle}\label{sub:the_twoyear_vine_development}
+
+A defining property of the grapevine that distinguishes it from annual crops is its perennial nature: physiological processes in one growing season directly determine yield potential in the following season. Two carry-over mechanisms are particularly important for the feature design used in this thesis.
+
+First, inflorescence primordia --- the embryonic structures that will become grape clusters --- are initiated during the spring and early summer of the prior growing season (year y0). The thermal (tm) conditions at primordia formation, which occurs around the flowering of the prior season, (captured by \texttt{tm\_fl\_y0} and \texttt{tm\_bb\_y0} features, where \texttt{tm} = mean temperature, \texttt{fl} = flowering stage, \texttt{bb} = budburst stage, \texttt{y0} = prior year) directly determines how many primordia differentiate into productive inflorescences rather than tendrils, setting an upper bound on current-year bunch number that cannot be altered by current-year climate. Second, the carbohydrate reserves accumulated during the prior year's harvest-to-dormancy period (captured by \texttt{swa\_hv\_y0} and \texttt{tn\_hv\_y0} features) determine the vine's reproductive investment in the current season. Vines that finished the prior season in water or thermal stress have depleted reserves and redirect more assimilates to vegetative recovery, reducing berry development relative to shoot growth.
+
+The practical consequence for modelling is that any dataset covering only the current growing season is fundamentally incomplete for predicting annual wine production. The 15 previous-year features included in the dataset (25\% of the 59-feature total) represent the two physiological pathways --- primordia formation and carbohydrate reserves --- through which the prior season materially constrains current-year yield potential. The multi-year mechanism motivates the inclusion of lagged climate features (\texttt{y0} variables) alongside current-year features in the agroclimatic models used in this thesis, and its agronomic relevance is confirmed empirically by the rule discovery results in Chapter~\ref{ch:goal_1_rule_extraction}.
+
+\section{Meteorological Drivers of Wine Production Variability}\label{sec:meteorological_drivers_of_wine}
+
+For the Douro, \citet{Cunha2016} demonstrated that spring temperature explains approximately 60--65\% of the long-term and short-term behaviour of production, with soil water as the second principal driver. Both current-year and lagged soil water values (up to three years prior) show significant positive correlations with production. \citet{Cunha2020} further decomposed cyclical production properties using a time-frequency approach, identifying dominant production cycles of approximately 5.7 and 2.5 years linked to spring temperature and soil water oscillations. Climate change projections are of particular concern: Portugal is expected to experience the greatest growing-season temperature increase among major European wine regions (+1.3$^\circ$C by 2049), with soil water becoming the primary limiting resource in the Douro. For Vinho Verde, the Atlantic climate provides more consistent growing-season moisture; the dominant vulnerability is cool, wet flowering conditions that promote disease and reduce fruit set. \citet{Zhu2020} showed that daily maximum temperature plays a critical role in inflorescence initiation, while both maximum and minimum temperature influence berry number and mass.
+
+
+\section{Quantitative Approaches to Wine Yield Prediction}\label{sec:quantitative_approaches_to_wine}
+
+
+\subsection{Statistical and Regression Models}\label{sub:statistical_and_regression_models}
+
+The earliest quantitative yield prediction models relied on linear and generalised linear regression applied to seasonal climate aggregates. \citet{Santos2011} developed a multivariate linear regression model for Douro yield (1986--2008) using monthly mean temperatures and precipitation from March to June. \citet{Bock2013} analysed correlations between long-term yield records in Lower Franconia (1805--2010) and mean growing-season temperature. \citet{Cunha2012} applied an autoregressive model and short-time Fourier transform to identify cyclical properties of production in Douro and Vinho Verde. These models are interpretable and grounded in agronomy but assume linear, stationary relationships and cannot capture threshold effects, interactions, or non-stationarity from structural production changes. A methodological review by \citet{Fraga2024} argued that statistical models for climate impacts in grape and wine research remain underused relative to their potential and should be combined with other approaches.
+
+
+\subsection{Machine Learning Approaches}\label{sub:machine_learning_approaches}
+
+The past decade has seen rapid growth in the application of machine learning to grape yield and wine production prediction. Random Forest, Support Vector Machines, Gradient Boosting ensembles, and Deep Learning architectures have all been applied to predict yield from meteorological, phenological, and remote sensing data. \citet{Lopes2024} used Random Forest models to identify climatic drivers of wine production in Portugal's C\^oa region, demonstrating competitive predictive performance with feature importance rankings that align with agronomic expectations. Remote sensing approaches use satellite-derived indices (NDVI, EVI) as proxies for vine vigour at the parcel scale, enabling near-real-time sub-regional yield maps.
+
+These methods achieve strong predictive accuracy and handle non-linear interactions well, but they operate as black-box or grey-box models. Their internal decision logic is not accessible to domain experts, and post-hoc tools such as SHAP values approximate feature influence rather than producing explicit, auditable rules. As Molnar (2019) argues, the trade-off between accuracy and interpretability depends on the intended application. For problems where the aim is to explain which conditions drive production, not merely to forecast, this opacity is a fundamental constraint. No published work applies interpretable rule-based discovery methods to extract statistically validated, human-readable agroclimatic patterns from long regional wine production records.
+
+A further limitation shared across virtually all published approaches, including this thesis, is the brevity of the effective evaluation window. The walk-forward protocol used here generates 18 scenarios for RDD and 16 for RVV, covering only 17 test years per region. This is manifestly short for capturing the full interannual variability of wine production, which exhibits dominant production cycles of approximately 5.7 and 2.5 years \citep{Cunha2020}. A 17-year test window spans only three complete cycles of the dominant 5.7-year oscillation, meaning that conclusions about predictive performance are necessarily sensitive to which part of the cycle falls in the test set. This is a known weakness of most modelling work in this domain: the historical records are long enough to support rule discovery but generate very small evaluation samples in a temporally honest walk-forward framework. The statistical results in Chapter~\ref{ch:goal_2_predictive_performance} should therefore be interpreted with this constraint in mind.
+
+
+\section{Subgroup Discovery}\label{sec:subgroup_discovery}
+
+Subgroup discovery (SD) is a descriptive induction technique that identifies subsets of a dataset, defined by conjunctions of attribute-value conditions, within which the distribution of a target variable is statistically exceptional relative to the overall population \citep{Herrera2011}. Unlike classification, which aims to correctly assign every observation to a class, SD aims to find the most interesting local patterns: subgroups that are both statistically significant and sufficiently large to be meaningful. The field was formalised by \citet{Wrobel1997} and Klösgen (1996). \citet{Lavrac2004} extended the CN2 rule learner \citep{Clark1989} to subgroup discovery (CN2-SD); \citet{Kav2006} adapted the Apriori algorithm to SD (APRIORI-SD).
+
+A significant recent development is Exceptional Model Mining (EMM), introduced by \citet{Duivesteijn2016} as a generalisation where the interestingness criterion is based on a model fitted to the subgroup rather than a simple distributional shift test. EMM identifies subgroups where the relationship between variables differs significantly from the global relationship. \citet{Lemmerich2022} introduced robust subgroup discovery with statistical reliability guarantees. \citet{Zimmermann2019} adapted SD to temporal and sequential data, directly addressing the time-series structure of problems such as the one studied in this thesis.
+
+
+\section{Distribution Rules and the CarenR Framework}\label{sec:distribution_rules_and_the}
+
+
+\subsection{Distribution Rules}\label{sub:distribution_rules}
+
+Distribution rules (DR) were introduced by \citet{Jorge2006} for discovering and presenting conditional distributions of a numeric target variable with respect to a set of input variables. A distribution rule takes the form IF antecedent THEN distribution, where the antecedent is a conjunction of attribute intervals and the consequent is the empirical distribution of the target among matching observations. Unlike conventional association rules, distribution rules preserve the full distributional shape of the outcome. Statistical significance is assessed using the Kolmogorov--Smirnov (KS) test, which compares the empirical cumulative distribution of the target in the subgroup against the global distribution without assuming normality, well suited to small datasets where normality cannot be assumed.
+
+
+\subsection{The CarenR Framework}\label{sub:the_carenr_framework}
+
+CarenR (distribution rule discovery framework implemented in R, based on the CAREN association rule engine) is the primary algorithmic contribution of the line of work this thesis extends. It operationalises the distribution rule framework of \citet{Jorge2006} with several additions specifically designed for agroclimatic time series problems.
+
+The CarenR pipeline operates in two modes depending on the goal.
+
+For Goal 1 (Rule Discovery), CarenR is applied to the full historical dataset using the complete set of domain-engineered features derived from the grape phenological cycle. Continuous features are discretised into equal-frequency bins (quartiles by default), ensuring uniform bin occupancy. CarenR then performs a beam search over conjunctions of feature-bin conditions, evaluating each candidate subgroup using a two-sample KS test against the global distribution. Rules are retained if they pass a significance threshold (p $\leq$ 0.10) and a minimum support filter ($\geq$ 15\% of observations). The output is a set of interpretable conditional patterns linking climate conditions to shifts in the distribution of production residuals.
+
+For Goal 2 (Predictive Validation), the same pipeline runs within each training fold rather than on the full dataset, preventing leakage of test-set information. Discretisation, feature selection, and rule induction are all performed on the training fold only. At prediction time, rules that match a test year's conditions have their subgroup medians combined as a support-weighted average --- each rule's median residual weighted by its support fraction, with weights normalised to sum to one; if no rule fires, the model falls back to the training median. The 11 CarenR variants evaluated in this thesis differ from one another in the feature selection step applied within each fold.
+
+CarenR differs from RIPPER and M5Rules in what it optimises: it asks whether the distribution of production residuals shifts significantly within a subgroup, rather than assigning class labels or minimising squared error. A feature that reliably shifts the distribution mean, even when the distribution remains wide and overlapping with the global one, will be detected by CarenR but not by classification or regression criteria. This is why Leaf Area Index (LAI) at harvest, the dominant feature in Vinho Verde CarenR rules, is not selected by RIPPER or M5Rules despite its agronomic relevance (Section~\ref{sub:vinho_verde_rvv_feature}).
+
+CarenR has been applied in agricultural settings in previous work by the research group at the University of Porto \citep{Moreira2022}, primarily in the context of viticulture rule discovery. The present thesis represents its first systematic evaluation in a walk-forward predictive validation framework across two contrasting wine regions, with explicit statistical testing and era-composition analysis.
+
+
+\section{Positioning and Research Gap}\label{sec:positioning_and_research_gap}
+
+Table~\ref{tab:ch2a_1} situates this thesis within the broader landscape of literature reviewed in this chapter. Each stream is scored on whether it produces directly interpretable models, whether it handles a continuous target variable, and whether it has been applied to long multi-decadal series of the kind studied here.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Literature map positioning this thesis relative to existing research streams.}\label{tab:ch2a_1}
+  \small
+  \renewcommand{\arraystretch}{1.1}
+  \begin{adjustbox}{max width=\textwidth}
+  \begin{tabularx}{\textwidth}{>{\raggedright}p{2.6cm} >{\raggedright}p{2.1cm} >{\centering}p{2cm} >{\centering}p{1.9cm} >{\centering}p{1.7cm} X}
+    \toprule
+    \textbf{Research stream} & \textbf{Primary goal} & \textbf{Interpretable?} & \textbf{Continuous target?} & \textbf{Long-term data?} & \textbf{Representative references} \\
+    \midrule
+    Statistical regression  & Prediction              & Yes     & Yes     & Yes     & Cunha \& Richter 2016/2020; Santos et al.\ 2011 \\
+    Modern ML (RF, LSTM, SVM) & Prediction            & Limited & Yes     & Partial & Lopes et al.\ 2024; Santos et al. \\
+    Explainable AI / SHAP   & Post-hoc explanation    & Partial & Yes     & No      & Molnar 2019 \\
+    Subgroup discovery      & Pattern discovery       & Yes     & Partial & No      & Lavrac et al.\ 2004; Herrera et al.\ 2011 \\
+    Exceptional model mining & Pattern discovery      & Yes     & Yes     & Partial & Duivesteijn et al.\ 2016; Zimmermann 2019 \\
+    Distribution rules (CarenR) & Discovery + prediction & Yes & Yes     & Yes     & Jorge et al.\ 2006 --- \textbf{this thesis} \\
+    \bottomrule
+  \end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+No existing stream combines all five properties simultaneously. This thesis applies CarenR to two Portuguese wine regions spanning 80--89 years, contributing (1) the first systematic walk-forward evaluation of distributional subgroup discovery for wine production forecasting with phenology-informed feature engineering, (2) a two-decision decomposition framework that diagnoses when and why rule-based prediction succeeds or fails, and (3) a cross-regional comparison that reveals how structural production history interacts with climate signal availability.
+
+
+% ===== CONTINUATION =====
+
+
+\section{Portuguese Viticulture Industry Structure and Policy}\label{sec:portuguese_viticulture_industry_structure}
+
+The structural production trends observed in the two study regions, a persistent increase in the Douro and a sharp decline in Vinho Verde, cannot be attributed to climate alone. Both trajectories were substantially shaped by regulatory, economic, and demographic forces that are independent of meteorological conditions. Understanding these structural drivers is essential for interpreting the era confound identified throughout this thesis and for correctly attributing the limitations of the predictive models.
+
+
+\subsection{Douro Region: Regulatory and Market Drivers}\label{sub:douro_region_regulatory_and}
+
+The Douro wine region has been formally demarcated since 1756, making it one of the first wine appellations in the world. The most significant modern regulatory influence on production is the Port wine benef\'icio system, administered by the Instituto dos Vinhos do Douro e do Porto (IVDP). The benef\'icio is an annual administrative quota that determines how much of the Douro's grape harvest may be used to produce Port wine, which commands a premium price over unfortified Douro wines. The quota is set annually by the IVDP based on market conditions, stock levels, and quality assessments, and has varied substantially across decades. Because Port production represents a significant fraction of total Douro output, the benef\'icio quota partially decouples observed production from pure climate effects. In years where Port quota is restricted, total production is administratively capped regardless of how favourable the climate was. This administrative component is not captured by any of the meteorological features in the dataset and represents an unobserved structural covariate.
+
+The second major structural driver of RDD production growth was the creation of the Douro DOC (Denomina\c{c}\~ao de Origem Controlada, Controlled Designation of Origin) for unfortified table wines in 1979. Before this designation, Douro grapes were used almost exclusively for Port wine. The Douro DOC enabled Port wine houses and independent producers to bottle and market premium dry red and white table wines from the region, opening new market channels. From the 1980s onward, Douro table wine production grew rapidly alongside Port, contributing to the gradual increase in total regional production documented in Appendix~\ref{app:exploratory_data_analysis}. This structural expansion is largely responsible for the upward trend in the RDD production series and is the primary reason the RDD time series is less confounded by non-climate structural changes than the RVV series.
+
+
+\subsection{Vinho Verde Region: EU Policy and Structural Transformation}\label{sub:vinho_verde_region_eu}
+
+The Vinho Verde region's dramatic production decline from the 1960s to around 800 mhl by the 2010s is one of the most striking structural transformations in Portuguese viticulture. Three interacting factors explain the collapse from approximately 2,300 mhl in the 1960s to around 800 mhl today.
+
+Portugal's accession to the European Economic Community (now European Union) in January 1986 triggered a sequence of structural adjustments that profoundly reshaped the RVV. The Common Agricultural Policy (CAP) introduced grubbing-up subsidies, payments to farmers who permanently removed vineyard plantings, as part of an effort to reduce wine surpluses across member states. The Vinho Verde region, dominated by small family-operated plots producing bulk wine for local and low-value export markets, was particularly exposed to these incentives. Thousands of small producers received grubbing-up payments and removed vineyards that were marginally profitable or required high labour input, accelerating a process of plot abandonment that had already begun with rural exodus in the 1960s and 1970s.
+
+The EU quality standards introduced post-accession also penalised the traditional high-yield pergola (ramada) training system used across the Minho. Pergola systems, which train vines on high horizontal trellises above ground level, maximise vegetative growth and can produce 15,000--20,000 kg/ha, far above the yield limits imposed by EU quality regulations for premium appellations. The incentive to qualify for premium designations drove a progressive conversion from pergola to lower-yield espalier (cordon) training systems, which produce 6,000--10,000 kg/ha. This training system transition reduced per-hectare yields structurally, independently of climate, and is estimated to have contributed substantially to the post-1986 production decline.
+
+The third factor was demographic. The Minho region had experienced significant rural exodus from the 1960s onward as workers migrated to urban centres and abroad. The generation that maintained the region's characteristic small, labour-intensive plots retired or emigrated, and their children often did not continue the viticultural tradition. Plot fragmentation --- the division of land into numerous small, scattered parcels across multiple owners --- has historically been among the most pronounced in Portugal in the Minho region, with individual parcels often below 0.1 hectares, making consolidation difficult and increased the per-unit cost of cultivation. Many marginal plots were simply abandoned, reducing the effective cultivated area and contributing to the production decline independently of the EU policy shock.
+
+These structural factors directly explain why the era confound is substantially stronger in RVV than in RDD: the production decline in Vinho Verde is predominantly driven by non-climate forces, creating a strong co-variation between era membership and climate variables that makes it difficult to disentangle genuine inter-annual climate effects from structural level changes. The models in this thesis acknowledge and partially address this confound through linear detrending and the LOESS sensitivity analysis, but fully removing it would require incorporating vineyard area, number of certified producers, and training system composition as explicit detrending covariates.
+
+
+\section{Time Series Properties and Evaluation Methodology}\label{sec:time_series_properties_and}
+
+Annual wine production data is a time series with properties that have important implications for model evaluation. This section reviews the relevant concepts and motivates the methodological choices made in Chapter~\ref{ch:data_and_methodology}.
+
+
+\subsection{Non-Stationarity and Structural Breaks}\label{sub:nonstationarity_and_structural_breaks}
+
+A time series is stationary if its mean, variance, and autocovariance structure do not change over time. Both regional production series are non-stationary in the strict sense. The RDD series has a positive mean trend, and the RVV series has a strongly negative trend. More subtly, both series exhibit structural breaks, abrupt changes in the level or trend that cannot be attributed to normal year-to-year variability. In the RVV series, the most prominent structural break occurs in the mid-1980s, coinciding with EU accession and the subsequent grubbing-up subsidies. In the RDD series, no sharp structural break is evident in the decade-level averages (Appendix~\ref{app:exploratory_data_analysis}, Table~\ref{tab:appb_2}); instead, production follows a gradual upward trend from the 1950s onward, consistent with incremental regulatory and market expansion rather than a single discrete transition.
+
+Non-stationarity poses a direct challenge for machine learning models: a model trained on data from one period of a non-stationary series may not generalise to data from a different period. The standard practice in such settings is to remove the deterministic trend component before modelling, leaving stationary residuals that represent genuine inter-annual variation around the structural trajectory. This is precisely the role of the detrending step described in Section~\ref{sec:detrending_and_the_twodecision}. The appropriateness of linear vs. flexible detrending depends on the shape of the structural trend, a question examined empirically through the LOESS sensitivity analysis in Section~\ref{sec:detrend_sensitivity_analysis_loess}.
+
+
+\subsection{Why Random Cross-Validation Is Invalid for Time Series}\label{sub:why_random_crossvalidation_is}
+
+Random k-fold cross-validation violates the temporal ordering of observations and conflates training and test eras, inflating apparent model performance on non-stationary series. Walk-forward (expanding-window) evaluation, described in Section~\ref{sec:walkforward_validation_protocol}, is therefore used throughout this thesis.
+
+
+\subsection{The Naive Baseline and What It Measures}\label{sub:the_naive_baseline_and}
+
+A central benchmark throughout this thesis is the Naive\_Median baseline, the model that always predicts the training-set median residual (approximately zero after detrending, i.e. "on trend"). This baseline has an important theoretical property: the median minimises mean absolute error among all constant predictors. Therefore, no model that predicts a constant for every year can beat the Naive\_Median on MAE, and any model that beats it must be doing so by identifying non-trivial structure in the data.
+
+The Naive\_Median MAE can be interpreted as the minimum error achievable by any model that ignores the climate features entirely --- it represents the "cost of not knowing the climate" in a given scenario. If the MAE from a climate-aware model is lower than the Naive\_Median, the model has successfully extracted information from the climate features that reduces prediction error. If it is higher, the model has actively misused the climate information, adding noise rather than signal.
+
+The fact that no model consistently beats the Naive\_Median in this study therefore means not that climate is irrelevant to wine production (the CarenR rules demonstrate it is not) but that the climate signal is insufficient in magnitude and consistency to overcome year-to-year production noise in a held-out forecasting evaluation. This distinction between "the signal exists" and "the signal is strong enough to beat the baseline" is the central finding of Chapter~\ref{ch:goal_2_predictive_performance} and motivates the two-decision decomposition framework described in Section~\ref{sec:detrending_and_the_twodecision}.

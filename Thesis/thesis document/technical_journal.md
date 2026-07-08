@@ -119,6 +119,63 @@ All scripts assume working directory = `Thesis/` (set automatically by `distribu
 
 ---
 
+---
+
+## Session — LOESS Span Selection Diagnostics (2026-06-11)
+
+### Why span=0.40 was chosen
+
+A sensitivity analysis (`span_selection_diagnostics.R`) tested spans 0.20–0.90 in steps of 0.05 across three criteria:
+
+1. **Stationarity (ADF):** Every span passes for both regions (p ≤ 0.01). Not a discriminating criterion — any span achieves stationarity.
+2. **Correlation preservation:** Key features tracked at each span to distinguish genuine within-era signal from era artefacts.
+3. **Naive_Median MAE:** RDD spans 0.35–0.50 are closest to the linear baseline. All LOESS spans give higher Naive MAE than linear for RVV.
+
+**Span = 0.40 justified as:** narrow enough to remove the era-level structural shift (~40–50 years of the 80–90 year series) while wider than inter-annual noise. The qualitative findings are robust across all tested spans.
+
+### Key findings from the span analysis
+
+**RDD — features with genuine within-era signal:**
+- `swa_hv_y1_b20` (harvest soil water): Linear |r|=0.33, LOESS |r|=0.41, **125% retained** — increases under LOESS, confirmed genuine
+- `days.rf.above.1mm_fl_y1_c15` (wet days post-flowering): Linear |r|=0.28, LOESS |r|=0.28, **103% retained** — genuine
+- `tm_hv_y1_c10` (harvest temperature): Linear |r|=0.17, LOESS |r|=0.17, **105% retained** — preserved (has within-era signal alongside warming trend)
+
+**RVV — era-driven vs genuine:**
+- `iaf_hv_y1_c10` (LAI at harvest): Linear |r|=0.22, LOESS |r|=0.03, **15% retained** — era-driven, collapses
+- `swa_hv_y1_b20` (harvest soil water): Linear |r|=0.17, LOESS |r|=0.03, **16% retained** — era-driven, collapses
+- `days.rf.above.1mm_fl_y1_c15` (wet days post-flowering): Linear |r|=0.34, LOESS |r|=0.32, **94% retained** — **genuine within-era signal** (only robust RVV feature)
+
+### What this means
+
+The previous thesis text (ch4) incorrectly stated RVV iaf and swa were "genuine" at ~90% retention. The actual values are 15–16%. These were updated in ch4 Section "LOESS Validation". The RVV result is not an artefact of span choice — the collapse to <20% holds across all tested spans (0.20–0.90), confirming that RVV feature-response relationships are structurally dominated by era co-variation.
+
+### Output files
+- `src/rscripts/span_selection_diagnostics.R` — diagnostic script
+- `data/span_diagnostics/` — CSVs and plots
+
+---
+
+## Session — KPSS Stationarity Table Investigation (2026-06-10)
+
+### Finding: identical KPSS statistics for raw vs detrended are correct
+
+Table 3.7 shows the same KPSS statistic for both raw and detrended series in each region (RDD: 0.134, RVV: 0.332). This was initially suspected to be a copy-paste error, but it is mathematically correct.
+
+**Why:** `KPSS(null="Trend")` on the raw series internally fits and removes a linear trend before computing the statistic. `KPSS(null="Level")` on the linearly detrended residuals removes just the mean (≈0). Both variants end up operating on the same residuals, so the statistic is identical. The p-values differ because `null="Trend"` and `null="Level"` use different critical value tables.
+
+This was verified computationally — a Python reimplementation of the KPSS statistic on the actual data confirmed the identical statistics are expected.
+
+### RVV partial stationarity — correct interpretation
+
+The table and thesis text are correct:
+- RVV detrended residuals: ADF p=0.372 (fails, unit root not rejected) + KPSS p=0.100 (passes, level stationary)
+- Conclusion: **partial stationarity only** — linear detrending removes the long-run level but not all persistent structure
+- Thesis Implication 2 correctly states this; no false claim of full stationarity is made
+
+The ADF failure for RVV detrended has a domain explanation: the sharp non-linear production decline associated with EU accession (~1986) is not fully captured by a linear trend, leaving residual non-stationarity. This formally underpins the era-confound effects seen in walk-forward results.
+
+---
+
 ### Run order
 
 1. `3_carenR__application.R` — generates distribution rules, produces `RulesTemp2.csv`

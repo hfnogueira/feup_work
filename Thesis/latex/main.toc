@@ -1,0 +1,138 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Research Goals and Questions}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Scope and Delimitations}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Thesis Structure}{3}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Literature Review}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Regional Wine Production in Portugal}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Douro Region}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Vinho Verde Region}{6}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Grapevine Yield Formation}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}The Two-Year Vine Development Cycle}{6}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Meteorological Drivers of Wine Production Variability}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Quantitative Approaches to Wine Yield Prediction}{8}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Statistical and Regression Models}{8}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Machine Learning Approaches}{8}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Subgroup Discovery}{9}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Distribution Rules and the CarenR Framework}{9}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Distribution Rules}{9}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}The CarenR Framework}{10}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Positioning and Research Gap}{10}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Portuguese Viticulture Industry Structure and Policy}{11}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Douro Region: Regulatory and Market Drivers}{12}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Vinho Verde Region: EU Policy and Structural Transformation}{12}{subsection.2.8.2}%
+\contentsline {section}{\numberline {2.9}Time Series Properties and Evaluation Methodology}{13}{section.2.9}%
+\contentsline {subsection}{\numberline {2.9.1}Non-Stationarity and Structural Breaks}{13}{subsection.2.9.1}%
+\contentsline {subsection}{\numberline {2.9.2}Why Random Cross-Validation Is Invalid for Time Series}{14}{subsection.2.9.2}%
+\contentsline {subsection}{\numberline {2.9.3}The Naive Baseline and What It Measures}{14}{subsection.2.9.3}%
+\contentsline {chapter}{\numberline {3}Data and Methodology}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Study Regions and Data}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Feature Engineering}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Autocorrelation Structure of the Residuals}{17}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Detrending and the Two-Decision Decomposition}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Rule-Learning Algorithms}{17}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}CarenR: Distribution Rules via the CAREN Framework}{18}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}RIPPER: Repeated Incremental Pruning to Produce Error Reduction}{21}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}M5Rules: Rule Induction with Linear Regression Consequents}{23}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Walk-Forward Validation Protocol}{24}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Baseline Models}{25}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Evaluation Metric}{25}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Software and Reproducibility}{29}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Prediction Aggregation: Combining Multiple Firing Rules}{29}{subsection.3.8.1}%
+\contentsline {section}{\numberline {3.9}Formal Stationarity Testing}{31}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Data Sources}{33}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Meteorological Data}{33}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Phenology and Production Data}{33}{subsection.3.10.2}%
+\contentsline {section}{\numberline {3.11}Feature Engineering: From Daily Records to Annual Features}{34}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Feature Naming Convention}{35}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Feature Groups and Counts}{35}{subsection.3.11.2}%
+\contentsline {subsection}{\numberline {3.11.3}Current-Year vs Previous-Year Features}{35}{subsection.3.11.3}%
+\contentsline {subsection}{\numberline {3.11.4}Feature Discretisation for CarenR}{37}{subsection.3.11.4}%
+\contentsline {section}{\numberline {3.12}Data Pipeline Summary}{37}{section.3.12}%
+\contentsline {chapter}{\numberline {4}Rule Discovery Results (Goal 1)}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}CarenR: Distributional Rules}{39}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Douro (RDD): Top 5 Rules}{39}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Vinho Verde (RVV): Top 5 Rules}{40}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}The Directional Inversion: A Method Validation Point}{41}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}LOESS Validation: Distinguishing Signal from Era Artefact}{42}{section.4.2}%
+\contentsline {section}{\numberline {4.3}RIPPER Classification Rules}{43}{section.4.3}%
+\contentsline {section}{\numberline {4.4}M5Rules: Piecewise Linear Models and Coefficient Interpretation}{44}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Cross-Algorithm Feature Agreement}{46}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Feature Frequency Analysis: What CarenR Selects Most Often}{47}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Douro (RDD): Feature Frequency}{47}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Vinho Verde (RVV): Feature Frequency}{48}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Rule Set Overlap and Internal Coherence}{49}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Pairwise Feature Overlap}{50}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Unique vs Redundant Rules}{50}{subsection.4.7.2}%
+\contentsline {section}{\numberline {4.8}Summary: Rule Discovery Assessment (Goal 1)}{51}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Predictive Validation (Goal 2)}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Aggregate Walk-Forward Results}{53}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Douro (RDD)}{53}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Vinho Verde (RVV)}{53}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Era Composition and Per-Scenario Analysis (RDD)}{55}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Era Composition and Per-Scenario Analysis (RVV)}{57}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Statistical Tests}{57}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Detrend Sensitivity Analysis (LOESS)}{59}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Negative Results: Supervised Discretisation}{59}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Summary: Predictive Validation Assessment (Goal 2)}{60}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Per-Scenario MAE: Douro (RDD)}{60}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Per-Scenario MAE: Vinho Verde (RVV)}{62}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Feature Selector Comparison: Why Eta2 Wins in RDD and Sup\_FS in RVV}{65}{section.5.10}%
+\contentsline {section}{\numberline {5.11}What Happened in the Era-Balanced Winning Years?}{66}{section.5.11}%
+\contentsline {section}{\numberline {5.12}The Fallback Mechanism: When CarenR Says ``I Don't Know''}{67}{section.5.12}%
+\contentsline {chapter}{\numberline {6}Discussion}{69}{chapter.6}%
+\contentsline {section}{\numberline {6.1}The Asymmetry Between Discovery and Prediction}{69}{section.6.1}%
+\contentsline {section}{\numberline {6.2}The Two-Decision Trade-off}{70}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Why the Two Regions Diverge}{70}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Why the Walk-Forward Metric Penalises CarenR}{71}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Structural Covariates as a Path Forward}{72}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Relation to Prior Work}{72}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Experimental Design Decisions and Methodological Evolution}{73}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}The Uptrend Problem and the Decision to Detrend}{73}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}LOESS Detrending: A Promising Idea That Killed the Signal}{73}{subsection.6.7.2}%
+\contentsline {subsection}{\numberline {6.7.3}The Classification-to-Regression Transition}{74}{subsection.6.7.3}%
+\contentsline {subsection}{\numberline {6.7.4}CarenR Variant Proliferation: Why 11 Variants?}{75}{subsection.6.7.4}%
+\contentsline {subsection}{\numberline {6.7.5}Limitations Acknowledged During Development}{75}{subsection.6.7.5}%
+\contentsline {chapter}{\numberline {7}Conclusions}{77}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Findings}{77}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Contributions}{78}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Limitations}{78}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Future Work}{79}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Closing Statement}{79}{section.7.5}%
+\contentsline {chapter}{References}{81}{section*.56}%
+\contentsline {chapter}{\numberline {A}Complete Rule Listings}{83}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Top 10 CarenR Rules per Region}{83}{section.A.1}%
+\contentsline {section}{\numberline {A.2}CarenR --- Douro Region (RDD): 48 Rules}{85}{section.A.2}%
+\contentsline {section}{\numberline {A.3}CarenR --- Vinho Verde Region (RVV): 20 Rules}{88}{section.A.3}%
+\contentsline {section}{\numberline {A.4}RIPPER Classification Rules: Both Regions}{91}{section.A.4}%
+\contentsline {section}{\numberline {A.5}M5Rules Piecewise Linear Rules: Both Regions}{91}{section.A.5}%
+\contentsline {subsection}{\numberline {A.5.1}RDD: 2 Rules}{92}{subsection.A.5.1}%
+\contentsline {subsection}{\numberline {A.5.2}RVV: 3 Rules}{92}{subsection.A.5.2}%
+\contentsline {chapter}{\numberline {B}Exploratory Data Analysis}{93}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Wine Production: Descriptive Statistics and Trends}{93}{section.B.1}%
+\contentsline {subsection}{\numberline {B.1.1}Decade-Level Production Averages}{94}{subsection.B.1.1}%
+\contentsline {section}{\numberline {B.2}Phenological Timing: Trends and Variability}{94}{section.B.2}%
+\contentsline {subsection}{\numberline {B.2.1}Growing Season Duration}{95}{subsection.B.2.1}%
+\contentsline {section}{\numberline {B.3}Feature Correlations with Production}{96}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Feature Drift: The Era Confound Quantified}{96}{section.B.4}%
+\contentsline {section}{\numberline {B.5}Experiment Pipeline}{98}{section.B.5}%
+\contentsline {chapter}{\numberline {C}Complete Feature Reference}{101}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Temperature Features (13 features)}{101}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Cold and Frost Day Features (5 features)}{102}{section.C.2}%
+\contentsline {section}{\numberline {C.3}Heat Stress Day Features (4 features)}{102}{section.C.3}%
+\contentsline {section}{\numberline {C.4}Rainfall Features (8 features)}{102}{section.C.4}%
+\contentsline {section}{\numberline {C.5}Leaf Area Index (LAI) Features (10 features)}{104}{section.C.5}%
+\contentsline {section}{\numberline {C.6}Soil Water Features (18 features)}{105}{section.C.6}%
+\contentsline {chapter}{\numberline {D}Feature Coverage Map}{109}{appendix.D}%
+\contentsline {chapter}{\numberline {E}AI Use Transparency Statement}{113}{appendix.E}%
+\contentsline {section}{\numberline {E.1}Overview of AI Use}{113}{section.E.1}%
+\contentsline {section}{\numberline {E.2}Writing Support --- All Chapters}{113}{section.E.2}%
+\contentsline {section}{\numberline {E.3}Substantive Content Revision}{114}{section.E.3}%
+\contentsline {subsection}{\numberline {E.3.1}Chapter 3 --- Methods: CarenR\_Supervised Description}{114}{subsection.E.3.1}%
+\contentsline {subsection}{\numberline {E.3.2}Chapter 3 --- Methods: Table~\ref {tab:ch3a_4} New Row}{114}{subsection.E.3.2}%
+\contentsline {subsection}{\numberline {E.3.3}Chapter 5 --- Prediction: Test Period Table Corrections}{115}{subsection.E.3.3}%
+\contentsline {subsection}{\numberline {E.3.4}Chapter 5 --- Prediction: Bold Label Paragraphs}{115}{subsection.E.3.4}%
+\contentsline {section}{\numberline {E.4}Code Generation}{116}{section.E.4}%
+\contentsline {section}{\numberline {E.5}Numerical Verification Process}{116}{section.E.5}%
+\contentsline {section}{\numberline {E.6}Student Responsibility Declaration}{117}{section.E.6}%
