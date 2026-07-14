@@ -284,7 +284,7 @@ m5rules\_interpreted\_*.txt & Translation of raw rule outputs to plain-English d
   Parameter & Value & Location in code \\
   \midrule
   Detrending method & Linear (OLS) & config.R: detrend\_method \\
-  CarenR support threshold & 15\% ($s_i$ $\geq$ 0.15) & config.R: support\_threshold \\
+  CarenR support threshold & 20\% ($s_i$ $\geq$ 0.20) & 6\_scenario\_validation.R: carenr\_min\_sup \\
   Significance threshold & p $\leq$ 0.10 & config.R: alpha\_threshold \\
   Minimum training fraction & 80\% & config.R: min\_train\_frac \\
   Feature selection strategy & Per variant ($\eta$$^2$, Pearson, or support-filtered) & config.R: fs\_strategy \\

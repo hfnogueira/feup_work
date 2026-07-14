@@ -8,7 +8,7 @@
 \contentsline {table}{\numberline {3.3}{\ignorespaces Complete set of 17 models evaluated in the walk-forward validation.\relax }}{27}{table.caption.14}%
 \contentsline {table}{\numberline {3.4}{\ignorespaces CarenR variant families and their feature selection strategies.\relax }}{28}{table.caption.15}%
 \contentsline {table}{\numberline {3.5}{\ignorespaces Prediction aggregation formulas for the three CarenR variant families.\relax }}{30}{table.caption.16}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Worked example of the support-weighted prediction formula.\relax }}{30}{table.caption.17}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Worked example of the support-weighted prediction formula.\relax }}{31}{table.caption.17}%
 \contentsline {table}{\numberline {3.7}{\ignorespaces Stationarity test results. ADF H$_0$: unit root present.\relax }}{32}{table.caption.18}%
 \contentsline {table}{\numberline {3.8}{\ignorespaces Primary daily meteorological variables in the raw source files.\relax }}{33}{table.caption.19}%
 \contentsline {table}{\numberline {3.9}{\ignorespaces Binary threshold indicators derived from raw daily meteorological variables.\relax }}{34}{table.caption.20}%
