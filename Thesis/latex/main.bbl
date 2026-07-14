@@ -1,9 +1,16 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Azevedo(2003)]{Azevedo2003}
+P.~J. Azevedo.
+\newblock {CAREN} --- a java based apriori implementation for classification
+  purposes.
+\newblock Technical report, Departamento de Inform\'atica, Universidade do
+  Minho, 2003.
 
 \bibitem[Bock et~al.(2013)Bock, Sparks, Estrella, and Menzel]{Bock2013}
 A.~Bock, T.~H. Sparks, N.~Estrella, and A.~Menzel.
@@ -57,7 +64,6 @@ H.~Fraga, A.~C. Malheiro, J.~Moutinho-Pereira, and J.~A. Santos.
 \newblock Statistical modelling of climate impacts on grapevine yield and wine
   quality.
 \newblock \emph{Australian Journal of Grape and Wine Research}, 2024.
-\newblock TODO: confirm title, journal and DOI with supervisor.
 
 \bibitem[Herrera et~al.(2011)Herrera, Carmona, González, and del
   Jesus]{Herrera2011}
@@ -69,9 +75,9 @@ F.~Herrera, C.~J. Carmona, P.~González, and M.~J. del Jesus.
 \bibitem[Jorge et~al.(2006)Jorge, Azevedo, and Pereira]{Jorge2006}
 A.~M. Jorge, P.~J. Azevedo, and F.~Pereira.
 \newblock Distribution rules with numeric attributes of interest.
-\newblock In \emph{Proceedings of the 10th European Conference on Principles
-  and Practice of Knowledge Discovery in Databases (PKDD 2006)}, 2006.
-\newblock \doi{10.1007/11871637_25}.
+\newblock In \emph{Knowledge Discovery in Databases: PKDD 2006}, volume 4213 of
+  \emph{Lecture Notes in Computer Science}, pages 247--258. Springer, 2006.
+\newblock \doi{10.1007/11871637_26}.
 
 \bibitem[Kavsek and Lavrac(2006)]{Kav2006}
 B.~Kavsek and N.~Lavrac.
@@ -96,13 +102,12 @@ C.~M. Lopes, A.~Monteiro, M.~Teixeira, and M.~Cunha.
 \newblock Identifying climatic drivers of wine production variability using
   random forest models.
 \newblock \emph{Journal to confirm}, 2024.
-\newblock TODO: confirm title, journal and DOI with supervisor.
 
 \bibitem[Moreira et~al.(2022)Moreira, Jorge, and Azevedo]{Moreira2022}
 J.~P.~M. Moreira, A.~M. Jorge, and P.~J. Azevedo.
-\newblock {CarenR}: Contrast association rules for extraordinary nodes.
+\newblock {carenR}: Distribution rule discovery in {R} based on the {CAREN}
+  engine.
 \newblock R package, University of Porto / FEUP, 2022.
-\newblock TODO: confirm exact citation and URL/DOI with supervisor.
 
 \bibitem[Quinlan(1992)]{Quinlan1992}
 J.~R. Quinlan.

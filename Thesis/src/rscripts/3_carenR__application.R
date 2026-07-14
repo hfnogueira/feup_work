@@ -147,7 +147,7 @@ cat("There are", max(0,nrow(drs %>% filter(Ant_sup >= 0.2, Ant_sup < 1))
 #print the rules with sup > 20%
 drs %>% filter(Ant_sup >= 0.2, Ant_sup < 1)
 
-rule = 23
+rule = 1
 # st is the argument to the rule
 plot.drs(drs, st = rule, n = 1, m = 1)   # st = rule index you want
 #plot.dr(drs[1,], dist.rep="boxplot")

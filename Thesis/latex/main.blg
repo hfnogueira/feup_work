@@ -17,44 +17,44 @@ A level-1 auxiliary file: chapters/app_c_features.aux
 A level-1 auxiliary file: chapters/app_d_feature_map.aux
 A level-1 auxiliary file: chapters/app_e_ai_transparency.aux
 Database file #1: references.bib
-You've used 22 entries,
+You've used 23 entries,
             2773 wiz_defined-function locations,
-            742 strings with 9410 characters,
-and the built_in function-call counts, 9393 in all, are:
-= -- 785
-> -- 645
-< -- 10
-+ -- 217
-- -- 195
-* -- 717
-:= -- 1513
-add.period$ -- 81
-call.type$ -- 22
-change.case$ -- 130
-chr.to.int$ -- 22
-cite$ -- 44
-duplicate$ -- 451
-empty$ -- 737
-format.name$ -- 231
-if$ -- 1939
+            750 strings with 9459 characters,
+and the built_in function-call counts, 9853 in all, are:
+= -- 836
+> -- 655
+< -- 13
++ -- 221
+- -- 198
+* -- 750
+:= -- 1577
+add.period$ -- 82
+call.type$ -- 23
+change.case$ -- 135
+chr.to.int$ -- 23
+cite$ -- 46
+duplicate$ -- 476
+empty$ -- 774
+format.name$ -- 235
+if$ -- 2043
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 22
-newline$ -- 133
-num.names$ -- 88
-pop$ -- 280
+newline$ -- 135
+num.names$ -- 92
+pop$ -- 285
 preamble$ -- 1
-purify$ -- 109
+purify$ -- 112
 quote$ -- 0
-skip$ -- 342
+skip$ -- 366
 stack$ -- 0
-substring$ -- 44
-swap$ -- 28
-text.length$ -- 0
+substring$ -- 78
+swap$ -- 39
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 237
+type$ -- 248
 warning$ -- 0
-while$ -- 66
+while$ -- 72
 width$ -- 0
-write$ -- 302
+write$ -- 312

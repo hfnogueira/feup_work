@@ -35,21 +35,21 @@
 \contentsline {subsection}{\numberline {3.4.1}CarenR: Distribution Rules via the CAREN Framework}{18}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}RIPPER: Repeated Incremental Pruning to Produce Error Reduction}{21}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}M5Rules: Rule Induction with Linear Regression Consequents}{23}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Walk-Forward Validation Protocol}{24}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Walk-Forward Validation Protocol}{25}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Baseline Models}{25}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Evaluation Metric}{25}{section.3.7}%
+\contentsline {section}{\numberline {3.7}Evaluation Metric}{29}{section.3.7}%
 \contentsline {section}{\numberline {3.8}Software and Reproducibility}{29}{section.3.8}%
 \contentsline {subsection}{\numberline {3.8.1}Prediction Aggregation: Combining Multiple Firing Rules}{29}{subsection.3.8.1}%
 \contentsline {section}{\numberline {3.9}Formal Stationarity Testing}{31}{section.3.9}%
 \contentsline {section}{\numberline {3.10}Data Sources}{33}{section.3.10}%
 \contentsline {subsection}{\numberline {3.10.1}Meteorological Data}{33}{subsection.3.10.1}%
-\contentsline {subsection}{\numberline {3.10.2}Phenology and Production Data}{33}{subsection.3.10.2}%
-\contentsline {section}{\numberline {3.11}Feature Engineering: From Daily Records to Annual Features}{34}{section.3.11}%
+\contentsline {subsection}{\numberline {3.10.2}Phenology and Production Data}{34}{subsection.3.10.2}%
+\contentsline {section}{\numberline {3.11}Feature Engineering: From Daily Records to Annual Features}{35}{section.3.11}%
 \contentsline {subsection}{\numberline {3.11.1}Feature Naming Convention}{35}{subsection.3.11.1}%
 \contentsline {subsection}{\numberline {3.11.2}Feature Groups and Counts}{35}{subsection.3.11.2}%
-\contentsline {subsection}{\numberline {3.11.3}Current-Year vs Previous-Year Features}{35}{subsection.3.11.3}%
+\contentsline {subsection}{\numberline {3.11.3}Current-Year vs Previous-Year Features}{37}{subsection.3.11.3}%
 \contentsline {subsection}{\numberline {3.11.4}Feature Discretisation for CarenR}{37}{subsection.3.11.4}%
-\contentsline {section}{\numberline {3.12}Data Pipeline Summary}{37}{section.3.12}%
+\contentsline {section}{\numberline {3.12}Data Pipeline Summary}{38}{section.3.12}%
 \contentsline {chapter}{\numberline {4}Rule Discovery Results (Goal 1)}{39}{chapter.4}%
 \contentsline {section}{\numberline {4.1}CarenR: Distributional Rules}{39}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Douro (RDD): Top 5 Rules}{39}{subsection.4.1.1}%

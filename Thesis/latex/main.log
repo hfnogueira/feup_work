@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.6.9)  8 JUL 2026 02:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.6.9)  13 JUL 2026 11:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1139,10 +1139,10 @@ Underfull \hbox (badness 1231) in paragraph at lines 130--130
 Underfull \vbox (badness 1194) has occurred while \output is active []
 
  [19]
-Underfull \vbox (badness 1708) has occurred while \output is active []
+Underfull \vbox (badness 2961) has occurred while \output is active []
 
  [20]
-<figures/fig_ch3_carenr_flowchart.png, id=1171, 734.526pt x 755.2215pt>
+<figures/fig_ch3_carenr_flowchart.png, id=1174, 734.526pt x 755.2215pt>
 File: figures/fig_ch3_carenr_flowchart.png Graphic file (type png)
 <use figures/fig_ch3_carenr_flowchart.png>
 Package pdftex.def Info: figures/fig_ch3_carenr_flowchart.png  used on input li
@@ -1152,8 +1152,11 @@ ne 167.
 [21]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22 <./figures/fig_ch3_carenr_flowchart.png>] [23] [24]
-<figures/fig_ch3_walkforward.png, id=1207, 706.6035pt x 933.597pt>
+ [22 <./figures/fig_ch3_carenr_flowchart.png>] [23]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24]
+<figures/fig_ch3_walkforward.png, id=1210, 706.6035pt x 933.597pt>
 File: figures/fig_ch3_walkforward.png Graphic file (type png)
 <use figures/fig_ch3_walkforward.png>
 Package pdftex.def Info: figures/fig_ch3_walkforward.png  used on input line 22
@@ -1318,7 +1321,11 @@ Underfull \hbox (badness 5771) in paragraph at lines 327--327
 \T1/ptm/m/n/10 (+20) (greedy 1D
  []
 
-[25] [26 <./figures/fig_ch3_walkforward.png>] [27] [28]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+[26 <./figures/fig_ch3_walkforward.png>] [27] [28]
 Underfull \hbox (badness 10000) in paragraph at lines 383--383
 \T1/pcr/m/n/10 Sup_FS\T1/ptm/m/n/10 (+20) , \T1/pcr/m/n/10 Thresh\T1/ptm/m/n/10
  (+20) ,
@@ -1360,7 +1367,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 383--383
 []|\T1/ptm/m/n/10 (+20) Second-stage
  []
 
-
+[29]
 Underfull \hbox (badness 10000) in paragraph at lines 417--417
 []|\T1/ptm/b/n/10 (+20) Subgroup me-
  []
@@ -1405,7 +1412,7 @@ Overfull \hbox (9.22743pt too wide) in paragraph at lines 417--417
 []|\T1/ptm/b/n/10 (-20) Prediction| 
  []
 
-[29] [30]
+[30]
 Overfull \hbox (2.55473pt too wide) in paragraph at lines 465--465
 []|\T1/ptm/m/n/10 (-20) Region| 
  []
@@ -1515,11 +1522,11 @@ Underfull \hbox (badness 4328) in paragraph at lines 465--465
 \T1/ptm/m/n/10 (+20) (level sta-tion-ar-
  []
 
-[31]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[31] [32]
+Underfull \vbox (badness 2401) has occurred while \output is active []
 
- [32]
-[33] [34]
+ [33]
+[34]
 Underfull \hbox (badness 10000) in paragraph at lines 603--603
 []|\T1/pcr/m/n/10 tm, tn, swa, iaf, rf, days.rf,
  []
@@ -1559,7 +1566,11 @@ Underfull \hbox (badness 1472) in paragraph at lines 638--638
 []|\T1/ptm/m/n/10 (+20) Carry-over wa-ter stress from
  []
 
-[35] [36]) [37] [38]
+[35] [36]
+Underfull \vbox (badness 1783) has occurred while \output is active []
+
+ [37])
+[38]
 \openout2 = `chapters/ch4_rules.aux'.
 
  (./chapters/ch4_rules.tex
@@ -2189,14 +2200,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--39
 []|\T1/ptm/m/n/10 (+20) CarenR_Dist_Conf / Sup_
  []
 
-<figures/fig51_weighted_mae_rdd.png, id=1380, 722.7pt x 433.62pt>
+<figures/fig51_weighted_mae_rdd.png, id=1383, 722.7pt x 433.62pt>
 File: figures/fig51_weighted_mae_rdd.png Graphic file (type png)
 <use figures/fig51_weighted_mae_rdd.png>
 Package pdftex.def Info: figures/fig51_weighted_mae_rdd.png  used on input line
  47.
 (pdftex.def)             Requested size: 392.64725pt x 235.5871pt.
 [53] [54 <./figures/fig51_weighted_mae_rdd.png>]
-<figures/fig52_weighted_mae_rvv.png, id=1389, 722.7pt x 433.62pt>
+<figures/fig52_weighted_mae_rvv.png, id=1392, 722.7pt x 433.62pt>
 File: figures/fig52_weighted_mae_rvv.png Graphic file (type png)
 <use figures/fig52_weighted_mae_rvv.png>
 Package pdftex.def Info: figures/fig52_weighted_mae_rvv.png  used on input line
@@ -2227,7 +2238,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--117
 []|\T1/ptm/m/n/10 (+20) Yes (5/5
  []
 
-<figures/fig53_per_scenario_rdd.png, id=1390, 794.97pt x 397.485pt>
+<figures/fig53_per_scenario_rdd.png, id=1393, 794.97pt x 397.485pt>
 File: figures/fig53_per_scenario_rdd.png Graphic file (type png)
 <use figures/fig53_per_scenario_rdd.png>
 Package pdftex.def Info: figures/fig53_per_scenario_rdd.png  used on input line
@@ -2235,7 +2246,7 @@ Package pdftex.def Info: figures/fig53_per_scenario_rdd.png  used on input line
 (pdftex.def)             Requested size: 392.64725pt x 196.32808pt.
 [55] [56 <./figures/fig52_weighted_mae_rvv.png> <./figures/fig53_per_scenario_r
 dd.png>]
-<figures/fig54_per_scenario_rvv.png, id=1401, 794.97pt x 397.485pt>
+<figures/fig54_per_scenario_rvv.png, id=1404, 794.97pt x 397.485pt>
 File: figures/fig54_per_scenario_rvv.png Graphic file (type png)
 <use figures/fig54_per_scenario_rvv.png>
 Package pdftex.def Info: figures/fig54_per_scenario_rvv.png  used on input line
@@ -2295,12 +2306,12 @@ Underfull \hbox (badness 6047) in paragraph at lines 210--210
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [58]
-<figures/fig_detrend_rdd.png, id=1412, 794.97pt x 505.89pt>
+<figures/fig_detrend_rdd.png, id=1415, 794.97pt x 505.89pt>
 File: figures/fig_detrend_rdd.png Graphic file (type png)
 <use figures/fig_detrend_rdd.png>
 Package pdftex.def Info: figures/fig_detrend_rdd.png  used on input line 225.
 (pdftex.def)             Requested size: 362.77525pt x 230.85959pt.
-<figures/fig_detrend_rvv.png, id=1413, 794.97pt x 505.89pt>
+<figures/fig_detrend_rvv.png, id=1416, 794.97pt x 505.89pt>
 File: figures/fig_detrend_rvv.png Graphic file (type png)
 <use figures/fig_detrend_rvv.png>
 Package pdftex.def Info: figures/fig_detrend_rvv.png  used on input line 232.
@@ -2355,7 +2366,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 307--307
 \T1/ptm/m/n/10 (+20) CarenR
  []
 
-<figures/fig55_learning_curve_rdd.png, id=1424, 722.7pt x 433.62pt>
+<figures/fig55_learning_curve_rdd.png, id=1427, 722.7pt x 433.62pt>
 File: figures/fig55_learning_curve_rdd.png Graphic file (type png)
 <use figures/fig55_learning_curve_rdd.png>
 Package pdftex.def Info: figures/fig55_learning_curve_rdd.png  used on input li
@@ -2446,7 +2457,7 @@ Underfull \hbox (badness 2368) in paragraph at lines 363--363
 []|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
  []
 
-<figures/fig56_learning_curve_rvv.png, id=1434, 722.7pt x 433.62pt>
+<figures/fig56_learning_curve_rvv.png, id=1437, 722.7pt x 433.62pt>
 File: figures/fig56_learning_curve_rvv.png Graphic file (type png)
 <use figures/fig56_learning_curve_rvv.png>
 Package pdftex.def Info: figures/fig56_learning_curve_rvv.png  used on input li
@@ -3557,7 +3568,7 @@ Overfull \hbox (25.35759pt too wide) in paragraph at lines 219--219
 Underfull \vbox (badness 5592) has occurred while \output is active []
 
  [97]
-<figures/fig_ch3_pipeline.png, id=1613, 1166.759pt x 1455.839pt>
+<figures/fig_ch3_pipeline.png, id=1616, 1166.759pt x 1455.839pt>
 File: figures/fig_ch3_pipeline.png Graphic file (type png)
 <use figures/fig_ch3_pipeline.png>
 Package pdftex.def Info: figures/fig_ch3_pipeline.png  used on input line 236.
@@ -3840,7 +3851,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 273--273
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 292--292
-[]|\T1/ptm/m/n/10 (+20) config.R: sup-port_
+[]|\T1/ptm/m/n/10 (+20) 6_scenario_validation.R:
  []
 
 ) [98] [99 <./figures/fig_ch3_pipeline.png>] [100]
@@ -5045,7 +5056,7 @@ Underfull \hbox (badness 1163) in paragraph at lines 202--203
 ]
 Appendix D.
 [109]
-<figures/fig_appd_1.png, id=1676, 827.4915pt x 460.26956pt>
+<figures/fig_appd_1.png, id=1679, 827.4915pt x 460.26956pt>
 File: figures/fig_appd_1.png Graphic file (type png)
 <use figures/fig_appd_1.png>
 Package pdftex.def Info: figures/fig_appd_1.png  used on input line 10.
@@ -5170,31 +5181,31 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 6F7B0F9F6EFFE8F680F2FA40F27EBCDA;36069.
  ) 
 Here is how much of TeX's memory you used:
- 20625 strings out of 480247
- 341459 string characters out of 5896152
- 732255 words of memory out of 5000000
- 36827 multiletter control sequences out of 15000+600000
- 628727 words of font info for 739 fonts, out of 8000000 for 9000
+ 20626 strings out of 480247
+ 341502 string characters out of 5896152
+ 732282 words of memory out of 5000000
+ 36830 multiletter control sequences out of 15000+600000
+ 628502 words of font info for 737 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,77p,2004b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
- </sessions/awesome-cool-albattani/.texlive2021/texmf-var/fonts/pk/ljfour/jkn
-appen/ec/tcrm0900.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.
-enc} </sessions/awesome-cool-albattani/.texlive2021/texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (136 pages, 2645202 bytes).
+ </sessions/compassionate-practical-volta/.texlive2021/texmf-var/fonts/pk/ljf
+our/jknappen/ec/tcrm0900.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/b
+ase/8r.enc} </sessions/compassionate-practical-volta/.texlive2021/texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecrm1200.600pk></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (136 pages, 2645994 bytes).
 PDF statistics:
- 1912 PDF objects out of 2073 (max. 8388607)
- 1672 compressed objects within 17 object streams
- 388 named destinations out of 1000 (max. 500000)
+ 1915 PDF objects out of 2073 (max. 8388607)
+ 1675 compressed objects within 17 object streams
+ 389 named destinations out of 1000 (max. 500000)
  143540 words of extra memory for PDF output out of 154059 (max. 10000000)
 
