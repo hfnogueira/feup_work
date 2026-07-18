@@ -1,0 +1,103 @@
+%% ============================================================
+%%  FEUP Master Thesis — Official FEUP Template
+%%  Wine Production Forecasting Using Rule-Based ML
+%%  Hugo Filipe Queir\'oz Nogueira, MECD 2026
+%%
+%%  Uses: feupteses.sty (official FEUP style)
+%%  Compiler: pdflatex thesis (x2), bibtex, pdflatex (x2)
+%% ============================================================
+
+\documentclass[11pt,a4paper,twoside,openright]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+%% Official FEUP thesis style (MECD programme)
+\usepackage[mecd]{feupteses}
+
+%% ---- EXTRA PACKAGES ----------------------------------------
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{pdflscape}
+
+%% ---- TABLE STYLING -----------------------------------------
+\renewcommand{\arraystretch}{1.3}
+%% Captions: smaller than body text, bold label
+\captionsetup{font=small,labelfont=bf}
+%% Allow line breaks after underscores in file/feature names
+%% (prevents long \texttt names from overflowing table columns).
+%% Robust + math-safe: mirrors the kernel definition of \_ and only
+%% adds \allowbreak in text mode.
+\makeatletter
+\DeclareRobustCommand{\_}{%
+  \ifmmode\nfss@text{\textunderscore}\else\textunderscore\allowbreak\fi}
+\makeatother
+\definecolor{tableheader}{RGB}{217,226,243}
+
+%% ---- FIGURE PATH -------------------------------------------
+\graphicspath{{figures/}}
+
+%%========================================
+%% Thesis metadata
+%%========================================
+\title{Wine Production Forecasting Using Rule-Based Machine Learning:\\
+       A Distributional Subgroup Discovery Approach\\
+       with Walk-Forward Validation Forecast for Portuguese Wine Regions}
+
+\author{Hugo Filipe Queir\'oz Nogueira}
+
+\thesisdate{June 2026}
+
+\supervisor{Supervisor}{Prof.\ Jo\~ao Mendes Moreira}
+\supervisor{Co-Supervisor}{Prof.\ M\'ario Campos Cunha}
+
+\logo{uporto-feup.pdf}
+
+%%========================================
+\newcommand{\erratamark}[2]{\textcolor{red}{#1}~\textcolor{red}{\footnotesize[errata: #2]}}
+\begin{document}
+%%========================================
+
+\begin{Prolog}
+  \include{chapters/honourdeclaration}
+  \include{chapters/ch0_abstract}
+  \cleardoublepage
+  \pdfbookmark[0]{Table of Contents}{contents}
+  \tableofcontents
+  \cleardoublepage
+  \pdfbookmark[0]{List of Figures}{figures}
+  \listoffigures
+  \cleardoublepage
+  \pdfbookmark[0]{List of Tables}{tables}
+  \listoftables
+\end{Prolog}
+
+\StartBody
+
+\include{chapters/ch1_intro}
+\include{chapters/ch2_literature}
+\include{chapters/ch3_methods}
+\include{chapters/ch4_rules}
+\include{chapters/ch5_prediction}
+\include{chapters/ch6_discussion}
+\include{chapters/ch7_conclusions}
+
+\PrintBib{references}
+
+\appendix
+\include{chapters/app_a_rules}
+\include{chapters/app_b_eda}
+\include{chapters/app_c_features}
+\include{chapters/app_d_feature_map}
+\include{chapters/app_e_ai_transparency}
+
+\end{document}

@@ -1,0 +1,159 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Azevedo(2003)]{Azevedo2003}
+P.~J. Azevedo.
+\newblock {CAREN} --- a java based apriori implementation for classification
+  purposes.
+\newblock Technical report, Departamento de Inform\'atica, Universidade do
+  Minho, 2003.
+
+\bibitem[Bock et~al.(2013)Bock, Sparks, Estrella, and Menzel]{Bock2013}
+A.~Bock, T.~H. Sparks, N.~Estrella, and A.~Menzel.
+\newblock Changes in the phenology and composition of wine from franconia,
+  germany.
+\newblock \emph{Climate Research}, 2013.
+\newblock \doi{10.3354/cr01048}.
+
+\bibitem[Clark and Niblett(1989)]{Clark1989}
+P.~Clark and T.~Niblett.
+\newblock The cn2 induction algorithm.
+\newblock \emph{Machine Learning}, 1989.
+
+\bibitem[Cohen(1995)]{Cohen1995}
+W.~W. Cohen.
+\newblock Fast effective rule induction.
+\newblock In \emph{Proceedings of the 12th International Conference on Machine
+  Learning (ICML 1995)}, 1995.
+
+\bibitem[Cunha and Richter(2012)]{Cunha2012}
+M.~Cunha and C.~Richter.
+\newblock Measuring the impact of temperature changes on the wine production in
+  the douro region using the short time fourier transform.
+\newblock \emph{International Journal of Biometeorology}, 2012.
+\newblock \doi{10.1007/s00484-011-0444-3}.
+
+\bibitem[Cunha and Richter(2016)]{Cunha2016}
+M.~Cunha and C.~Richter.
+\newblock The impact of climate change on the winegrape vineyards of the
+  portuguese douro region.
+\newblock \emph{Climatic Change}, 2016.
+\newblock \doi{10.1007/s10584-016-1719-9}.
+
+\bibitem[Cunha and Richter(2020)]{Cunha2020}
+M.~Cunha and C.~Richter.
+\newblock Climate-induced cyclical properties of regional wine production using
+  a time-frequency approach in douro and minho wine regions.
+\newblock \emph{Ciência e Técnica Vitivinícola}, 2020.
+\newblock \doi{10.1051/ctv/20203501016}.
+
+\bibitem[Duivesteijn et~al.(2016)Duivesteijn, Feelders, and
+  Knobbe]{Duivesteijn2016}
+W.~Duivesteijn, A.~Feelders, and A.~Knobbe.
+\newblock Exceptional model mining.
+\newblock \emph{Data Mining and Knowledge Discovery}, 2016.
+\newblock \doi{10.1007/s10618-016-0474-0}.
+
+\bibitem[Fraga et~al.(2024)Fraga, Malheiro, Moutinho-Pereira, and
+  Santos]{Fraga2024}
+H.~Fraga, A.~C. Malheiro, J.~Moutinho-Pereira, and J.~A. Santos.
+\newblock Statistical modelling of climate impacts on grapevine yield and wine
+  quality.
+\newblock \emph{Australian Journal of Grape and Wine Research}, 2024.
+
+\bibitem[Herrera et~al.(2011)Herrera, Carmona, González, and del
+  Jesus]{Herrera2011}
+F.~Herrera, C.~J. Carmona, P.~González, and M.~J. del Jesus.
+\newblock An overview on subgroup discovery: foundations and applications.
+\newblock \emph{Knowledge and Information Systems}, 2011.
+\newblock \doi{10.1007/s10115-010-0356-2}.
+
+\bibitem[Jorge et~al.(2006)Jorge, Azevedo, and Pereira]{Jorge2006}
+A.~M. Jorge, P.~J. Azevedo, and F.~Pereira.
+\newblock Distribution rules with numeric attributes of interest.
+\newblock In \emph{Knowledge Discovery in Databases: PKDD 2006}, volume 4213 of
+  \emph{Lecture Notes in Computer Science}, pages 247--258. Springer, 2006.
+\newblock \doi{10.1007/11871637_26}.
+
+\bibitem[Kavsek and Lavrac(2006)]{Kav2006}
+B.~Kavsek and N.~Lavrac.
+\newblock Apriori-sd: Adapting association rule learning to subgroup discovery.
+\newblock \emph{Applied Artificial Intelligence}, 2006.
+\newblock \doi{10.1080/08839510600779688}.
+
+\bibitem[Lavrac et~al.(2004)Lavrac, Kavsek, Flach, and Todorovski]{Lavrac2004}
+N.~Lavrac, B.~Kavsek, P.~Flach, and L.~Todorovski.
+\newblock Subgroup discovery with cn2-sd.
+\newblock \emph{Journal of Machine Learning Research}, 2004.
+
+\bibitem[Lemmerich et~al.(2022)Lemmerich, Becker, Lang, and
+  Pilz]{Lemmerich2022}
+F.~Lemmerich, M.~Becker, M.~Lang, and F.~Pilz.
+\newblock Robust subgroup discovery.
+\newblock \emph{Data Mining and Knowledge Discovery}, 2022.
+\newblock \doi{10.1007/s10618-022-00856-x}.
+
+\bibitem[Lopes et~al.(2024)Lopes, Monteiro, Teixeira, and Cunha]{Lopes2024}
+C.~M. Lopes, A.~Monteiro, M.~Teixeira, and M.~Cunha.
+\newblock Identifying climatic drivers of wine production variability using
+  random forest models.
+\newblock \emph{Journal to confirm}, 2024.
+
+\bibitem[Moreira et~al.(2022)Moreira, Jorge, and Azevedo]{Moreira2022}
+J.~P.~M. Moreira, A.~M. Jorge, and P.~J. Azevedo.
+\newblock {carenR}: Distribution rule discovery in {R} based on the {CAREN}
+  engine.
+\newblock R package, University of Porto / FEUP, 2022.
+
+\bibitem[Quinlan(1992)]{Quinlan1992}
+J.~R. Quinlan.
+\newblock Learning with continuous classes.
+\newblock In \emph{Proceedings of the 5th Australian Joint Conference on
+  Artificial Intelligence}, 1992.
+
+\bibitem[Santos et~al.(2011)Santos, Malheiro, Karremann, and Pinto]{Santos2011}
+J.~A. Santos, A.~C. Malheiro, M.~K. Karremann, and J.~G. Pinto.
+\newblock Statistical modelling of grapevine yield in the port wine region
+  under present and future climate conditions.
+\newblock \emph{International Journal of Climatology}, 2011.
+\newblock \doi{10.1002/joc.2215}.
+
+\bibitem[Wang and Witten(1997)]{Wang1997}
+Y.~Wang and I.~H. Witten.
+\newblock Induction of model trees for predicting continuous classes.
+\newblock In \emph{Proceedings of the Poster Papers of the European Conference
+  on Machine Learning (ECML 1997)}, 1997.
+
+\bibitem[Witten et~al.(2011)Witten, Frank, and Hall]{Witten2011}
+I.~H. Witten, E.~Frank, and M.~A. Hall.
+\newblock \emph{Data Mining: Practical Machine Learning Tools and Techniques
+  (3rd ed.)}.
+\newblock Morgan Kaufmann, Burlington, MA, 2011.
+
+\bibitem[Wrobel(1997)]{Wrobel1997}
+S.~Wrobel.
+\newblock An algorithm for multi-relational discovery of subgroups.
+\newblock In \emph{Proceedings of the 1st European Symposium on Principles of
+  Data Mining and Knowledge Discovery (PKDD 1997)}, 1997.
+
+\bibitem[Zhu et~al.(2020)Zhu, Fraysse, Trought, Raw, Yang, Greven, Martin, and
+  Agnew]{Zhu2020}
+J.~Zhu, R.~Fraysse, M.~C.~T. Trought, V.~Raw, L.~Yang, M.~Greven, D.~Martin,
+  and R.~Agnew.
+\newblock Quantifying the seasonal variations in grapevine yield components
+  based on pre- and post-flowering weather conditions.
+\newblock \emph{OENO One}, 2020.
+\newblock \doi{10.20870/oeno-one.2020.54.2.2892}.
+
+\bibitem[Zimmermann and Atzmueller(2019)]{Zimmermann2019}
+A.~Zimmermann and M.~Atzmueller.
+\newblock Subgroup discovery for time series data.
+\newblock In \emph{Proceedings of the IEEE International Conference on Data
+  Mining Workshops (ICDMW 2019)}, 2019.
+\newblock \doi{10.1109/ICDMW.2019.00069}.
+
+\end{thebibliography}

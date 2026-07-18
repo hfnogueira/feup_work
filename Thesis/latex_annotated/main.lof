@@ -1,0 +1,27 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Production time series for the Douro (RDD) region, 1934--2022.\relax }}{16}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Production time series for the Vinho Verde (RVV) region, 1942--2021.\relax }}{16}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Rule-learning framework methodology: CarenR algorithm steps (blue, left) and thesis framework decisions (green, right). The significance threshold, support filter, prediction logic, and fallback are thesis design choices, not prescribed by the CarenR algorithm.\relax }}{22}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Walk-forward expanding-window validation for RDD (18 scenarios, top) and RVV (16 scenarios, bottom).\relax }}{27}{figure.caption.13}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Weighted MAE ranking across all 17 models for the Douro (RDD) region. Lower is better.\relax }}{54}{figure.caption.37}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Weighted MAE ranking across all 17 models for the Vinho Verde (RVV) region.\relax }}{56}{figure.caption.39}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Per-scenario MAE for \texttt {CarenR\_Dist\_Eta2} vs \texttt {Naive\_Median} (RDD).\relax }}{56}{figure.caption.41}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Per-scenario MAE for \texttt {CarenR\_Dist\_Sup\_FS} vs \texttt {Naive\_Median} (RVV).\relax }}{57}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Weighted MAE under linear vs LOESS detrending for all 17 models, Douro (RDD).\relax }}{59}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Weighted MAE under linear vs LOESS detrending for all 17 models, Vinho Verde (RVV).\relax }}{60}{figure.caption.47}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces MAE learning curve for all 17 models across 18 RDD scenarios. LOESS smoothing applied.\relax }}{62}{figure.caption.50}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces MAE learning curve for all 17 models across 16 RVV scenarios. LOESS smoothing applied.\relax }}{64}{figure.caption.52}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Experiment pipeline: data preparation, rule discovery (CarenR, RIPPER, M5Rules), and walk-forward validation.\relax }}{99}{figure.caption.65}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Feature coverage map: 59 agroclimatic features by phenological stage and window position.\relax }}{110}{figure.caption.70}%
+\addvspace {10\p@ }
