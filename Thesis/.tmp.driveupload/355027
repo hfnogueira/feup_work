@@ -1,0 +1,5211 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.6.9)  13 JUL 2026 11:36
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2021/10/04 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@chapter=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\c@figure=\count192
+\c@table=\count193
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2022/01/26 3.70 The Babel package
+\babel@savecnt=\count194
+\U@D=\dimen139
+\l@unhyphenated=\language3
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count195
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'british' set to \l@english
+(babel)             (\language0). Reported on input line 82.
+Package babel Info: Hyphen rules for 'UKenglish' set to \l@english
+(babel)             (\language0). Reported on input line 83.
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@english
+(babel)             (\language0). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@english
+(babel)             (\language0). Reported on input line 108.
+))
+(./feupteses.sty
+Package: feupteses 2017/10/02 1.1.2 
+
+Document Style `FEUP Teses' 1.1.2 <2017/10/02>
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count196
+\Gm@cntv=\count197
+\c@Gm@tempcnt=\count198
+\Gm@bindingoffset=\dimen140
+\Gm@wd@mp=\dimen141
+\Gm@odd@mp=\dimen142
+\Gm@even@mp=\dimen143
+\Gm@layoutwidth=\dimen144
+\Gm@layoutheight=\dimen145
+\Gm@layouthoffset=\dimen146
+\Gm@layoutvoffset=\dimen147
+\Gm@dimlist=\toks19
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathptmx.sty
+Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen148
+\Gin@req@width=\dimen149
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen150
+\captionmargin@=\dimen151
+\captionwidth=\dimen152
+\caption@tempdima=\dimen153
+\caption@indent=\dimen154
+\caption@parindent=\dimen155
+\caption@hangindent=\dimen156
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count199
+\c@continuedfloat=\count266
+) (./lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count267
+\output=\toks20
+\linenoprevgraf=\count268
+\linenumbersep=\dimen157
+\linenumberwidth=\dimen158
+\c@linenumber=\count269
+\c@pagewiselinenumber=\count270
+\c@LN@truepage=\count271
+\c@internallinenumber=\count272
+\c@internallinenumbers=\count273
+\quotelinenumbersep=\dimen159
+\bframerule=\dimen160
+\bframesep=\dimen161
+\bframebox=\box50
+LaTeX Info: Redefining \\ on input line 3056.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count274
+)
+\@vivatext=\box51
+\@supervisorstext=\box52
+
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip51
+\f@nch@O@elh=\skip52
+\f@nch@O@erh=\skip53
+\f@nch@O@olh=\skip54
+\f@nch@O@orh=\skip55
+\f@nch@O@elf=\skip56
+\f@nch@O@erf=\skip57
+\f@nch@O@olf=\skip58
+\f@nch@O@orf=\skip59
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen162
+\Hy@linkcounter=\count275
+\Hy@pagecounter=\count276
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count277
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 4073.
+Package hyperref Info: Option `bookmarks' set `true' on input line 4073.
+Package hyperref Info: Option `hyperindex' set `true' on input line 4073.
+Package hyperref Info: Option `hyperfigures' set `true' on input line 4073.
+Package hyperref Info: Hyper figures ON on input line 4190.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count278
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen163
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count279
+\Field@Width=\dimen164
+\Fld@charsize=\dimen165
+Package hyperref Info: Hyper figures ON on input line 6074.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count280
+\c@Item=\count281
+\c@Hfootnote=\count282
+)
+Package hyperref Info: Driver: hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count283
+\c@bookmark@seq@number=\count284
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip60
+)
+Package hyperref Info: Option `plainpages' set `false' on input line 534.
+Package hyperref Info: Option `bookmarksopen' set `false' on input line 534.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 534.
+
+Package hyperref Info: Option `breaklinks' set `true' on input line 534.
+Package hyperref Info: Option `linktocpage' set `true' on input line 534.
+Package hyperref Info: Option `colorlinks' set `true' on input line 534.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen166
+\lightrulewidth=\dimen167
+\cmidrulewidth=\dimen168
+\belowrulesep=\dimen169
+\belowbottomsep=\dimen170
+\aboverulesep=\dimen171
+\abovetopsep=\dimen172
+\cmidrulesep=\dimen173
+\cmidrulekern=\dimen174
+\defaultaddspace=\dimen175
+\@cmidla=\count285
+\@cmidlb=\count286
+\@aboverulesep=\dimen176
+\@belowrulesep=\dimen177
+\@thisruleclass=\count287
+\@lastruleclass=\count288
+\@thisrulewidth=\dimen178
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks21
+\XKV@tempa@toks=\toks22
+)
+\XKV@depth=\count289
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box53
+)
+\tc@llx=\dimen179
+\tc@lly=\dimen180
+\tc@urx=\dimen181
+\tc@ury=\dimen182
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen183
+\adjbox@Height=\dimen184
+\adjbox@Depth=\dimen185
+\adjbox@Totalheight=\dimen186
+\adjbox@pwidth=\dimen187
+\adjbox@pheight=\dimen188
+\adjbox@pdepth=\dimen189
+\adjbox@ptotalheight=\dimen190
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count290
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box54
+\sift@deathcycles=\count291
+\@vwid@loff=\dimen191
+\@vwid@roff=\dimen192
+))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip61
+\LTright=\skip62
+\LTpre=\skip63
+\LTpost=\skip64
+\LTchunksize=\count292
+\LTcapwidth=\dimen193
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@gbox=\box59
+\LT@cols=\count293
+\LT@rows=\count294
+\c@LT@tables=\count295
+\c@LT@chunks=\count296
+\LT@p@ftn=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen194
+\ar@mcellbox=\box60
+\extrarowheight=\dimen195
+\NC@list=\toks24
+\extratabsurround=\skip65
+\backup@length=\skip66
+\ar@cellbox=\box61
+)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip67
+\multirow@cntb=\count297
+\multirow@dima=\skip68
+\bigstrutjot=\dimen196
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen197
+\TX@old@table=\dimen198
+\TX@old@col=\dimen199
+\TX@target=\dimen256
+\TX@delta=\dimen257
+\TX@cols=\count298
+\TX@ftn=\toks25
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
+\@mathmargin=\skip69
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks26
+\ex@=\dimen258
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen259
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
+)
+\inf@bad=\count299
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count300
+\leftroot@=\count301
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count302
+\DOTSCASE@=\count303
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box62
+\strutbox@=\box63
+\big@size=\dimen260
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count304
+\c@MaxMatrixCols=\count305
+\dotsspace@=\muskip17
+\c@parentequation=\count306
+\dspbrk@lvl=\count307
+\tag@help=\toks27
+\row@=\count308
+\column@=\count309
+\maxfields@=\count310
+\andhelp@=\toks28
+\eqnshift@=\dimen261
+\alignsep@=\dimen262
+\tagshift@=\dimen263
+\tagwidth@=\dimen264
+\totwidth@=\dimen265
+\lineht@=\dimen266
+\@envbody=\toks29
+\multlinegap=\skip70
+\multlinetaggap=\skip71
+\mathdisplay@stack=\toks30
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup6
+\symAMSb=\mathgroup7
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2021/02/02 v1.28 mathematical typesetting tools
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count311
+\calc@Bcount=\count312
+\calc@Adimen=\dimen267
+\calc@Bdimen=\dimen268
+\calc@Askip=\skip72
+\calc@Bskip=\skip73
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count313
+\calc@Cskip=\skip74
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count314
+\l_MT_multwidth_dim=\dimen269
+\origjot=\skip75
+\l_MT_shortvdotswithinadjustabove_dim=\dimen270
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen271
+\l_MT_above_intertext_sep=\dimen272
+\l_MT_below_intertext_sep=\dimen273
+\l_MT_above_shortintertext_sep=\dimen274
+\l_MT_below_shortintertext_sep=\dimen275
+\xmathstrut@box=\box64
+\xmathstrut@dim=\dimen276
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count315
+\float@exts=\toks31
+\float@box=\box65
+\@float@everytoks=\toks32
+\@floatcapt=\box66
+)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2021/12/10 v3.0b Micro-typographical refinements (RS)
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count316
+)
+\MT@toks=\toks33
+\MT@count=\count317
+\MT@tempbox=\box67
+LaTeX Info: Redefining \leftprotrusion on input line 1010.
+LaTeX Info: Redefining \rightprotrusion on input line 1018.
+LaTeX Info: Redefining \textls on input line 1173.
+\MT@outer@kern=\dimen277
+LaTeX Info: Redefining \textmicrotypecontext on input line 1759.
+\MT@listname@count=\count318
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2021/12/10 v3.0b Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 897.
+LaTeX Info: Redefining \lslig on input line 897.
+\MT@outer@space=\skip76
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2021/12/10 v3.0b microtype main configuration file (RS)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+LaTeX Info: Redefining \_ on input line 41.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 ...{Supervisor}{Prof.\ Jo\~ao Mendes Moreira}
+                                                  
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 ...o-Supervisor}{Prof.\ M\'ario Campos Cunha}
+                                                  
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 66
+.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count319
+\l__pdf_internal_box=\box68
+)
+(./main.aux (./chapters/honourdeclaration.aux) (./chapters/ch0_abstract.aux)
+(./chapters/ch1_intro.aux) (./chapters/ch2_literature.aux)
+(./chapters/ch3_methods.aux) (./chapters/ch4_rules.aux)
+(./chapters/ch5_prediction.aux) (./chapters/ch6_discussion.aux)
+(./chapters/ch7_conclusions.aux) (./chapters/app_a_rules.aux)
+(./chapters/app_b_eda.aux) (./chapters/app_c_features.aux)
+(./chapters/app_d_feature_map.aux) (./chapters/app_e_ai_transparency.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot twoside 
+* h-part:(L,W,R)=(99.58464pt, 426.79135pt, 71.13188pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=661.23584pt
+* \oddsidemargin=27.31465pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-15.36449pt
+* \headheight=15.5pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=103.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count320
+\scratchdimen=\dimen278
+\scratchbox=\box69
+\nofMPsegments=\count321
+\nofMParguments=\count322
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count323
+\MPscratchDim=\dimen279
+\MPnumerator=\count324
+\makeMPintoPDFobject=\count325
+\everyMPtoPDFconversion=\toks35
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+)
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 66.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count326
+)
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
+
+(./main.out) (./main.out)
+\@outlinefile=\write3
+\openout3 = `main.out'.
+
+LaTeX Info: Redefining \microtypecontext on input line 66.
+Package microtype Info: Applying patch `item' on input line 66.
+Package microtype Info: Applying patch `toc' on input line 66.
+Package microtype Info: Applying patch `eqnum' on input line 66.
+Package microtype Info: Applying patch `footnote' on input line 66.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 66.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ptm.cfg
+File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
+)
+\@crestbox=\box70
+<figures//uporto-feup.pdf, id=570, 338.26375pt x 126.4725pt>
+File: figures//uporto-feup.pdf Graphic file (type pdf)
+<use figures//uporto-feup.pdf>
+Package pdftex.def Info: figures//uporto-feup.pdf  used on input line 69.
+(pdftex.def)             Requested size: 204.85983pt x 76.59618pt.
+ [-3
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures//uporto-feup.pdf
+>] [-2
+
+
+
+]
+[-1] [0
+
+]
+\openout2 = `chapters/honourdeclaration.aux'.
+
+ (./chapters/honourdeclaration.tex) [1
+
+
+]
+\openout2 = `chapters/ch0_abstract.aux'.
+
+ (./chapters/ch0_abstract.tex
+[2
+
+
+
+
+]
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
+ 10.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `ztmcm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
+ 10.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
+ 10.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
+ 10.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
+0.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 10.
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+Underfull \vbox (badness 1939) has occurred while \output is active []
+
+ [3]
+[4]
+Underfull \vbox (badness 1122) has occurred while \output is active []
+
+ [5
+
+
+])
+[6] (./main.toc [7
+
+
+
+
+] [8] [9])
+\tf@toc=\write4
+\openout4 = `main.toc'.
+
+ [10] (./main.lof
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 13
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `pcr' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+)
+\tf@lof=\write5
+\openout5 = `main.lof'.
+
+ [11
+
+
+] [12
+
+]
+(./main.lot [13
+
+])
+\tf@lot=\write6
+\openout6 = `main.lot'.
+
+ [14]
+\openout2 = `chapters/ch1_intro.aux'.
+
+ (./chapters/ch1_intro.tex
+Chapter 1.
+[1
+
+
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
+6.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+) [2]) [3]
+\openout2 = `chapters/ch2_literature.aux'.
+
+
+(./chapters/ch2_literature.tex [4
+
+
+
+
+]
+Chapter 2.
+[5] [6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+[8]
+Overfull \hbox (5.94421pt too wide) in paragraph at lines 64--65
+[]\T1/ptm/m/n/10.95 (-20) A sig-nif-i-cant re-cent de-vel-op-ment is Ex-cep-tio
+nal Model Min-ing (EMM), in-tro-duced by [][]Duivesteijn
+ []
+
+
+Underfull \vbox (badness 7576) has occurred while \output is active []
+
+ [9]
+Overfull \hbox (3.77951pt too wide) in paragraph at lines 111--111
+ []|\T1/ptm/b/n/10 (-20) Interpretable?| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/10 (+20) Cunha &
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+\T1/ptm/m/n/10 (+20) Richter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+\T1/ptm/m/n/10 (+20) 2016/2020;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+\T1/ptm/m/n/10 (+20) San-tos et al.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/10 (+20) Lopes et al.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/10 (+20) Lavrac et al.
+ []
+
+
+Underfull \hbox (badness 4229) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/10 (+20) Duivesteijn et
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/10 (+20) Jorge et al.
+ []
+
+
+Underfull \hbox (badness 3989) in paragraph at lines 111--111
+\T1/ptm/m/n/10 (+20) 2006 --- \T1/ptm/b/n/10 (+20) this
+ []
+
+[10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+[12] [13]) [14]
+\openout2 = `chapters/ch3_methods.aux'.
+
+ (./chapters/ch3_methods.tex
+Chapter 3.
+<figures/fig_context_ts_rdd.png, id=1124, 867.24pt x 361.35pt>
+File: figures/fig_context_ts_rdd.png Graphic file (type png)
+<use figures/fig_context_ts_rdd.png>
+Package pdftex.def Info: figures/fig_context_ts_rdd.png  used on input line 41.
+
+(pdftex.def)             Requested size: 362.77525pt x 151.15945pt.
+[15
+
+
+
+
+]
+<figures/fig_context_ts_rvv.png, id=1129, 867.24pt x 361.35pt>
+File: figures/fig_context_ts_rvv.png Graphic file (type png)
+<use figures/fig_context_ts_rvv.png>
+Package pdftex.def Info: figures/fig_context_ts_rvv.png  used on input line 48.
+
+(pdftex.def)             Requested size: 362.77525pt x 151.15945pt.
+ [16 <./figures/fig_context_ts_rdd.png> <./figures/fig_context_ts_rvv.png>] [17
+]
+Underfull \hbox (badness 2980) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Continuous (de-trended
+ []
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Continuous (de-trended
+ []
+
+
+Underfull \hbox (badness 3343) in paragraph at lines 130--130
+[]|\T1/ptm/b/n/10 (+20) Core ques-tion an-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Kolmogorov--Smirnov
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+\T1/ptm/m/n/10 (+20) two-sample test
+ []
+
+
+Underfull \hbox (badness 2856) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Standard de-vi-a-tion re-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) IF con-di-tions THEN
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 130--130
+\T1/ptm/m/n/10 (+20) class = Low / Med /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) IF con-di-tions THEN
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+\T1/ptm/m/n/10 (+20) pro-duc-tion = lin-ear
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Discretised equal-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Continuous (RIP-PER
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Continuous (M5Rules
+ []
+
+
+Underfull \hbox (badness 4072) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Very high --- sim-ple
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) High --- or-dered
+ []
+
+
+Underfull \hbox (badness 2644) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/10 (+20) Medium --- IF/THEN
+ []
+
+
+Underfull \hbox (badness 1231) in paragraph at lines 130--130
+[]|\T1/ptm/b/n/10 (+20) Fallback (no rules
+ []
+
+[18]
+Underfull \vbox (badness 1194) has occurred while \output is active []
+
+ [19]
+Underfull \vbox (badness 2961) has occurred while \output is active []
+
+ [20]
+<figures/fig_ch3_carenr_flowchart.png, id=1174, 734.526pt x 755.2215pt>
+File: figures/fig_ch3_carenr_flowchart.png Graphic file (type png)
+<use figures/fig_ch3_carenr_flowchart.png>
+Package pdftex.def Info: figures/fig_ch3_carenr_flowchart.png  used on input li
+ne 167.
+(pdftex.def)             Requested size: 426.79135pt x 438.82391pt.
+
+[21]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22 <./figures/fig_ch3_carenr_flowchart.png>] [23]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24]
+<figures/fig_ch3_walkforward.png, id=1210, 706.6035pt x 933.597pt>
+File: figures/fig_ch3_walkforward.png Graphic file (type png)
+<use figures/fig_ch3_walkforward.png>
+Package pdftex.def Info: figures/fig_ch3_walkforward.png  used on input line 22
+3.
+(pdftex.def)             Requested size: 426.79135pt x 563.89485pt.
+
+Underfull \hbox (badness 5417) in paragraph at lines 268--268
+[]|\T1/ptm/m/n/10 (+20) Predicts most re-cent ob-served value
+ []
+
+
+Underfull \hbox (badness 2150) in paragraph at lines 268--268
+[]|\T1/ptm/m/n/10 (+20) Per-fold su-per-vised dis-creti-sa-tion (cut-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/b/n/10 (+20) Selection
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) All 59 fea-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Retain
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) above-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) median $\OMS/ztmcm/m/n/10 j\OML/ztmcm/m/it/10 r\OMS/ztmcm/
+m/n/10 j$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Bin-wise
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) ANOVA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\OML/ztmcm/m/it/10 ^^Q[]$ \T1/ptm/m/n/10 (+20) with
+ []
+
+
+Overfull \hbox (0.81364pt too wide) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (-20) Conservative:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\OMS/ztmcm/m/n/10 j\OML/ztmcm/m/it/10 r\OMS/ztmcm/m/n/10 j$ \T1/ptm/m/n/10 (+20
+) + min-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) i-mum bin
+ []
+
+
+Underfull \hbox (badness 3815) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Most sta-ble across
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) fil-ter (less
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) strict than
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Confidence-weighted
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) by $\OT1/ztmcm/m/n/10 1 \OMS/ztmcm/m/n/10 ^^@ \OML/ztmcm/m
+/it/10 p$\T1/ptm/m/n/10 (+20) -
+ []
+
+
+Underfull \hbox (badness 8000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Stronger rules get
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) more pre-dic-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) CarenR
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) resid-u-als
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) as second-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|$\OMS/ztmcm/m/n/10 j\OML/ztmcm/m/it/10 r\OMS/ztmcm/m/n/10 j ^^U \OT1/ztmcm/m
+/n/10 0\OML/ztmcm/m/it/10 :\OT1/ztmcm/m/n/10 30$
+ []
+
+
+Underfull \hbox (badness 3838) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) + min-i-mum
+ []
+
+
+Underfull \hbox (badness 2165) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Threshold and sup-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+[]|\T1/ptm/m/n/10 (+20) Maximise
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) between-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) group
+ []
+
+
+Underfull \hbox (badness 4792) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) resid-ual SS
+ []
+
+
+Underfull \hbox (badness 5771) in paragraph at lines 327--327
+\T1/ptm/m/n/10 (+20) (greedy 1D
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+[26 <./figures/fig_ch3_walkforward.png>] [27] [28]
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+\T1/pcr/m/n/10 Sup_FS\T1/ptm/m/n/10 (+20) , \T1/pcr/m/n/10 Thresh\T1/ptm/m/n/10
+ (+20) ,
+ []
+
+
+Underfull \hbox (badness 3590) in paragraph at lines 383--383
+\T1/ptm/m/n/10 (+20) train-ing obs. cov-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+[]|\T1/ptm/m/n/10 (+20) Confidence-weighted
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+\T1/ptm/m/n/10 (+20) (\T1/pcr/m/n/10 CarenR_Dist_
+ []
+
+
+Underfull \hbox (badness 4013) in paragraph at lines 383--383
+[]|\T1/ptm/m/n/10 (+20) Confidence of
+ []
+
+
+Underfull \hbox (badness 4647) in paragraph at lines 383--383
+\OML/ztmcm/m/it/10 p[]$ \T1/ptm/m/n/10 (+20) is the KS $\OML/ztmcm/m/it/10 p$\T
+1/ptm/m/n/10 (+20) -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+[]|\T1/ptm/m/n/10 (+20) Stacking (\T1/pcr/m/n/10 CarenR_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--383
+[]|\T1/ptm/m/n/10 (+20) Second-stage
+ []
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+[]|\T1/ptm/b/n/10 (+20) Subgroup me-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+[]|\T1/ptm/m/n/10 (+20) Wet days post-flowering
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+\T1/ptm/m/n/10 (+20) Wet days post-maturity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+[]|\T1/ptm/m/n/10 (+20) Wet days post-flowering
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+\T1/ptm/m/n/10 (+20) Heat days pre-maturity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+[]|\T1/ptm/m/n/10 (+20) Wet days post-flowering
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+\T1/ptm/m/n/10 (+20) Soil wa-ter pre-harvest
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+\T1/ptm/m/n/10 (+20) Heat days pre-maturity
+ []
+
+
+Overfull \hbox (9.22743pt too wide) in paragraph at lines 417--417
+[]|\T1/ptm/b/n/10 (-20) Prediction| 
+ []
+
+[30]
+Overfull \hbox (2.55473pt too wide) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (-20) Region| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) ADF
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) ADF
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) KPSS
+ []
+
+
+Underfull \hbox (badness 1038) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) KPSS p-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Raw (Wine_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Non-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) stationary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Borderline sta-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) tion-ary around
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Linear de-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) <0.001
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Raw (Wine_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Non-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) stationary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Non-stationary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Linear de-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Non-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) stationary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) (unit root
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--465
+[]|\T1/ptm/m/n/10 (+20) Stationary $[]$
+ []
+
+
+Underfull \hbox (badness 4328) in paragraph at lines 465--465
+\T1/ptm/m/n/10 (+20) (level sta-tion-ar-
+ []
+
+[31] [32]
+Underfull \vbox (badness 2401) has occurred while \output is active []
+
+ [33]
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 603--603
+[]|\T1/pcr/m/n/10 tm, tn, swa, iaf, rf, days.rf,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 603--603
+\T1/pcr/m/n/10 sw.less.15wp, sw.above.09fc,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 603--603
+\T1/pcr/m/n/10 days.maxTemp.above.35,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 603--603
+\T1/pcr/m/n/10 tm.days.less.15,
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 603--603
+[]|\T1/ptm/m/n/10 (+20) Window po-si-tion rel-a-tive to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 638--638
+[]|\T1/ptm/m/n/10 (+20) days.maxTemp.above.35 /
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 638--638
+[]|\T1/ptm/m/n/10 (+20) Night tem-per-a-ture at har-vest,
+ []
+
+
+Underfull \hbox (badness 1472) in paragraph at lines 638--638
+[]|\T1/ptm/m/n/10 (+20) Carry-over wa-ter stress from
+ []
+
+[35] [36]
+Underfull \vbox (badness 1783) has occurred while \output is active []
+
+ [37])
+[38]
+\openout2 = `chapters/ch4_rules.aux'.
+
+ (./chapters/ch4_rules.tex
+Chapter 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+[]|\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 29--29
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 29--29
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 29--29
+\T1/ptm/b/n/10 (+20) post-Maturity [0--3.5d] AND Heat days post-
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 29--29
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 29--29
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 29--29
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+[39
+
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]|\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Underfull \hbox (badness 3428) in paragraph at lines 55--55
+\T1/ptm/m/it/10 (+20) Highest-support below-trend rule: moist post-
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+[40]
+Underfull \hbox (badness 6825) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) RDD di-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) RVV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/b/n/10 (+20) swa_hv_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) 74--231 mm
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) (mod-er-ate
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) ABOVE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) +108 to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) 61--97 mm
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) (pro-nounced
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) BELOW
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/b/n/10 (+20) Wet days
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ptm/b/n/10 (+20) post-flowering
+ []
+
+
+Overfull \hbox (19.82832pt too wide) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (-20) (days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) 0--3.3 days
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) ABOVE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) +108 to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) 20--121 mm
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) BELOW
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) (iaf_hv_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) Absent from
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) BELOW
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) trend
+ []
+
+
+Underfull \hbox (badness 1472) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) (where it
+ []
+
+
+Underfull \hbox (badness 6641) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) -118 to -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) Dominant
+ []
+
+
+Underfull \hbox (badness 3098) in paragraph at lines 92--92
+\T1/ptm/m/n/10 (+20) sig-nal (all 20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/10 (+20) BELOW
+ []
+
+[41] [42]
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/b/n/10 (+20) swa_hv_y1_b20 \T1/ptm/m/n/10 (+20) (har-vest
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/10 (+20) Genuine within-era
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+\T1/ptm/m/n/10 (+20) sig-nal; in-creases
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/b/n/10 (+20) days.rf.above.1mm_fl_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+\T1/ptm/b/n/10 (+20) y1_c15 \T1/ptm/m/n/10 (+20) (wet days post-
+ []
+
+
+Underfull \hbox (badness 1783) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/10 (+20) Genuine; fully pre-
+ []
+
+
+Underfull \hbox (badness 1642) in paragraph at lines 123--123
+\T1/ptm/m/n/10 (+20) served af-ter era re-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+\T1/ptm/m/n/10 (+20) sig-nal along-side
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/b/n/10 (+20) days.rf.above.1mm_fl_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+\T1/ptm/b/n/10 (+20) y1_c15 \T1/ptm/m/n/10 (+20) (wet days post-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/b/n/10 (+20) swa_hv_y1_b20 \T1/ptm/m/n/10 (+20) (har-vest
+ []
+
+
+Underfull \hbox (badness 2521) in paragraph at lines 173--173
+[]|\T1/ptm/m/n/10 (+20) Mean temp at Flow-er-ing $\OMS/ztmcm/m/n/10 ^^U$
+ []
+
+
+Underfull \hbox (badness 1748) in paragraph at lines 173--173
+[]|\T1/ptm/m/n/10 (+20) Soil wa-ter post-Flowering $\OMS/ztmcm/m/n/10 ^^T$
+ []
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) Coefficient (RDD
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) Coefficient
+ []
+
+
+Underfull \hbox (badness 2126) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) Consistent, warmer flow-
+ []
+
+
+Underfull \hbox (badness 2165) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) er-ing $\OMS/ztmcm/m/n/9 !$ \T1/ptm/m/n/9 (+20) above trend
+ in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) (prev-yr bud-burst
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) Carry-over, not a top
+ []
+
+
+Underfull \hbox (badness 3679) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) CarenR rule fea-ture but
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) (prev-yr ma-tu-rity
+ []
+
+
+Underfull \hbox (badness 7238) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) M5Rules global neg-a-tive slope (-2.3
+ []
+
+
+Underfull \hbox (badness 3792) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) mhl/mm) con-trasts with CarenR Rule
+ []
+
+
+Underfull \hbox (badness 2980) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) 4's above-trend moderate-deficit range;
+ []
+
+
+Underfull \hbox (badness 1005) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) the dis-crep-ancy re-flects con-founded co-
+ []
+
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+[]|\T1/ptm/m/n/9 (+20) Coefficient (RVV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+[]|\T1/ptm/m/n/9 (+20) Coefficient
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+\T1/ptm/m/n/9 (+20) (prev-yr ma-tu-rity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+[]|\T1/ptm/m/n/9 (+20) Consistent with CarenR
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+\T1/ptm/m/n/9 (+20) (post-flowering soil
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 221--221
+\T1/ptm/m/n/9 (+20) a-tive di-rec-tion con-sis-tent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+[]|\T1/ptm/m/n/9 (+20) Same vari-able se-lected;
+ []
+
+
+Underfull \hbox (badness 4217) in paragraph at lines 221--221
+\T1/ptm/m/n/9 (+20) di-rec-tion con-sis-tent with
+ []
+
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T1/ptm/m/n/8 (+20) swa_hv_y1_b20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]$ \T1/ptm/m/n/8 (+20) Dif-fer-en-tial
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T1/ptm/m/n/8 (+20) tm_sm_y0_a20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T1/ptm/m/n/8 (+20) (prev-yr sum-mer
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T1/ptm/m/n/8 (+20) Wet days
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T1/ptm/m/n/8 (+20) post-flowering
+ []
+
+
+Overfull \hbox (3.34357pt too wide) in paragraph at lines 261--261
+\T1/ptm/m/n/8 (-20) (days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T1/ptm/m/n/8 (+20) tm_fl (flow-er-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]|\T1/ptm/m/n/8 (+20) tn_hv_y0_a30
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+\T1/ptm/m/n/8 (+20) (prev-yr har-vest
+ []
+
+[46]
+Overfull \hbox (4.39253pt too wide) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (-20) Rank| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) % of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.rf.above.1mm_sm_
+ []
+
+
+Underfull \hbox (badness 4954) in paragraph at lines 303--303
+\T1/ptm/m/n/9 (+20) Maturity, cur-rent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.maxTemp.above.35_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) Heat-stress days post-
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 303--303
+\T1/ptm/m/n/9 (+20) flowering, flower abor-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.tempMax.above.35_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) Heat-stress days pre-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+\T1/ptm/m/n/9 (+20) veraison, ac-cel-er-ated
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.maxTemp.above.35_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.rf.above.1mm_fl_y1_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) LAI at bud-burst, early
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]|\T1/ptm/b/n/9 (+20) days.rf.above.1mm_hv_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) 30d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 2922) in paragraph at lines 303--303
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter post-flowering,
+ []
+
+
+Overfull \hbox (4.39253pt too wide) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (-20) Rank| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) % of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/b/n/9 (+20) days.maxTemp.above.35_
+ []
+
+
+Underfull \hbox (badness 2142) in paragraph at lines 342--342
+\T1/ptm/m/n/9 (+20) sent in below-trend RVV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/b/n/9 (+20) days.tempMax.above.35_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/b/n/9 (+20) days.maxTemp.above.35_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 4024) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) Heat days post-flowering,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) 15d cen-tred on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--342
+[]|\T1/ptm/b/n/9 (+20) days_minTemp.less.0_bb_
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) 15d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter Flow-er-
+ []
+
+
+Underfull \hbox (badness 1325) in paragraph at lines 342--342
+[]|\T1/ptm/m/n/9 (+20) LAI at har-vest, dom-i-nant
+ []
+
+
+Underfull \hbox (badness 2012) in paragraph at lines 342--342
+\T1/ptm/m/n/9 (+20) struc-tural sig-nal (see Sec
+ []
+
+[47] [48]
+Underfull \vbox (badness 3690) has occurred while \output is active []
+
+ [49]
+Underfull \hbox (badness 2368) in paragraph at lines 393--393
+[]|\T1/ptm/m/n/10 (+20) Rules with $\OMS/ztmcm/m/n/10 ^^U$\T1/ptm/m/n/10 (+20) 
+1 unique
+ []
+
+
+Overfull \hbox (12.95468pt too wide) in paragraph at lines 393--393
+\T1/ptm/m/n/10 (-20) maxTemp.above.35_
+ []
+
+[50]) [51]
+\openout2 = `chapters/ch5_prediction.aux'.
+
+ (./chapters/ch5_prediction.tex [52
+
+
+
+
+]
+Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
+[]|\T1/ptm/m/n/10 (+20) CarenR_Dist_Conf / Sup_
+ []
+
+<figures/fig51_weighted_mae_rdd.png, id=1383, 722.7pt x 433.62pt>
+File: figures/fig51_weighted_mae_rdd.png Graphic file (type png)
+<use figures/fig51_weighted_mae_rdd.png>
+Package pdftex.def Info: figures/fig51_weighted_mae_rdd.png  used on input line
+ 47.
+(pdftex.def)             Requested size: 392.64725pt x 235.5871pt.
+[53] [54 <./figures/fig51_weighted_mae_rdd.png>]
+<figures/fig52_weighted_mae_rvv.png, id=1392, 722.7pt x 433.62pt>
+File: figures/fig52_weighted_mae_rvv.png Graphic file (type png)
+<use figures/fig52_weighted_mae_rvv.png>
+Package pdftex.def Info: figures/fig52_weighted_mae_rvv.png  used on input line
+ 93.
+(pdftex.def)             Requested size: 392.64725pt x 235.5871pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/10 (+20) Post-1990
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/10 (+20) CarenR
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/10 (+20) Early, era-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/10 (+20) No (7/9
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/10 (+20) Yes (5/5
+ []
+
+<figures/fig53_per_scenario_rdd.png, id=1393, 794.97pt x 397.485pt>
+File: figures/fig53_per_scenario_rdd.png Graphic file (type png)
+<use figures/fig53_per_scenario_rdd.png>
+Package pdftex.def Info: figures/fig53_per_scenario_rdd.png  used on input line
+ 125.
+(pdftex.def)             Requested size: 392.64725pt x 196.32808pt.
+[55] [56 <./figures/fig52_weighted_mae_rvv.png> <./figures/fig53_per_scenario_r
+dd.png>]
+<figures/fig54_per_scenario_rvv.png, id=1404, 794.97pt x 397.485pt>
+File: figures/fig54_per_scenario_rvv.png Graphic file (type png)
+<use figures/fig54_per_scenario_rvv.png>
+Package pdftex.def Info: figures/fig54_per_scenario_rvv.png  used on input line
+ 159.
+(pdftex.def)             Requested size: 392.64725pt x 196.32808pt.
+ [57 <./figures/fig54_per_scenario_rvv.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) Wilcoxon (2-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) CarenR_Dist_Eta2 vs
+ []
+
+
+Underfull \hbox (badness 3965) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) Binomial sign
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) CarenR wins 5/5 era-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) p(k$\OMS/ztmcm/m/n/10 ^^U$\T1/ptm/m/n/10 (+20) 5,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) POST-HOC / EX-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+\T1/ptm/m/n/10 (+20) PLORATORY, re-quires
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) Wilcoxon (2-
+ []
+
+
+Underfull \hbox (badness 6016) in paragraph at lines 210--210
+[]|\T1/ptm/m/n/10 (+20) CarenR_Dist_Sup_FS vs
+ []
+
+
+Underfull \hbox (badness 6047) in paragraph at lines 210--210
+\T1/ptm/m/n/10 (+20) Naive_Median, RVV, 9
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [58]
+<figures/fig_detrend_rdd.png, id=1415, 794.97pt x 505.89pt>
+File: figures/fig_detrend_rdd.png Graphic file (type png)
+<use figures/fig_detrend_rdd.png>
+Package pdftex.def Info: figures/fig_detrend_rdd.png  used on input line 225.
+(pdftex.def)             Requested size: 362.77525pt x 230.85959pt.
+<figures/fig_detrend_rvv.png, id=1416, 794.97pt x 505.89pt>
+File: figures/fig_detrend_rvv.png Graphic file (type png)
+<use figures/fig_detrend_rvv.png>
+Package pdftex.def Info: figures/fig_detrend_rvv.png  used on input line 232.
+(pdftex.def)             Requested size: 362.77525pt x 230.85959pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--252
+[]|\T1/ptm/m/n/10 (+20) Naive_Median
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--252
+[]|\T1/ptm/m/n/10 (+20) CarenR rules
+ []
+
+[59 <./figures/fig_detrend_rdd.png>] [60 <./figures/fig_detrend_rvv.png>]
+Overfull \hbox (1.58415pt too wide) in paragraph at lines 307--307
+[]|\T1/ptm/m/n/10 (-20) Scen.| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+[]|\T1/ptm/m/n/10 (+20) Train pe-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+[]|\T1/ptm/m/n/10 (+20) Naive_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+\T1/ptm/m/n/10 (+20) MAE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+[]|\T1/ptm/m/n/10 (+20) CarenR_
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 307--307
+[]|\T1/ptm/m/n/10 (+20) Gap (+ =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--307
+\T1/ptm/m/n/10 (+20) CarenR
+ []
+
+<figures/fig55_learning_curve_rdd.png, id=1427, 722.7pt x 433.62pt>
+File: figures/fig55_learning_curve_rdd.png Graphic file (type png)
+<use figures/fig55_learning_curve_rdd.png>
+Package pdftex.def Info: figures/fig55_learning_curve_rdd.png  used on input li
+ne 315.
+(pdftex.def)             Requested size: 392.64725pt x 235.5871pt.
+[61]
+Overfull \hbox (1.58415pt too wide) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (-20) Scen.| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) Train pe-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) Naive_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ptm/m/n/10 (+20) MAE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) CarenR_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ptm/m/n/10 (+20) Sup_FS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ptm/m/n/10 (+20) MAE
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) Gap (+ =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ptm/m/n/10 (+20) CarenR
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 363--363
+[]|\T1/ptm/m/n/10 (+20) FALLBACK, no rules
+ []
+
+<figures/fig56_learning_curve_rvv.png, id=1437, 722.7pt x 433.62pt>
+File: figures/fig56_learning_curve_rvv.png Graphic file (type png)
+<use figures/fig56_learning_curve_rvv.png>
+Package pdftex.def Info: figures/fig56_learning_curve_rvv.png  used on input li
+ne 371.
+(pdftex.def)             Requested size: 392.64725pt x 235.5871pt.
+[62 <./figures/fig55_learning_curve_rdd.png>] [63]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [64 <./figures/fig56_learning_curve_rvv.png>]
+Underfull \hbox (badness 8000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) RDD rank
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+\T1/ptm/m/n/10 (+20) (among
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) RDD wtd
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) RVV rank
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+\T1/ptm/m/n/10 (+20) (among
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-3) RVV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+\T1/ptm/m/n/10 (+20) wtd
+ []
+
+
+Overfull \hbox (1.88118pt too wide) in paragraph at lines 416--416
+\T1/ptm/m/n/10 (-20) MAE| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 225.7| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 222.4| 
+ []
+
+
+Underfull \hbox (badness 7291) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) Pearson |r| + sup-port
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 171.6| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 185.2| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 225.0| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) Confidence-weighted
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 171.6| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) CarenR_Dist_Sup_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) Pearson + sup-port +
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 171.6| 
+ []
+
+
+Underfull \hbox (badness 2735) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (+20) Pearson hard thresh-old
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 209.4| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 274.6| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 196.2| 
+ []
+
+
+Overfull \hbox (2.15569pt too wide) in paragraph at lines 416--416
+[]|\T1/ptm/m/n/10 (-20) 347.3| 
+ []
+
+
+Underfull \vbox (badness 2080) has occurred while \output is active []
+
+ [65]
+[66]
+Underfull \hbox (badness 2119) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Rules fire, cor-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Applies match-ing
+ []
+
+
+Underfull \hbox (badness 4595) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Weighted rule
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Negative
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Applies match-ing
+ []
+
+
+Underfull \hbox (badness 4595) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Weighted rule
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Positive
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+\T1/ptm/m/n/10 (+20) (CarenR
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 463--463
+[]|\T1/ptm/m/n/10 (+20) Training me-
+ []
+
+)
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+ [67]
+[68]
+\openout2 = `chapters/ch6_discussion.aux'.
+
+ (./chapters/ch6_discussion.tex
+Chapter 6.
+[69
+
+
+
+
+] [70]
+Underfull \hbox (badness 1810) in paragraph at lines 53--53
+[]|\T1/ptm/m/n/10 (+20) CarenR rules are more era-
+ []
+
+
+Underfull \hbox (badness 4072) in paragraph at lines 53--53
+[]|\T1/ptm/m/n/10 (+20) Same mag-ni-tude but
+ []
+
+
+Underfull \hbox (badness 1242) in paragraph at lines 53--53
+[]|\T1/ptm/m/n/10 (+20) 3% gap, wins in
+ []
+
+
+Underfull \hbox (badness 1400) in paragraph at lines 53--53
+[]|\T1/ptm/m/n/10 (+20) 22% gap, 0/16 wins,
+ []
+
+[71] [72] [73] [74]) [75]
+\openout2 = `chapters/ch7_conclusions.aux'.
+
+ (./chapters/ch7_conclusions.tex [76
+
+
+
+
+]
+Chapter 7.
+[77] [78]) [79] [80] (./main.bbl [81
+
+
+
+
+]) [82]
+\openout2 = `chapters/app_a_rules.aux'.
+
+ (./chapters/app_a_rules.tex
+Appendix A.
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+[]|\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 28--28
+\T1/ptm/b/n/10 (+20) post-Maturity [0--3.5d] AND Heat days post-
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Underfull \hbox (badness 1087) in paragraph at lines 28--28
+[]|\T1/ptm/b/n/10 (+20) Wet days post-Flowering [0--3.3d] AND Heat
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 28--28
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+LaTeX Warning: Float too large for page by 36.54892pt on input line 30.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--36
+[]|\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Overfull \hbox (31.32036pt too wide) in alignment at lines 33--38
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
+[]|\T1/ptm/m/n/10 (+20) Median
+ []
+
+
+Overfull \hbox (31.32036pt too wide) in alignment at lines 38--43
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (31.32036pt too wide) in alignment at lines 43--46
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (31.32036pt too wide) in alignment at lines 46--48
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 49--49
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Underfull \hbox (badness 1888) in paragraph at lines 50--50
+[]|\T1/ptm/b/n/10 (+20) Temp at Flow-er-ing [13.8--17.1$[]$C] AND Temp post-
+ []
+
+
+Underfull \hbox (badness 5592) in paragraph at lines 50--50
+\T1/ptm/b/n/10 (+20) Flowering [12.6--17.5$[]$C] AND Wet-soil days post-
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 50--50
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 51--51
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (4.31859pt too wide) in paragraph at lines 52--52
+ []|\T1/ptm/m/n/9 (-20) ABOVE| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 53--53
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 54--54
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 55--55
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 56--56
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 57--57
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (5.4326pt too wide) in paragraph at lines 58--58
+ []|\T1/ptm/m/n/9 (-20) BELOW| 
+ []
+
+
+Overfull \hbox (31.32036pt too wide) in alignment at lines 48--59
+ [] [] [] [] [] [] 
+ []
+
+[83
+
+
+] [84]
+Underfull \hbox (badness 10000) in paragraph at lines 70--70
+[]|\T1/ptm/m/n/9 (+20) Mean $\OT1/ztmcm/m/n/9 ^^A$
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 67--72
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--75
+[]|\T1/ptm/m/n/9 (+20) Mean $\OT1/ztmcm/m/n/9 ^^A$
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 72--77
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 77--80
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 80--82
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+[]|\T1/ptm/m/n/9 (+20) 28.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--84
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--85
+[]|\T1/ptm/m/n/9 (+20) 25.8%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 86--86
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--87
+[]|\T1/ptm/m/n/9 (+20) 24.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
+[]|\T1/ptm/m/n/9 (+20) 23.6%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--90
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--91
+[]|\T1/ptm/m/n/9 (+20) 23.6%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--94
+[]|\T1/ptm/m/n/9 (+20) 28.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--96
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--98
+[]|\T1/ptm/m/n/9 (+20) 18.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) 22.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--100
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--101
+[]|\T1/ptm/m/n/9 (+20) 22.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--102
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--103
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
+[]|\T1/ptm/m/n/9 (+20) 22.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--106
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--108
+[]|\T1/ptm/m/n/9 (+20) 18.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--109
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--110
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--115
+[]|\T1/ptm/m/n/9 (+20) 18.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--116
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+[]|\T1/ptm/m/n/9 (+20) 20.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--122
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--125
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--126
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--129
+[]|\T1/ptm/m/n/9 (+20) 15.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
+[]|\T1/ptm/m/n/9 (+20) 16.9%
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 130--131
+[]|\T1/ptm/m/n/9 (+20) LAI at Har-vest [0.58--0.77 m$[]$/m$[]$] AND Soil wa-ter
+ post-
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 82--131
+ [] [] [] [] [] [] 
+ []
+
+[85] [86] [87]
+Underfull \hbox (badness 10000) in paragraph at lines 144--144
+[]|\T1/ptm/m/n/8 (+20) Mean $\OT1/ztmcm/m/n/8 ^^A$
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 141--146
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+[]|\T1/ptm/m/n/8 (+20) Mean $\OT1/ztmcm/m/n/8 ^^A$
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 146--151
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 151--154
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 154--156
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--158
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
+[]|\T1/ptm/m/n/8 (+20) 27.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--160
+[]|\T1/ptm/m/n/8 (+20) 25.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--161
+[]|\T1/ptm/m/n/8 (+20) 23.8%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--162
+[]|\T1/ptm/m/n/8 (+20) 26.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--163
+[]|\T1/ptm/m/n/8 (+20) 26.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--164
+[]|\T1/ptm/m/n/8 (+20) 22.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--165
+[]|\T1/ptm/m/n/8 (+20) 20.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--166
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--167
+[]|\T1/ptm/m/n/8 (+20) 18.8%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
+[]|\T1/ptm/m/n/8 (+20) 20.0%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--169
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--170
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--171
+[]|\T1/ptm/m/n/8 (+20) 18.8%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\T1/ptm/m/n/8 (+20) 22.5%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--173
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--174
+[]|\T1/ptm/m/n/8 (+20) 21.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--175
+[]|\T1/ptm/m/n/8 (+20) 18.8%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--176
+[]|\T1/ptm/m/n/8 (+20) 23.8%
+ []
+
+
+Overfull \hbox (48.39217pt too wide) in alignment at lines 156--177
+ [] [] [] [] [] [] 
+ []
+
+[88] [89]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [90]
+Underfull \hbox (badness 10000) in paragraph at lines 190--190
+[]|\T1/ptm/m/n/9 (+20) Precision
+ []
+
+
+Overfull \hbox (40.87488pt too wide) in alignment at lines 187--192
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
+[]|\T1/ptm/m/n/9 (+20) Precision
+ []
+
+
+Overfull \hbox (40.87488pt too wide) in alignment at lines 192--197
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (40.87488pt too wide) in alignment at lines 197--200
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (40.87488pt too wide) in alignment at lines 200--202
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 203--203
+[]|\T1/ptm/m/n/9 (+20) 21.3%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--205
+[]|\T1/ptm/m/n/9 (+20) 19.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--211
+[]|\T1/ptm/m/n/9 (+20) 16.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--213
+[]|\T1/ptm/m/n/9 (+20) 11.2%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--215
+[]|\T1/ptm/m/n/9 (+20) 26.2%
+ []
+
+
+Overfull \hbox (40.87488pt too wide) in alignment at lines 202--217
+ [] [] [] [] [] [] [] 
+ []
+
+[91]) [92]
+\openout2 = `chapters/app_b_eda.aux'.
+
+ (./chapters/app_b_eda.tex
+Appendix B.
+[93
+
+
+
+
+] [94]
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RDD mean
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RDD SD
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RDD trend
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RVV mean
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RVV SD
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) RVV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+\T1/ptm/m/n/9 (+20) trend
+ []
+
+
+Overfull \hbox (18.4229pt too wide) in paragraph at lines 99--99
+\T1/ptm/m/n/9 (-20) (days/decade)| 
+ []
+
+
+Underfull \hbox (badness 1622) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) DOY 88 / 27
+ []
+
+
+Underfull \hbox (badness 1418) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) DOY 90 / 30
+ []
+
+
+Underfull \hbox (badness 1418) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) DOY 154 / 2
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
+[]|\T1/ptm/m/n/9 (+20) Start Ma-tu-rity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) Budburst $\OMS/ztmcm/m/n/9 !$
+ []
+
+
+Underfull \hbox (badness 6396) in paragraph at lines 128--128
+\T1/ptm/m/n/9 (+20) than RDD on av-er-age,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) Flowering $\OMS/ztmcm/m/n/9 !$
+ []
+
+
+Underfull \hbox (badness 5563) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) RVV takes 28d longer
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) Veraison $\OMS/ztmcm/m/n/9 !$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
+[]|\T1/ptm/m/n/9 (+20) Full sea-son
+ []
+
+[95]
+Overfull \hbox (22.05501pt too wide) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (-20) Direction| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_hv_y1_c10 (har-vest
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_hv_y1_b20 (pre-
+ []
+
+
+Underfull \hbox (badness 2644) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_sm_y1_c20 (ma-tu-rity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+7) days.rf.above.1mm_fl_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_sm_y0_a20 (prev-yr
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_hv_y1_b20 (pre-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+5) tm.days.less.15_fl_y1_b15
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+7) days.rf.above.1mm_fl_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) tm_hv_y1_c10 (har-vest
+ []
+
+
+Underfull \hbox (badness 4981) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) swa_hv_y1_b20 (har-vest
+ []
+
+
+Underfull \hbox (badness 4981) in paragraph at lines 181--181
+[]|\T1/ptm/m/n/9 (+20) swa_hv_y1_b20 (har-vest
+ []
+
+
+Overfull \hbox (7.24376pt too wide) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (-20) Concern
+ []
+
+
+Underfull \hbox (badness 6428) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (+20) HIGH, warm-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) warm-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) ing
+ []
+
+
+Overfull \hbox (25.35759pt too wide) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (-20) MODERATE| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (+20) tm_sm_y0_b20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) (prev-yr ma-tu-rity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (+20) tm_sm_y0_a20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) (prev-yr sum-mer
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (+13) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) hv (har-vest rain
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (+20) tm_sm_y0_a20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--219
+\T1/ptm/m/n/9 (+20) (prev-yr sum-mer
+ []
+
+
+Overfull \hbox (25.35759pt too wide) in paragraph at lines 219--219
+[]|\T1/ptm/m/n/9 (-20) MODERATE| 
+ []
+
+[96]
+Underfull \vbox (badness 5592) has occurred while \output is active []
+
+ [97]
+<figures/fig_ch3_pipeline.png, id=1616, 1166.759pt x 1455.839pt>
+File: figures/fig_ch3_pipeline.png Graphic file (type png)
+<use figures/fig_ch3_pipeline.png>
+Package pdftex.def Info: figures/fig_ch3_pipeline.png  used on input line 236.
+(pdftex.def)             Requested size: 426.79135pt x 532.52086pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 0: Raw
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) BCM_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) base*.xls
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) Pheno_
+ []
+
+
+Underfull \hbox (badness 3000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 1: Daily
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 1_data_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) preparation_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) dataPrep_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) meteo_*.csv
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) dat-aPrep_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) production_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) en-gi-neer-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 2_features_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) dataPrep_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) meteo_*.csv
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) dat-aPrep_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) production_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) dataPrep_cont_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) dataset_*.csv
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) dat-aPrep_dis_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) rule_dataset_
+ []
+
+
+Underfull \hbox (badness 5563) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) 89 rows (RDD), 80 rows
+ []
+
+
+Underfull \hbox (badness 7012) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 3: Rule
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 3_carenR__
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) application.R
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) 4_ripper_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) pipeline.R
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) 5_m5rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) dataPrep_*_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) RulesTemp_*_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) linear.csv rip-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) per_rules_*.txt
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) m5rules_rules_
+ []
+
+
+Underfull \hbox (badness 5446) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) 48 rules (RDD), 20 rules
+ []
+
+
+Underfull \hbox (badness 2359) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 4: Walk-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) forward
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 6_scenario_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+14) dataPrep_cont_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) scenario_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) metrics_*.csv
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) sce-nario_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) predictions_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) *.csv sce-nario_
+ []
+
+
+Underfull \hbox (badness 1776) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 17-model $\OMS/ztmcm/m/n/10 ^^B$ \T1/ptm/m/n/10 (+20) 1
+8/16 sce-nario
+ []
+
+
+Underfull \hbox (badness 7012) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 5: Rule
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) in-ter-pre-ta-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) 9_rule_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) RulesTemp_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) *.csv rip-per_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) rules_*.txt
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) m5rules_rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+[]|\T1/ptm/m/n/10 (+20) rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) interpreted_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) interpreted_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
+\T1/ptm/m/n/10 (+20) *.txt m5rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--292
+[]|\T1/ptm/m/n/10 (+20) 6_scenario_validation.R:
+ []
+
+) [98] [99 <./figures/fig_ch3_pipeline.png>] [100]
+\openout2 = `chapters/app_c_features.aux'.
+
+
+(./chapters/app_c_features.tex
+Appendix C.
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 16--16
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 21--21
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 29--29
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 29--29
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 29--29
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 30--30
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 30--30
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 30--30
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 31--31
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 31--31
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 31--31
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 32--32
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--32
+[]|\T1/ptm/m/n/9 (+20) Bud
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--32
+[]|\T1/ptm/m/n/9 (+20) 15d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 32--32
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 33--33
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
+[]|\T1/ptm/m/n/9 (+20) Bud
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
+[]|\T1/ptm/m/n/9 (+20) 30d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 33--33
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 34--34
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 34--34
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 35--35
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 35--35
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 36--36
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 36--36
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 37--37
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--37
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 37--37
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 38--38
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 38--38
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 39--39
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 39--39
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 39--39
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 40--40
+[]|\T1/ptm/m/n/9 (+20) Mean tem-
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 40--40
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 40--40
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
+[]|\T1/ptm/m/n/9 (+20) 30d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 41--41
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+[101
+
+
+
+
+]
+Overfull \hbox (2.0107pt too wide) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) tm.days.less.15_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) Cold days
+ []
+
+
+Overfull \hbox (1.46161pt too wide) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (-20) (Tmed<15$[]$C)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) ing flow-er-ing, im-pairs
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) tm.days.less.15_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) Cold days
+ []
+
+
+Overfull \hbox (1.46161pt too wide) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (-20) (Tmed<15$[]$C)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) days_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) minTemp.less.0_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) Frost days
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) po-ten-tial spring frost
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) dam-age to emerg-ing
+ []
+
+
+Overfull \hbox (9.76578pt too wide) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (-20) days.minTemp.less.0_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) Frost days
+ []
+
+
+Underfull \hbox (badness 1845) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) win-dow, young shoots
+ []
+
+
+Overfull \hbox (9.76578pt too wide) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (-20) days.minTemp.less.0_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\T1/ptm/m/n/9 (+20) Frost days
+ []
+
+
+Underfull \hbox (badness 3547) in paragraph at lines 65--65
+\T1/ptm/m/n/9 (+20) un-usual but dam-ag-ing
+ []
+
+
+Overfull \hbox (2.0107pt too wide) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) days.maxTemp.above.35_fl_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Heat days
+ []
+
+
+Overfull \hbox (7.15207pt too wide) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (-20) (Tmax>35$[]$C)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Extreme heat
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) at flow-er-ing,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) causes flower
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) tube fail-ure,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) and re-duces
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) days.maxTemp.above.35_fl_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Heat days
+ []
+
+
+Overfull \hbox (7.15207pt too wide) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (-20) (Tmax>35$[]$C)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 1142) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) flowering heat
+ []
+
+
+Underfull \hbox (badness 2158) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) ex-po-sure, sus-
+ []
+
+
+Underfull \hbox (badness 3158) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) pact on early
+ []
+
+
+Underfull \hbox (badness 1990) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) berry de-vel-op-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) days.tempMax.above.35_sm_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Heat days
+ []
+
+
+Overfull \hbox (7.15207pt too wide) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (-20) (Tmax>35$[]$C)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Heat stress
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) ap-proach-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) ve-rai-son, ac-
+ []
+
+
+Underfull \hbox (badness 6284) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) acid re-ten-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) and berry
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) days.maxTemp.above.35_sm_y1_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Heat days
+ []
+
+
+Overfull \hbox (7.15207pt too wide) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (-20) (Tmax>35$[]$C)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+[]|\T1/ptm/m/n/9 (+20) Post-veraison
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) heat stress,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) berry ther-mal
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) stress dur-ing
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 89--89
+\T1/ptm/m/n/9 (+20) the key ripen-
+ []
+
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 103--103
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 108--108
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 116--116
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 119--119
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 119--119
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 119--119
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 120--120
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 120--120
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 120--120
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 4686) in paragraph at lines 120--121
+\T1/ptm/m/n/9 (+20) dis-ease pres-sure in-di-ca-tor in the
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 121--121
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 121--121
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 122--122
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--122
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 122--122
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 123--123
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+[102] [103]
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 136--136
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 141--141
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (8.94594pt too wide) in paragraph at lines 149--149
+[]|\T1/ptm/m/n/9 (-20) days.rf.above.1mm_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+[]|\T1/ptm/m/n/9 (+20) Wet days
+ []
+
+
+Overfull \hbox (2.66681pt too wide) in paragraph at lines 149--149
+\T1/ptm/m/n/9 (-20) (Rain>1mm)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 150--150
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
+[]|\T1/ptm/m/n/9 (+20) Bud
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 150--150
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 150--150
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 151--151
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 151--151
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 151--151
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 151--151
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 1859) in paragraph at lines 151--152
+[]|\T1/ptm/m/n/9 (+20) Pre-flowering canopy de-vel-op-ment,
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 152--152
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 152--152
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 152--152
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 152--152
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 153--153
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 153--153
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 153--153
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 153--153
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 154--154
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 154--154
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 154--154
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 154--154
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/9 (+20) centred
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 155--155
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 156--156
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 156--156
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 156--156
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 156--156
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 157--157
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 4353) in paragraph at lines 157--158
+[]|\T1/ptm/m/n/9 (+20) Wider previous-year pre-flowering
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 158--158
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 158--158
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 158--158
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 158--158
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 1354) in paragraph at lines 158--159
+[]|\T1/ptm/m/n/9 (+20) Widest previous-year pre-flowering
+ []
+
+[104]
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 172--172
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Overfull \hbox (4.85614pt too wide) in paragraph at lines 177--177
+[]|\T1/ptm/m/n/9 (-20) Year| 
+ []
+
+
+Underfull \hbox (badness 7814) in paragraph at lines 185--185
+[]|\T1/ptm/m/n/9 (+20) Leaf Area
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 185--185
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 185--185
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Overfull \hbox (4.25876pt too wide) in paragraph at lines 185--185
+[]|\T1/ptm/m/n/9 (-20) m$[]$/m$[]$| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 185--185
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 6691) in paragraph at lines 186--186
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 186--186
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 186--186
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 186--187
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter bal-ance post-flowering,
+ []
+
+
+Underfull \hbox (badness 6691) in paragraph at lines 187--187
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 187--187
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 187--187
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 6691) in paragraph at lines 188--188
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 188--188
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 6691) in paragraph at lines 189--189
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--189
+[]|\T1/ptm/m/n/9 (+20) 15d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 189--189
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 6691) in paragraph at lines 190--190
+[]|\T1/ptm/m/n/9 (+20) Soil wa-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--190
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter
+ []
+
+
+Overfull \hbox (3.46487pt too wide) in paragraph at lines 190--190
+[]|\T1/ptm/m/n/9 (-20) Average| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 191--191
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_fl_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 191--191
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 191--191
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_fl_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 192--192
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 192--192
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 193--193
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--194
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 194--194
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 195--195
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--197
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_fl_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 197--197
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 197--197
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--197
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Underfull \hbox (badness 1342) in paragraph at lines 197--198
+[]|\T1/ptm/m/n/9 (+20) Previous-year post-flowering stress,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--198
+[]|\T1/ptm/m/n/9 (+20) sw.less.15wp_fl_
+ []
+
+
+Overfull \hbox (10.39197pt too wide) in paragraph at lines 198--198
+\T1/ptm/m/n/9 (-20) (Sm<1.5$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Wp)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 198--198
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--198
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+[]|\T1/ptm/m/n/9 (+20) sw.above.09fc_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+[]|\T1/ptm/m/n/9 (+20) Saturation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+\T1/ptm/m/n/9 (+20) days
+ []
+
+
+Overfull \hbox (6.47581pt too wide) in paragraph at lines 199--199
+\T1/ptm/m/n/9 (-20) (Sm>0.9$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Fc)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 199--199
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) sw.above.09fc_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (+20) Saturation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (+20) days
+ []
+
+
+Overfull \hbox (6.47581pt too wide) in paragraph at lines 200--200
+\T1/ptm/m/n/9 (-20) (Sm>0.9$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Fc)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 200--200
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
+[]|\T1/ptm/m/n/9 (+20) Extended near-saturation post-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
+[]|\T1/ptm/m/n/9 (+20) sw.above.09fc_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
+[]|\T1/ptm/m/n/9 (+20) Saturation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
+\T1/ptm/m/n/9 (+20) days
+ []
+
+
+Overfull \hbox (6.47581pt too wide) in paragraph at lines 201--201
+\T1/ptm/m/n/9 (-20) (Sm>0.9$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Fc)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 201--201
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
+[]|\T1/ptm/m/n/9 (+20) 10d af-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
+[]|\T1/ptm/m/n/9 (+20) sw.above.09fc_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
+[]|\T1/ptm/m/n/9 (+20) Saturation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
+\T1/ptm/m/n/9 (+20) days
+ []
+
+
+Overfull \hbox (6.47581pt too wide) in paragraph at lines 202--202
+\T1/ptm/m/n/9 (-20) (Sm>0.9$\OMS/ztmcm/m/n/9 ^^B$\T1/ptm/m/n/9 (-20) Fc)| 
+ []
+
+
+Overfull \hbox (1.89044pt too wide) in paragraph at lines 202--202
+[]|\T1/ptm/m/n/9 (-20) Flowering| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
+[]|\T1/ptm/m/n/9 (+20) 20d af-ter
+ []
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 202--203
+\T1/ptm/m/n/9 (+20) flowering soil sat-u-ra-tion, strongest
+ []
+
+[105]) [106] [107]
+\openout2 = `chapters/app_d_feature_map.aux'.
+
+ (./chapters/app_d_feature_map.tex [108
+
+
+
+
+]
+Appendix D.
+[109]
+<figures/fig_appd_1.png, id=1679, 827.4915pt x 460.26956pt>
+File: figures/fig_appd_1.png Graphic file (type png)
+<use figures/fig_appd_1.png>
+Package pdftex.def Info: figures/fig_appd_1.png  used on input line 10.
+(pdftex.def)             Requested size: 652.23383pt x 362.78725pt.
+ [110 <./figures/fig_appd_1.png>]) [111
+
+
+]
+\openout2 = `chapters/app_e_ai_transparency.aux'.
+
+
+(./chapters/app_e_ai_transparency.tex [112
+
+
+
+
+]
+Appendix E.
+
+Underfull \hbox (badness 1874) in paragraph at lines 43--43
+[]|\T1/ptm/m/n/9 (+20) Reformulation, AI-phrase re-
+ []
+
+
+Underfull \hbox (badness 4886) in paragraph at lines 43--43
+[]|\T1/ptm/m/n/9 (+20) Reformulation, hedg-ing lan-
+ []
+
+
+Underfull \vbox (badness 1533) has occurred while \output is active []
+
+ [113]
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 75.
+ [114] [115]
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
+[]|\T1/ptm/m/n/9 (+20) src/rscripts/6_scenario_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
+[]|\T1/ptm/m/n/9 (+20) src/rscripts/10_rule_overlap_
+ []
+
+[116]
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (+20) cor_thresh =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (+20) interpreted_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (+20) interpreted_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+13) ripper_metrics_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) ripper_rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (+20) interpreted_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) dataPrep_cont_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+[]|\T1/ptm/m/n/9 (+20) rules_
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
+\T1/ptm/m/n/9 (+20) interpreted_
+ []
+
+)
+Underfull \vbox (badness 4048) has occurred while \output is active []
+
+ [117
+
+]
+[118] (./main.aux (./chapters/honourdeclaration.aux)
+(./chapters/ch0_abstract.aux) (./chapters/ch1_intro.aux)
+(./chapters/ch2_literature.aux) (./chapters/ch3_methods.aux)
+(./chapters/ch4_rules.aux) (./chapters/ch5_prediction.aux)
+(./chapters/ch6_discussion.aux) (./chapters/ch7_conclusions.aux)
+(./chapters/app_a_rules.aux) (./chapters/app_b_eda.aux)
+(./chapters/app_c_features.aux) (./chapters/app_d_feature_map.aux)
+(./chapters/app_e_ai_transparency.aux))
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 6F7B0F9F6EFFE8F680F2FA40F27EBCDA;36069.
+ ) 
+Here is how much of TeX's memory you used:
+ 20626 strings out of 480247
+ 341502 string characters out of 5896152
+ 732282 words of memory out of 5000000
+ 36830 multiletter control sequences out of 15000+600000
+ 628502 words of font info for 737 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 75i,19n,77p,2004b,695s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </sessions/compassionate-practical-volta/.texlive2021/texmf-var/fonts/pk/ljf
+our/jknappen/ec/tcrm0900.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/b
+ase/8r.enc} </sessions/compassionate-practical-volta/.texlive2021/texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecrm1200.600pk></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (136 pages, 2645994 bytes).
+PDF statistics:
+ 1915 PDF objects out of 2073 (max. 8388607)
+ 1675 compressed objects within 17 object streams
+ 389 named destinations out of 1000 (max. 500000)
+ 143540 words of extra memory for PDF output out of 154059 (max. 10000000)
+

@@ -1,0 +1,206 @@
+
+\chapter{Complete Feature Reference}\label{app:complete_feature_reference}
+
+This appendix provides a complete reference for all 58 agroclimatic features used in the modelling datasets (dataPrep\_cont\_dataset\_rdd.csv and dataPrep\_cont\_dataset\_rvv.csv). Features are grouped by variable family. The naming convention is described in Section~\ref{sub:feature_naming_convention}. For each feature, the full name, phenological anchor, year offset, window specification, unit, calculation type, and agronomic interpretation are provided.
+
+Key notation: y1 = current harvest year; y0 = previous growing season. Positions: c = centred ($\pm$n/2 days around stage DOY), b = n days before stage DOY, a = n days after stage DOY. All aggregations are computed over the specified window relative to the phenological DOY for each individual year, using the daily meteorological records from dataPrep\_meteo\_*.csv.
+
+
+\section{Temperature Features (13 features)}\label{app_sec:temperature_features_13_features}
+
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{2.2cm}|p{1.5cm}|p{1.2cm}|p{0.4cm}|p{1.4cm}|p{0.7cm}|p{0.9cm}|p{4.8cm}}
+\caption{Temperature features (13 features).}\label{tab:appc_1}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endfirsthead
+\multicolumn{8}{l}{\textit{Table~\ref{tab:appc_1} continued from previous page}}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{\textit{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+tm\_fl\_y1\_c15 & Mean temperature & Flowering & y1 & centred $\pm$15d & $^\circ$C & Average & Thermal conditions during the critical flowering window, governs pollen viability, fruit set, and inflorescence development \\
+tm\_fl\_y1\_b10 & Mean temperature & Flowering & y1 & 10d before & $^\circ$C & Average & Pre-flowering thermal conditions, vine heat accumulation entering the flowering phase \\
+tm\_fl\_y1\_a10 & Mean temperature & Flowering & y1 & 10d after & $^\circ$C & Average & Post-flowering temperature, governs initial berry cell division and early fruit development \\
+tm\_bb\_y0\_a15 & Mean temperature & Bud Break & y0 & 15d after prev. yr & $^\circ$C & Average & Previous-year early spring thermal conditions, influences inflorescence primordia initiation for current year \\
+tm\_bb\_y0\_a30 & Mean temperature & Bud Break & y0 & 30d after prev. yr & $^\circ$C & Average & Wider post-budburst window in previous year, vine carbohydrate allocation and early season vigour \\
+tm\_sm\_y1\_c20 & Mean temperature & Start Maturity & y1 & centred $\pm$20d & $^\circ$C & Average & Temperature at veraison onset, governs timing of berry colour change and ripening acceleration \\
+tm\_sm\_y0\_a20 & Mean temperature & Start Maturity & y0 & 20d after prev. yr & $^\circ$C & Average & Previous-year post-veraison heat, vine thermal stress at end of prior season; affects reserve accumulation \\
+tm\_sm\_y0\_b20 & Mean temperature & Start Maturity & y0 & 20d before prev. yr & $^\circ$C & Average & Previous-year pre-veraison temperature, mid-ripening thermal conditions in prior season \\
+tm\_hv\_y1\_c10 & Mean temperature & Harvest & y1 & centred $\pm$10d & $^\circ$C & Average & Temperature at harvest, final ripening conditions; warmer harvest accelerates sugar accumulation \\
+tm\_hv\_y1\_b20 & Mean temperature & Harvest & y1 & 20d before & $^\circ$C & Average & Pre-harvest temperature, late-season thermal driver of final berry maturation \\
+tm\_fl\_y0\_b10 & Mean temperature & Flowering & y0 & 10d before prev. yr & $^\circ$C & Average & Previous-year pre-flowering temperature, key driver of inflorescence primordia differentiation \\
+tm\_fl\_y0\_a10 & Mean temperature & Flowering & y0 & 10d after prev. yr & $^\circ$C & Average & Previous-year post-flowering temperature, affects fruit set and bunch architecture for current year \\
+tn\_hv\_y0\_a30 & Min temperature & Harvest & y0 & 30d after prev. yr & $^\circ$C & Average & Previous-year post-harvest night temperatures, warm nights maintain vine metabolic activity; affect carbohydrate reserve building \\
+\end{longtable}
+}
+
+
+
+\section{Cold and Frost Day Features (5 features)}\label{app_sec:cold_and_frost_day}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Cold day (Tmed $<$ 15$^\circ$C) and frost day (Tmin $<$ 0$^\circ$C) features (5 features).}\label{tab:appc_2}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{2.4cm}|p{1.7cm}|p{1.4cm}|p{0.5cm}|p{1.6cm}|p{0.8cm}|p{1.1cm}|X}
+  \toprule
+  Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+  \midrule
+  tm.days.less.15\_fl\_y1\_c15 & Cold days (Tmed<15$^\circ$C) & Flowering & y1 & centred $\pm$15d & days & Count & Number of cold days during flowering, impairs pollen viability and fertilisation; directly reduces berry set \\
+  tm.days.less.15\_fl\_y1\_b15 & Cold days (Tmed<15$^\circ$C) & Flowering & y1 & 15d before & days & Count & Pre-flowering cold days, cool conditions entering the flowering phase \\
+  days\_minTemp.less.0\_bb\_y1\_c20 & Frost days (Tmin<0$^\circ$C) & Bud Break & y1 & centred $\pm$20d & days & Count & Frost days at budburst, potential spring frost damage to emerging shoots; severe frosts can destroy entire crop \\
+  days.minTemp.less.0\_bb\_y1\_a30 & Frost days (Tmin<0$^\circ$C) & Bud Break & y1 & 30d after & days & Count & Post-budburst frost risk window, young shoots most vulnerable \\
+  days.minTemp.less.0\_fl\_y1\_a10 & Frost days (Tmin<0$^\circ$C) & Flowering & y1 & 10d after & days & Count & Late frost at flowering, unusual but damaging frost events during fruit set \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+
+\section{Heat Stress Day Features (4 features)}\label{app_sec:heat_stress_day_features}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Heat stress day (Tmax $>$ 35$^\circ$C) features (4 features).}\label{tab:appc_3}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{p{4.5cm}|p{1.5cm}|p{1.2cm}|p{0.5cm}|p{1.4cm}|p{0.7cm}|p{0.9cm}|X}
+  \toprule
+  Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+  \midrule
+  days.maxTemp.above.35\_fl\_y1\_a10 & Heat days (Tmax>35$^\circ$C) & Flowering & y1 & 10d after & days & Count & Extreme heat at flowering, causes flower abortion, pollen tube failure, and reduces berry number \\
+  days.maxTemp.above.35\_fl\_y1\_a20 & Heat days (Tmax>35$^\circ$C) & Flowering & y1 & 20d after & days & Count & Extended post-flowering heat exposure, sustained heat impact on early berry development \\
+  days.tempMax.above.35\_sm\_y1\_b20 & Heat days (Tmax>35$^\circ$C) & Start Maturity & y1 & 20d before & days & Count & Heat stress approaching veraison, accelerates sugar rise; can impair acid retention and berry integrity \\
+  days.maxTemp.above.35\_sm\_y1\_a20 & Heat days (Tmax>35$^\circ$C) & Start Maturity & y1 & 20d after & days & Count & Post-veraison heat stress, berry thermal stress during the key ripening phase \\
+  \bottomrule
+\end{tabularx}
+  \end{adjustbox}
+
+\end{table}
+
+
+
+\section{Rainfall Features (8 features)}\label{app_sec:rainfall_features_8_features}
+
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{2.2cm}|p{1.5cm}|p{1.2cm}|p{0.4cm}|p{1.4cm}|p{0.7cm}|p{0.9cm}|p{4.8cm}}
+\caption{Rainfall total and wet day count features (8 features).}\label{tab:appc_4}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endfirsthead
+\multicolumn{8}{l}{\textit{Table~\ref{tab:appc_4} continued from previous page}}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{\textit{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+rf\_fl\_y1\_a10 & Rainfall total & Flowering & y1 & 10d after & mm & Sum & Rainfall immediately post-flowering, disease risk (Botrytis, downy mildew); excess rain dilutes berry development \\
+rf\_hv\_y1\_b10 & Rainfall total & Harvest & y1 & 10d before & mm & Sum & Pre-harvest rainfall, late rain can cause berry splitting, dilution of sugars, and Botrytis infection \\
+rf\_hv\_y0\_a10 & Rainfall total & Harvest & y0 & 10d after prev. yr & mm & Sum & Post-harvest rainfall in previous year, begins recharging soil water reserves for the following season \\
+days.rf.above.1mm\_fl\_y1\_c15 & Wet days (Rain>1mm) & Flowering & y1 & centred $\pm$15d & days & Count & Frequency of rain days at flowering, high frequency promotes disease and physically interferes with pollination \\
+days.rf.above.1mm\_fl\_y1\_a20 & Wet days (Rain>1mm) & Flowering & y1 & 20d after & days & Count & Post-flowering rain event count, key disease pressure indicator in the Douro; DRY = above trend \\
+days.rf.above.1mm\_sm\_y1\_b20 & Wet days (Rain>1mm) & Start Maturity & y1 & 20d before & days & Count & Rain days approaching veraison, moisture during mid-season ripening phase \\
+days.rf.above.1mm\_sm\_y1\_a20 & Wet days (Rain>1mm) & Start Maturity & y1 & 20d after & days & Count & Post-veraison rain days, disease and dilution risk during the ripening phase; 2nd most frequent RDD rule feature \\
+days.rf.above.1mm\_hv\_y1\_c10 & Wet days (Rain>1mm) & Harvest & y1 & centred $\pm$10d & days & Count & Rain days at harvest, wet harvest conditions cause berry splitting, Botrytis; reduce quality and quantity \\
+\end{longtable}
+}
+
+
+
+\section{Leaf Area Index (LAI) Features (10 features)}\label{app_sec:leaf_area_index_lai}
+
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{2.2cm}|p{1.5cm}|p{1.2cm}|p{0.4cm}|p{1.4cm}|p{0.7cm}|p{0.9cm}|p{4.8cm}}
+\caption{Leaf Area Index (LAI) features (10 features).}\label{tab:appc_5}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endfirsthead
+\multicolumn{8}{l}{\textit{Table~\ref{tab:appc_5} continued from previous page}}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{\textit{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+days.rf.above.1mm\_hv\_y0\_a10 & Wet days (Rain>1mm) & Harvest & y0 & 10d after prev. yr & days & Count & Post-harvest rain events in previous year, soil recharge initiation; carry-over for next season \\
+iaf\_bb\_y1\_c10 & Leaf Area Index & Bud Break & y1 & centred $\pm$10d & m$^2$/m$^2$ & Average & LAI at budburst, canopy size at growth initiation; proxy for vine vigour entering the season \\
+iaf\_fl\_y1\_b10 & Leaf Area Index & Flowering & y1 & 10d before & m$^2$/m$^2$ & Average & Pre-flowering canopy development, vegetative vigour entering the critical fruit-set window \\
+iaf\_fl\_y1\_b20 & Leaf Area Index & Flowering & y1 & 20d before & m$^2$/m$^2$ & Average & Broader pre-flowering LAI window, canopy development trajectory before flowering \\
+iaf\_fl\_y1\_b30 & Leaf Area Index & Flowering & y1 & 30d before & m$^2$/m$^2$ & Average & Early pre-flowering canopy, wider window capturing canopy build-up phase \\
+iaf\_fl\_y1\_a10 & Leaf Area Index & Flowering & y1 & 10d after & m$^2$/m$^2$ & Average & Post-flowering canopy, rapid leaf area expansion immediately after flowering; vigour proxy \\
+iaf\_hv\_y1\_c10 & Leaf Area Index & Harvest & y1 & centred $\pm$10d & m$^2$/m$^2$ & Average & LAI at harvest, canopy size at the time of picking; DOMINANT RVV feature (20/20 rules); high LAI $\rightarrow$ below trend \\
+iaf\_fl\_y0\_b10 & Leaf Area Index & Flowering & y0 & 10d before prev. yr & m$^2$/m$^2$ & Average & Previous-year pre-flowering LAI, vine canopy state before prior-year fruit set; carry-over vigour signal \\
+iaf\_fl\_y0\_b20 & Leaf Area Index & Flowering & y0 & 20d before prev. yr & m$^2$/m$^2$ & Average & Wider previous-year pre-flowering LAI window \\
+iaf\_fl\_y0\_b30 & Leaf Area Index & Flowering & y0 & 30d before prev. yr & m$^2$/m$^2$ & Average & Widest previous-year pre-flowering LAI window: M5Rules LAI differential uses b10/b20/b30 together \\
+\end{longtable}
+}
+
+iaf\_hv\_y1\_c10 appears in 2 of 20 RVV rules; the dominant RVV features are heat-stress days (up to 50\% of rules).
+
+
+\section{Soil Water Features (18 features)}\label{app_sec:soil_water_features_18}
+
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{2.2cm}|p{1.5cm}|p{1.2cm}|p{0.4cm}|p{1.4cm}|p{0.7cm}|p{0.9cm}|p{4.8cm}}
+\caption{Soil water availability, stress day (Sm $<$ 1.5$\times$Wp), and saturation day (Sm $>$ 0.9$\times$Fc) features (18 features).}\label{tab:appc_6}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endfirsthead
+\multicolumn{8}{l}{\textit{Table~\ref{tab:appc_6} continued from previous page}}\\
+\toprule
+Feature name & Variable & Stage & Year & Window & Unit & Calc & Agronomic interpretation \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{\textit{Continued on next page}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+iaf\_fl\_y0\_a10 & Leaf Area Index & Flowering & y0 & 10d after prev. yr & m$^2$/m$^2$ & Average & Post-flowering LAI in previous year, canopy expansion after prior-year fruit set \\
+swa\_fl\_y1\_a15 & Soil water availability & Flowering & y1 & 15d after & mm & Average & Soil water balance post-flowering, moisture availability during early berry development; excess $\rightarrow$ vigour/disease in RVV \\
+swa\_fl\_y1\_a30 & Soil water availability & Flowering & y1 & 30d after & mm & Average & Wider post-flowering soil water window, cumulative moisture through mid-season; appears in RVV rules 3, 16, 19 \\
+swa\_hv\_y1\_b20 & Soil water availability & Harvest & y1 & 20d before & mm & Average & Pre-harvest soil water: DOMINANT feature in both regions; RDD: moderate deficit $\rightarrow$ above trend; RVV: deficit $\rightarrow$ below trend \\
+swa\_hv\_y0\_a15 & Soil water availability & Harvest & y0 & 15d after prev. yr & mm & Average & Post-harvest soil water in previous year, soil recharge initiation; carry-over moisture for next season \\
+swa\_hv\_y0\_a20 & Soil water availability & Harvest & y0 & 20d after prev. yr & mm & Average & Wider post-harvest soil water in previous year, confirms carry-over recharge pattern \\
+sw.less.15wp\_fl\_y1\_a10 & Stress days (Sm<1.5$\times$Wp) & Flowering & y1 & 10d after & days & Count & Severe stress days post-flowering, days when soil water falls below vine wilting threshold \\
+sw.less.15wp\_fl\_y1\_a20 & Stress days (Sm<1.5$\times$Wp) & Flowering & y1 & 20d after & days & Count & Extended post-flowering stress exposure \\
+sw.less.15wp\_sm\_y1\_a10 & Stress days (Sm<1.5$\times$Wp) & Start Maturity & y1 & 10d after & days & Count & Severe stress days at veraison onset, critical window for sugar--acid balance \\
+sw.less.15wp\_sm\_y1\_a20 & Stress days (Sm<1.5$\times$Wp) & Start Maturity & y1 & 20d after & days & Count & Extended stress at maturity, prolonged wilting-level stress during ripening \\
+sw.less.15wp\_hv\_y1\_b20 & Stress days (Sm<1.5$\times$Wp) & Harvest & y1 & 20d before & days & Count & Pre-harvest severe stress, intense berry concentration but risk of vine damage if prolonged \\
+sw.less.15wp\_hv\_y1\_a20 & Stress days (Sm<1.5$\times$Wp) & Harvest & y1 & 20d after & days & Count & Post-harvest severe stress, vine recovery period after harvest \\
+sw.less.15wp\_fl\_y0\_a10 & Stress days (Sm<1.5$\times$Wp) & Flowering & y0 & 10d after prev. yr & days & Count & Previous-year post-flowering stress, carry-over water deficit from prior season \\
+sw.less.15wp\_fl\_y0\_a20 & Stress days (Sm<1.5$\times$Wp) & Flowering & y0 & 20d after prev. yr & days & Count & Extended previous-year post-flowering stress \\
+sw.above.09fc\_fl\_y1\_a10 & Saturation days (Sm>0.9$\times$Fc) & Flowering & y1 & 10d after & days & Count & Near-saturation days post-flowering, promote disease and vegetative vigour; relevant to RVV below-trend rules \\
+sw.above.09fc\_fl\_y1\_a20 & Saturation days (Sm>0.9$\times$Fc) & Flowering & y1 & 20d after & days & Count & Extended near-saturation post-flowering \\
+sw.above.09fc\_fl\_y0\_a10 & Saturation days (Sm>0.9$\times$Fc) & Flowering & y0 & 10d after prev. yr & days & Count & Previous-year post-flowering soil saturation, carry-over vigour effect identified in RVV Rule 2 \\
+sw.above.09fc\_fl\_y0\_a20 & Saturation days (Sm>0.9$\times$Fc) & Flowering & y0 & 20d after prev. yr & days & Count & Wider window for previous-year post-flowering soil saturation, strongest RVV carry-over signal \\
+\end{longtable}
+}
+
+swa\_hv\_y1\_b20 is the dominant RDD feature (54\% of rules); in RVV it appears in 25\% of rules.
